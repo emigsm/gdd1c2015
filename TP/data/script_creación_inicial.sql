@@ -19,6 +19,7 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Funcionalidad;
 	
 /*	****************************************	CREACION DE LAS TABLAS	*********************************************** */
+
 CREATE TABLE GEM4.Rol(
 	Rol_Cod 					INT IDENTITY(1,1),
 	Rol_Nombre					NVARCHAR(50) NOT NULL,					
@@ -41,3 +42,22 @@ CREATE TABLE GEM4.Rol_Por_Funcionalidad(
 	FOREIGN KEY (Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod),
 	FOREIGN KEY (Funcionalidad_Cod) REFERENCES GEM4.Funcionalidad(Funcionalidad_Cod)
 	);
+	
+/*	*******************************************	    VIEWS   	********************************************************** */
+
+/* *****************************************     CREACION DE TRIGGERS    ********************************************** */
+
+/*	****************************************	MIGRACION 	******************************************* */
+
+/* ***************************************** INICIALIZACION DE DATOS ************************************************** */
+
+SET IDENTITY_INSERT GEM4.Rol ON;
+INSERT INTO GEM4.Rol (Rol_Cod,Rol_Nombre) VALUES 
+	(1,'Administrador'),
+	(2,'Cliente');
+SET IDENTITY_INSERT GEM4.Rol OFF;
+
+/* ***************************************** STORED PROCEDURES ************************************************** */
+
+
+

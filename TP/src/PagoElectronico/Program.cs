@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
+using PagoElectronico.Utilidades.ConexionDB;
+
 namespace PagoElectronico
 {
     static class Program
@@ -15,7 +17,9 @@ namespace PagoElectronico
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            ConexionDB.ConectarDB();
+            Application.Run(new Login());
+            ConexionDB.DesconectarDB();
         }
     }
 }

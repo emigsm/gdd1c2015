@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Utilidades\Cifrado\Cifrador.cs" />
     <Compile Include="Utilidades\ConexionDB\ConexionDB.cs" />
+    <Compile Include="Utilidades\ModeloSistema\GestorDeSistema.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ABMs\ABM Cliente\" />
@@ -93,7 +94,6 @@
     <Folder Include="Operaciones\Listados\" />
     <Folder Include="Operaciones\Retiros\" />
     <Folder Include="Operaciones\Transferencias\" />
-    <Folder Include="Utilidades\ModeloSistema\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -11,6 +11,8 @@ GO
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
+	DROP TABLE GEM4.Pais;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Rol_Por_Funcionalidad')
 	DROP TABLE GEM4.Rol_Por_Funcionalidad;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario_Por_Rol')
@@ -23,6 +25,12 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Usuario;
 	
 /*	****************************************	CREACION DE LAS TABLAS	*********************************************** */
+
+CREATE TABLE GEM4.Pais(
+	Pais_Cod					INT IDENTITY(1,1),
+	Nombre_Pais					NVARCHAR(60)
+	PRIMARY KEY (Pais_Cod)
+	);
 
 CREATE TABLE GEM4.Rol(
 	Rol_Cod 					INT IDENTITY(1,1),

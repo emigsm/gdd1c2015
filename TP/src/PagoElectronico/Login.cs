@@ -15,5 +15,10 @@ namespace PagoElectronico
         {
             InitializeComponent();
         }
+
+        private void btnIngresar_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.MessageBox.Show("Fallo el login");
+        }
     }
 }

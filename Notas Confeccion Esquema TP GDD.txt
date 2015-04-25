@@ -48,7 +48,7 @@ Factura:ID(PK,Identity),fecha,Costo_Apertura_CUenta,Costo_Modificacion_CUenta,ha
 
 Factura_Por_Operacion:ID(PK,Identity),ID_Factura(FK),ID_Operacion(FK)
 
-Factura_Por_Apertura_Cuenta:ID(PK,Identity),ID_Factura(FK),ID_Operacion
+
 
 
 -------------------Notas Sobre Reglas de Negocio:---------------------

@@ -173,6 +173,7 @@ CREATE TABLE GEM4.Cuenta_Por_Usuario(
 	)
 CREATE TABLE GEM4.Operacion(
 	Operacion_ID	INT IDENTITY(1,1),
+	Costo			NUMERIC(18,2),
 	PRIMARY KEY(Operacion_ID)
 	)
 CREATE TABLE GEM4.Deposito(
@@ -219,8 +220,35 @@ CREATE TABLE GEM4.Retiro(
 	FOREIGN KEY (Banco_ID) REFERENCES GEM4.Banco(Banco_ID)
 	)
 		
-	
+CREATE TABLE GEM4.Transferencia(
+	Transferencia_ID	INT IDENTITY(1,1),
+	Operacion_ID		INT,
+	Cuenta_Origen		INT,
+	Cuenta_Destino		INT,
+	Importe				INT CHECK(Importe>0),
+	Costo_Fijo			NUMERIC(18,2),
+	Habilitado			BIT DEFAULT 1,
+	PRIMARY KEY (Transferencia_ID),
+	FOREIGN KEY (Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
+	FOREIGN KEY (Cuenta_Origen) REFERENCES GEM4.Cuenta_Por_Usuario(Cuenta_Por_Usuario_ID),
+	FOREIGN KEY (Cuenta_Destino) REFERENCES GEM4.Cuenta_Por_Usuario(Cuenta_Por_Usuario_ID)
 	)
+
+CREATE TABLE GEM4.Factura(
+	Factura_ID					INT IDENTITY(1,1),
+	Fecha						DATETIME,
+	Habilitado					BIT DEFAULT 1,
+	PRIMARY KEY(Factura_ID)
+	)
+	
+CREATE TABLE GEM4.Factura_Por_Operacion(
+	Factura_Por_Operacion_ID	INT IDENTITY(1,1),
+	Factura_ID					INT,
+	Operacion_ID				INT,
+	PRIMARY KEY (Factura_Por_Operacion_ID),
+	FOREIGN KEY (Factura_ID) REFERENCES GEM4.Factura(Factura_ID),
+	FOREIGN KEY (Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID)
+	)					
 	
 	
 		

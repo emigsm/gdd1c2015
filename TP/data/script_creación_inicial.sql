@@ -27,10 +27,10 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 /*	****************************************	CREACION DE LAS TABLAS	*********************************************** */
 
 CREATE TABLE GEM4.Pais(
-	Pais_Cod					INT IDENTITY(1,1),
+	Pais_ID					INT IDENTITY(1,1),
 	Nombre_Pais					NVARCHAR(60),
 	Pais_Habilitado				BIT NOT NULL DEFAULT 1
-	PRIMARY KEY (Pais_Cod)
+	PRIMARY KEY (Pais_ID)
 	);
 
 CREATE TABLE GEM4.Rol(
@@ -109,7 +109,47 @@ CREATE TABLE GEM4.Cliente(
 	Tipo_Doc_ID			INT,
 	Numero_Documento	INT,
 	Mail				NVARCHAR(60) UNIQUE,
+	Pais_ID				INT,
+	Domicilio			NVARCHAR(60),
+	Localidad			NVARCHAR(60),
+	Nacionalidad		NVARCHAR(60),
+	Fecha_Nacimiento	DATETIME,
+	Habilitado			BIT DEFAULT 1,
+	PRIMARY KEY	(Cliente_ID),
+	FOREIGN KEY(Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	FOREIGN KEY(Tipo_Doc_ID) REFERENCES GEM4.Tipo_Documento(Tipo_Doc_ID),
+	FOREIGN KEY(Pais_ID) REFERENCES GEM4.Pais(Pais_ID)
+	)
+CREATE TABLE GEM4.Emisora_Tarjeta(
+	Emisora_Tarjeta_ID	INT IDENTITY(1,1),
+	Descripcion	NVARCHAR(60),
+	Habilitado	BIT DEFAULT 1,
+	PRIMARY KEY(Emisora_Tarjeta_ID)
+	)
+CREATE TABLE GEM4.Tarjeta_Por_Cliente(
+	Tarjeta_Por_Cliente_ID	INT IDENTITY(1,1),
+	Emisora_Tarjeta_ID		INT,
+	Cliente_ID				INT,
+	Fecha_Emision			DATETIME,
+	Fecha_Vencimiento		DATETIME,
+	Codigo_Seguridad		INT,
+	Habilitado				BIT DEFAULT 1,
+	PRIMARY KEY (Tarjeta_Por_Cliente_ID),
+	FOREIGN KEY(Emisora_Tarjeta_ID) REFERENCES	GEM4.Emisora_Tarjeta(Emisora_Tarjeta_ID),
+	FOREIGN KEY (Cliente_ID)		REFERENCES	GEM4.Cliente(Cliente_ID)
+	)
 	
+		
+CREATE TABLE GEM4.Moneda(
+	Moneda_ID		INT IDENTITY(1,1),
+	Descripcion		NVARCHAR(60),
+	Habilitado		NVARCHAR(60),
+	PRIMARY KEY	(Moneda_ID)
+	)
+
+	
+	
+		
 	
 	
 	

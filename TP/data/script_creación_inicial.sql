@@ -359,8 +359,8 @@ CREATE PROCEDURE GEM4.spLoginUsuario
     @usuario nvarchar(30), 
     @pass char(44) 
 AS 
-    SELECT Usuario_ID
-		FROM GEM4.Usuario
+    SELECT Rol_Cod
+		FROM GEM4.Usuario JOIN GEM4.Usuario_Por_Rol ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID)
 		WHERE Usuario_Username = @usuario AND Usuario_Contrasena = @pass AND Usuario_Habilitado = 1;
 GO
 

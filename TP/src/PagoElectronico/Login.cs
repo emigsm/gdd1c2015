@@ -15,22 +15,34 @@ namespace PagoElectronico
 {
     public partial class Login : Form
     {
+        private int cantidadIntentos;
+
         public Login()
         {
             InitializeComponent();
+            cantidadIntentos = 1;
 
         }
 
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-            int usuarioid = GestorDeSistema.loginUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContrasena.Text));
-            if (usuarioid == 1 || usuarioid == 2 || usuarioid == 3)
+            int rolCod = GestorDeSistema.loginUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContrasena.Text));
+            if (rolCod == 1)
             {
-                System.Windows.Forms.MessageBox.Show("Login Correcto");
+                System.Windows.Forms.MessageBox.Show("Login Correcto como ADMIN");
+            }
+            else if (rolCod == 2)
+            {
+                System.Windows.Forms.MessageBox.Show("Login Correcto como CLIENTE");
             }
             else
             {
-                System.Windows.Forms.MessageBox.Show("Fallo el Login");
+                System.Windows.Forms.MessageBox.Show("Login Incorrecto");
+                cantidadIntentos++;
+                if (cantidadIntentos > 3)
+                {
+                    System.Windows.Forms.MessageBox.Show("Maximo superado. Su cuenta queda INHABILITADA");
+                }
             }
            
         }

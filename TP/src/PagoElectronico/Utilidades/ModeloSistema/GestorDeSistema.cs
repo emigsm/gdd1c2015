@@ -23,15 +23,15 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
         public static int loginUsuario(string usuario, string contrasena)
         {
-            int usuario_ID;
+            int Rol_Cod;
             List<SqlParameter> parametros = new List<SqlParameter>();
             SqlParameter user = new SqlParameter("@usuario", usuario);
             SqlParameter pass = new SqlParameter("@pass", contrasena);
             parametros.Add(user);
             parametros.Add(pass);
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LOGINUSUARIO, SCALAR, parametros);
-            usuario_ID = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
-            return usuario_ID;
+            Rol_Cod = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return Rol_Cod;
         }
     }
 }

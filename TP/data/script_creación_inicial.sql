@@ -49,9 +49,9 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Funcionalidad')
 	DROP TABLE GEM4.Funcionalidad;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario')
-	DROP TABLE GEM4.Usuario;/*
+	DROP TABLE GEM4.Usuario;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
-	DROP TABLE GEM4.Pais;
+	DROP TABLE GEM4.Pais;/*
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Documento')
 	DROP TABLE GEM4.Tipo_Documento;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Moneda')
@@ -60,13 +60,12 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Emisora_Tarjeta;	
 */
 /*	****************************************	CREACION DE LAS TABLAS	*********************************************** */
-/*
+
 CREATE TABLE GEM4.Pais(
-	Pais_ID					INT IDENTITY(1,1),
-	Nombre_Pais					NVARCHAR(60),
-	Pais_Habilitado				BIT NOT NULL DEFAULT 1
-	PRIMARY KEY (Pais_ID)
-	);*/
+	Pais_Cod					INT IDENTITY(1,1),
+	Pais_Descripcion			NVARCHAR(60),
+	PRIMARY KEY (Pais_Cod)
+	);
 
 CREATE TABLE GEM4.Rol(
 	Rol_Cod 					INT IDENTITY(1,1),
@@ -302,6 +301,18 @@ CREATE TABLE GEM4.Factura_Por_Operacion( --para mi iria en items, porq	ue una op
 
 /*	****************************************	MIGRACION 	******************************************* */
 
+SET IDENTITY_INSERT GEM4.Pais ON;
+INSERT INTO GEM4.Pais(Pais_Cod, Pais_Descripcion)
+(SELECT DISTINCT Cuenta_Dest_Pais_Codigo, Cuenta_Dest_Pais_Desc
+FROM gd_esquema.Maestra
+WHERE Cuenta_Dest_Pais_Codigo IS NOT NULL
+
+UNION
+SELECT DISTINCT Cli_Pais_Codigo, Cli_Pais_Desc
+FROM gd_esquema.Maestra
+WHERE Cli_Pais_Codigo IS NOT NULL);
+SET IDENTITY_INSERT GEM4.Pais OFF;
+
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
 SET IDENTITY_INSERT GEM4.Rol ON;
@@ -355,7 +366,7 @@ INSERT INTO GEM4.Usuario_Por_Rol (Usuario_ID, Rol_Cod) VALUES
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')
 	DROP PROCEDURE GEM4.spLoginUsuario;
-go
+GO
 CREATE PROCEDURE GEM4.spLoginUsuario
     @usuario nvarchar(30), 
     @pass char(44) 

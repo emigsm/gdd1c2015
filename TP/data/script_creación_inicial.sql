@@ -58,7 +58,7 @@ CREATE TABLE GEM4.Rol_Por_Funcionalidad(
 	
 CREATE TABLE GEM4.Usuario(
 	Usuario_ID 								INT IDENTITY(0,1),
-	Usuario_Username						NVARCHAR(30) NOT NULL,
+	Usuario_Username						NVARCHAR(30) UNIQUE NOT NULL,
 	Usuario_Contrasena						CHAR(44) NOT NULL,
 	Usuario_Fecha_Creacion 					DATETIME,
 	Usuario_Fecha_Ultima_Modificacion 		DATETIME,
@@ -72,10 +72,48 @@ CREATE TABLE GEM4.Usuario(
 CREATE TABLE GEM4.Usuario_Por_Rol(
 	Usuario_ID								INT,
 	Rol_Cod									INT,
+	Habilitado								BIT DEFAULT 1,
 	PRIMARY KEY (Usuario_ID, Rol_Cod),
 	FOREIGN KEY (Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
 	FOREIGN KEY (Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod)
 	);
+
+
+-- A DISCUTIR:-------------------------------------------------
+CREATE TABLE GEM4.Tipo_Log(
+	Log_Cod			INT IDENTITY(1,1),
+	Descripcion		NVARCHAR(60),
+	habilitado		BIT DEFAULT 1,
+	PRIMARY KEY (Log_Cod)
+	)
+
+CREATE TABLE GEM4.Logs(
+	Logs_ID			INT IDENTITY(1,1),
+	Tipo_Log		INT,
+	Fecha_Hora_Log	DATETIME,
+	Numero_Intento	TINYINT
+	)
+
+CREATE TABLE GEM4.Tipo_Documento(
+	Tipo_Doc_ID		INT IDENTITY(1,1),
+	Descrípcion		NVARCHAR(60),
+	Habilitado		BIT DEFAULT 1,
+	PRIMARY KEY (Tipo_Doc_ID)
+	)
+
+CREATE TABLE GEM4.Cliente(
+	Cliente_ID			INT IDENTITY(1,1),
+	Usuario_ID			INT,
+	Nombre				NVARCHAR(60),
+	Apellido			NVARCHAR(60),
+	Tipo_Doc_ID			INT,
+	Numero_Documento	INT,
+	Mail				NVARCHAR(60) UNIQUE,
+	
+	
+	
+	
+	
 	
 /*	*******************************************	    VIEWS   	********************************************************** */
 

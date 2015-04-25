@@ -53,9 +53,9 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
 	DROP TABLE GEM4.Pais;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Documento')
-	DROP TABLE GEM4.Documento;/*
+	DROP TABLE GEM4.Documento;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Moneda')
-	DROP TABLE GEM4.Moneda;
+	DROP TABLE GEM4.Moneda;/*
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Emisora_Tarjeta')
 	DROP TABLE GEM4.Emisora_Tarjeta;	
 */
@@ -117,6 +117,13 @@ CREATE TABLE GEM4.Documento(
 	Documento_Tipo_Descripcion				NVARCHAR(60),
 	PRIMARY KEY (Documento_Tipo_Codigo)
 	)
+	
+CREATE TABLE GEM4.Moneda(
+	Moneda_Codigo							INT IDENTITY(1,1),
+	Moneda_Descripcion						NVARCHAR(60),
+--	Habilitado			NVARCHAR(60), --Para que???
+	PRIMARY KEY	(Moneda_Codigo)
+	)
 /*
 
 -- A DISCUTIR:-------------------------------------------------
@@ -172,14 +179,6 @@ CREATE TABLE GEM4.Tarjeta_Por_Cliente(  --yo le pondria tarjeta
 	PRIMARY KEY (Tarjeta_Por_Cliente_ID),
 	FOREIGN KEY(Emisora_Tarjeta_ID) REFERENCES	GEM4.Emisora_Tarjeta(Emisora_Tarjeta_ID),
 	FOREIGN KEY (Cliente_ID)		REFERENCES	GEM4.Cliente(Cliente_ID)
-	)
-	
-		
-CREATE TABLE GEM4.Moneda(
-	Moneda_ID		INT IDENTITY(1,1),
-	Descripcion		NVARCHAR(60),
-	Habilitado		NVARCHAR(60), --Para que???
-	PRIMARY KEY	(Moneda_ID)
 	)
 
 CREATE TABLE GEM4.Tipo_Cuenta(
@@ -367,7 +366,12 @@ INSERT INTO GEM4.Usuario_Por_Rol (Usuario_ID, Rol_Cod) VALUES
 	(1,1),
 	(2,1),
 	(3,1);
-	
+
+SET IDENTITY_INSERT GEM4.Moneda ON;	
+INSERT INTO GEM4.Moneda(Moneda_Codigo, Moneda_Descripcion) VALUES
+	(1,'Dólar estadounidense');
+SET IDENTITY_INSERT GEM4.Moneda OFF;
+
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')

@@ -147,7 +147,38 @@ CREATE TABLE GEM4.Moneda(
 	PRIMARY KEY	(Moneda_ID)
 	)
 
+CREATE TABLE GEM4.Tipo_Cuenta(
+	Tipo_Cuenta_ID		INT IDENTITY(1,1),
+	Descripcion			NVARCHAR(60),
+	Costo_Creacion		NUMERIC(18,2),
+	Costo_Modificacion	NUMERIC(18,2),
+	Habilitado			BIT DEFAULT 1
+	PRIMARY KEY (Tipo_Cuenta_ID)
+	)
+
+CREATE TABLE GEM4.Estado_Cuenta(
+	Estado_Cuenta_ID	INT IDENTITY(1,1),
+	Descripcion			NVARCHAR(60),
+	PRIMARY KEY(Estado_Cuenta_ID)
+	)
+
+CREATE TABLE GEM4.Cuenta_Por_Usuario(
+	Cuenta_Por_Usuario	INT IDENTITY(1,1),
+	Usuario_ID			INT,
+	Cuenta_ID			INT,
+	Habilitado			BIT DEFAULT 1,
+	PRIMARY KEY (Cuenta_Por_Usuario),
+	FOREIGN KEY(Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	FOREIGN KEY(Cuenta_ID) REFERENCES GEM4.Cuenta(Cuenta_ID)
+	)
+CREATE TABLE GEM4.Operacion(
+	Operacion_ID	INT IDENTITY(1,1),
+	PRIMARY KEY(Operacion_ID)
+	)
+
 	
+	Importe				NUMERIC(18,2) CHECK(Importe>1),
+	Tipo_Moneda			INT,	
 	
 		
 	

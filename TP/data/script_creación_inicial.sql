@@ -116,17 +116,21 @@ CREATE TABLE GEM4.Usuario_Por_Rol(
 
 -- A DISCUTIR:-------------------------------------------------
 CREATE TABLE GEM4.Tipo_Log(
-	Log_Cod			INT IDENTITY(1,1),
+	Tipo_Log_ID			INT IDENTITY(1,1),
 	Descripcion		NVARCHAR(60),
 	habilitado		BIT DEFAULT 1,
-	PRIMARY KEY (Log_Cod)
+	PRIMARY KEY (Tipo_Log_ID)
 	)
 
 CREATE TABLE GEM4.Logs(
-	Logs_ID			INT IDENTITY(1,1),
-	Tipo_Log		INT,
+	Log_ID		INT IDENTITY(1,1),
+	Tipo_Log_ID		INT,
+	Usuario_ID		INT,
 	Fecha_Hora_Log	DATETIME,
-	Numero_Intento	TINYINT
+	Numero_Intento	TINYINT,
+	PRIMARY KEY (Log_ID),
+	FOREIGN KEY (Tipo_Log_ID) REFERENCES GEM4.Tipo_Log(Tipo_Log_ID),
+	FOREIGN KEY (Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)
 	)
 
 CREATE TABLE GEM4.Tipo_Documento(

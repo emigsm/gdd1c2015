@@ -205,7 +205,7 @@ CREATE TABLE GEM4.Cuenta_Por_Usuario(
 	Habilitado				BIT DEFAULT 1,
 	PRIMARY KEY (Cuenta_Por_Usuario_ID),
 	FOREIGN KEY(Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
-	FOREIGN KEY(TipoCuenta_ID) REFERENCES GEM4.Tipo_Cuenta(Tipo_Cuenta_ID),
+	FOREIGN KEY(Tipo_Cuenta_ID) REFERENCES GEM4.Tipo_Cuenta(Tipo_Cuenta_ID),
 	FOREIGN KEY(Estado_Cuenta_ID) REFERENCES GEM4.Estado_Cuenta(Estado_Cuenta_ID)
 	)
 	
@@ -217,20 +217,19 @@ CREATE TABLE GEM4.Operacion(
 CREATE TABLE GEM4.Deposito(
 	Deposito_ID				INT IDENTITY(1,1),
 	Operacion_ID			INT,
-	Cuenta_Por_Usuario_ID	INT,
+	Cuenta_Por_Usuario_ID	INT NOT NULL,
 	Importe					NUMERIC(18,2) CHECK(Importe>1),
 	Moneda_ID				INT,
 	Tarjeta_Por_Cliente_ID	INT,
 	Fecha					DATETIME,
-	--EN NECESARIO EL BANCO??? HAY Q PREGUNTAR EN EL GRUPO EL ENUNCIADO NO DICE NADA
-	--PERO NO SERIA ILOGICO QUE EL BANCO ESTE, AUNQUE CON LA TARJETA SE PUEDE AVERIGUAR EL BANCO
 	PRIMARY KEY(Deposito_ID),
 	FOREIGN KEY(Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
-	FOREIGN KEY(Cuenta_Por_Usuario_ID)	REFERENCES GEM4.Cuenta_Por_Usuario_ID(Cuenta_Por_Usario_ID),
+	FOREIGN KEY(Cuenta_Por_Usuario_ID) REFERENCES GEM4.Cuenta_Por_Usuario(Cuenta_Por_Usuario_ID),
 	FOREIGN	KEY(Moneda_ID) REFERENCES GEM4.Moneda(Moneda_ID),
 	FOREIGN KEY(Tarjeta_Por_Cliente_ID) REFERENCES GEM4.Tarjeta_Por_Cliente(Tarjeta_Por_Cliente_ID)
 	)
-	
+	--EN NECESARIO EL BANCO??? HAY Q PREGUNTAR EN EL GRUPO EL ENUNCIADO NO DICE NADA
+	--PERO NO SERIA ILOGICO QUE EL BANCO ESTE, AUNQUE CON LA TARJETA SE PUEDE AVERIGUAR EL BANCO
 CREATE TABLE GEM4.Banco(
 	Banco_ID	INT IDENTITY(1,1),
 	Descripcion	NVARCHAR(60),
@@ -251,7 +250,7 @@ CREATE TABLE GEM4.Retiro(
 	Habilitado				BIT DEFAULT 1,
 	PRIMARY KEY(Retiro_ID),
 	FOREIGN KEY(Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
-	FOREIGN KEY(Cuenta_Por_Usuario_ID) REFERENCES GEM4.Cuenta_Por_Usuario(Cuena_Por_Usuario_ID),
+	FOREIGN KEY(Cuenta_Por_Usuario_ID) REFERENCES GEM4.Cuenta_Por_Usuario(Cuenta_Por_Usuario_ID),
 	FOREIGN	KEY(Moneda_ID) REFERENCES GEM4.Moneda(Moneda_ID),
 	FOREIGN KEY(Tarjeta_Por_Cliente_ID) REFERENCES GEM4.Tarjeta_Por_Cliente(Tarjeta_Por_Cliente_ID),
 	FOREIGN KEY(Librador_ID)	REFERENCES	GEM4.Usuario(Usuario_ID),

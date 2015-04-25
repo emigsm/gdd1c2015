@@ -51,9 +51,9 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario')
 	DROP TABLE GEM4.Usuario;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
-	DROP TABLE GEM4.Pais;/*
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Documento')
-	DROP TABLE GEM4.Tipo_Documento;
+	DROP TABLE GEM4.Pais;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Documento')
+	DROP TABLE GEM4.Documento;/*
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Moneda')
 	DROP TABLE GEM4.Moneda;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Emisora_Tarjeta')
@@ -111,6 +111,12 @@ CREATE TABLE GEM4.Usuario_Por_Rol(
 	FOREIGN KEY (Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
 	FOREIGN KEY (Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod)
 	);
+
+CREATE TABLE GEM4.Documento(
+	Documento_Tipo_Codigo					INT IDENTITY(10001,1),
+	Documento_Tipo_Descripcion				NVARCHAR(60),
+	PRIMARY KEY (Documento_Tipo_Codigo)
+	)
 /*
 
 -- A DISCUTIR:-------------------------------------------------
@@ -128,12 +134,6 @@ CREATE TABLE GEM4.Logs(
 	Numero_Intento	TINYINT
 	)
 
-CREATE TABLE GEM4.Tipo_Documento(
-	Tipo_Doc_ID		INT IDENTITY(1,1),
-	Descrípcion		NVARCHAR(60),
-	Habilitado		BIT DEFAULT 1,
-	PRIMARY KEY (Tipo_Doc_ID)
-	)
 
 CREATE TABLE GEM4.Cliente(
 	Cliente_ID			INT IDENTITY(1,1),					
@@ -312,6 +312,12 @@ SELECT DISTINCT Cli_Pais_Codigo, Cli_Pais_Desc
 FROM gd_esquema.Maestra
 WHERE Cli_Pais_Codigo IS NOT NULL);
 SET IDENTITY_INSERT GEM4.Pais OFF;
+
+SET IDENTITY_INSERT GEM4.Documento ON;
+INSERT INTO GEM4.Documento(Documento_Tipo_Codigo,Documento_Tipo_Descripcion)
+SELECT DISTINCT Cli_Tipo_Doc_Cod, Cli_Tipo_Doc_Desc
+FROM gd_esquema.Maestra;
+SET IDENTITY_INSERT GEM4.Documento OFF;
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 

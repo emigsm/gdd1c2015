@@ -116,21 +116,17 @@ CREATE TABLE GEM4.Usuario_Por_Rol(
 
 -- A DISCUTIR:-------------------------------------------------
 CREATE TABLE GEM4.Tipo_Log(
-	Tipo_Log_ID			INT IDENTITY(1,1),
+	Log_Cod			INT IDENTITY(1,1),
 	Descripcion		NVARCHAR(60),
-	habilitado		BIT DEFAULT 1,
-	PRIMARY KEY (Tipo_Log_ID)
+	Habilitado		BIT DEFAULT 1,
+	PRIMARY KEY (Log_Cod)
 	)
 
 CREATE TABLE GEM4.Logs(
-	Log_ID		INT IDENTITY(1,1),
-	Tipo_Log_ID		INT,
-	Usuario_ID		INT,
+	Logs_ID			INT IDENTITY(1,1),
+	Tipo_Log		INT,
 	Fecha_Hora_Log	DATETIME,
-	Numero_Intento	TINYINT,
-	PRIMARY KEY (Log_ID),
-	FOREIGN KEY (Tipo_Log_ID) REFERENCES GEM4.Tipo_Log(Tipo_Log_ID),
-	FOREIGN KEY (Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)
+	Numero_Intento	TINYINT
 	)
 
 CREATE TABLE GEM4.Tipo_Documento(
@@ -141,15 +137,15 @@ CREATE TABLE GEM4.Tipo_Documento(
 	)
 
 CREATE TABLE GEM4.Cliente(
-	Cliente_ID			INT IDENTITY(1,1),
-	Usuario_ID			INT,
+	Cliente_ID			INT IDENTITY(1,1),					
+	Usuario_ID			INT,						
 	Nombre				NVARCHAR(60),
 	Apellido			NVARCHAR(60),
 	Tipo_Doc_ID			INT,
 	Numero_Documento	INT,
 	Mail				NVARCHAR(60) UNIQUE,
 	Pais_ID				INT,
-	Domicilio			NVARCHAR(60),
+	Domicilio			NVARCHAR(60), --FALTAN CALLE, NUMERO, DEPTO Y PISO
 	Localidad			NVARCHAR(60),
 	Nacionalidad		NVARCHAR(60),
 	Fecha_Nacimiento	DATETIME,
@@ -159,14 +155,15 @@ CREATE TABLE GEM4.Cliente(
 	FOREIGN KEY(Tipo_Doc_ID) REFERENCES GEM4.Tipo_Documento(Tipo_Doc_ID),
 	FOREIGN KEY(Pais_ID) REFERENCES GEM4.Pais(Pais_ID)
 	)
+	
 CREATE TABLE GEM4.Emisora_Tarjeta(
 	Emisora_Tarjeta_ID	INT IDENTITY(1,1),
 	Descripcion	NVARCHAR(60),
-	Habilitado	BIT DEFAULT 1,
+	Habilitado	BIT DEFAULT 1,   -- para quee?
 	PRIMARY KEY(Emisora_Tarjeta_ID)
 	)
-CREATE TABLE GEM4.Tarjeta_Por_Cliente(
-	Tarjeta_Por_Cliente_ID	INT IDENTITY(1,1),
+CREATE TABLE GEM4.Tarjeta_Por_Cliente(  --yo le pondria tarjeta
+	Tarjeta_Por_Cliente_ID	INT IDENTITY(1,1), --y esto que seria?? el numero de tarjeta??
 	Emisora_Tarjeta_ID		INT,
 	Cliente_ID				INT,
 	Fecha_Emision			DATETIME,
@@ -182,7 +179,7 @@ CREATE TABLE GEM4.Tarjeta_Por_Cliente(
 CREATE TABLE GEM4.Moneda(
 	Moneda_ID		INT IDENTITY(1,1),
 	Descripcion		NVARCHAR(60),
-	Habilitado		NVARCHAR(60),
+	Habilitado		NVARCHAR(60), --Para que???
 	PRIMARY KEY	(Moneda_ID)
 	)
 
@@ -190,7 +187,7 @@ CREATE TABLE GEM4.Tipo_Cuenta(
 	Tipo_Cuenta_ID		INT IDENTITY(1,1),
 	Descripcion			NVARCHAR(60),
 	Costo_Creacion		NUMERIC(18,2),
-	Costo_Modificacion	NUMERIC(18,2),
+	Costo_Modificacion	NUMERIC(18,2),  --Faltaria la duracion
 	Habilitado			BIT DEFAULT 1
 	PRIMARY KEY (Tipo_Cuenta_ID)
 	)
@@ -201,7 +198,7 @@ CREATE TABLE GEM4.Estado_Cuenta(
 	PRIMARY KEY(Estado_Cuenta_ID)
 	)
 
-CREATE TABLE GEM4.Cuenta_Por_Usuario(
+CREATE TABLE GEM4.Cuenta_Por_Usuario(  --NO ENTIENDO PARA QUE ESTA TABLA, FALTARIA LA TABLA CUENTA
 	Cuenta_Por_Usuario_ID	INT IDENTITY(1,1),
 	Usuario_ID				INT,
 	Tipo_Cuenta_ID			INT,
@@ -213,7 +210,7 @@ CREATE TABLE GEM4.Cuenta_Por_Usuario(
 	FOREIGN KEY(Estado_Cuenta_ID) REFERENCES GEM4.Estado_Cuenta(Estado_Cuenta_ID)
 	)
 	
-CREATE TABLE GEM4.Operacion(
+CREATE TABLE GEM4.Operacion( -- esta tabla que seria?
 	Operacion_ID	INT IDENTITY(1,1),
 	Costo			NUMERIC(18,2),
 	PRIMARY KEY(Operacion_ID)
@@ -223,7 +220,7 @@ CREATE TABLE GEM4.Deposito(
 	Operacion_ID			INT,
 	Cuenta_Por_Usuario_ID	INT,
 	Importe					NUMERIC(18,2) CHECK(Importe>1),
-	Moneda_ID				INT,
+	Moneda_ID				INT,							--Faltaria una FK al cliente??
 	Tarjeta_Por_Cliente_ID	INT,
 	Fecha					DATETIME,
 	--EN NECESARIO EL BANCO??? HAY Q PREGUNTAR EN EL GRUPO EL ENUNCIADO NO DICE NADA
@@ -237,7 +234,7 @@ CREATE TABLE GEM4.Deposito(
 	
 CREATE TABLE GEM4.Banco(
 	Banco_ID	INT IDENTITY(1,1),
-	Descripcion	NVARCHAR(60),
+	Descripcion	NVARCHAR(60), --falta banco direccion
 	PRIMARY KEY(Banco_ID),
 	)
 		
@@ -250,9 +247,9 @@ CREATE TABLE GEM4.Retiro(
 	Tarjeta_Por_Cliente_ID	INT,
 	Fecha					DATETIME,
 	Numero_Cheque			INT,
-	Librador_ID				INT,--(USUARIO CON CUENTA DEL BANCO QUE CONFECCIONO EL CHEQUE)
+	Librador_ID				INT,--(USUARIO CON CUENTA DEL BANCO QUE CONFECCIONO EL CHEQUE) --no entiendo
 	Banco_ID				INT,
-	Habilitado				BIT DEFAULT 1,
+	Habilitado				BIT DEFAULT 1,			--para que??
 	PRIMARY KEY(Retiro_ID),
 	FOREIGN KEY(Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
 	FOREIGN KEY(Cuenta_Por_Usuario_ID) REFERENCES GEM4.Cuenta_Por_Usuario(Cuena_Por_Usuario_ID),
@@ -269,7 +266,7 @@ CREATE TABLE GEM4.Transferencia(
 	Cuenta_Destino		INT,
 	Importe				INT CHECK(Importe>0),
 	Costo_Fijo			NUMERIC(18,2),
-	Habilitado			BIT DEFAULT 1,
+	Habilitado			BIT DEFAULT 1,					--falta fecha
 	PRIMARY KEY (Transferencia_ID),
 	FOREIGN KEY (Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
 	FOREIGN KEY (Cuenta_Origen) REFERENCES GEM4.Cuenta_Por_Usuario(Cuenta_Por_Usuario_ID),
@@ -279,11 +276,11 @@ CREATE TABLE GEM4.Transferencia(
 CREATE TABLE GEM4.Factura(
 	Factura_ID					INT IDENTITY(1,1),
 	Fecha						DATETIME,
-	Habilitado					BIT DEFAULT 1,
+	Habilitado					BIT DEFAULT 1, --para que?
 	PRIMARY KEY(Factura_ID)
 	)
 	
-CREATE TABLE GEM4.Factura_Por_Operacion(
+CREATE TABLE GEM4.Factura_Por_Operacion( --para mi iria en items, porq	ue una operacion es un item de una factura
 	Factura_Por_Operacion_ID	INT IDENTITY(1,1),
 	Factura_ID					INT,
 	Operacion_ID				INT,

@@ -10,7 +10,10 @@ IF NOT EXISTS (SELECT 1 FROM [sys].[schemas] WHERE [name] = 'GEM4')
 GO
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
-
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Operacion')
+	DROP TABLE GEM4.Tipo_Operacion;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Login')
+	DROP TABLE GEM4.Log_Login;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Item_Por_Factura')
 	DROP TABLE GEM4.Item_Por_Factura;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Factura')
@@ -264,6 +267,22 @@ CREATE TABLE GEM4.Item_Por_Factura(
 	FOREIGN KEY(Item_Codigo) REFERENCES GEM4.Item(Item_Codigo)
 	)
 	
+CREATE TABLE GEM4.Log_Login(
+	Log_Login_Numero						INT IDENTITY(1,1),
+	Log_Login_Usuario_ID					INT,
+	Log_Login_Fecha							DATETIME,
+	Log_Login_Incorrecto					BIT, --Si es TRUE -----> LOGIN FUE INCORRECTO
+	Log_Login_NIntento						INT,
+	PRIMARY KEY(Log_Login_Numero),
+	FOREIGN KEY(Log_Login_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)
+	)
+
+CREATE TABLE GEM4.Tipo_Operacion(
+	Tipo_Operacion_ID						INT IDENTITY(1,1),
+	Tipo_Operacion_Descripcion				NVARCHAR(60),
+	PRIMARY KEY(Tipo_Operacion_ID)
+	)
+
 
 
 /*

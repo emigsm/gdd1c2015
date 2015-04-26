@@ -20,6 +20,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
         //Constantes de StoreProcedure
         private const string STORE_LOGINUSUARIO = "GEM4.spLoginUsuario";
+        private const string STORE_CANTIDADROLES = "GEM4.spCantidadRoles";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -32,6 +33,18 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LOGINUSUARIO, SCALAR, parametros);
             Rol_Cod = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return Rol_Cod;
+        }
+
+        public static int cantidadRoles(string usuario)
+        {
+            int cantidadRoles;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter user = new SqlParameter("@usuario", usuario);
+            parametros.Add(user);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CANTIDADROLES, SCALAR, parametros);
+            cantidadRoles = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return cantidadRoles;
+
         }
     }
 }

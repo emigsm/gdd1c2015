@@ -27,13 +27,37 @@ namespace PagoElectronico
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             int rolCod = GestorDeSistema.loginUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContrasena.Text));
+            int cantidadRoles = GestorDeSistema.cantidadRoles(txtUsuario.Text);
+            
             if (rolCod == 1)
             {
                 System.Windows.Forms.MessageBox.Show("Login Correcto como ADMIN");
+                if (cantidadRoles > 1)
+                {
+                    System.Windows.Forms.MessageBox.Show("Tiene mas de un Rol");
+                    SeleccionRol frmSeleccionRol = new SeleccionRol();
+                    frmSeleccionRol.Show(this);
+                    this.Hide();
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Tiene un solo Rol");
+                    Principal frmPrincipal = new Principal();
+                    frmPrincipal.Show(this);
+                    this.Hide();
+                }
             }
             else if (rolCod == 2)
             {
                 System.Windows.Forms.MessageBox.Show("Login Correcto como CLIENTE");
+                                if (cantidadRoles > 1)
+                {
+                    System.Windows.Forms.MessageBox.Show("Tiene mas de un Rol");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Tiene un solo Rol");
+                }
             }
             else
             {

@@ -422,3 +422,14 @@ AS
 		WHERE Usuario_Username = @usuario AND Usuario_Contrasena = @pass AND Usuario_Habilitado = 1;
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCantidadRoles')
+	DROP PROCEDURE GEM4.spCantidadRoles;
+GO
+CREATE PROCEDURE GEM4.spCantidadRoles
+	@usuario NVARCHAR(30)
+AS
+	SELECT COUNT(Usuario_Por_Rol.Usuario_ID) CantidadRoles
+	FROM GEM4.Usuario_Por_Rol JOIN GEM4.Usuario ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID)
+	WHERE Usuario.Usuario_Username = @usuario AND Habilitado = 1
+	GROUP BY Usuario_Por_Rol.Usuario_ID
+GO

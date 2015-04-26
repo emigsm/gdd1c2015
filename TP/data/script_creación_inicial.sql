@@ -37,23 +37,23 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Cuenta')
 	DROP TABLE GEM4.Tipo_Cuenta;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Banco')
-	DROP TABLE GEM4.Banco;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cliente')
-	DROP TABLE GEM4.Cliente;*/
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Rol_Por_Funcionalidad')
-	DROP TABLE GEM4.Rol_Por_Funcionalidad;
+	DROP TABLE GEM4.Banco;*/
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario_Por_Rol')
 	DROP TABLE GEM4.Usuario_Por_Rol;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario')
+	DROP TABLE GEM4.Usuario;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cliente')
+	DROP TABLE GEM4.Cliente;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Documento')
+	DROP TABLE GEM4.Documento;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
+	DROP TABLE GEM4.Pais;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Rol_Por_Funcionalidad')
+	DROP TABLE GEM4.Rol_Por_Funcionalidad;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Rol')
 	DROP TABLE GEM4.Rol;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Funcionalidad')
 	DROP TABLE GEM4.Funcionalidad;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario')
-	DROP TABLE GEM4.Usuario;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
-	DROP TABLE GEM4.Pais;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Documento')
-	DROP TABLE GEM4.Documento;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Moneda')
 	DROP TABLE GEM4.Moneda;/*
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Emisora_Tarjeta')
@@ -90,6 +90,33 @@ CREATE TABLE GEM4.Rol_Por_Funcionalidad(
 	FOREIGN KEY (Funcionalidad_Cod) REFERENCES GEM4.Funcionalidad(Funcionalidad_Cod)
 	);
 	
+CREATE TABLE GEM4.Documento(
+	Documento_Tipo_Codigo					INT IDENTITY(10001,1),
+	Documento_Tipo_Descripcion				NVARCHAR(60),
+	PRIMARY KEY (Documento_Tipo_Codigo)
+	)
+	
+CREATE TABLE GEM4.Cliente(
+	Cliente_ID					INT IDENTITY(1,1),					
+	Cliente_Nombre				NVARCHAR(60),
+	Cliente_Apellido			NVARCHAR(60),
+	Cliente_Tipo_Doc			INT,
+	Cliente_Numero_Documento	INT,						--no esta en maestra (no tienen ndoc)
+	Cliente_Mail				NVARCHAR(60) UNIQUE,
+	Cliente_Pais				INT,
+	Cliente_Dom_Calle			NVARCHAR(60),
+	Cliente_Dom_Numero			INT,
+	Cliente_Dom_Piso			INT,
+	Cliente_Dom_Depto			NVARCHAR(60),
+	Cliente_Localidad			NVARCHAR(60),				--no esta en maestra
+	Cliente_Nacionalidad		NVARCHAR(60),				--no esta en maestra
+	Cliente_Fecha_Nacimiento	DATETIME,
+	Cliente_Habilitado			BIT DEFAULT 1,
+	PRIMARY KEY(Cliente_ID),
+	FOREIGN KEY(Cliente_Tipo_Doc) REFERENCES GEM4.Documento(Documento_Tipo_Codigo),
+	FOREIGN KEY(Cliente_Pais) REFERENCES GEM4.Pais(Pais_Cod)
+	)	
+	
 CREATE TABLE GEM4.Usuario(
 	Usuario_ID 								INT IDENTITY(0,1),
 	Usuario_Username						NVARCHAR(30) UNIQUE NOT NULL,
@@ -98,8 +125,10 @@ CREATE TABLE GEM4.Usuario(
 	Usuario_Fecha_Ultima_Modificacion 		DATETIME,
 	Usuario_Pregunta_Secreta 				NVARCHAR(60),
 	Usuario_Respuesta_Secreta 				DATETIME,
+	Cliente_ID								INT,
 	Usuario_Habilitado						BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY (Usuario_ID),
+	FOREIGN KEY(Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID),
 	UNIQUE (Usuario_Username)
 	);
 	
@@ -111,12 +140,6 @@ CREATE TABLE GEM4.Usuario_Por_Rol(
 	FOREIGN KEY (Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
 	FOREIGN KEY (Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod)
 	);
-
-CREATE TABLE GEM4.Documento(
-	Documento_Tipo_Codigo					INT IDENTITY(10001,1),
-	Documento_Tipo_Descripcion				NVARCHAR(60),
-	PRIMARY KEY (Documento_Tipo_Codigo)
-	)
 	
 CREATE TABLE GEM4.Moneda(
 	Moneda_Codigo							INT IDENTITY(1,1),
@@ -298,26 +321,6 @@ CREATE TABLE GEM4.Factura_Por_Operacion( --para mi iria en items, porq	ue una op
 
 /* *****************************************     CREACION DE TRIGGERS    ********************************************** */
 
-/*	****************************************	MIGRACION 	******************************************* */
-
-SET IDENTITY_INSERT GEM4.Pais ON;
-INSERT INTO GEM4.Pais(Pais_Cod, Pais_Descripcion)
-(SELECT DISTINCT Cuenta_Dest_Pais_Codigo, Cuenta_Dest_Pais_Desc
-FROM gd_esquema.Maestra
-WHERE Cuenta_Dest_Pais_Codigo IS NOT NULL
-
-UNION
-SELECT DISTINCT Cli_Pais_Codigo, Cli_Pais_Desc
-FROM gd_esquema.Maestra
-WHERE Cli_Pais_Codigo IS NOT NULL);
-SET IDENTITY_INSERT GEM4.Pais OFF;
-
-SET IDENTITY_INSERT GEM4.Documento ON;
-INSERT INTO GEM4.Documento(Documento_Tipo_Codigo,Documento_Tipo_Descripcion)
-SELECT DISTINCT Cli_Tipo_Doc_Cod, Cli_Tipo_Doc_Desc
-FROM gd_esquema.Maestra;
-SET IDENTITY_INSERT GEM4.Documento OFF;
-
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
 SET IDENTITY_INSERT GEM4.Rol ON;
@@ -371,6 +374,39 @@ SET IDENTITY_INSERT GEM4.Moneda ON;
 INSERT INTO GEM4.Moneda(Moneda_Codigo, Moneda_Descripcion) VALUES
 	(1,'Dólar estadounidense');
 SET IDENTITY_INSERT GEM4.Moneda OFF;
+
+/*	****************************************	MIGRACION 	******************************************* */
+
+SET IDENTITY_INSERT GEM4.Pais ON;
+INSERT INTO GEM4.Pais(Pais_Cod, Pais_Descripcion)
+(SELECT DISTINCT Cuenta_Dest_Pais_Codigo, Cuenta_Dest_Pais_Desc
+FROM gd_esquema.Maestra
+WHERE Cuenta_Dest_Pais_Codigo IS NOT NULL
+
+UNION
+SELECT DISTINCT Cli_Pais_Codigo, Cli_Pais_Desc
+FROM gd_esquema.Maestra
+WHERE Cli_Pais_Codigo IS NOT NULL);
+SET IDENTITY_INSERT GEM4.Pais OFF;
+
+SET IDENTITY_INSERT GEM4.Documento ON;
+INSERT INTO GEM4.Documento(Documento_Tipo_Codigo,Documento_Tipo_Descripcion)
+SELECT DISTINCT Cli_Tipo_Doc_Cod, Cli_Tipo_Doc_Desc
+FROM gd_esquema.Maestra;
+SET IDENTITY_INSERT GEM4.Documento OFF;
+
+INSERT INTO GEM4.Cliente(Cliente_Pais, Cliente_Nombre, Cliente_Apellido, Cliente_Tipo_Doc, Cliente_Dom_Calle, Cliente_Dom_Numero, Cliente_Dom_Piso, Cliente_Dom_Depto, Cliente_Fecha_Nacimiento, Cliente_Mail)
+SELECT DISTINCT Cli_Pais_Codigo, Cli_Nombre, Cli_Apellido, Cli_Tipo_Doc_Cod, Cli_Dom_Calle, Cli_Dom_Nro, Cli_Dom_Piso, Cli_Dom_Depto, Cli_Fecha_Nac, Cli_Mail
+FROM gd_esquema.Maestra
+
+INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Cliente_ID)
+SELECT Cliente_Nombre +'.'+ Cliente_Apellido, '5rhwUL/LgUP8uNsBcKTcntANkE3dPipK0bHo3A/cm+c=', SYSDATETIME(), SYSDATETIME(), Cliente_ID
+FROM GEM4.Cliente
+
+INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID,Rol_Cod)
+SELECT Usuario_ID, 2
+FROM GEM4.Usuario
+WHERE Usuario_ID > 3
 
 /* ***************************************** STORED PROCEDURES ************************************************** */
 

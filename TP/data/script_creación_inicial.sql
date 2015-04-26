@@ -10,6 +10,8 @@ IF NOT EXISTS (SELECT 1 FROM [sys].[schemas] WHERE [name] = 'GEM4')
 GO
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Operacion')
+	DROP TABLE GEM4.Log_Operacion;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Operacion')
 	DROP TABLE GEM4.Tipo_Operacion;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Login')
@@ -283,7 +285,15 @@ CREATE TABLE GEM4.Tipo_Operacion(
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
 
-
+CREATE TABLE GEM4.Log_Operacion(
+	Log_Operacion_ID						INT IDENTITY(1,1),
+	Log_Operacion_Tipo						INT,
+	Log_Operacion_Fecha						DATETIME,
+	Log_Operacion_Usuario_ID				INT,				
+	PRIMARY KEY(Log_Operacion_ID),
+	FOREIGN KEY(Log_Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
+	FOREIGN KEY(Log_Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)	
+	)
 
 /*
 -- A DISCUTIR:-------------------------------------------------

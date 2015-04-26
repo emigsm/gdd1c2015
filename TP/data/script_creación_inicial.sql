@@ -22,22 +22,30 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Factura;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Retiro')
 	DROP TABLE GEM4.Retiro;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Desposito')
-	DROP TABLE GEM4.Deposito;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Transferencia')
-	DROP TABLE GEM4.Transferencia;		
+
+	
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operacion')
 	DROP TABLE GEM4.Operacion;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tarjeta_Por_Cliente')
 	DROP TABLE GEM4.Tarjeta_Por_Cliente;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cuenta_Por_Usuario')
-	DROP TABLE GEM4.Cuenta_Por_Usuario;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Estado_Cuenta')
-	DROP TABLE GEM4.Estado_Cuenta;
+	DROP TABLE GEM4.Cuenta_Por_Usuario;*/
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cheque')
+	DROP TABLE GEM4.Cheque;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Banco')
+	DROP TABLE GEM4.Banco;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Transferencia')
+	DROP TABLE GEM4.Transferencia;	
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
+	DROP TABLE GEM4.Deposito;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tarjeta')
+	DROP TABLE GEM4.Tarjeta;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cuenta')
+	DROP TABLE GEM4.Cuenta;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Cuenta')
 	DROP TABLE GEM4.Tipo_Cuenta;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Banco')
-	DROP TABLE GEM4.Banco;*/
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Estado_Cuenta')
+	DROP TABLE GEM4.Estado_Cuenta;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario_Por_Rol')
 	DROP TABLE GEM4.Usuario_Por_Rol;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario')
@@ -62,51 +70,51 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 /*	****************************************	CREACION DE LAS TABLAS	*********************************************** */
 
 CREATE TABLE GEM4.Pais(
-	Pais_Cod					INT IDENTITY(1,1),
+	Pais_Cod					NUMERIC(18,0) IDENTITY(1,1),
 	Pais_Descripcion			NVARCHAR(60),
-	PRIMARY KEY (Pais_Cod)
+	PRIMARY KEY(Pais_Cod)
 	);
 
 CREATE TABLE GEM4.Rol(
 	Rol_Cod 					INT IDENTITY(1,1),
 	Rol_Nombre					NVARCHAR(50) NOT NULL,					
 	Rol_Habilitado				BIT NOT NULL DEFAULT 1,
-	PRIMARY KEY (Rol_Cod)
+	PRIMARY KEY(Rol_Cod)
 	);
 	
 CREATE TABLE GEM4.Funcionalidad(
 	Funcionalidad_Cod			TINYINT ,
 	Funcionalidad_Descripcion	NVARCHAR(50) NOT NULL,
 	Funcionalidad_Habilitada	BIT DEFAULT 1 NOT NULL,
-	PRIMARY KEY (Funcionalidad_Cod)
+	PRIMARY KEY(Funcionalidad_Cod)
 	);
 
 CREATE TABLE GEM4.Rol_Por_Funcionalidad(
 	Rol_Cod								INT,
 	Funcionalidad_Cod					TINYINT,
 	Rol_Por_Funcionalidad_Habilitado	BIT DEFAULT 1,	
-	PRIMARY KEY (Rol_Cod, Funcionalidad_Cod),
-	FOREIGN KEY (Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod),
-	FOREIGN KEY (Funcionalidad_Cod) REFERENCES GEM4.Funcionalidad(Funcionalidad_Cod)
+	PRIMARY KEY(Rol_Cod, Funcionalidad_Cod),
+	FOREIGN KEY(Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod),
+	FOREIGN KEY(Funcionalidad_Cod) REFERENCES GEM4.Funcionalidad(Funcionalidad_Cod)
 	);
 	
 CREATE TABLE GEM4.Documento(
-	Documento_Tipo_Codigo					INT IDENTITY(10001,1),
+	Documento_Tipo_Codigo					NUMERIC(18,0) IDENTITY(10001,1),
 	Documento_Tipo_Descripcion				NVARCHAR(60),
-	PRIMARY KEY (Documento_Tipo_Codigo)
+	PRIMARY KEY(Documento_Tipo_Codigo)
 	)
 	
 CREATE TABLE GEM4.Cliente(
 	Cliente_ID					INT IDENTITY(1,1),					
 	Cliente_Nombre				NVARCHAR(60),
 	Cliente_Apellido			NVARCHAR(60),
-	Cliente_Tipo_Doc			INT,
+	Cliente_Tipo_Doc			NUMERIC(18,0),
 	Cliente_Numero_Documento	INT,						--no esta en maestra (no tienen ndoc)
 	Cliente_Mail				NVARCHAR(60) UNIQUE,
-	Cliente_Pais				INT,
+	Cliente_Pais				NUMERIC(18,0),
 	Cliente_Dom_Calle			NVARCHAR(60),
-	Cliente_Dom_Numero			INT,
-	Cliente_Dom_Piso			INT,
+	Cliente_Dom_Numero			NUMERIC(18,0),
+	Cliente_Dom_Piso			NUMERIC(18,0),
 	Cliente_Dom_Depto			NVARCHAR(60),
 	Cliente_Localidad			NVARCHAR(60),				--no esta en maestra
 	Cliente_Nacionalidad		NVARCHAR(60),				--no esta en maestra
@@ -124,28 +132,128 @@ CREATE TABLE GEM4.Usuario(
 	Usuario_Fecha_Creacion 					DATETIME,
 	Usuario_Fecha_Ultima_Modificacion 		DATETIME,
 	Usuario_Pregunta_Secreta 				NVARCHAR(60),
-	Usuario_Respuesta_Secreta 				DATETIME,
+	Usuario_Respuesta_Secreta 				NVARCHAR(60),
 	Cliente_ID								INT,
 	Usuario_Habilitado						BIT NOT NULL DEFAULT 1,
-	PRIMARY KEY (Usuario_ID),
+	PRIMARY KEY(Usuario_ID),
 	FOREIGN KEY(Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID),
-	UNIQUE (Usuario_Username)
+	UNIQUE(Usuario_Username)
 	);
 	
 CREATE TABLE GEM4.Usuario_Por_Rol(
 	Usuario_ID								INT,
 	Rol_Cod									INT,
 	Habilitado								BIT DEFAULT 1,
-	PRIMARY KEY (Usuario_ID, Rol_Cod),
-	FOREIGN KEY (Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
-	FOREIGN KEY (Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod)
+	PRIMARY KEY(Usuario_ID, Rol_Cod),
+	FOREIGN KEY(Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	FOREIGN KEY(Rol_Cod) REFERENCES GEM4.Rol(Rol_Cod)
 	);
 	
 CREATE TABLE GEM4.Moneda(
 	Moneda_Codigo							INT IDENTITY(1,1),
 	Moneda_Descripcion						NVARCHAR(60),
---	Habilitado			NVARCHAR(60), --Para que???
-	PRIMARY KEY	(Moneda_Codigo)
+	PRIMARY KEY(Moneda_Codigo)
+	)
+
+CREATE TABLE GEM4.Estado_Cuenta(
+	Estado_Codigo							INT IDENTITY(1,1),
+	Estado_Descripcion						NVARCHAR(60),
+	PRIMARY KEY(Estado_Codigo)
+	)
+	
+CREATE TABLE GEM4.Tipo_Cuenta(
+	Tipo_Cuenta_ID						INT IDENTITY(1,1),
+	Tipo_Cuenta_Descripcion				NVARCHAR(60),
+	Tipo_Cuenta_Costo_Creacion			NUMERIC(18,2),
+	Tipo_Cuenta_Costo_Modificacion		NUMERIC(18,2), 
+	Tipo_Cuenta_Duracion				TIME,
+	Habilitado							BIT DEFAULT 1
+	PRIMARY KEY (Tipo_Cuenta_ID)
+	)	
+	
+CREATE TABLE GEM4.Cuenta(
+	Cuenta_Numero							NUMERIC(18,0) IDENTITY(1,1),
+	Cuenta_Fecha_Creacion					DATETIME,
+	Cuenta_Estado							INT,
+	Cuenta_Pais								NUMERIC(18,0),
+	Cuenta_Fecha_Cierre						DATETIME,
+	Cuenta_Moneda							INT,
+	Cuenta_Tipo								INT,
+	Cuenta_Cliente_ID						INT,
+	Cuenta_Saldo							NUMERIC(18,2),
+	PRIMARY KEY(Cuenta_Numero),
+	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
+	FOREIGN KEY(Cuenta_Moneda) REFERENCES GEM4.Moneda(Moneda_Codigo),
+	FOREIGN KEY(Cuenta_Tipo) REFERENCES GEM4.Tipo_Cuenta(Tipo_Cuenta_ID),
+	FOREIGN KEY(Cuenta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID) 
+	)
+
+CREATE TABLE GEM4.Tarjeta(
+	Tarjeta_Numero							NVARCHAR(16),
+	Tarjeta_Fecha_Emision					DATETIME,
+	Tarjeta_Fecha_Vencimiento				DATETIME,
+	Tarjeta_Codigo_Seg						NVARCHAR(3),
+	Tarjeta_Emisor_Descripcion				NVARCHAR(60),
+	Tarjeta_Cliente_ID						INT,
+	PRIMARY KEY(Tarjeta_Numero),
+	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
+	)
+	
+
+CREATE TABLE GEM4.Deposito(
+	Deposito_Codigo							NUMERIC(18,0) IDENTITY(1,1),
+	Deposito_Fecha							DATETIME,
+	Deposito_Importe						NUMERIC(18,2),
+	Deposito_Cliente						INT,
+	Deposito_Tarjeta						NVARCHAR(16),
+	Deposito_Moneda							INT,
+	Deposito_Cuenta							NUMERIC(18,0),
+	PRIMARY KEY(Deposito_Codigo),
+	FOREIGN KEY(Deposito_Cliente) REFERENCES GEM4.Cliente(Cliente_ID),
+	FOREIGN KEY(Deposito_Tarjeta) REFERENCES GEM4.Tarjeta(Tarjeta_Numero),
+	FOREIGN KEY(Deposito_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	)
+
+CREATE TABLE GEM4.Transferencia( --aca omiti todos los campos de Cuenta_Dest porque los podemos sacar de cuenta, a DISCUTIR si hice bien o no
+	Transferencia_Codigo					INT IDENTITY(1,1),
+	Transferencia_Fecha						DATETIME,
+	Transferencia_Importe					NUMERIC(18,2),
+	Transferencia_Costo_Trans				NUMERIC(18,2),
+	Transferencia_Cuenta_Origen				NUMERIC(18,0),
+	Transferencia_Cuenta_Destino			NUMERIC(18,0)
+	PRIMARY KEY(Transferencia_Codigo),
+	FOREIGN KEY(Transferencia_Cuenta_Origen) REFERENCES GEM4.Cuenta(Cuenta_Numero),
+	FOREIGN KEY(Transferencia_Cuenta_Destino) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	)
+
+CREATE TABLE GEM4.Banco(
+	Banco_Codigo							NUMERIC(18,0) IDENTITY(1,1),
+	Banco_Nombre							NVARCHAR(60),
+	Banco_Direccion							NVARCHAR(60),
+	PRIMARY KEY(Banco_Codigo)
+	)
+
+CREATE TABLE GEM4.Cheque(
+	Cheque_Numero							NUMERIC(18,0) IDENTITY(1,1),
+	Cheque_Fecha							DATETIME,
+	Cheque_Importe							NUMERIC(18,2),
+	Cheque_Cliente_ID						INT,
+	Cheque_Banco							NUMERIC(18,0),
+	PRIMARY KEY(Cheque_Numero),
+	FOREIGN KEY(Cheque_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID),
+	FOREIGN KEY(Cheque_Banco) REFERENCES GEM4.Banco(Banco_Codigo)							
+	)
+
+/*
+CREATE TABLE GEM4.Retiro(
+	Retiro_Codigo							NUMERIC(18,0) IDENTITY(1,1),
+	Retiro_Importe							NUMERIC(18,2),
+	Retiro_Fecha							DATETIME,
+	Retiro_Cuenta							NUMERIC(18,0),
+	Retiro_Cheque							NUMERIC(18,0),
+	PRIMARY KEY(Retiro_Codigo),
+	FOREIGN KEY(Retiro_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
+	FOREIGN KEY(Retiro_Cheque) REFERENCES GEM4.Cheque(Cheque_Numero)
 	)
 /*
 
@@ -162,27 +270,6 @@ CREATE TABLE GEM4.Logs(
 	Tipo_Log		INT,
 	Fecha_Hora_Log	DATETIME,
 	Numero_Intento	TINYINT
-	)
-
-
-CREATE TABLE GEM4.Cliente(
-	Cliente_ID			INT IDENTITY(1,1),					
-	Usuario_ID			INT,						
-	Nombre				NVARCHAR(60),
-	Apellido			NVARCHAR(60),
-	Tipo_Doc_ID			INT,
-	Numero_Documento	INT,
-	Mail				NVARCHAR(60) UNIQUE,
-	Pais_ID				INT,
-	Domicilio			NVARCHAR(60), --FALTAN CALLE, NUMERO, DEPTO Y PISO
-	Localidad			NVARCHAR(60),
-	Nacionalidad		NVARCHAR(60),
-	Fecha_Nacimiento	DATETIME,
-	Habilitado			BIT DEFAULT 1,
-	PRIMARY KEY	(Cliente_ID),
-	FOREIGN KEY(Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
-	FOREIGN KEY(Tipo_Doc_ID) REFERENCES GEM4.Tipo_Documento(Tipo_Doc_ID),
-	FOREIGN KEY(Pais_ID) REFERENCES GEM4.Pais(Pais_ID)
 	)
 	
 CREATE TABLE GEM4.Emisora_Tarjeta(
@@ -204,21 +291,6 @@ CREATE TABLE GEM4.Tarjeta_Por_Cliente(  --yo le pondria tarjeta
 	FOREIGN KEY (Cliente_ID)		REFERENCES	GEM4.Cliente(Cliente_ID)
 	)
 
-CREATE TABLE GEM4.Tipo_Cuenta(
-	Tipo_Cuenta_ID		INT IDENTITY(1,1),
-	Descripcion			NVARCHAR(60),
-	Costo_Creacion		NUMERIC(18,2),
-	Costo_Modificacion	NUMERIC(18,2),  --Faltaria la duracion
-	Habilitado			BIT DEFAULT 1
-	PRIMARY KEY (Tipo_Cuenta_ID)
-	)
-
-CREATE TABLE GEM4.Estado_Cuenta(
-	Estado_Cuenta_ID	INT IDENTITY(1,1),
-	Descripcion			NVARCHAR(60),
-	PRIMARY KEY(Estado_Cuenta_ID)
-	)
-
 CREATE TABLE GEM4.Cuenta_Por_Usuario(  --NO ENTIENDO PARA QUE ESTA TABLA, FALTARIA LA TABLA CUENTA
 	Cuenta_Por_Usuario_ID	INT IDENTITY(1,1),
 	Usuario_ID				INT,
@@ -236,6 +308,7 @@ CREATE TABLE GEM4.Operacion( -- esta tabla que seria?
 	Costo			NUMERIC(18,2),
 	PRIMARY KEY(Operacion_ID)
 	)
+	
 CREATE TABLE GEM4.Deposito(
 	Deposito_ID				INT IDENTITY(1,1),
 	Operacion_ID			INT,

@@ -15,5 +15,15 @@ namespace PagoElectronico.ABMs.ABM_Rol
         {
             InitializeComponent();
         }
+
+        private void ABMRolPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VolverButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

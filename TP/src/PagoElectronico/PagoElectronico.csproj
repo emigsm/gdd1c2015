@@ -48,11 +48,77 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ABMs\ABM Cliente\ABMClientePrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM Cliente\ABMClientePrincipal.Designer.cs">
+      <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.Designer.cs">
+      <DependentUpon>ABMCuentaPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMs\ABM de Usuario\ABMUsuarioPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM de Usuario\ABMUsuarioPrincipal.Designer.cs">
+      <DependentUpon>ABMUsuarioPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ABMs\ABM Rol\ABMRolPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM Rol\ABMRolPrincipal.Designer.cs">
+      <DependentUpon>ABMRolPrincipal.cs</DependentUpon>
+    </Compile>
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Asociacion TC\AsociacionTCPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Asociacion TC\AsociacionTCPrincipal.Designer.cs">
+      <DependentUpon>AsociacionTCPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Consulta Saldos\ConsultaSaldosPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Consulta Saldos\ConsultaSaldosPrincipal.Designer.cs">
+      <DependentUpon>ConsultaSaldosPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Depositos\DepositosPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Depositos\DepositosPrincipal.Designer.cs">
+      <DependentUpon>DepositosPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Facturacion\FacturacionPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Facturacion\FacturacionPrincipal.Designer.cs">
+      <DependentUpon>FacturacionPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Listados\ListadosPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Listados\ListadosPrincipal.Designer.cs">
+      <DependentUpon>ListadosPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Retiros\RetirosPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Retiros\RetirosPrincipal.Designer.cs">
+      <DependentUpon>RetirosPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Transferencias\TransferenciasPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Transferencias\TransferenciasPrincipal.Designer.cs">
+      <DependentUpon>TransferenciasPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
       <SubType>Form</SubType>
@@ -62,6 +128,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ABMs\ABM Cliente\ABMClientePrincipal.resx">
+      <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,18 +169,7 @@
     <Compile Include="Utilidades\ModeloSistema\GestorDeSistema.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ABMs\ABM Cliente\" />
-    <Folder Include="ABMs\ABM Cuenta\" />
-    <Folder Include="ABMs\ABM de Usuario\" />
-    <Folder Include="ABMs\ABM Rol\" />
     <Folder Include="Login\" />
-    <Folder Include="Operaciones\Asociacion TC\" />
-    <Folder Include="Operaciones\Consulta Saldos\" />
-    <Folder Include="Operaciones\Depositos\" />
-    <Folder Include="Operaciones\Facturacion\" />
-    <Folder Include="Operaciones\Listados\" />
-    <Folder Include="Operaciones\Retiros\" />
-    <Folder Include="Operaciones\Transferencias\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

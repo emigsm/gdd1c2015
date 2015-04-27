@@ -8,3 +8,4 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Login.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Principal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.SeleccionRol.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ABMClientePrincipal.resources

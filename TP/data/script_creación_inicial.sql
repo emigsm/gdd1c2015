@@ -168,9 +168,9 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Estado							INT,
 	Cuenta_Pais								NUMERIC(18,0),
 	Cuenta_Fecha_Cierre						DATETIME,
-	Cuenta_Moneda							INT,
-	Cuenta_Tipo								INT,
-	Cuenta_Cliente_ID						INT,
+	Cuenta_Moneda							INT,--no estan en maestra
+	Cuenta_Tipo								INT,--idem
+	Cuenta_Cliente_ID						INT,--idem
 	Cuenta_Saldo							NUMERIC(18,2),
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
@@ -184,7 +184,7 @@ CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Fecha_Emision					DATETIME,
 	Tarjeta_Fecha_Vencimiento				DATETIME,
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
-	Tarjeta_Emisor_Descripcion				NVARCHAR(60),
+	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
 	Tarjeta_Cliente_ID						INT,
 	PRIMARY KEY(Tarjeta_Numero),
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
@@ -219,8 +219,8 @@ CREATE TABLE GEM4.Transferencia( --aca omiti todos los campos de Cuenta_Dest por
 
 CREATE TABLE GEM4.Banco(
 	Banco_Codigo							NUMERIC(18,0) IDENTITY(1,1),
-	Banco_Nombre							NVARCHAR(60),
-	Banco_Direccion							NVARCHAR(60),
+	Banco_Nombre							NVARCHAR(255),
+	Banco_Direccion							NVARCHAR(255),
 	PRIMARY KEY(Banco_Codigo)
 	)
 
@@ -260,10 +260,15 @@ CREATE TABLE GEM4.Factura(
 	PRIMARY KEY(Factura_Numero),
 	FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
 	)
+
+CREATE TABLE GEM4.Operacion_Por_Factura
+	(
+	
+
 	
 CREATE TABLE GEM4.Item_Por_Factura(
 	Factura_Numero							NUMERIC(18,0),
-	Item_Codigo								INT
+	Item_Codigo								INT,
 	PRIMARY KEY(Factura_Numero, Item_Codigo),
 	FOREIGN KEY(Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
 	FOREIGN KEY(Item_Codigo) REFERENCES GEM4.Item(Item_Codigo)
@@ -281,18 +286,19 @@ CREATE TABLE GEM4.Log_Login(
 
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
-	Tipo_Operacion_Descripcion				NVARCHAR(60),
+	Tipo_Operacion_Descripcion				NVARCHAR(255),
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
 
-CREATE TABLE GEM4.Log_Operacion(
-	Log_Operacion_ID						INT IDENTITY(1,1),
-	Log_Operacion_Tipo						INT,
-	Log_Operacion_Fecha						DATETIME,
-	Log_Operacion_Usuario_ID				INT,				
-	PRIMARY KEY(Log_Operacion_ID),
-	FOREIGN KEY(Log_Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
-	FOREIGN KEY(Log_Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)	
+CREATE TABLE GEM4.Operacion(
+	Operacion_ID						INT IDENTITY(1,1),
+	Operacion_Tipo						INT,
+	Operacion_Fecha						DATETIME,
+	Operacion_Usuario_ID				INT,
+	Operacion_Importe					NUMERIC(18,2),
+	PRIMARY KEY(Operacion_ID),
+	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
+	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)	
 	)
 
 /*

@@ -24,6 +24,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERROLES = "GEM4.spObtenerRoles";
         private const string STORE_OBTENERFUNCIONALIDADES = "GEM4.spObtenerFuncionalidades";
         private const string STORE_INHABILITARUSUARIO = "GEM4.spInhabilitarUsuario";
+        private const string STORE_BUSCARROLES = "GEM4.spBuscarRoles";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -83,6 +84,24 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@username", username));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_INHABILITARUSUARIO, NONQUERY, parametros);
+        }
+
+         //ABM ROL
+
+
+        internal static DataTable buscarRoles(string rol_cod, string rol_nombre)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@rol_cod", rol_cod));
+            parametros.Add(new SqlParameter("@rol_nombre", rol_nombre));
+            SqlDataReader readerRoles = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BUSCARROLES, READER, parametros);
+            DataTable roles = new DataTable();
+            if (readerRoles.HasRows)
+            {
+                roles.Load(readerRoles);
+            }
+            readerRoles.Dispose();
+            return roles;
         }
     }
 }

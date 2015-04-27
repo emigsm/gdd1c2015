@@ -40,6 +40,11 @@
             this.dgvRoles = new System.Windows.Forms.DataGridView();
             this.CrearRolButton = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
+            this.Rol_Cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rol_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Rol_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ModificarButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.EliminarButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.SuspendLayout();
@@ -106,6 +111,7 @@
             this.BuscarRolesButton.TabIndex = 4;
             this.BuscarRolesButton.Text = "Buscar";
             this.BuscarRolesButton.UseVisualStyleBackColor = true;
+            this.BuscarRolesButton.Click += new System.EventHandler(this.BuscarRolesButton_Click);
             // 
             // LimpiarBusquedaButton
             // 
@@ -115,10 +121,11 @@
             this.LimpiarBusquedaButton.TabIndex = 5;
             this.LimpiarBusquedaButton.Text = "Limpiar Búsqueda";
             this.LimpiarBusquedaButton.UseVisualStyleBackColor = true;
+            this.LimpiarBusquedaButton.Click += new System.EventHandler(this.LimpiarBusquedaButton_Click);
             // 
             // VolverButton
             // 
-            this.VolverButton.Location = new System.Drawing.Point(512, 374);
+            this.VolverButton.Location = new System.Drawing.Point(535, 374);
             this.VolverButton.Name = "VolverButton";
             this.VolverButton.Size = new System.Drawing.Size(147, 33);
             this.VolverButton.TabIndex = 2;
@@ -128,10 +135,18 @@
             // 
             // dgvRoles
             // 
+            this.dgvRoles.AllowUserToAddRows = false;
+            this.dgvRoles.AllowUserToDeleteRows = false;
             this.dgvRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRoles.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Rol_Cod,
+            this.Rol_Nombre,
+            this.Rol_Habilitado,
+            this.ModificarButton,
+            this.EliminarButton});
             this.dgvRoles.Location = new System.Drawing.Point(22, 212);
             this.dgvRoles.Name = "dgvRoles";
-            this.dgvRoles.Size = new System.Drawing.Size(637, 147);
+            this.dgvRoles.Size = new System.Drawing.Size(543, 147);
             this.dgvRoles.TabIndex = 3;
             // 
             // CrearRolButton
@@ -142,6 +157,7 @@
             this.CrearRolButton.TabIndex = 4;
             this.CrearRolButton.Text = "Crear Nuevo Rol";
             this.CrearRolButton.UseVisualStyleBackColor = true;
+            this.CrearRolButton.Click += new System.EventHandler(this.CrearRolButton_Click);
             // 
             // label4
             // 
@@ -152,11 +168,46 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Puede crear un nuevo rol utilizando el respectivo botón";
             // 
+            // Rol_Cod
+            // 
+            this.Rol_Cod.Frozen = true;
+            this.Rol_Cod.HeaderText = "Código";
+            this.Rol_Cod.Name = "Rol_Cod";
+            this.Rol_Cod.ReadOnly = true;
+            // 
+            // Rol_Nombre
+            // 
+            this.Rol_Nombre.Frozen = true;
+            this.Rol_Nombre.HeaderText = "Nombre";
+            this.Rol_Nombre.Name = "Rol_Nombre";
+            this.Rol_Nombre.ReadOnly = true;
+            // 
+            // Rol_Habilitado
+            // 
+            this.Rol_Habilitado.Frozen = true;
+            this.Rol_Habilitado.HeaderText = "Habilitado";
+            this.Rol_Habilitado.Name = "Rol_Habilitado";
+            this.Rol_Habilitado.ReadOnly = true;
+            // 
+            // ModificarButton
+            // 
+            this.ModificarButton.Frozen = true;
+            this.ModificarButton.HeaderText = "Modificar";
+            this.ModificarButton.Name = "ModificarButton";
+            this.ModificarButton.ReadOnly = true;
+            // 
+            // EliminarButton
+            // 
+            this.EliminarButton.Frozen = true;
+            this.EliminarButton.HeaderText = "Eliminar";
+            this.EliminarButton.Name = "EliminarButton";
+            this.EliminarButton.ReadOnly = true;
+            // 
             // ABMRolPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(719, 419);
+            this.ClientSize = new System.Drawing.Size(694, 419);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.CrearRolButton);
             this.Controls.Add(this.dgvRoles);
@@ -188,5 +239,10 @@
         private System.Windows.Forms.DataGridView dgvRoles;
         private System.Windows.Forms.Button CrearRolButton;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rol_Cod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Rol_Nombre;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Rol_Habilitado;
+        private System.Windows.Forms.DataGridViewButtonColumn ModificarButton;
+        private System.Windows.Forms.DataGridViewButtonColumn EliminarButton;
     }
 }

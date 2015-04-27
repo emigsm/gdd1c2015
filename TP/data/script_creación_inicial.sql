@@ -565,3 +565,15 @@ AS
 	FROM GEM4.Funcionalidad JOIN GEM4.Rol_Por_Funcionalidad ON (Funcionalidad.Funcionalidad_Cod = Rol_Por_Funcionalidad.Funcionalidad_Cod)
 	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
 GO
+
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarUsuario')
+	DROP PROCEDURE GEM4.spInhabilitarUsuario;
+GO
+CREATE PROCEDURE GEM4.spInhabilitarUsuario
+	@username	NVARCHAR(30)
+AS
+	UPDATE GEM4.Usuario
+	SET Usuario_Habilitado = 0
+	WHERE Usuario_Username = @username
+GO

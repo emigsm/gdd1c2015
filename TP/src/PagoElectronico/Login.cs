@@ -20,7 +20,7 @@ namespace PagoElectronico
         public Login()
         {
             InitializeComponent();
-            cantidadIntentos = 1;
+            cantidadIntentos = 0;
 
         }
 
@@ -66,13 +66,20 @@ namespace PagoElectronico
                 }
             }
             else
-            {
-                System.Windows.Forms.MessageBox.Show("Login Incorrecto");
+            {   /*Login incorrecto*/
                 cantidadIntentos++;
-                if (cantidadIntentos > 3)
+                if (cantidadIntentos >= 3)
                 {
+                    GestorDeSistema.inhabilitarUsuario(txtUsuario.Text);
                     System.Windows.Forms.MessageBox.Show("Maximo superado. Su cuenta queda INHABILITADA");
+                    ConexionDB.DesconectarDB();
+                    Application.Exit();
                 }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Datos no válidos o usuario bloqueado. \nIntentos " + this.cantidadIntentos.ToString() + " de 3");
+                }
+
             }
            
         }

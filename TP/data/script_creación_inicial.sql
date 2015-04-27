@@ -62,7 +62,7 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 
 CREATE TABLE GEM4.Pais(
 	Pais_Cod					NUMERIC(18,0) IDENTITY(1,1),
-	Pais_Descripcion			NVARCHAR(60),
+	Pais_Descripcion			NVARCHAR(250),
 	PRIMARY KEY(Pais_Cod)
 	);
 
@@ -91,22 +91,22 @@ CREATE TABLE GEM4.Rol_Por_Funcionalidad(
 	
 CREATE TABLE GEM4.Documento(
 	Documento_Tipo_Codigo					NUMERIC(18,0) IDENTITY(10001,1),
-	Documento_Tipo_Descripcion				NVARCHAR(60),
+	Documento_Tipo_Descripcion				NVARCHAR(255),
 	PRIMARY KEY(Documento_Tipo_Codigo)
 	)
 	
 CREATE TABLE GEM4.Cliente(
 	Cliente_ID					INT IDENTITY(1,1),					
-	Cliente_Nombre				NVARCHAR(60),
-	Cliente_Apellido			NVARCHAR(60),
+	Cliente_Nombre				NVARCHAR(255),
+	Cliente_Apellido			NVARCHAR(255),
 	Cliente_Tipo_Doc			NUMERIC(18,0),
 	Cliente_Numero_Documento	INT,						--no esta en maestra (no tienen ndoc)
-	Cliente_Mail				NVARCHAR(60) UNIQUE,
+	Cliente_Mail				NVARCHAR(255) UNIQUE,
 	Cliente_Pais				NUMERIC(18,0),
-	Cliente_Dom_Calle			NVARCHAR(60),
+	Cliente_Dom_Calle			NVARCHAR(255),
 	Cliente_Dom_Numero			NUMERIC(18,0),
 	Cliente_Dom_Piso			NUMERIC(18,0),
-	Cliente_Dom_Depto			NVARCHAR(60),
+	Cliente_Dom_Depto			NVARCHAR(10),
 	Cliente_Localidad			NVARCHAR(60),				--no esta en maestra
 	Cliente_Nacionalidad		NVARCHAR(60),				--no esta en maestra
 	Cliente_Fecha_Nacimiento	DATETIME,
@@ -148,7 +148,7 @@ CREATE TABLE GEM4.Moneda(
 
 CREATE TABLE GEM4.Estado_Cuenta(
 	Estado_Codigo							INT IDENTITY(1,1),
-	Estado_Descripcion						NVARCHAR(60),
+	Estado_Descripcion						NVARCHAR(255),
 	PRIMARY KEY(Estado_Codigo)
 	)
 	

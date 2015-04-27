@@ -10,6 +10,8 @@ IF NOT EXISTS (SELECT 1 FROM [sys].[schemas] WHERE [name] = 'GEM4')
 GO
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Operacion')
+	DROP TABLE GEM4.Operacion
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Operacion')
 	DROP TABLE GEM4.Log_Operacion;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Operacion')
@@ -261,11 +263,11 @@ CREATE TABLE GEM4.Factura(
 	FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
 	)
 
-CREATE TABLE GEM4.Operacion_Por_Factura
+/*CREATE TABLE GEM4.Operacion_Por_Factura
 	(
 	
 
-	
+	*/
 CREATE TABLE GEM4.Item_Por_Factura(
 	Factura_Numero							NUMERIC(18,0),
 	Item_Codigo								INT,

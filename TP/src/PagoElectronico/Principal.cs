@@ -11,9 +11,15 @@ namespace PagoElectronico
 {
     public partial class Principal : Form
     {
-        public Principal()
+        public Principal(int rolCod)
         {
             InitializeComponent();
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
         }
     }
 }

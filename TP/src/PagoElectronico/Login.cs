@@ -31,32 +31,38 @@ namespace PagoElectronico
             
             if (rolCod == 1)
             {
-                System.Windows.Forms.MessageBox.Show("Login Correcto como ADMIN");
+                /*Login Correcto como ADMIN*/
                 if (cantidadRoles > 1)
                 {
-                    System.Windows.Forms.MessageBox.Show("Tiene mas de un Rol");
+                    /*Tiene mas de un Rol*/
                     SeleccionRol frmSeleccionRol = new SeleccionRol();
                     frmSeleccionRol.Show(this);
                     this.Hide();
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Tiene un solo Rol");
-                    Principal frmPrincipal = new Principal();
+                    /*Tiene un solo Rol*/
+                    Principal frmPrincipal = new Principal(rolCod);
                     frmPrincipal.Show(this);
                     this.Hide();
                 }
             }
             else if (rolCod == 2)
             {
-                System.Windows.Forms.MessageBox.Show("Login Correcto como CLIENTE");
-                                if (cantidadRoles > 1)
+                /*Login Correcto como CLIENTE*/
+                if (cantidadRoles > 1)
                 {
-                    System.Windows.Forms.MessageBox.Show("Tiene mas de un Rol");
+                    /*Tiene mas de un Rol*/
+                    SeleccionRol frmSeleccionRol = new SeleccionRol();
+                    frmSeleccionRol.Show(this);
+                    this.Hide();
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Tiene un solo Rol");
+                    /*Tiene un solo Rol*/
+                    Principal frmPrincipal = new Principal(rolCod);
+                    frmPrincipal.Show(this);
+                    this.Hide();
                 }
             }
             else

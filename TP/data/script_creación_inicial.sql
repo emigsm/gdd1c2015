@@ -545,3 +545,23 @@ AS
 	WHERE Usuario.Usuario_Username = @usuario AND Habilitado = 1
 	GROUP BY Usuario_Por_Rol.Usuario_ID
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRoles')
+	DROP PROCEDURE GEM4.spObtenerRoles;
+GO
+CREATE PROCEDURE GEM4.spObtenerRoles
+AS
+	SELECT Rol_Nombre, Rol_Cod
+	FROM GEM4.Rol
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerFuncionalidades')
+	DROP PROCEDURE GEM4.spObtenerFuncionalidades;
+GO
+CREATE PROCEDURE GEM4.spObtenerFuncionalidades
+	@rol_cod	TINYINT
+AS
+	SELECT Funcionalidad_Descripcion
+	FROM GEM4.Funcionalidad JOIN GEM4.Rol_Por_Funcionalidad ON (Funcionalidad.Funcionalidad_Cod = Rol_Por_Funcionalidad.Funcionalidad_Cod)
+	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
+GO

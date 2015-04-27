@@ -25,6 +25,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERFUNCIONALIDADES = "GEM4.spObtenerFuncionalidades";
         private const string STORE_INHABILITARUSUARIO = "GEM4.spInhabilitarUsuario";
         private const string STORE_BUSCARROLES = "GEM4.spBuscarRoles";
+        private const string STORE_LOGLOGIN = "GEM4.spLogLogin";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -86,6 +87,15 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_INHABILITARUSUARIO, NONQUERY, parametros);
         }
 
+        public static void logLogin(string username, bool incorrecto, int nIntento)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@username", username));
+            parametros.Add(new SqlParameter("@incorrecto", incorrecto));
+            parametros.Add(new SqlParameter("@nIntento", nIntento));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LOGLOGIN, NONQUERY, parametros);
+        }
+
          //ABM ROL
 
 
@@ -103,5 +113,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerRoles.Dispose();
             return roles;
         }
+
+
     }
 }

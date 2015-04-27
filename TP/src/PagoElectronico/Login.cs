@@ -31,7 +31,9 @@ namespace PagoElectronico
             
             if (rolCod == 1)
             {
+                GestorDeSistema.logLogin(txtUsuario.Text, false, cantidadIntentos +1 );  /*Agrega el log de logueo correcto a la base*/
                 /*Login Correcto como ADMIN*/
+                cantidadIntentos = 0;
                 if (cantidadRoles > 1)
                 {
                     /*Tiene mas de un Rol*/
@@ -49,7 +51,9 @@ namespace PagoElectronico
             }
             else if (rolCod == 2)
             {
+                GestorDeSistema.logLogin(txtUsuario.Text, false, cantidadIntentos +1);  /*Agrega el log de logueo correcto a la base*/
                 /*Login Correcto como CLIENTE*/
+                cantidadIntentos = 0;
                 if (cantidadRoles > 1)
                 {
                     /*Tiene mas de un Rol*/
@@ -66,7 +70,9 @@ namespace PagoElectronico
                 }
             }
             else
-            {   /*Login incorrecto*/
+            {
+                GestorDeSistema.logLogin(txtUsuario.Text, true, cantidadIntentos +1);  /*Agrega el log de logueo incorrecto a la base*/
+                /*Login incorrecto*/
                 cantidadIntentos++;
                 if (cantidadIntentos >= 3)
                 {

@@ -572,7 +572,6 @@ AS
 	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
 GO
 
-
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarUsuario')
 	DROP PROCEDURE GEM4.spInhabilitarUsuario;
 GO
@@ -583,3 +582,18 @@ AS
 	SET Usuario_Habilitado = 0
 	WHERE Usuario_Username = @username
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLogLogin')
+	DROP PROCEDURE GEM4.spLogLogin
+GO
+CREATE PROCEDURE GEM4.spLogLogin
+	@username	NVARCHAR(30),
+	@incorrecto	BIT,
+	@nIntento	TINYINT
+AS
+DECLARE @usuarioID INT
+SET @usuarioID = (SELECT Usuario_ID FROM Usuario WHERE Usuario_Username = @username)
+INSERT INTO GEM4.Log_Login (Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento) VALUES
+	(@usuarioID, GETDATE(), @incorrecto, @nIntento)
+GO
+

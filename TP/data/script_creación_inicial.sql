@@ -306,9 +306,9 @@ CREATE TABLE GEM4.Retiro(
 CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Fecha							DATETIME,
-	Factura_Cuenta							NUMERIC(18,0),
+	--Factura_Cuenta							NUMERIC(18,0),
 	PRIMARY KEY(Factura_Numero),
-	FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	--FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
 	)
 
 CREATE TABLE GEM4.Tipo_Operacion(
@@ -461,6 +461,12 @@ FROM gd_esquema.Maestra m
 WHERE m.Banco_Cogido IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Banco OFF;
 
+SET IDENTITY_INSERT GEM4.Factura ON;
+INSERT INTO GEM4.Factura(Factura_Numero,Factura_Fecha)
+SELECT DISTINCT m.Factura_Numero,m.Factura_Fecha
+FROM gd_esquema.Maestra m
+WHERE M.Factura_Numero IS NOT NULL;
+SET IDENTITY_INSERT GEM4.Factura OFF;
 
 
 /* ***************************************** STORED PROCEDURES ************************************************** */

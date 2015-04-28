@@ -51,7 +51,7 @@
             this.rbModificarRol = new System.Windows.Forms.RadioButton();
             this.rbAgregarRol = new System.Windows.Forms.RadioButton();
             this.checkBoxCambioRol = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.checkBoxEstado = new System.Windows.Forms.CheckBox();
             this.groupBoxContraseña.SuspendLayout();
             this.groupBoxPregunta.SuspendLayout();
@@ -115,7 +115,7 @@
             // groupBoxEstado
             // 
             this.groupBoxEstado.Controls.Add(this.checkBoxEstado);
-            this.groupBoxEstado.Controls.Add(this.comboBox1);
+            this.groupBoxEstado.Controls.Add(this.cmbEstado);
             this.groupBoxEstado.Location = new System.Drawing.Point(13, 252);
             this.groupBoxEstado.Name = "groupBoxEstado";
             this.groupBoxEstado.Size = new System.Drawing.Size(162, 58);
@@ -125,6 +125,7 @@
             // 
             // btnVerificarContraseña
             // 
+            this.btnVerificarContraseña.Enabled = false;
             this.btnVerificarContraseña.Location = new System.Drawing.Point(339, 33);
             this.btnVerificarContraseña.Name = "btnVerificarContraseña";
             this.btnVerificarContraseña.Size = new System.Drawing.Size(75, 23);
@@ -140,10 +141,12 @@
             this.checkBoxContraseña.Size = new System.Drawing.Size(15, 14);
             this.checkBoxContraseña.TabIndex = 0;
             this.checkBoxContraseña.UseVisualStyleBackColor = true;
+            this.checkBoxContraseña.CheckedChanged += new System.EventHandler(this.checkBoxContraseña_CheckedChanged);
             // 
             // lblNuevaContraseña
             // 
             this.lblNuevaContraseña.AutoSize = true;
+            this.lblNuevaContraseña.Enabled = false;
             this.lblNuevaContraseña.Location = new System.Drawing.Point(6, 20);
             this.lblNuevaContraseña.Name = "lblNuevaContraseña";
             this.lblNuevaContraseña.Size = new System.Drawing.Size(98, 13);
@@ -153,6 +156,7 @@
             // lblVerifContraseña
             // 
             this.lblVerifContraseña.AutoSize = true;
+            this.lblVerifContraseña.Enabled = false;
             this.lblVerifContraseña.Location = new System.Drawing.Point(6, 47);
             this.lblVerifContraseña.Name = "lblVerifContraseña";
             this.lblVerifContraseña.Size = new System.Drawing.Size(104, 13);
@@ -161,6 +165,7 @@
             // 
             // txtContraseña
             // 
+            this.txtContraseña.Enabled = false;
             this.txtContraseña.Location = new System.Drawing.Point(157, 13);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.Size = new System.Drawing.Size(157, 20);
@@ -168,6 +173,7 @@
             // 
             // txtVerificarContraseña
             // 
+            this.txtVerificarContraseña.Enabled = false;
             this.txtVerificarContraseña.Location = new System.Drawing.Point(157, 40);
             this.txtVerificarContraseña.Name = "txtVerificarContraseña";
             this.txtVerificarContraseña.Size = new System.Drawing.Size(157, 20);
@@ -176,6 +182,7 @@
             // lblPregSecreta
             // 
             this.lblPregSecreta.AutoSize = true;
+            this.lblPregSecreta.Enabled = false;
             this.lblPregSecreta.Location = new System.Drawing.Point(7, 16);
             this.lblPregSecreta.Name = "lblPregSecreta";
             this.lblPregSecreta.Size = new System.Drawing.Size(124, 13);
@@ -186,6 +193,7 @@
             // lblRespSecretanueva
             // 
             this.lblRespSecretanueva.AutoSize = true;
+            this.lblRespSecretanueva.Enabled = false;
             this.lblRespSecretanueva.Location = new System.Drawing.Point(7, 42);
             this.lblRespSecretanueva.Name = "lblRespSecretanueva";
             this.lblRespSecretanueva.Size = new System.Drawing.Size(132, 13);
@@ -194,6 +202,7 @@
             // 
             // txtPregSec
             // 
+            this.txtPregSec.Enabled = false;
             this.txtPregSec.Location = new System.Drawing.Point(158, 16);
             this.txtPregSec.Name = "txtPregSec";
             this.txtPregSec.Size = new System.Drawing.Size(157, 20);
@@ -201,6 +210,7 @@
             // 
             // txtRespSec
             // 
+            this.txtRespSec.Enabled = false;
             this.txtRespSec.Location = new System.Drawing.Point(158, 42);
             this.txtRespSec.Name = "txtRespSec";
             this.txtRespSec.Size = new System.Drawing.Size(157, 20);
@@ -219,6 +229,7 @@
             // lblRolActual
             // 
             this.lblRolActual.AutoSize = true;
+            this.lblRolActual.Enabled = false;
             this.lblRolActual.Location = new System.Drawing.Point(10, 20);
             this.lblRolActual.Name = "lblRolActual";
             this.lblRolActual.Size = new System.Drawing.Size(58, 13);
@@ -227,6 +238,7 @@
             // 
             // txtRolActual
             // 
+            this.txtRolActual.Enabled = false;
             this.txtRolActual.Location = new System.Drawing.Point(74, 17);
             this.txtRolActual.Name = "txtRolActual";
             this.txtRolActual.Size = new System.Drawing.Size(101, 20);
@@ -236,6 +248,7 @@
             // lblCambioRol
             // 
             this.lblCambioRol.AutoSize = true;
+            this.lblCambioRol.Enabled = false;
             this.lblCambioRol.Location = new System.Drawing.Point(181, 20);
             this.lblCambioRol.Name = "lblCambioRol";
             this.lblCambioRol.Size = new System.Drawing.Size(57, 13);
@@ -244,6 +257,7 @@
             // 
             // cmbCambioRol
             // 
+            this.cmbCambioRol.Enabled = false;
             this.cmbCambioRol.FormattingEnabled = true;
             this.cmbCambioRol.Location = new System.Drawing.Point(244, 16);
             this.cmbCambioRol.Name = "cmbCambioRol";
@@ -253,6 +267,7 @@
             // rbModificarRol
             // 
             this.rbModificarRol.AutoSize = true;
+            this.rbModificarRol.Enabled = false;
             this.rbModificarRol.Location = new System.Drawing.Point(394, 203);
             this.rbModificarRol.Name = "rbModificarRol";
             this.rbModificarRol.Size = new System.Drawing.Size(68, 17);
@@ -264,6 +279,7 @@
             // rbAgregarRol
             // 
             this.rbAgregarRol.AutoSize = true;
+            this.rbAgregarRol.Enabled = false;
             this.rbAgregarRol.Location = new System.Drawing.Point(394, 226);
             this.rbAgregarRol.Name = "rbAgregarRol";
             this.rbAgregarRol.Size = new System.Drawing.Size(62, 17);
@@ -280,14 +296,16 @@
             this.checkBoxCambioRol.Size = new System.Drawing.Size(15, 14);
             this.checkBoxCambioRol.TabIndex = 8;
             this.checkBoxCambioRol.UseVisualStyleBackColor = true;
+            this.checkBoxCambioRol.CheckedChanged += new System.EventHandler(this.checkBoxCambioRol_CheckedChanged);
             // 
-            // comboBox1
+            // cmbEstado
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(6, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(130, 21);
-            this.comboBox1.TabIndex = 11;
+            this.cmbEstado.Enabled = false;
+            this.cmbEstado.FormattingEnabled = true;
+            this.cmbEstado.Location = new System.Drawing.Point(6, 19);
+            this.cmbEstado.Name = "cmbEstado";
+            this.cmbEstado.Size = new System.Drawing.Size(130, 21);
+            this.cmbEstado.TabIndex = 11;
             // 
             // checkBoxEstado
             // 
@@ -297,6 +315,7 @@
             this.checkBoxEstado.Size = new System.Drawing.Size(15, 14);
             this.checkBoxEstado.TabIndex = 11;
             this.checkBoxEstado.UseVisualStyleBackColor = true;
+            this.checkBoxEstado.CheckedChanged += new System.EventHandler(this.checkBoxEstado_CheckedChanged);
             // 
             // ModificacionUsuario
             // 
@@ -351,7 +370,7 @@
         private System.Windows.Forms.RadioButton rbModificarRol;
         private System.Windows.Forms.CheckBox checkBoxCambioRol;
         private System.Windows.Forms.RadioButton rbAgregarRol;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbEstado;
         private System.Windows.Forms.CheckBox checkBoxEstado;
     }
 }

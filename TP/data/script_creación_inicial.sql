@@ -213,7 +213,8 @@ CREATE TABLE GEM4.Tipo_Cuenta(
 	Tipo_Cuenta_ID						INT IDENTITY(1,1),
 	Tipo_Cuenta_Descripcion				NVARCHAR(60),
 	Tipo_Cuenta_Costo_Creacion			NUMERIC(18,2),
-	Tipo_Cuenta_Costo_Modificacion		NUMERIC(18,2), 
+	Tipo_Cuenta_Costo_Modificacion		NUMERIC(18,2),
+	Tipo_Cuenta_Costo_Transf			NUMERIC(18,2), 
 	Tipo_Cuenta_Duracion				TIME,
 	Habilitado							BIT DEFAULT 1
 	PRIMARY KEY (Tipo_Cuenta_ID)
@@ -313,7 +314,9 @@ CREATE TABLE GEM4.Factura(
 
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
+	--Tipo_Operacion_Costo					NUMERIC(18,2),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
+	
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
 
@@ -323,14 +326,18 @@ CREATE TABLE GEM4.Operacion(
 	Operacion_Fecha						DATETIME,
 	Operacion_Usuario_ID				INT,
 	Operacion_Importe					NUMERIC(18,2),
+	Factura_Numero					NUMERIC(18,0),
 	PRIMARY KEY(Operacion_ID),
 	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
-	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)	
+	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero)
 	)
 
 
 
 	
+/*
+NO ES NECESARIA, O SEA CADA OPERACION TIENE UN SOLO NRO DE FACTURA, ES DE UNO A MUCHOS
 CREATE TABLE GEM4.Operacion_Por_Factura
 	(Factura_Por_Operacion_ID		NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Numero					NUMERIC(18,0),
@@ -340,7 +347,9 @@ CREATE TABLE GEM4.Operacion_Por_Factura
 	FOREIGN KEY(Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID)
 	)--el importe y la descripcion no los pongo porque ya existe en Operacion,
 	-- se puede acceder a esos datos a traver de Operacion_ID
-	
+
+
+*/	
 CREATE TABLE GEM4.Log_Login(
 	Log_Login_Numero						INT IDENTITY(1,1),
 	Log_Login_Usuario_ID					INT,
@@ -413,6 +422,11 @@ SET IDENTITY_INSERT GEM4.Moneda ON;
 INSERT INTO GEM4.Moneda(Moneda_Codigo, Moneda_Descripcion) VALUES
 	(1,'Dólar estadounidense');
 SET IDENTITY_INSERT GEM4.Moneda OFF;
+
+
+INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_Descripcion)
+VALUES('Deposito'),('Retiro'),('Transferencia'),('Apertura Cuenta'),('Cierre Cuenta');
+
 
 /*	****************************************	MIGRACION 	******************************************* */
 

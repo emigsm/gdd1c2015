@@ -113,6 +113,7 @@
             this.dgvUsuario.RowHeadersVisible = false;
             this.dgvUsuario.Size = new System.Drawing.Size(704, 150);
             this.dgvUsuario.TabIndex = 4;
+            this.dgvUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuario_CellContentClick);
             // 
             // Usuario_ID
             // 

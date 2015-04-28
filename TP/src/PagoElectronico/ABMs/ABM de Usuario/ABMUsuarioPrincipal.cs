@@ -73,5 +73,26 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 btnBuscarUsuario.PerformClick();
             }
         }
+
+        private void dgvUsuario_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 4)
+            {
+                int usuarioIDAModificar = Convert.ToInt32(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString());
+                ModificacionUsuario frmModificacionUsuario = new ModificacionUsuario(usuarioIDAModificar);
+                frmModificacionUsuario.Show(this);
+                this.Hide();
+            }
+            else if (e.ColumnIndex == 5)
+            {
+                string usernameAEliminar = dgvUsuario.Rows[e.RowIndex].Cells["Usuario_Username"].Value.ToString();
+                DialogResult res = MessageBox.Show("Se eliminará el usuario: " + usernameAEliminar + "\n¿Está seguro?", "Atención", MessageBoxButtons.YesNo);
+                if (res == DialogResult.Yes)
+                {
+                   /*BORRADO LOGICO DE USUARIO*/
+                }
+            }
+
+        }
     }
 }

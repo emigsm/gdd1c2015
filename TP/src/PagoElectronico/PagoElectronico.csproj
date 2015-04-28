@@ -72,6 +72,12 @@
     <Compile Include="ABMs\ABM de Usuario\AltaUsuario.Designer.cs">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABMs\ABM de Usuario\ModificacionUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM de Usuario\ModificacionUsuario.Designer.cs">
+      <DependentUpon>ModificacionUsuario.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABMs\ABM Rol\ABMRolPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -148,6 +154,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM de Usuario\AltaUsuario.resx">
       <DependentUpon>AltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMs\ABM de Usuario\ModificacionUsuario.resx">
+      <DependentUpon>ModificacionUsuario.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM Rol\ABMRolPrincipal.resx">
       <DependentUpon>ABMRolPrincipal.cs</DependentUpon>

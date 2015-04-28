@@ -454,6 +454,13 @@ SELECT DISTINCT m.Tarjeta_Numero,m.Tarjeta_Fecha_Emision,m.Tarjeta_Fecha_Vencimi
 FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL
 
+SET IDENTITY_INSERT GEM4.Banco ON;
+INSERT INTO GEM4.Banco(Banco_Codigo,Banco_Direccion,Banco_Nombre)
+SELECT DISTINCT m.Banco_Cogido,m.Banco_Direccion,m.Banco_Nombre
+FROM gd_esquema.Maestra m
+WHERE m.Banco_Cogido IS NOT NULL;
+SET IDENTITY_INSERT GEM4.Banco OFF;
+
 
 
 /* ***************************************** STORED PROCEDURES ************************************************** */

@@ -534,10 +534,10 @@ CREATE PROCEDURE GEM4.spLogLogin
 	@incorrecto	BIT,
 	@nIntento	TINYINT
 AS
-DECLARE @usuarioID INT
-SET @usuarioID = (SELECT Usuario_ID FROM Usuario WHERE Usuario_Username = @username)
-INSERT INTO GEM4.Log_Login (Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento) VALUES
-	(@usuarioID, GETDATE(), @incorrecto, @nIntento)
+	DECLARE @usuarioID INT
+	SET @usuarioID = (SELECT Usuario_ID FROM Usuario WHERE Usuario_Username = @username)
+	INSERT INTO GEM4.Log_Login (Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento) VALUES
+		(@usuarioID, GETDATE(), @incorrecto, @nIntento)
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerDatosUsuario')
@@ -546,8 +546,18 @@ GO
 CREATE PROCEDURE GEM4.spObtenerDatosUsuario
 	@username	NVARCHAR(30)
 AS
-SELECT Usuario_ID, Usuario_Username, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Usuario_Habilitado, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta
-FROM GEM4.Usuario
-WHERE Usuario_Username LIKE '%'+@username+'%'
+	SELECT Usuario_ID, Usuario_Username, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Usuario_Habilitado, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta
+	FROM GEM4.Usuario
+	WHERE Usuario_Username LIKE '%'+@username+'%'
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBajaLogicaUsuario')
+	DROP PROCEDURE GEM4.spBajaLogicaUsuario
+GO
+CREATE PROCEDURE GEM4.spBajaLogicaUsuario
+	@usuarioID	INT
+AS
+	UPDATE GEM4.Usuario
+	SET Usuario_Habilitado = 0 
+	WHERE Usuario_ID = @usuarioID
+GO

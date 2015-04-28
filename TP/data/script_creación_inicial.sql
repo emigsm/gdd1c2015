@@ -431,6 +431,14 @@ INSERT INTO GEM4.Tipo_Cuenta(Tipo_Cuenta_ID,Tipo_Cuenta_Descripcion,Tipo_Cuenta_
 VALUES (1,'STANDARD',100,100,20,
 		GETDATE());
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
+
+
+SET IDENTITY_INSERT GEM4.Estado_Cuenta ON;
+INSERT INTO GEM4.Estado_Cuenta(Estado_Codigo,Estado_Descripcion)
+VALUES(1,'ACTIVA'),(2,'INACTIVA');
+SET IDENTITY_INSERT GEM4.Estado_Cuenta OFF;
+
+
 /*	****************************************	MIGRACION 	******************************************* */
 
 SET IDENTITY_INSERT GEM4.Pais ON;

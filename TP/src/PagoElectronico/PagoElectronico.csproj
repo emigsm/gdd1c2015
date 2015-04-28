@@ -78,10 +78,10 @@
     <Compile Include="ABMs\ABM Rol\CrearRol.Designer.cs">
       <DependentUpon>CrearRol.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login.cs">
+    <Compile Include="Login\Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
+    <Compile Include="Login\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Operaciones\Asociacion TC\AsociacionTCPrincipal.cs">
@@ -140,7 +140,7 @@
     <EmbeddedResource Include="ABMs\ABM Rol\ABMRolPrincipal.resx">
       <DependentUpon>ABMRolPrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Login.resx">
+    <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">
@@ -176,9 +176,6 @@
     <Compile Include="Utilidades\Cifrado\Cifrador.cs" />
     <Compile Include="Utilidades\ConexionDB\ConexionDB.cs" />
     <Compile Include="Utilidades\ModeloSistema\GestorDeSistema.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Login\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

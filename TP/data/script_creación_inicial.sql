@@ -9,6 +9,56 @@ IF NOT EXISTS (SELECT 1 FROM [sys].[schemas] WHERE [name] = 'GEM4')
 	EXECUTE ('CREATE SCHEMA GEM4 AUTHORIZATION gd;');
 GO
 
+/*	****************************************	FECHA DEL SISTEMA	*************************************************** */
+
+IF EXISTS (SELECT 1 AS existe FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'fechaSistema')
+	DROP TABLE GEM4.fechaSistema;
+
+CREATE TABLE GEM4.fechaSistema (
+		fechaSistema	DATETIME NOT NULL
+	);
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spRegistrarFechaDelSistema')
+	DROP PROCEDURE GEM4.spRegistrarFechaDelSistema
+GO
+CREATE PROCEDURE GEM4.spRegistrarFechaDelSistema
+	@fecha DATETIME
+AS
+BEGIN
+	IF @fecha is NULL
+			INSERT GEM4.fechaSistema (fechaSistema) VALUES (GETDATE())
+	ELSE
+			INSERT GEM4.fechaSistema (fechaSistema) VALUES (@fecha)
+END;
+GO
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnDevolverFechaSistema')
+	DROP FUNCTION GEM4.fnDevolverFechaSistema
+GO
+CREATE FUNCTION GEM4.fnDevolverFechaSistema()
+RETURNS DATETIME
+AS
+	BEGIN
+	DECLARE @fecha DATETIME
+	SELECT TOP 1 @fecha = fechaSistema FROM GEM4.fechaSistema
+	RETURN @fecha
+	END
+GO
+
+EXEC GEM4.spRegistrarFechaDelSistema '2015-01-01 00:00:00.000' --NULL
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spInsertarFechaFuncionamiento')
+	DROP PROCEDURE GEM4.spInsertarFechaFuncionamiento
+GO
+CREATE PROCEDURE GEM4.spInsertarFechaFuncionamiento
+	@fecha DATETIME
+AS
+BEGIN
+	UPDATE GEM4.fechaSistema
+	SET fechaSistema = @fecha
+END;
+GO
+
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Operacion')
 	DROP TABLE GEM4.Operacion
@@ -520,7 +570,7 @@ SELECT DISTINCT Cli_Pais_Codigo, Cli_Nombre, Cli_Apellido, Cli_Tipo_Doc_Cod, Cli
 FROM gd_esquema.Maestra
 
 INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Cliente_ID)
-SELECT Cliente_Nombre +'.'+ Cliente_Apellido, '5rhwUL/LgUP8uNsBcKTcntANkE3dPipK0bHo3A/cm+c=', SYSDATETIME(), SYSDATETIME(), Cliente_ID
+SELECT Cliente_Nombre +'.'+ Cliente_Apellido, '5rhwUL/LgUP8uNsBcKTcntANkE3dPipK0bHo3A/cm+c=', GEM4.fnDevolverFechaSistema(), GEM4.fnDevolverFechaSistema(), Cliente_ID
 FROM GEM4.Cliente
 
 INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID,Rol_Cod)

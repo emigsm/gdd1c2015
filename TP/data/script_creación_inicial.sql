@@ -540,3 +540,14 @@ INSERT INTO GEM4.Log_Login (Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Inc
 	(@usuarioID, GETDATE(), @incorrecto, @nIntento)
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerDatosUsuario')
+	DROP PROCEDURE GEM4.spObtenerDatosUsuario
+GO
+CREATE PROCEDURE GEM4.spObtenerDatosUsuario
+	@username	NVARCHAR(30)
+AS
+SELECT Usuario_ID, Usuario_Username, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Usuario_Habilitado, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta
+FROM GEM4.Usuario
+WHERE Usuario_Username LIKE '%'+@username+'%'
+GO
+

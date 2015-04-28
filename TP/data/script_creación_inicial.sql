@@ -229,7 +229,7 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Moneda							INT	DEFAULT 1,--no estan en maestra
 	Cuenta_Tipo								INT	DEFAULT 1,--idem
 	Cuenta_Cliente_ID						INT,--idem
-	Cuenta_Saldo							NUMERIC(18,2),
+	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 0,--LO HARDCODEO PARA AVANZAR DESPUES HAY Q HACER ALGUN ALGORITMO
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
 	FOREIGN KEY(Cuenta_Moneda) REFERENCES GEM4.Moneda(Moneda_Codigo),
@@ -314,7 +314,6 @@ CREATE TABLE GEM4.Factura(
 
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
-	--Tipo_Operacion_Costo					NUMERIC(18,2),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
 	
 	PRIMARY KEY(Tipo_Operacion_ID)
@@ -326,7 +325,7 @@ CREATE TABLE GEM4.Operacion(
 	Operacion_Fecha						DATETIME,
 	Operacion_Usuario_ID				INT,
 	Operacion_Importe					NUMERIC(18,2),
-	Factura_Numero					NUMERIC(18,0),
+	Factura_Numero						NUMERIC(18,0),
 	PRIMARY KEY(Operacion_ID),
 	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
 	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
@@ -427,7 +426,11 @@ SET IDENTITY_INSERT GEM4.Moneda OFF;
 INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_Descripcion)
 VALUES('Deposito'),('Retiro'),('Transferencia'),('Apertura Cuenta'),('Cierre Cuenta');
 
-
+SET IDENTITY_INSERT GEM4.Tipo_Cuenta ON;
+INSERT INTO GEM4.Tipo_Cuenta(Tipo_Cuenta_ID,Tipo_Cuenta_Descripcion,Tipo_Cuenta_Costo_Creacion,Tipo_Cuenta_Costo_Modificacion,Tipo_Cuenta_Costo_Transf,Tipo_Cuenta_Duracion)
+VALUES (1,'STANDARD',100,100,20,
+		GETDATE());
+SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
 /*	****************************************	MIGRACION 	******************************************* */
 
 SET IDENTITY_INSERT GEM4.Pais ON;
@@ -481,8 +484,6 @@ SELECT DISTINCT m.Factura_Numero,m.Factura_Fecha
 FROM gd_esquema.Maestra m
 WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;
-
-
 
 
 /* ***************************************** STORED PROCEDURES ************************************************** */

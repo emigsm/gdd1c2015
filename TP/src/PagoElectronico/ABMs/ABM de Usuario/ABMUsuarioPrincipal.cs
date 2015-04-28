@@ -26,5 +26,12 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             Owner.Show();
             this.Hide();
         }
+
+        private void btnNuevoUsuario_Click(object sender, EventArgs e)
+        {
+            AltaUsuario frmAltaUsuario = new AltaUsuario();
+            frmAltaUsuario.Show(this);
+            this.Hide();
+        }
     }
 }

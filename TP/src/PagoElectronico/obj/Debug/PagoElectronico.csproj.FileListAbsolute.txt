@@ -13,3 +13,4 @@ Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.exe
 Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.pdb
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.ABMRolPrincipal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ABMUsuarioPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.AltaUsuario.resources

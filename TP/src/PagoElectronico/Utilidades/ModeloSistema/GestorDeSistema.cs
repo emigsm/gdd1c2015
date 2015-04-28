@@ -26,6 +26,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_INHABILITARUSUARIO = "GEM4.spInhabilitarUsuario";
         private const string STORE_BUSCARROLES = "GEM4.spBuscarRoles";
         private const string STORE_LOGLOGIN = "GEM4.spLogLogin";
+        private const string STORE_OBTENERDATOSUSUARIO = "GEM4.spObtenerDatosUsuario";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -112,6 +113,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerRoles.Dispose();
             return roles;
+        }
+
+        public static DataTable obtenerDatosUsuario(string username)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@username", username));
+            SqlDataReader readerUsuarios = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERDATOSUSUARIO, READER, parametros);
+            DataTable usuarios = new DataTable();
+            if (readerUsuarios.HasRows)
+            {
+                usuarios.Load(readerUsuarios);
+            }
+            readerUsuarios.Dispose();
+            return usuarios;
         }
 
 

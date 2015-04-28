@@ -15,5 +15,16 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
         {
             InitializeComponent();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
+        }
     }
 }

@@ -222,11 +222,11 @@ CREATE TABLE GEM4.Tipo_Cuenta(
 CREATE TABLE GEM4.Cuenta(
 	Cuenta_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Cuenta_Fecha_Creacion					DATETIME,
-	Cuenta_Estado							INT,
+	Cuenta_Estado							INT	DEFAULT 1,
 	Cuenta_Pais								NUMERIC(18,0),
 	Cuenta_Fecha_Cierre						DATETIME,
-	Cuenta_Moneda							INT,--no estan en maestra
-	Cuenta_Tipo								INT,--idem
+	Cuenta_Moneda							INT	DEFAULT 1,--no estan en maestra
+	Cuenta_Tipo								INT	DEFAULT 1,--idem
 	Cuenta_Cliente_ID						INT,--idem
 	Cuenta_Saldo							NUMERIC(18,2),
 	PRIMARY KEY(Cuenta_Numero),
@@ -418,9 +418,9 @@ SET IDENTITY_INSERT GEM4.Moneda OFF;
 
 SET IDENTITY_INSERT GEM4.Pais ON;
 INSERT INTO GEM4.Pais(Pais_Cod, Pais_Descripcion)
-(SELECT DISTINCT Cuenta_Dest_Pais_Codigo, Cuenta_Dest_Pais_Desc
-FROM gd_esquema.Maestra
-WHERE Cuenta_Dest_Pais_Codigo IS NOT NULL
+SELECT DISTINCT m.Cuenta_Dest_Pais_Codigo, m.Cuenta_Dest_Pais_Desc
+FROM gd_esquema.Maestra m
+WHERE m.Cuenta_Dest_Pais_Codigo IS NOT NULL
 
 UNION
 SELECT DISTINCT Cli_Pais_Codigo, Cli_Pais_Desc
@@ -446,6 +446,15 @@ INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID,Rol_Cod)
 SELECT Usuario_ID, 2
 FROM GEM4.Usuario
 WHERE Usuario_ID > 3
+
+INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Codigo_Seg,
+						 Tarjeta_Emisor_Descripcion,Tarjeta_Cliente_ID)
+SELECT m.Tarjeta_Numero,m.Tarjeta_Fecha_Emision,m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
+	   m.Tarjeta_Emisor_Descripcion,c.Cliente_ID
+FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
+WHERE m.Tarjeta_Numero IS NOT NULL
+
+
 
 /* ***************************************** STORED PROCEDURES ************************************************** */
 

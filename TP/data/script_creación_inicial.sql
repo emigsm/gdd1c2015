@@ -418,9 +418,9 @@ SET IDENTITY_INSERT GEM4.Moneda OFF;
 
 SET IDENTITY_INSERT GEM4.Pais ON;
 INSERT INTO GEM4.Pais(Pais_Cod, Pais_Descripcion)
-SELECT DISTINCT m.Cuenta_Dest_Pais_Codigo, m.Cuenta_Dest_Pais_Desc
-FROM gd_esquema.Maestra m
-WHERE m.Cuenta_Dest_Pais_Codigo IS NOT NULL
+(SELECT DISTINCT Cuenta_Dest_Pais_Codigo, Cuenta_Dest_Pais_Desc
+FROM gd_esquema.Maestra 
+WHERE Cuenta_Dest_Pais_Codigo IS NOT NULL
 
 UNION
 SELECT DISTINCT Cli_Pais_Codigo, Cli_Pais_Desc

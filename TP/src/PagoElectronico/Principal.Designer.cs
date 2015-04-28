@@ -40,6 +40,7 @@
             this.cmbFuncionalidades.Name = "cmbFuncionalidades";
             this.cmbFuncionalidades.Size = new System.Drawing.Size(149, 21);
             this.cmbFuncionalidades.TabIndex = 0;
+            this.cmbFuncionalidades.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbFuncionalidades_KeyPress);
             // 
             // btnSeleccionar
             // 

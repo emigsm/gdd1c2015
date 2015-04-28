@@ -111,5 +111,13 @@ namespace PagoElectronico
                     break;
             }
         }
+
+        private void cmbFuncionalidades_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                btnSeleccionar.PerformClick();
+            }
+        }
     }
 }

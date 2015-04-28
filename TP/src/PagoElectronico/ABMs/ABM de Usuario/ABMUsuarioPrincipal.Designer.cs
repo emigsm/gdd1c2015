@@ -30,12 +30,10 @@
         {
             this.lblUsuario = new System.Windows.Forms.Label();
             this.btnBuscarUsuario = new System.Windows.Forms.Button();
-            this.txtBuscarUsuaio = new System.Windows.Forms.TextBox();
+            this.txtBuscarUsuario = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLimpiarUsuario = new System.Windows.Forms.Button();
             this.dgvUsuario = new System.Windows.Forms.DataGridView();
-            this.btnVolver = new System.Windows.Forms.Button();
-            this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.Usuario_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Usuario_Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Usuario_Fecha_Creacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,6 +41,8 @@
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Usuario_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
             this.SuspendLayout();
@@ -67,17 +67,18 @@
             this.btnBuscarUsuario.UseVisualStyleBackColor = true;
             this.btnBuscarUsuario.Click += new System.EventHandler(this.btnBuscarUsuario_Click);
             // 
-            // txtBuscarUsuaio
+            // txtBuscarUsuario
             // 
-            this.txtBuscarUsuaio.Location = new System.Drawing.Point(69, 18);
-            this.txtBuscarUsuaio.Name = "txtBuscarUsuaio";
-            this.txtBuscarUsuaio.Size = new System.Drawing.Size(188, 20);
-            this.txtBuscarUsuaio.TabIndex = 2;
+            this.txtBuscarUsuario.Location = new System.Drawing.Point(69, 18);
+            this.txtBuscarUsuario.Name = "txtBuscarUsuario";
+            this.txtBuscarUsuario.Size = new System.Drawing.Size(188, 20);
+            this.txtBuscarUsuario.TabIndex = 2;
+            this.txtBuscarUsuario.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtBuscarUsuaio_KeyPress);
             // 
             // panel1
             // 
             this.panel1.Controls.Add(this.btnLimpiarUsuario);
-            this.panel1.Controls.Add(this.txtBuscarUsuaio);
+            this.panel1.Controls.Add(this.txtBuscarUsuario);
             this.panel1.Controls.Add(this.btnBuscarUsuario);
             this.panel1.Controls.Add(this.lblUsuario);
             this.panel1.Location = new System.Drawing.Point(12, 12);
@@ -93,9 +94,11 @@
             this.btnLimpiarUsuario.TabIndex = 3;
             this.btnLimpiarUsuario.Text = "Limpiar Búsqueda";
             this.btnLimpiarUsuario.UseVisualStyleBackColor = true;
+            this.btnLimpiarUsuario.Click += new System.EventHandler(this.btnLimpiarUsuario_Click);
             // 
             // dgvUsuario
             // 
+            this.dgvUsuario.AllowUserToAddRows = false;
             this.dgvUsuario.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsuario.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Usuario_ID,
@@ -110,26 +113,6 @@
             this.dgvUsuario.RowHeadersVisible = false;
             this.dgvUsuario.Size = new System.Drawing.Size(704, 150);
             this.dgvUsuario.TabIndex = 4;
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Location = new System.Drawing.Point(596, 272);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(120, 23);
-            this.btnVolver.TabIndex = 5;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // btnNuevoUsuario
-            // 
-            this.btnNuevoUsuario.Location = new System.Drawing.Point(345, 33);
-            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
-            this.btnNuevoUsuario.Size = new System.Drawing.Size(324, 38);
-            this.btnNuevoUsuario.TabIndex = 6;
-            this.btnNuevoUsuario.Text = "Nuevo Usuario";
-            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
-            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
             // 
             // Usuario_ID
             // 
@@ -179,6 +162,26 @@
             this.Usuario_Habilitado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Usuario_Habilitado.TrueValue = "True";
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(596, 272);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(120, 23);
+            this.btnVolver.TabIndex = 5;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // btnNuevoUsuario
+            // 
+            this.btnNuevoUsuario.Location = new System.Drawing.Point(345, 33);
+            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
+            this.btnNuevoUsuario.Size = new System.Drawing.Size(324, 38);
+            this.btnNuevoUsuario.TabIndex = 6;
+            this.btnNuevoUsuario.Text = "Nuevo Usuario";
+            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
+            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
+            // 
             // ABMUsuarioPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -201,7 +204,7 @@
 
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnBuscarUsuario;
-        private System.Windows.Forms.TextBox txtBuscarUsuaio;
+        private System.Windows.Forms.TextBox txtBuscarUsuario;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btnLimpiarUsuario;
         private System.Windows.Forms.DataGridView dgvUsuario;

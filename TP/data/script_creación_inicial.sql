@@ -302,14 +302,7 @@ CREATE TABLE GEM4.Retiro(
 	FOREIGN KEY(Retiro_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
 	FOREIGN KEY(Retiro_Cheque) REFERENCES GEM4.Cheque(Cheque_Numero)
 	)
-	
-/*CREATE TABLE GEM4.Item(
-	Item_Codigo								INT IDENTITY(1,1),
-	Item_Descripcion						NVARCHAR(60),
-	Item_Precio								NUMERIC(18,2),
-	PRIMARY KEY(Item_Codigo)
-	)
-*/	
+
 CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Fecha							DATETIME,
@@ -348,14 +341,6 @@ CREATE TABLE GEM4.Operacion_Por_Factura
 	)--el importe y la descripcion no los pongo porque ya existe en Operacion,
 	-- se puede acceder a esos datos a traver de Operacion_ID
 	
-/*CREATE TABLE GEM4.Item_Por_Factura(
-	Factura_Numero							NUMERIC(18,0),
-	Item_Codigo								INT,
-	PRIMARY KEY(Factura_Numero, Item_Codigo),
-	FOREIGN KEY(Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
-	FOREIGN KEY(Item_Codigo) REFERENCES GEM4.Item(Item_Codigo)
-	)
-	*/
 CREATE TABLE GEM4.Log_Login(
 	Log_Login_Numero						INT IDENTITY(1,1),
 	Log_Login_Usuario_ID					INT,

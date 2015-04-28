@@ -469,6 +469,8 @@ WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;
 
 
+
+
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')

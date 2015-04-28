@@ -45,6 +45,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 lblRespSecretanueva.Enabled = true;
                 txtPregSec.Enabled = true;
                 txtRespSec.Enabled = true;
+                btnCambiarPregunta.Enabled = true;
             }
             else
             {
@@ -52,6 +53,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 lblRespSecretanueva.Enabled = false;
                 txtPregSec.Enabled = false;
                 txtRespSec.Enabled = false;
+                btnCambiarPregunta.Enabled = false;
             }
 
         }
@@ -64,7 +66,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 lblVerifContraseña.Enabled = true;
                 txtContraseña.Enabled = true;
                 txtVerificarContraseña.Enabled = true;
-                btnVerificarContraseña.Enabled = true;
+                btnCambiarContraseña.Enabled = true;
             }
             else
             {
@@ -72,7 +74,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 lblVerifContraseña.Enabled = false;
                 txtContraseña.Enabled = false;
                 txtVerificarContraseña.Enabled = false;
-                btnVerificarContraseña.Enabled = false;
+                btnCambiarContraseña.Enabled = false;
             }
 
         }
@@ -87,6 +89,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 cmbCambioRol.Enabled = true;
                 rbModificarRol.Enabled = true;
                 rbAgregarRol.Enabled = true;
+                btnCambiarRol.Enabled = true;
             }
             else
             {
@@ -96,6 +99,8 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 cmbCambioRol.Enabled = false;
                 rbModificarRol.Enabled = false;
                 rbAgregarRol.Enabled = false;
+                btnCambiarRol.Enabled = false;
+
             }
         }
 
@@ -104,11 +109,54 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             if (checkBoxEstado.Checked == true)
             {
                 cmbEstado.Enabled = true;
+                btnCambiarEstado.Enabled = true;
             }
             else 
             {
                 cmbEstado.Enabled = false;
+                btnCambiarEstado.Enabled = false;
             }
         }
+
+        private void btnVerificarContraseña_Click(object sender, EventArgs e)
+        {
+            if (txtContraseña.Text == txtVerificarContraseña.Text)
+            {
+                /*STORE MODIFICAR CONTRASEÑA*/
+                System.Windows.Forms.MessageBox.Show("Contraseña cambiada correctamente");
+            }
+            else
+            {
+                /*CAMPOS NO COINCIDEN*/
+                System.Windows.Forms.MessageBox.Show("Los campos no coinciden. Por favor verifique.");
+            }
+        }
+
+        private void btnCambiarPregunta_Click(object sender, EventArgs e)
+        {
+            /*STORE MODIFICAR PREGUNTA*/
+            System.Windows.Forms.MessageBox.Show("Pregunta secreta cambiada correctamente");
+        }
+
+        private void btnCambiarRol_Click(object sender, EventArgs e)
+        {
+            if (rbAgregarRol.Checked == true)
+            {
+                /*STORE AGREGAR ROL*/
+                System.Windows.Forms.MessageBox.Show("Rol agregado correctamente");
+            }
+            else
+            {
+                /*STORE MODIFICAR ROL*/
+                System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
+            }
+        }
+
+        private void btnCambiarEstado_Click(object sender, EventArgs e)
+        {
+            /*STORE CAMBIAR HABILITADO*/
+            System.Windows.Forms.MessageBox.Show("Habilitacion cambiada correctamente");
+        }
+
     }
 }

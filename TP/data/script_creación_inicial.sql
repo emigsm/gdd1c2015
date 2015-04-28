@@ -449,7 +449,7 @@ WHERE Usuario_ID > 3
 
 INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Codigo_Seg,
 						 Tarjeta_Emisor_Descripcion,Tarjeta_Cliente_ID)
-SELECT m.Tarjeta_Numero,m.Tarjeta_Fecha_Emision,m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
+SELECT DISTINCT m.Tarjeta_Numero,m.Tarjeta_Fecha_Emision,m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
 	   m.Tarjeta_Emisor_Descripcion,c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL

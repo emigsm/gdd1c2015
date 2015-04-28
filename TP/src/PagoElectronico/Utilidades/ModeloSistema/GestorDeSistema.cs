@@ -29,7 +29,10 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERDATOSUSUARIO = "GEM4.spObtenerDatosUsuario";
         private const string STORE_BAJALOGICAUSUARIO = "GEM4.spBajaLogicaUsuario";
         private const string STORE_OBTENERFUNCIONALIDADESASIGNABLES = "GEM4.spObtenerFuncionalidadesAsignables";
-
+        private const string STORE_CREARROL = "GEM4.spCrearRol";
+        private const string STORE_AGREGARFUNCIONALIDADAROL = "GEM4.spAgregarFuncionalidadARol";
+        
+        
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -149,6 +152,22 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerFuncionalidades.Dispose();
             return funcionalidades;
+        }
+
+        public static void crearRol(string Rol_Nombre,bool Rol_Habilitado)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Rol_Nombre", Rol_Nombre));
+            parametros.Add(new SqlParameter("@Rol_Habilitado", Rol_Habilitado));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CREARROL, NONQUERY, parametros);
+        }
+        public static void agregarFuncionalidadARol(string Rol_Nombre,int Funcionalidad_Cod,int Funcionalidad_Hab)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Rol_Nombre", Rol_Nombre));
+            parametros.Add(new SqlParameter("@Funcionalidad_Cod", Funcionalidad_Cod));
+            parametros.Add(new SqlParameter("@Funcionalidad_Hab", Funcionalidad_Hab));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_AGREGARFUNCIONALIDADAROL, NONQUERY, parametros);
         }
     }
 }

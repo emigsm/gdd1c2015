@@ -31,12 +31,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Rol_NombreTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.HabilitadoOpButton = new System.Windows.Forms.RadioButton();
             this.InhabilitadoOpButton = new System.Windows.Forms.RadioButton();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.CrearRolButton = new System.Windows.Forms.Button();
             this.VolverButton = new System.Windows.Forms.Button();
-            this.Funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -66,6 +66,14 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Funcionalidades";
+            // 
+            // Funcionalidades
+            // 
+            this.Funcionalidades.FormattingEnabled = true;
+            this.Funcionalidades.Location = new System.Drawing.Point(12, 28);
+            this.Funcionalidades.Name = "Funcionalidades";
+            this.Funcionalidades.Size = new System.Drawing.Size(298, 109);
+            this.Funcionalidades.TabIndex = 0;
             // 
             // HabilitadoOpButton
             // 
@@ -108,6 +116,7 @@
             this.CrearRolButton.TabIndex = 6;
             this.CrearRolButton.Text = "Crear Rol";
             this.CrearRolButton.UseVisualStyleBackColor = true;
+            this.CrearRolButton.Click += new System.EventHandler(this.CrearRolButton_Click);
             // 
             // VolverButton
             // 
@@ -117,14 +126,7 @@
             this.VolverButton.TabIndex = 7;
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
-            // 
-            // Funcionalidades
-            // 
-            this.Funcionalidades.FormattingEnabled = true;
-            this.Funcionalidades.Location = new System.Drawing.Point(12, 28);
-            this.Funcionalidades.Name = "Funcionalidades";
-            this.Funcionalidades.Size = new System.Drawing.Size(298, 109);
-            this.Funcionalidades.TabIndex = 0;
+            this.VolverButton.Click += new System.EventHandler(this.VolverButton_Click);
             // 
             // CrearRol
             // 

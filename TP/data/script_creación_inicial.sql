@@ -318,6 +318,19 @@ CREATE TABLE GEM4.Factura(
 	
 
 	*/
+	
+	
+	
+CREATE TABLE GEM4.Operacion_Por_Factura
+	(Factura_Por_Operacion_ID		NUMERIC(18,0) IDENTITY(1,1),
+	Factura_Numero					NUMERIC(18,0),
+	Operacion_ID					INT IDENTITY(1,1),
+	PRIMARY KEY(Factura_Por_Operacion_ID),
+	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
+	FOREIGN KEY(Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID)
+	)--el importe y la descripcion no los pongo porque ya existe en Operacion,
+	-- se puede acceder a esos datos a traver de Operacion_ID
+	
 CREATE TABLE GEM4.Item_Por_Factura(
 	Factura_Numero							NUMERIC(18,0),
 	Item_Codigo								INT,

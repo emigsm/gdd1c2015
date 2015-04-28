@@ -602,3 +602,13 @@ AS
 	WHERE (@Rol_Cod ='' OR @Rol_Cod =r.Rol_Cod)
 	AND (@Rol_Nombre='' OR r.Rol_Nombre like @Rol_Nombre+'%' )
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerFuncionalidadesAsignables')
+	DROP PROCEDURE GEM4.spObtenerFuncionalidadesAsignables
+GO
+
+CREATE PROCEDURE GEM4.spObtenerFuncionalidadesAsignables
+AS
+	SELECT F.Funcionalidad_Descripcion,F.Funcionalidad_Cod
+	FROM GEM4.Funcionalidad F
+GO

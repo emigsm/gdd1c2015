@@ -28,6 +28,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_LOGLOGIN = "GEM4.spLogLogin";
         private const string STORE_OBTENERDATOSUSUARIO = "GEM4.spObtenerDatosUsuario";
         private const string STORE_BAJALOGICAUSUARIO = "GEM4.spBajaLogicaUsuario";
+        private const string STORE_OBTENERFUNCIONALIDADESASIGNABLES = "GEM4.spObtenerFuncionalidadesAsignables";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -137,5 +138,17 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BAJALOGICAUSUARIO, NONQUERY, parametros);
         }
 
+        public static DataTable obtenerFuncionalidadesAsignables()
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlDataReader readerFuncionalidades = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERFUNCIONALIDADESASIGNABLES, READER, parametros);
+            DataTable funcionalidades = new DataTable();
+            if (readerFuncionalidades.HasRows)
+            {
+                funcionalidades.Load(readerFuncionalidades);
+            }
+            readerFuncionalidades.Dispose();
+            return funcionalidades;
+        }
     }
 }

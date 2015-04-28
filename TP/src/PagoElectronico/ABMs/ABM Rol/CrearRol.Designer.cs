@@ -139,6 +139,7 @@
             this.Controls.Add(this.label1);
             this.Name = "CrearRol";
             this.Text = "CrearRol";
+            this.Load += new System.EventHandler(this.CrearRol_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

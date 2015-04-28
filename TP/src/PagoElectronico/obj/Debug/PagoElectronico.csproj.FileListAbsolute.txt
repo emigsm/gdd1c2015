@@ -15,3 +15,17 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ABMUsuarioPrincipal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.AltaUsuario.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ModificacionUsuario.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\bin\Debug\PagoElectronico.exe
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\bin\Debug\PagoElectronico.pdb
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\ResolveAssemblyReference.cache
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ABMClientePrincipal.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ABMUsuarioPrincipal.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.AltaUsuario.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ModificacionUsuario.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.ABMRolPrincipal.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.CrearRol.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Login.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Principal.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Properties.Resources.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.SeleccionRol.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.csproj.GenerateResource.Cache

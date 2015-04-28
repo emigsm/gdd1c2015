@@ -161,6 +161,9 @@
     <EmbeddedResource Include="ABMs\ABM Rol\ABMRolPrincipal.resx">
       <DependentUpon>ABMRolPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABMs\ABM Rol\CrearRol.resx">
+      <DependentUpon>CrearRol.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>

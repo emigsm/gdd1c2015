@@ -577,3 +577,17 @@ AS
 	SET Usuario_Habilitado = 0 
 	WHERE Usuario_ID = @usuarioID
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarRoles')
+	DROP PROCEDURE GEM4.spBuscarRoles
+GO
+
+CREATE PROCEDURE GEM4.spBuscarRoles
+	@rol_cod	INT,
+	@rol_nombre NVARCHAR(50)
+AS
+	SELECT r.Rol_Cod,r.Rol_Nombre,r.Rol_Habilitado	
+	FROM GEM4.Rol r
+	WHERE (@Rol_Cod ='' OR @Rol_Cod =r.Rol_Cod)
+	AND (@Rol_Nombre='' OR @Rol_Nombre like RTRIM(r.Rol_Nombre)+'%')
+GO

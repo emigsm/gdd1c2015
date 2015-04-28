@@ -89,7 +89,10 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 DialogResult res = MessageBox.Show("Se eliminará el usuario: " + usernameAEliminar + "\n¿Está seguro?", "Atención", MessageBoxButtons.YesNo);
                 if (res == DialogResult.Yes)
                 {
-                   /*BORRADO LOGICO DE USUARIO*/
+                    /*BORRADO LOGICO DE USUARIO*/
+                    int usuarioIDAEliminar = Convert.ToInt32(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString());
+                    GestorDeSistema.bajaLogicaUsuario(usuarioIDAEliminar);
+                    System.Windows.Forms.MessageBox.Show("Usuario eliminado correctamente");                    
                 }
             }
 

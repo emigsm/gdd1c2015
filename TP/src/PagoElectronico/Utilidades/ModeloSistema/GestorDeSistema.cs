@@ -27,6 +27,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_BUSCARROLES = "GEM4.spBuscarRoles";
         private const string STORE_LOGLOGIN = "GEM4.spLogLogin";
         private const string STORE_OBTENERDATOSUSUARIO = "GEM4.spObtenerDatosUsuario";
+        private const string STORE_BAJALOGICAUSUARIO = "GEM4.spBajaLogicaUsuario";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -129,6 +130,12 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return usuarios;
         }
 
+        public static void bajaLogicaUsuario(int usuarioID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BAJALOGICAUSUARIO, NONQUERY, parametros);
+        }
 
     }
 }

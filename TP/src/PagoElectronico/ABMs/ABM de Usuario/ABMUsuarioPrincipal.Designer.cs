@@ -34,6 +34,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnLimpiarUsuario = new System.Windows.Forms.Button();
             this.dgvUsuario = new System.Windows.Forms.DataGridView();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.Usuario_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Usuario_Username = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Usuario_Fecha_Creacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,8 +43,6 @@
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Usuario_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.btnVolver = new System.Windows.Forms.Button();
-            this.btnNuevoUsuario = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsuario)).BeginInit();
             this.SuspendLayout();
@@ -115,6 +115,26 @@
             this.dgvUsuario.TabIndex = 4;
             this.dgvUsuario.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsuario_CellContentClick);
             // 
+            // btnVolver
+            // 
+            this.btnVolver.Location = new System.Drawing.Point(596, 272);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(120, 23);
+            this.btnVolver.TabIndex = 5;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
+            // 
+            // btnNuevoUsuario
+            // 
+            this.btnNuevoUsuario.Location = new System.Drawing.Point(345, 33);
+            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
+            this.btnNuevoUsuario.Size = new System.Drawing.Size(324, 38);
+            this.btnNuevoUsuario.TabIndex = 6;
+            this.btnNuevoUsuario.Text = "Nuevo Usuario";
+            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
+            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
+            // 
             // Usuario_ID
             // 
             this.Usuario_ID.HeaderText = "ID";
@@ -159,29 +179,10 @@
             // 
             this.Usuario_Habilitado.HeaderText = "Habilitado";
             this.Usuario_Habilitado.Name = "Usuario_Habilitado";
+            this.Usuario_Habilitado.ReadOnly = true;
             this.Usuario_Habilitado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Usuario_Habilitado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             this.Usuario_Habilitado.TrueValue = "True";
-            // 
-            // btnVolver
-            // 
-            this.btnVolver.Location = new System.Drawing.Point(596, 272);
-            this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(120, 23);
-            this.btnVolver.TabIndex = 5;
-            this.btnVolver.Text = "Volver";
-            this.btnVolver.UseVisualStyleBackColor = true;
-            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
-            // 
-            // btnNuevoUsuario
-            // 
-            this.btnNuevoUsuario.Location = new System.Drawing.Point(345, 33);
-            this.btnNuevoUsuario.Name = "btnNuevoUsuario";
-            this.btnNuevoUsuario.Size = new System.Drawing.Size(324, 38);
-            this.btnNuevoUsuario.TabIndex = 6;
-            this.btnNuevoUsuario.Text = "Nuevo Usuario";
-            this.btnNuevoUsuario.UseVisualStyleBackColor = true;
-            this.btnNuevoUsuario.Click += new System.EventHandler(this.btnNuevoUsuario_Click);
             // 
             // ABMUsuarioPrincipal
             // 

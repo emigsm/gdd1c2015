@@ -669,3 +669,34 @@ AS
 	SET Usuario_Habilitado = @estado 
 	WHERE Usuario_ID = @usuarioID
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAgregarFuncionalidadARol')
+	DROP PROCEDURE GEM4.spAgregarFuncionalidadARol;
+go
+CREATE PROCEDURE GEM4.spAgregarFuncionalidadARol
+    @Rol_Nombre			NVARCHAR(50),
+    @Funcionalidad_Cod	TINYINT,
+    @Funcionalidad_Hab	BIT
+AS 
+	UPDATE GEM4.Rol_Por_Funcionalidad
+		SET Rol_Por_Funcionalidad_Habilitado = @Funcionalidad_Hab
+		WHERE Rol_Cod = (SELECT Rol_Cod FROM GEM4.ROL WHERE Rol_Nombre =@Rol_Nombre)
+			AND Funcionalidad_Cod = @Funcionalidad_Cod;
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearRol')
+	DROP PROCEDURE GEM4.spCrearRol;
+go
+
+CREATE PROCEDURE GEM4.spCrearRol
+    @Rol_Nombre			NVARCHAR(50),
+    @Rol_Habilitado			BIT
+AS 
+	INSERT INTO GEM4.Rol(Rol_Nombre,Rol_Habilitado)
+		VALUES (@Rol_Nombre,@Rol_Habilitado);
+	
+	INSERT INTO GEM4.Rol_Por_Funcionalidad (Funcionalidad_Cod,Rol_Cod,Rol_Por_Funcionalidad_Habilitado)
+		SELECT Funcionalidad_Cod,Rol_Cod,0
+			FROM GEM4.Rol,GEM4.Funcionalidad
+			WHERE Rol_Nombre=@Rol_Nombre;
+GO

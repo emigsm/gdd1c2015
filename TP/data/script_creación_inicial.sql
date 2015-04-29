@@ -247,6 +247,34 @@ CREATE TABLE GEM4.Tarjeta(
 	PRIMARY KEY(Tarjeta_Numero),
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
 	)
+CREATE TABLE GEM4.Factura(
+	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
+	Factura_Fecha							DATETIME,
+	--Factura_Cuenta							NUMERIC(18,0),
+	PRIMARY KEY(Factura_Numero),
+	--FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	)
+
+
+CREATE TABLE GEM4.Tipo_Operacion(
+	Tipo_Operacion_ID						INT IDENTITY(1,1),
+	Tipo_Operacion_Descripcion				NVARCHAR(255),
+	
+	PRIMARY KEY(Tipo_Operacion_ID)
+	)
+
+CREATE TABLE GEM4.Operacion(
+	Operacion_ID						INT IDENTITY(1,1),
+	Operacion_Tipo						INT,
+	Operacion_Fecha						DATETIME,
+	Operacion_Usuario_ID				INT,
+	Operacion_Importe					NUMERIC(18,2),
+	Factura_Numero						NUMERIC(18,0),
+	PRIMARY KEY(Operacion_ID),
+	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
+	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero)
+	)
 	
 
 CREATE TABLE GEM4.Deposito(
@@ -257,11 +285,16 @@ CREATE TABLE GEM4.Deposito(
 	Deposito_Tarjeta						NVARCHAR(16),
 	Deposito_Moneda							INT DEFAULT 1,
 	Deposito_Cuenta							NUMERIC(18,0),
+	Deposito_Operacion_ID							INT,
 	PRIMARY KEY(Deposito_Codigo),
 	FOREIGN KEY(Deposito_Cliente) REFERENCES GEM4.Cliente(Cliente_ID),
 	FOREIGN KEY(Deposito_Tarjeta) REFERENCES GEM4.Tarjeta(Tarjeta_Numero),
-	FOREIGN KEY(Deposito_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	FOREIGN KEY(Deposito_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
+	FOREIGN KEY(Deposito_Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
 	)
+
+
+
 
 CREATE TABLE GEM4.Transferencia( --aca omiti todos los campos de Cuenta_Dest porque los podemos sacar de cuenta, a DISCUTIR si hice bien o no
 	Transferencia_Codigo					INT IDENTITY(1,1),
@@ -269,10 +302,12 @@ CREATE TABLE GEM4.Transferencia( --aca omiti todos los campos de Cuenta_Dest por
 	Transferencia_Importe					NUMERIC(18,2),
 	Transferencia_Costo_Trans				NUMERIC(18,2),
 	Transferencia_Cuenta_Origen				NUMERIC(18,0),
-	Transferencia_Cuenta_Destino			NUMERIC(18,0)
+	Transferencia_Cuenta_Destino			NUMERIC(18,0),
+	Transferencia_Operacion_ID				INT,
 	PRIMARY KEY(Transferencia_Codigo),
 	FOREIGN KEY(Transferencia_Cuenta_Origen) REFERENCES GEM4.Cuenta(Cuenta_Numero),
-	FOREIGN KEY(Transferencia_Cuenta_Destino) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	FOREIGN KEY(Transferencia_Cuenta_Destino) REFERENCES GEM4.Cuenta(Cuenta_Numero),
+	FOREIGN KEY(Transferencia_Operacion_ID)	REFERENCES	GEM4.Operacion(Operacion_ID)
 	)
 
 CREATE TABLE GEM4.Banco(
@@ -299,38 +334,14 @@ CREATE TABLE GEM4.Retiro(
 	Retiro_Fecha							DATETIME,
 	Retiro_Cuenta							NUMERIC(18,0),
 	Retiro_Cheque							NUMERIC(18,0),
+	Operacion_ID							INT,
 	PRIMARY KEY(Retiro_Codigo),
 	FOREIGN KEY(Retiro_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
-	FOREIGN KEY(Retiro_Cheque) REFERENCES GEM4.Cheque(Cheque_Numero)
+	FOREIGN KEY(Retiro_Cheque) REFERENCES GEM4.Cheque(Cheque_Numero),
+	FOREIGN KEY(Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
 	)
 
-CREATE TABLE GEM4.Factura(
-	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
-	Factura_Fecha							DATETIME,
-	--Factura_Cuenta							NUMERIC(18,0),
-	PRIMARY KEY(Factura_Numero),
-	--FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
-	)
 
-CREATE TABLE GEM4.Tipo_Operacion(
-	Tipo_Operacion_ID						INT IDENTITY(1,1),
-	Tipo_Operacion_Descripcion				NVARCHAR(255),
-	
-	PRIMARY KEY(Tipo_Operacion_ID)
-	)
-
-CREATE TABLE GEM4.Operacion(
-	Operacion_ID						INT IDENTITY(1,1),
-	Operacion_Tipo						INT,
-	Operacion_Fecha						DATETIME,
-	Operacion_Usuario_ID				INT,
-	Operacion_Importe					NUMERIC(18,2),
-	Factura_Numero						NUMERIC(18,0),
-	PRIMARY KEY(Operacion_ID),
-	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
-	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
-	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero)
-	)
 
 
 
@@ -486,12 +497,14 @@ FROM gd_esquema.Maestra m
 WHERE m.Banco_Cogido IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Banco OFF;
 
+
 SET IDENTITY_INSERT GEM4.Factura ON;
 INSERT INTO GEM4.Factura(Factura_Numero,Factura_Fecha)
 SELECT DISTINCT m.Factura_Numero,m.Factura_Fecha
 FROM gd_esquema.Maestra m
 WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;
+
 
 
 SET IDENTITY_INSERT GEM4.Cuenta ON;
@@ -501,6 +514,21 @@ FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
+/*CREATE TRIGGER  insertaOperacion
+ON GEM4.Deposito
+INSTEAD OF INSERT
+AS
+	DECLARE @nFactura NUMERIC(18,0), @nOperacion INT,
+	
+	BEGIN
+		 
+			
+		
+	END;
+ 
+GO;
+
+*/
 SET IDENTITY_INSERT GEM4.Deposito ON;
 INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Cuenta)
 SELECT	m.Deposito_Codigo,m.Deposito_Fecha,m.Deposito_Importe,c.Cliente_ID,m.Tarjeta_Numero,m.Cuenta_Numero
@@ -508,6 +536,10 @@ FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Deposito_Codigo IS NOT NULL
 SET IDENTITY_INSERT GEM4.Deposito OFF;
 
+/*SET IDENTITY_INSERT GEM4.Transferencia ON;
+INSERT INTO GEM4.Transferencia()
+SET IDENTITY_INSERT GEM4.Transferencia OFF;
+*/
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')

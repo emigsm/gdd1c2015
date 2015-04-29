@@ -255,7 +255,7 @@ CREATE TABLE GEM4.Deposito(
 	Deposito_Importe						NUMERIC(18,2),
 	Deposito_Cliente						INT,
 	Deposito_Tarjeta						NVARCHAR(16),
-	Deposito_Moneda							INT,
+	Deposito_Moneda							INT DEFAULT 1,
 	Deposito_Cuenta							NUMERIC(18,0),
 	PRIMARY KEY(Deposito_Codigo),
 	FOREIGN KEY(Deposito_Cliente) REFERENCES GEM4.Cliente(Cliente_ID),
@@ -501,7 +501,12 @@ FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
-
+SET IDENTITY_INSERT GEM4.Deposito ON;
+INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Cuenta)
+SELECT	m.Deposito_Codigo,m.Deposito_Fecha,m.Deposito_Importe,c.Cliente_ID,m.Tarjeta_Numero,m.Cuenta_Numero
+FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
+WHERE M.Deposito_Codigo IS NOT NULL
+SET IDENTITY_INSERT GEM4.Deposito OFF;
 
 /* ***************************************** STORED PROCEDURES ************************************************** */
 

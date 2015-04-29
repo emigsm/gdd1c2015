@@ -656,3 +656,16 @@ AS
 	SELECT F.Funcionalidad_Descripcion,F.Funcionalidad_Cod
 	FROM GEM4.Funcionalidad F
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCambiarHabilitacionUsuario')
+	DROP PROCEDURE GEM4.spCambiarHabilitacionUsuario
+GO
+
+CREATE PROCEDURE GEM4.spCambiarHabilitacionUsuario
+	@estado BIT,
+	@usuarioID INT
+AS
+	UPDATE GEM4.Usuario
+	SET Usuario_Habilitado = @estado 
+	WHERE Usuario_ID = @usuarioID
+GO

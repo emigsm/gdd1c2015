@@ -31,6 +31,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERFUNCIONALIDADESASIGNABLES = "GEM4.spObtenerFuncionalidadesAsignables";
         private const string STORE_CREARROL = "GEM4.spCrearRol";
         private const string STORE_AGREGARFUNCIONALIDADAROL = "GEM4.spAgregarFuncionalidadARol";
+        private const string STORE_CAMBIARHABILITACIONUSUARIO = "GEM4.spCambiarHabilitacionUsuario";
         
         
 
@@ -168,6 +169,14 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@Funcionalidad_Cod", Funcionalidad_Cod));
             parametros.Add(new SqlParameter("@Funcionalidad_Hab", Funcionalidad_Hab));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_AGREGARFUNCIONALIDADAROL, NONQUERY, parametros);
+        }
+
+        public static void cambiarHabilitacionUsuario(bool estado, int usuarioID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@estado", estado));
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CAMBIARHABILITACIONUSUARIO, NONQUERY, parametros);
         }
     }
 }

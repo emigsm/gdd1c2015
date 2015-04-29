@@ -7,13 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using PagoElectronico.Utilidades.ModeloSistema;
+
 namespace PagoElectronico.ABMs.ABM_de_Usuario
 {
     public partial class ModificacionUsuario : Form
     {
-        public ModificacionUsuario( int usuarioID)
+        int usuarioID;
+        bool estadoUsuario;
+        
+        public ModificacionUsuario(int usuarioIDP, bool estadoUsuarioP)
         {
             InitializeComponent();
+            usuarioID = usuarioIDP;
+            estadoUsuario = estadoUsuarioP;
+
+            DataTable dtcmbEstado = new DataTable();
+            dtcmbEstado.Columns.Add("DisplayMember");
+            dtcmbEstado.Columns.Add("ValueMember");
+
+            dtcmbEstado.Rows.Add("Habilitado", true);
+            dtcmbEstado.Rows.Add("Deshabilitado", false);
+
+            cmbEstado.Items.Clear();
+            cmbEstado.DataSource = dtcmbEstado;
+            cmbEstado.DisplayMember = "DisplayMember";
+            cmbEstado.ValueMember = "ValueMember";
+            cmbEstado.SelectedValue = estadoUsuario;
+            cmbEstado.Update();
+        
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -110,11 +132,16 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             {
                 cmbEstado.Enabled = true;
                 btnCambiarEstado.Enabled = true;
+                cmbEstado.SelectedValue = estadoUsuario;
+                cmbEstado.Update();
+                
             }
             else 
             {
                 cmbEstado.Enabled = false;
                 btnCambiarEstado.Enabled = false;
+                cmbEstado.SelectedValue = !estadoUsuario;
+                cmbEstado.Update();
             }
         }
 
@@ -155,6 +182,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
         private void btnCambiarEstado_Click(object sender, EventArgs e)
         {
             /*STORE CAMBIAR HABILITADO*/
+            GestorDeSistema.cambiarHabilitacionUsuario(Convert.ToBoolean(cmbEstado.SelectedValue), usuarioID);
             System.Windows.Forms.MessageBox.Show("Habilitacion cambiada correctamente");
         }
 

@@ -78,8 +78,9 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
         {
             if (e.ColumnIndex == 4)
             {
+                bool estadoHabilitacion = Convert.ToBoolean(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_Habilitado"].Value.ToString());
                 int usuarioIDAModificar = Convert.ToInt32(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString());
-                ModificacionUsuario frmModificacionUsuario = new ModificacionUsuario(usuarioIDAModificar);
+                ModificacionUsuario frmModificacionUsuario = new ModificacionUsuario(usuarioIDAModificar, estadoHabilitacion);
                 frmModificacionUsuario.Show(this);
                 this.Hide();
             }

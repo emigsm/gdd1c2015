@@ -43,7 +43,9 @@
             this.lblPregSecreta = new System.Windows.Forms.Label();
             this.groupBoxRol = new System.Windows.Forms.GroupBox();
             this.checkBoxCambioRol = new System.Windows.Forms.CheckBox();
+            this.rbAgregarRol = new System.Windows.Forms.RadioButton();
             this.cmbCambioRol = new System.Windows.Forms.ComboBox();
+            this.rbModificarRol = new System.Windows.Forms.RadioButton();
             this.lblCambioRol = new System.Windows.Forms.Label();
             this.txtRolActual = new System.Windows.Forms.TextBox();
             this.lblRolActual = new System.Windows.Forms.Label();
@@ -51,8 +53,6 @@
             this.checkBoxEstado = new System.Windows.Forms.CheckBox();
             this.cmbEstado = new System.Windows.Forms.ComboBox();
             this.btnCambiarContraseña = new System.Windows.Forms.Button();
-            this.rbModificarRol = new System.Windows.Forms.RadioButton();
-            this.rbAgregarRol = new System.Windows.Forms.RadioButton();
             this.btnCambiarPregunta = new System.Windows.Forms.Button();
             this.btnCambiarRol = new System.Windows.Forms.Button();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
@@ -222,6 +222,18 @@
             this.checkBoxCambioRol.UseVisualStyleBackColor = true;
             this.checkBoxCambioRol.CheckedChanged += new System.EventHandler(this.checkBoxCambioRol_CheckedChanged);
             // 
+            // rbAgregarRol
+            // 
+            this.rbAgregarRol.AutoSize = true;
+            this.rbAgregarRol.Enabled = false;
+            this.rbAgregarRol.Location = new System.Drawing.Point(222, -2);
+            this.rbAgregarRol.Name = "rbAgregarRol";
+            this.rbAgregarRol.Size = new System.Drawing.Size(62, 17);
+            this.rbAgregarRol.TabIndex = 12;
+            this.rbAgregarRol.TabStop = true;
+            this.rbAgregarRol.Text = "Agregar";
+            this.rbAgregarRol.UseVisualStyleBackColor = true;
+            // 
             // cmbCambioRol
             // 
             this.cmbCambioRol.Enabled = false;
@@ -230,6 +242,18 @@
             this.cmbCambioRol.Name = "cmbCambioRol";
             this.cmbCambioRol.Size = new System.Drawing.Size(121, 21);
             this.cmbCambioRol.TabIndex = 10;
+            // 
+            // rbModificarRol
+            // 
+            this.rbModificarRol.AutoSize = true;
+            this.rbModificarRol.Enabled = false;
+            this.rbModificarRol.Location = new System.Drawing.Point(148, -2);
+            this.rbModificarRol.Name = "rbModificarRol";
+            this.rbModificarRol.Size = new System.Drawing.Size(68, 17);
+            this.rbModificarRol.TabIndex = 11;
+            this.rbModificarRol.TabStop = true;
+            this.rbModificarRol.Text = "Modificar";
+            this.rbModificarRol.UseVisualStyleBackColor = true;
             // 
             // lblCambioRol
             // 
@@ -300,30 +324,6 @@
             this.btnCambiarContraseña.Text = "Cambiar";
             this.btnCambiarContraseña.UseVisualStyleBackColor = true;
             this.btnCambiarContraseña.Click += new System.EventHandler(this.btnVerificarContraseña_Click);
-            // 
-            // rbModificarRol
-            // 
-            this.rbModificarRol.AutoSize = true;
-            this.rbModificarRol.Enabled = false;
-            this.rbModificarRol.Location = new System.Drawing.Point(148, -2);
-            this.rbModificarRol.Name = "rbModificarRol";
-            this.rbModificarRol.Size = new System.Drawing.Size(68, 17);
-            this.rbModificarRol.TabIndex = 11;
-            this.rbModificarRol.TabStop = true;
-            this.rbModificarRol.Text = "Modificar";
-            this.rbModificarRol.UseVisualStyleBackColor = true;
-            // 
-            // rbAgregarRol
-            // 
-            this.rbAgregarRol.AutoSize = true;
-            this.rbAgregarRol.Enabled = false;
-            this.rbAgregarRol.Location = new System.Drawing.Point(222, -2);
-            this.rbAgregarRol.Name = "rbAgregarRol";
-            this.rbAgregarRol.Size = new System.Drawing.Size(62, 17);
-            this.rbAgregarRol.TabIndex = 12;
-            this.rbAgregarRol.TabStop = true;
-            this.rbAgregarRol.Text = "Agregar";
-            this.rbAgregarRol.UseVisualStyleBackColor = true;
             // 
             // btnCambiarPregunta
             // 

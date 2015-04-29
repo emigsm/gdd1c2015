@@ -494,6 +494,13 @@ WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;
 
 
+SET IDENTITY_INSERT GEM4.Cuenta ON;
+INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Cliente_ID)
+SELECT	DISTINCT m.Cuenta_Numero,m.Cuenta_Fecha_Creacion,m.Cuenta_Fecha_Cierre,m.Cuenta_Pais_Codigo,c.Cliente_ID
+FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
+WHERE M.Cuenta_Numero IS NOT NULL
+SET IDENTITY_INSERT GEM4.Cuenta OFF;
+
 
 
 /* ***************************************** STORED PROCEDURES ************************************************** */

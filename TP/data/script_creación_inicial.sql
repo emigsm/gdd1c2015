@@ -268,7 +268,7 @@ CREATE TABLE GEM4.Operacion(
 	Operacion_Tipo						INT,
 	Operacion_Fecha						DATETIME,
 	Operacion_Usuario_ID				INT,
-	Operacion_Importe					NUMERIC(18,2),
+	Operacion_Costo						NUMERIC(18,2),
 	Factura_Numero						NUMERIC(18,0),
 	PRIMARY KEY(Operacion_ID),
 	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
@@ -369,17 +369,17 @@ CREATE TABLE GEM4.Log_Login(
 	PRIMARY KEY(Log_Login_Numero),
 	FOREIGN KEY(Log_Login_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)
 	)
-
-
-
-	
-	
+GO
 	
 /*	*******************************************	    VIEWS   	********************************************************** */
 
 /* *****************************************     CREACION DE TRIGGERS    ********************************************** */
+/* *****************************************	PROCEDIMIENTOS DE MIGRACION *******************************************/
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertaOperaciones')
+	DROP PROCEDURE GEM4.spInsertaOperaciones
+GO
 
 SET IDENTITY_INSERT GEM4.Rol ON;
 INSERT INTO GEM4.Rol (Rol_Cod,Rol_Nombre) VALUES 
@@ -449,6 +449,120 @@ INSERT INTO GEM4.Estado_Cuenta(Estado_Codigo,Estado_Descripcion)
 VALUES(1,'ACTIVA'),(2,'INACTIVA');
 SET IDENTITY_INSERT GEM4.Estado_Cuenta OFF;
 
+GO
+CREATE PROCEDURE GEM4.spInsertaOperaciones 
+AS
+BEGIN
+	DECLARE @nFactura NUMERIC(18,0), @nOperacion INT,@clienteID INT,
+			@clienteMail NVARCHAR(255),@depositoCodigo NUMERIC(18,0),
+			@depositoFecha DATETIME,@depositoImporte NUMERIC(18,2),
+			@tarjeta NVARCHAR(16),@cuentaNumero NUMERIC(18,0),@usuarioID INT,
+			@retiroCodigo NUMERIC(18,0),@retiroFecha DATETIME,@retiroImporte NUMERIC(18,2),
+			@chequeNumero NUMERIC(18,0),@chequeFecha DATETIME,@chequeImporte NUMERIC(18,2),@banco NUMERIC(18,0),
+			@transfFecha DATETIME,@transfImporte NUMERIC(18,2),@transfCosto NUMERIC(18,2),@cuentaDestino NUMERIC(18,0) ;
+
+	DECLARE Cursor1 CURSOR FOR
+	SELECT DISTINCT Factura_Numero,Cli_Mail,Retiro_Codigo,Retiro_Fecha,Retiro_Importe,
+					Cuenta_Numero,Cheque_Numero,Cheque_Fecha,Cheque_Importe,Banco_Cogido,
+					Deposito_Codigo,Deposito_Fecha,Deposito_Importe,Tarjeta_Numero,
+					Transf_Fecha,Trans_Importe,Trans_Costo_Trans,Cuenta_Dest_Numero
+	FROM gd_esquema.Maestra ;
+
+	    OPEN Cursor1;
+	FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
+								@chequeNumero,@chequeFecha,@chequeImporte,@banco,@depositoCodigo,@depositoFecha,
+								 @depositoImporte,@tarjeta,@transfFecha,@transfImporte,@transfCosto,@cuentaDestino;
+	SET @nOperacion=1;
+    
+    BEGIN TRANSACTION;
+    WHILE @@FETCH_STATUS = 0
+		BEGIN
+		
+			SELECT @clienteID=c.Cliente_ID
+			FROM Cliente c
+			WHERE c.Cliente_Mail=@clienteMail;
+		
+			SELECT @usuarioID=u.Usuario_ID
+			FROM GEM4.Usuario u
+			WHERE u.Cliente_ID=@clienteID;
+	
+		IF(@depositoCodigo IS NOT NULL)
+			BEGIN
+				SET IDENTITY_INSERT GEM4.Operacion ON;
+				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
+											Operacion_Costo,Factura_Numero)
+				VALUES(@nOperacion,1,@depositoFecha,@usuarioID,0,@nFactura);
+				SET IDENTITY_INSERT GEM4.Operacion OFF;
+				
+				SET IDENTITY_INSERT GEM4.Deposito ON;
+				INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,
+									  Deposito_Cliente,Deposito_Tarjeta,
+									  Deposito_Cuenta,Deposito_Operacion_ID)
+				VALUES(@depositoCodigo,@depositoFecha,@depositoImporte,@clienteID,@tarjeta,@cuentaNumero,@nOperacion);
+				SET IDENTITY_INSERT GEM4.Deposito OFF;
+				
+			END;	
+		IF(@retiroCodigo IS NOT NULL)
+			BEGIN
+				
+				SET IDENTITY_INSERT GEM4.Operacion ON;
+				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
+											Operacion_Costo,Factura_Numero)
+				VALUES(@nOperacion,2,@retiroFecha,@usuarioID,0,@nFactura);
+				SET IDENTITY_INSERT GEM4.Operacion OFF;
+				
+				SET IDENTITY_INSERT GEM4.Cheque ON; 
+				INSERT INTO GEM4.Cheque(Cheque_Numero,Cheque_Fecha,Cheque_Importe,Cheque_Cliente_ID,Cheque_Banco)
+				VALUES(@chequeNumero,@chequeFecha,@chequeImporte,@clienteID,@banco);
+				SET IDENTITY_INSERT GEM4.Cheque OFF;
+				
+				SET IDENTITY_INSERT GEM4.Retiro ON;
+				INSERT INTO GEM4.Retiro(Retiro_Codigo,Retiro_Importe,Retiro_Fecha,Retiro_Cheque,Operacion_ID,Retiro_Cuenta)
+				VALUES(@retiroCodigo,@retiroImporte,@retiroFecha,@chequeNumero,@nOperacion,@cuentaNumero);
+				SET IDENTITY_INSERT GEM4.Retiro OFF;
+				 
+			END;
+		IF(@cuentaDestino IS NOT NULL)
+			BEGIN
+				IF(@cuentaDestino=@cuentaNumero)
+					BEGIN
+							SET @transfCosto=0
+					END
+				ELSE
+					BEGIN
+						SELECT @transfCosto=c.Tipo_Cuenta_Costo_Transf
+						FROM GEM4.Tipo_Cuenta c
+						WHERE c.Tipo_Cuenta_ID=1;
+					END;
+				
+				SET IDENTITY_INSERT GEM4.Operacion ON;
+				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
+											Operacion_Costo,Factura_Numero)
+				VALUES(@nOperacion,3,@retiroFecha,@usuarioID,0,@nFactura);
+				SET IDENTITY_INSERT GEM4.Operacion OFF;
+				
+				INSERT INTO GEM4.Transferencia(Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans
+											,Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino,Transferencia_Operacion_ID)
+				VALUES(@transfFecha,@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion)
+			END;	
+		SET @nOperacion=@nOperacion+1;				
+		FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
+								@chequeNumero,@chequeFecha,@chequeImporte,@banco,@depositoCodigo,@depositoFecha,
+								 @depositoImporte,@tarjeta,@transfFecha,@transfImporte,@transfCosto,@cuentaDestino;
+	END;
+	CLOSE Cursor1;
+DEALLOCATE Cursor1;
+	IF @@ERROR=0
+		BEGIN
+			COMMIT TRANSACTION;
+		END
+	ELSE
+		BEGIN
+			ROLLBACK TRANSACTION;
+		END;
+END;
+GO
+
 
 /*	****************************************	MIGRACION 	******************************************* */
 
@@ -514,32 +628,11 @@ FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
-/*CREATE TRIGGER  insertaOperacion
-ON GEM4.Deposito
-INSTEAD OF INSERT
-AS
-	DECLARE @nFactura NUMERIC(18,0), @nOperacion INT,
-	
-	BEGIN
-		 
-			
-		
-	END;
- 
-GO;
+EXEC GEM4.spInsertaOperaciones
+go
 
-*/
-SET IDENTITY_INSERT GEM4.Deposito ON;
-INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Cuenta)
-SELECT	m.Deposito_Codigo,m.Deposito_Fecha,m.Deposito_Importe,c.Cliente_ID,m.Tarjeta_Numero,m.Cuenta_Numero
-FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
-WHERE M.Deposito_Codigo IS NOT NULL
-SET IDENTITY_INSERT GEM4.Deposito OFF;
 
-/*SET IDENTITY_INSERT GEM4.Transferencia ON;
-INSERT INTO GEM4.Transferencia()
-SET IDENTITY_INSERT GEM4.Transferencia OFF;
-*/
+
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')

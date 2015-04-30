@@ -36,6 +36,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_CAMBIARPREGUNTASECRETA = "GEM4.spCambiarPreguntaSecreta";
         private const string STORE_OBTENERROLESUSUARIO = "GEM4.spObtenerRolesParaUsuario";
         private const string STORE_AGREGARROLAUSUARIO = "GEM4.spAgregarRolAUsuario";
+        private const string STORE_MODIFICARROLAUSUARIO = "GEM4.spModificarRolAUsuario";
 
         
 
@@ -223,6 +224,15 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_AGREGARROLAUSUARIO, NONQUERY, parametros);
         }
 
+        public static void modificarRolAUsuario(int usuarioID, int nuevoRolCod, int viejoRolCod)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            parametros.Add(new SqlParameter("@nuevoRolCod", nuevoRolCod));
+            parametros.Add(new SqlParameter("@viejoRolCod", viejoRolCod));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARROLAUSUARIO, NONQUERY, parametros);
+        }
+        
 
     }
 }

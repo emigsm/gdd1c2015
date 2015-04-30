@@ -188,7 +188,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             }
             else if(rbModificarRol.Checked == true)
             {
-                /*STORE MODIFICAR ROL*/
+                GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
                 System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
             }
             else if (rbEliminarRol.Checked == true)

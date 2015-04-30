@@ -37,6 +37,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERROLESUSUARIO = "GEM4.spObtenerRolesParaUsuario";
         private const string STORE_AGREGARROLAUSUARIO = "GEM4.spAgregarRolAUsuario";
         private const string STORE_MODIFICARROLAUSUARIO = "GEM4.spModificarRolAUsuario";
+        private const string STORE_ELIMINARROLAUSUARIO = "GEM4.spEliminarRolAUsuario";
 
         
 
@@ -231,6 +232,14 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@nuevoRolCod", nuevoRolCod));
             parametros.Add(new SqlParameter("@viejoRolCod", viejoRolCod));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARROLAUSUARIO, NONQUERY, parametros);
+        }
+
+        public static void eliminarRolAUsuario(int usuarioID, int rolCod)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            parametros.Add(new SqlParameter("@rolCod", rolCod));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ELIMINARROLAUSUARIO, NONQUERY, parametros);
         }
         
 

@@ -830,7 +830,7 @@ CREATE PROCEDURE GEM4.spObtenerRolesParaUsuario
 AS
 	SELECT Rol.Rol_Nombre, Rol.Rol_Cod
 	FROM GEM4.Rol JOIN GEM4.Usuario_Por_Rol ON (Rol.Rol_Cod = Usuario_Por_Rol.Rol_Cod)
-	WHERE Usuario_ID = @usuarioID
+	WHERE Usuario_ID = @usuarioID AND Habilitado = 1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAgregarRolAUsuario')
@@ -855,4 +855,19 @@ AS
 	UPDATE GEM4.Usuario_Por_Rol
 	SET Rol_Cod = @nuevoRolCod
 	WHERE Usuario_ID = @usuarioID AND Rol_Cod = @viejoRolCod
-GO				
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spEliminarRolAUsuario')
+	DROP PROCEDURE GEM4.spEliminarRolAUsuario;
+GO
+CREATE PROCEDURE GEM4.spEliminarRolAUsuario
+	@usuarioID		INT,
+	@rolCod			INT
+AS
+	UPDATE GEM4.Usuario_Por_Rol
+	SET Habilitado = 0
+	WHERE Usuario_ID = @usuarioID AND Rol_Cod = @rolCod
+GO
+
+
+				

@@ -188,14 +188,23 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             }
             else if(rbModificarRol.Checked == true)
             {
+                /*FALTA VERIFICAR QUE NO SE PUEDA CAMBIAR UN ROL AL MISMO Y COSAS ASI*/
                 GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
                 System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
             }
             else if (rbEliminarRol.Checked == true)
             {
                 /*VERIFICAR QUE NO SE QUEDE SIN ROLES*/
-                /*STORE ELIMINAR ROL*/
-                System.Windows.Forms.MessageBox.Show("Rol eliminado correctamente");
+                if (cmbRolActual.Items.Count > 1)
+                {
+                    GestorDeSistema.eliminarRolAUsuario(usuarioID, Convert.ToInt32(cmbRolActual.SelectedValue));
+                    System.Windows.Forms.MessageBox.Show("Rol eliminado correctamente");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No se puede eliminar un rol único", "Error");
+                }
+
             }
             else
             {

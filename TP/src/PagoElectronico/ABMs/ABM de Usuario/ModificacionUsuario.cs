@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using PagoElectronico.Utilidades.ModeloSistema;
+using PagoElectronico.Utilidades.Cifrado;
 
 namespace PagoElectronico.ABMs.ABM_de_Usuario
 {
@@ -149,7 +150,8 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
         {
             if (txtContraseña.Text == txtVerificarContraseña.Text)
             {
-                /*STORE MODIFICAR CONTRASEÑA*/
+                /*CAMBIO DE CONTRASEÑA*/
+                GestorDeSistema.cambiarContraseña(usuarioID, Cifrador.Cifrar(txtContraseña.Text));
                 System.Windows.Forms.MessageBox.Show("Contraseña cambiada correctamente");
             }
             else

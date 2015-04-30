@@ -779,7 +779,7 @@ GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearRol')
 	DROP PROCEDURE GEM4.spCrearRol;
-go
+GO
 
 CREATE PROCEDURE GEM4.spCrearRol
     @Rol_Nombre			NVARCHAR(50),
@@ -792,4 +792,17 @@ AS
 		SELECT Funcionalidad_Cod,Rol_Cod,0
 			FROM GEM4.Rol,GEM4.Funcionalidad
 			WHERE Rol_Nombre=@Rol_Nombre;
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCambiarContraseña')
+	DROP PROCEDURE GEM4.spCambiarContraseña;
+GO
+
+CREATE PROCEDURE GEM4.spCambiarContraseña
+	@usuarioID		INT,
+	@nuevaPass		CHAR(44)
+AS
+	UPDATE GEM4.Usuario
+	SET Usuario_Contrasena = @nuevaPass
+	WHERE Usuario_ID = @usuarioID
 GO

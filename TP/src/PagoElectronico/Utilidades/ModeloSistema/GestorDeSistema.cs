@@ -32,7 +32,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_CREARROL = "GEM4.spCrearRol";
         private const string STORE_AGREGARFUNCIONALIDADAROL = "GEM4.spAgregarFuncionalidadARol";
         private const string STORE_CAMBIARHABILITACIONUSUARIO = "GEM4.spCambiarHabilitacionUsuario";
-        
+        private const string STORE_CAMBIARCONTRASEÑA = "GEM4.spCambiarContraseña";
         
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -177,6 +177,14 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@estado", estado));
             parametros.Add(new SqlParameter("@usuarioID", usuarioID));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CAMBIARHABILITACIONUSUARIO, NONQUERY, parametros);
+        }
+
+        public static void cambiarContraseña(int usuarioID, string contraseña)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            parametros.Add(new SqlParameter("@nuevaPass", contraseña));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CAMBIARCONTRASEÑA, NONQUERY, parametros);
         }
     }
 }

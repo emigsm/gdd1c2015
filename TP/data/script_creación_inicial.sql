@@ -806,3 +806,18 @@ AS
 	SET Usuario_Contrasena = @nuevaPass
 	WHERE Usuario_ID = @usuarioID
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCambiarPreguntaSecreta')
+	DROP PROCEDURE GEM4.spCambiarPreguntaSecreta;
+GO
+
+CREATE PROCEDURE GEM4.spCambiarPreguntaSecreta
+	@usuarioID		INT,
+	@nuevaPreg		NVARCHAR(60),
+	@nuevaResp		NVARCHAR(60)
+AS
+	UPDATE GEM4.Usuario
+	SET Usuario_Pregunta_Secreta = @nuevaPreg,
+		Usuario_Respuesta_Secreta = @nuevaResp
+	WHERE Usuario_ID = @usuarioID
+GO

@@ -163,7 +163,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
         private void btnCambiarPregunta_Click(object sender, EventArgs e)
         {
-            /*STORE MODIFICAR PREGUNTA*/
+            GestorDeSistema.cambiarPreguntaSecreta(usuarioID, txtPregSec.Text, txtRespSec.Text);
             System.Windows.Forms.MessageBox.Show("Pregunta secreta cambiada correctamente");
         }
 

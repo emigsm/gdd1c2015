@@ -34,6 +34,9 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_CAMBIARHABILITACIONUSUARIO = "GEM4.spCambiarHabilitacionUsuario";
         private const string STORE_CAMBIARCONTRASEÑA = "GEM4.spCambiarContraseña";
         private const string STORE_CAMBIARPREGUNTASECRETA = "GEM4.spCambiarPreguntaSecreta";
+        private const string STORE_OBTENERROLESUSUARIO = "GEM4.spObtenerRolesParaUsuario";
+        private const string STORE_AGREGARROLAUSUARIO = "GEM4.spAgregarRolAUsuario";
+
         
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -197,6 +200,29 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CAMBIARPREGUNTASECRETA, NONQUERY, parametros);
         }
+
+        public static DataTable obtenerRolesParaUsuario(int usuarioID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            SqlDataReader readerRoles = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERROLESUSUARIO, READER, parametros);
+            DataTable roles = new DataTable();
+            if (readerRoles.HasRows)
+            {
+                roles.Load(readerRoles);
+            }
+            readerRoles.Dispose();
+            return roles;
+        }
+
+        public static void agregarRolAUsuario(int usuarioID, int rolCod)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuarioID", usuarioID));
+            parametros.Add(new SqlParameter("@rolCod", rolCod));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_AGREGARROLAUSUARIO, NONQUERY, parametros);
+        }
+
 
     }
 }

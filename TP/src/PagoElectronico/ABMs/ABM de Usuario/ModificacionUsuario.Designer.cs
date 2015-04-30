@@ -47,7 +47,6 @@
             this.cmbCambioRol = new System.Windows.Forms.ComboBox();
             this.rbModificarRol = new System.Windows.Forms.RadioButton();
             this.lblCambioRol = new System.Windows.Forms.Label();
-            this.txtRolActual = new System.Windows.Forms.TextBox();
             this.lblRolActual = new System.Windows.Forms.Label();
             this.groupBoxEstado = new System.Windows.Forms.GroupBox();
             this.checkBoxEstado = new System.Windows.Forms.CheckBox();
@@ -56,6 +55,8 @@
             this.btnCambiarPregunta = new System.Windows.Forms.Button();
             this.btnCambiarRol = new System.Windows.Forms.Button();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
+            this.rbEliminarRol = new System.Windows.Forms.RadioButton();
+            this.cmbRolActual = new System.Windows.Forms.ComboBox();
             this.groupBoxContraseña.SuspendLayout();
             this.groupBoxPregunta.SuspendLayout();
             this.groupBoxRol.SuspendLayout();
@@ -197,12 +198,13 @@
             // 
             // groupBoxRol
             // 
+            this.groupBoxRol.Controls.Add(this.cmbRolActual);
+            this.groupBoxRol.Controls.Add(this.rbEliminarRol);
             this.groupBoxRol.Controls.Add(this.checkBoxCambioRol);
             this.groupBoxRol.Controls.Add(this.rbAgregarRol);
             this.groupBoxRol.Controls.Add(this.cmbCambioRol);
             this.groupBoxRol.Controls.Add(this.rbModificarRol);
             this.groupBoxRol.Controls.Add(this.lblCambioRol);
-            this.groupBoxRol.Controls.Add(this.txtRolActual);
             this.groupBoxRol.Controls.Add(this.lblRolActual);
             this.groupBoxRol.Location = new System.Drawing.Point(12, 187);
             this.groupBoxRol.Name = "groupBoxRol";
@@ -240,7 +242,7 @@
             this.cmbCambioRol.FormattingEnabled = true;
             this.cmbCambioRol.Location = new System.Drawing.Point(244, 16);
             this.cmbCambioRol.Name = "cmbCambioRol";
-            this.cmbCambioRol.Size = new System.Drawing.Size(121, 21);
+            this.cmbCambioRol.Size = new System.Drawing.Size(107, 21);
             this.cmbCambioRol.TabIndex = 10;
             // 
             // rbModificarRol
@@ -264,15 +266,6 @@
             this.lblCambioRol.Size = new System.Drawing.Size(57, 13);
             this.lblCambioRol.TabIndex = 9;
             this.lblCambioRol.Text = "Cambiar a:";
-            // 
-            // txtRolActual
-            // 
-            this.txtRolActual.Enabled = false;
-            this.txtRolActual.Location = new System.Drawing.Point(74, 17);
-            this.txtRolActual.Name = "txtRolActual";
-            this.txtRolActual.Size = new System.Drawing.Size(101, 20);
-            this.txtRolActual.TabIndex = 8;
-            this.txtRolActual.TextChanged += new System.EventHandler(this.txtRolActual_TextChanged);
             // 
             // lblRolActual
             // 
@@ -358,6 +351,27 @@
             this.btnCambiarEstado.UseVisualStyleBackColor = true;
             this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
             // 
+            // rbEliminarRol
+            // 
+            this.rbEliminarRol.AutoSize = true;
+            this.rbEliminarRol.Enabled = false;
+            this.rbEliminarRol.Location = new System.Drawing.Point(290, -3);
+            this.rbEliminarRol.Name = "rbEliminarRol";
+            this.rbEliminarRol.Size = new System.Drawing.Size(61, 17);
+            this.rbEliminarRol.TabIndex = 13;
+            this.rbEliminarRol.TabStop = true;
+            this.rbEliminarRol.Text = "Eliminar";
+            this.rbEliminarRol.UseVisualStyleBackColor = true;
+            // 
+            // cmbRolActual
+            // 
+            this.cmbRolActual.Enabled = false;
+            this.cmbRolActual.FormattingEnabled = true;
+            this.cmbRolActual.Location = new System.Drawing.Point(74, 17);
+            this.cmbRolActual.Name = "cmbRolActual";
+            this.cmbRolActual.Size = new System.Drawing.Size(100, 21);
+            this.cmbRolActual.TabIndex = 14;
+            // 
             // ModificacionUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,7 +419,6 @@
         private System.Windows.Forms.TextBox txtPregSec;
         private System.Windows.Forms.Label lblRespSecretanueva;
         private System.Windows.Forms.Label lblRolActual;
-        private System.Windows.Forms.TextBox txtRolActual;
         private System.Windows.Forms.ComboBox cmbCambioRol;
         private System.Windows.Forms.Label lblCambioRol;
         private System.Windows.Forms.RadioButton rbModificarRol;
@@ -416,5 +429,7 @@
         private System.Windows.Forms.Button btnCambiarPregunta;
         private System.Windows.Forms.Button btnCambiarRol;
         private System.Windows.Forms.Button btnCambiarEstado;
+        private System.Windows.Forms.RadioButton rbEliminarRol;
+        private System.Windows.Forms.ComboBox cmbRolActual;
     }
 }

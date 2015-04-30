@@ -821,3 +821,25 @@ AS
 		Usuario_Respuesta_Secreta = @nuevaResp
 	WHERE Usuario_ID = @usuarioID
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRolesParaUsuario')
+	DROP PROCEDURE GEM4.spObtenerRolesParaUsuario;
+GO
+CREATE PROCEDURE GEM4.spObtenerRolesParaUsuario
+	@usuarioID		INT
+AS
+	SELECT Rol.Rol_Nombre, Rol.Rol_Cod
+	FROM GEM4.Rol JOIN GEM4.Usuario_Por_Rol ON (Rol.Rol_Cod = Usuario_Por_Rol.Rol_Cod)
+	WHERE Usuario_ID = @usuarioID
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAgregarRolAUsuario')
+	DROP PROCEDURE GEM4.spAgregarRolAUsuario;
+GO
+CREATE PROCEDURE GEM4.spAgregarRolAUsuario
+	@usuarioID		INT,
+	@rolCod			INT
+AS
+	INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
+		(@usuarioID, @rolCod, 1)
+GO			

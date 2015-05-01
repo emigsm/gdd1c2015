@@ -40,6 +40,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_ELIMINARROLAUSUARIO = "GEM4.spEliminarRolAUsuario";
         private const string STORE_ALTAUSUARIO = "GEM4.spAltaUsuario";
         private const string STORE_USUARIOEXISTE = "GEM4.spUsuarioExiste";
+        private const string STORE_OBTENERDATOSCUENTA = "GEM4.spObtenerDatosCuenta";
 
         
 
@@ -265,6 +266,21 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return Convert.ToBoolean(existe);
 
+        }
+
+        public static DataTable obtenerDatosCuenta(string numeroCuenta, string clienteID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            SqlDataReader readerDatosCuenta = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERDATOSCUENTA, READER, parametros);
+            DataTable datosCuenta = new DataTable();
+            if (readerDatosCuenta.HasRows)
+            {
+                datosCuenta.Load(readerDatosCuenta);
+            }
+            readerDatosCuenta.Dispose();
+            return datosCuenta;
         }
         
 

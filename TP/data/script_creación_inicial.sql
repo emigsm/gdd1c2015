@@ -911,7 +911,7 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerDatosCuenta')
 	DROP PROCEDURE GEM4.spObtenerDatosCuenta
 GO
 CREATE PROCEDURE GEM4.spObtenerDatosCuenta
-	@numeroCuenta	NUMERIC(18,0),
+	@numeroCuenta	BIGINT,
 	@clienteID		INT
 AS
 	SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais

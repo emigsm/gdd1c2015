@@ -7,14 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using PagoElectronico.Utilidades.ModeloSistema;
+
 namespace PagoElectronico.ABMs.ABM_Cuenta
 {
     public partial class ABMCuentaPrincipal : Form
     {
-        public ABMCuentaPrincipal(int rolCod)
+        int rolCod;
+
+        public ABMCuentaPrincipal(int rolCodP)
         {
             InitializeComponent();
-            if (rolCod == 1) {lblClienteID.Enabled = true ; txtClienteID.Enabled = true;}
+            rolCod = rolCodP;
+
+            if (rolCod == 1) { lblClienteID.Enabled = true; txtClienteID.Enabled = true; }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -22,5 +28,42 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             Owner.Show();
             this.Hide();
         }
+
+        private void btnBuscarCuenta_Click(object sender, EventArgs e)
+        {
+            dgvCuenta.Rows.Clear();
+            string cuentaABuscar = txtBuscarCuentaNumero.Text;
+
+            string clienteABuscar = txtClienteID.Text;
+            DataTable cuentasEncontradas = GestorDeSistema.obtenerDatosCuenta(cuentaABuscar, clienteABuscar);
+            if (cuentasEncontradas.Rows.Count > 0)
+            {
+                foreach (DataRow usuarioEncontrado in cuentasEncontradas.Rows)
+                {
+                    dgvCuenta.Rows.Add(usuarioEncontrado.ItemArray[0],
+                                         usuarioEncontrado.ItemArray[1],
+                                         usuarioEncontrado.ItemArray[2].ToString(),
+                                         usuarioEncontrado.ItemArray[3].ToString(),
+                                         usuarioEncontrado.ItemArray[4],
+                                         usuarioEncontrado.ItemArray[5],
+                                         usuarioEncontrado.ItemArray[6],
+                                         usuarioEncontrado.ItemArray[7],
+                                         usuarioEncontrado.ItemArray[8],
+                                         "Modificar",
+                                         "Borrar");
+                }
+                dgvCuenta.Update();
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("No se encontraron cuentas con los datos proporcionados");
+            }
+        }
+
+        private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+        {
+            dgvCuenta.Rows.Clear();
+        }
+
     }
 }

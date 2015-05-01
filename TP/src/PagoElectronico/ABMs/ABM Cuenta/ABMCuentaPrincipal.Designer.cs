@@ -31,13 +31,6 @@
             this.btnNuevaCuenta = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvCuenta = new System.Windows.Forms.DataGridView();
-            this.panelBusqueda = new System.Windows.Forms.Panel();
-            this.txtClienteID = new System.Windows.Forms.TextBox();
-            this.lblClienteID = new System.Windows.Forms.Label();
-            this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
-            this.txtBuscarCuentaNumero = new System.Windows.Forms.TextBox();
-            this.btnBuscarCuenta = new System.Windows.Forms.Button();
-            this.lblCuentaNumero = new System.Windows.Forms.Label();
             this.Cuenta_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Cliente_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Fecha_Creacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,6 +42,13 @@
             this.Cuenta_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.panelBusqueda = new System.Windows.Forms.Panel();
+            this.txtClienteID = new System.Windows.Forms.TextBox();
+            this.lblClienteID = new System.Windows.Forms.Label();
+            this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
+            this.txtBuscarCuentaNumero = new System.Windows.Forms.TextBox();
+            this.btnBuscarCuenta = new System.Windows.Forms.Button();
+            this.lblCuentaNumero = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuenta)).BeginInit();
             this.panelBusqueda.SuspendLayout();
             this.SuspendLayout();
@@ -93,71 +93,6 @@
             this.dgvCuenta.RowHeadersVisible = false;
             this.dgvCuenta.Size = new System.Drawing.Size(704, 150);
             this.dgvCuenta.TabIndex = 8;
-            // 
-            // panelBusqueda
-            // 
-            this.panelBusqueda.Controls.Add(this.txtClienteID);
-            this.panelBusqueda.Controls.Add(this.lblClienteID);
-            this.panelBusqueda.Controls.Add(this.btnLimpiarBusqueda);
-            this.panelBusqueda.Controls.Add(this.txtBuscarCuentaNumero);
-            this.panelBusqueda.Controls.Add(this.btnBuscarCuenta);
-            this.panelBusqueda.Controls.Add(this.lblCuentaNumero);
-            this.panelBusqueda.Location = new System.Drawing.Point(12, 12);
-            this.panelBusqueda.Name = "panelBusqueda";
-            this.panelBusqueda.Size = new System.Drawing.Size(346, 108);
-            this.panelBusqueda.TabIndex = 7;
-            // 
-            // txtClienteID
-            // 
-            this.txtClienteID.Enabled = false;
-            this.txtClienteID.Location = new System.Drawing.Point(122, 50);
-            this.txtClienteID.Name = "txtClienteID";
-            this.txtClienteID.Size = new System.Drawing.Size(210, 20);
-            this.txtClienteID.TabIndex = 5;
-            // 
-            // lblClienteID
-            // 
-            this.lblClienteID.AutoSize = true;
-            this.lblClienteID.Enabled = false;
-            this.lblClienteID.Location = new System.Drawing.Point(17, 53);
-            this.lblClienteID.Name = "lblClienteID";
-            this.lblClienteID.Size = new System.Drawing.Size(56, 13);
-            this.lblClienteID.TabIndex = 4;
-            this.lblClienteID.Text = "Cliente ID:";
-            // 
-            // btnLimpiarBusqueda
-            // 
-            this.btnLimpiarBusqueda.Location = new System.Drawing.Point(225, 76);
-            this.btnLimpiarBusqueda.Name = "btnLimpiarBusqueda";
-            this.btnLimpiarBusqueda.Size = new System.Drawing.Size(107, 23);
-            this.btnLimpiarBusqueda.TabIndex = 3;
-            this.btnLimpiarBusqueda.Text = "Limpiar Búsqueda";
-            this.btnLimpiarBusqueda.UseVisualStyleBackColor = true;
-            // 
-            // txtBuscarCuentaNumero
-            // 
-            this.txtBuscarCuentaNumero.Location = new System.Drawing.Point(122, 18);
-            this.txtBuscarCuentaNumero.Name = "txtBuscarCuentaNumero";
-            this.txtBuscarCuentaNumero.Size = new System.Drawing.Size(210, 20);
-            this.txtBuscarCuentaNumero.TabIndex = 2;
-            // 
-            // btnBuscarCuenta
-            // 
-            this.btnBuscarCuenta.Location = new System.Drawing.Point(144, 76);
-            this.btnBuscarCuenta.Name = "btnBuscarCuenta";
-            this.btnBuscarCuenta.Size = new System.Drawing.Size(75, 23);
-            this.btnBuscarCuenta.TabIndex = 1;
-            this.btnBuscarCuenta.Text = "Buscar";
-            this.btnBuscarCuenta.UseVisualStyleBackColor = true;
-            // 
-            // lblCuentaNumero
-            // 
-            this.lblCuentaNumero.AutoSize = true;
-            this.lblCuentaNumero.Location = new System.Drawing.Point(17, 21);
-            this.lblCuentaNumero.Name = "lblCuentaNumero";
-            this.lblCuentaNumero.Size = new System.Drawing.Size(99, 13);
-            this.lblCuentaNumero.TabIndex = 0;
-            this.lblCuentaNumero.Text = "Numero de Cuenta:";
             // 
             // Cuenta_Numero
             // 
@@ -228,6 +163,73 @@
             this.Eliminar.ReadOnly = true;
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // panelBusqueda
+            // 
+            this.panelBusqueda.Controls.Add(this.txtClienteID);
+            this.panelBusqueda.Controls.Add(this.lblClienteID);
+            this.panelBusqueda.Controls.Add(this.btnLimpiarBusqueda);
+            this.panelBusqueda.Controls.Add(this.txtBuscarCuentaNumero);
+            this.panelBusqueda.Controls.Add(this.btnBuscarCuenta);
+            this.panelBusqueda.Controls.Add(this.lblCuentaNumero);
+            this.panelBusqueda.Location = new System.Drawing.Point(12, 12);
+            this.panelBusqueda.Name = "panelBusqueda";
+            this.panelBusqueda.Size = new System.Drawing.Size(346, 108);
+            this.panelBusqueda.TabIndex = 7;
+            // 
+            // txtClienteID
+            // 
+            this.txtClienteID.Enabled = false;
+            this.txtClienteID.Location = new System.Drawing.Point(122, 50);
+            this.txtClienteID.Name = "txtClienteID";
+            this.txtClienteID.Size = new System.Drawing.Size(210, 20);
+            this.txtClienteID.TabIndex = 5;
+            // 
+            // lblClienteID
+            // 
+            this.lblClienteID.AutoSize = true;
+            this.lblClienteID.Enabled = false;
+            this.lblClienteID.Location = new System.Drawing.Point(17, 53);
+            this.lblClienteID.Name = "lblClienteID";
+            this.lblClienteID.Size = new System.Drawing.Size(56, 13);
+            this.lblClienteID.TabIndex = 4;
+            this.lblClienteID.Text = "Cliente ID:";
+            // 
+            // btnLimpiarBusqueda
+            // 
+            this.btnLimpiarBusqueda.Location = new System.Drawing.Point(225, 76);
+            this.btnLimpiarBusqueda.Name = "btnLimpiarBusqueda";
+            this.btnLimpiarBusqueda.Size = new System.Drawing.Size(107, 23);
+            this.btnLimpiarBusqueda.TabIndex = 3;
+            this.btnLimpiarBusqueda.Text = "Limpiar Búsqueda";
+            this.btnLimpiarBusqueda.UseVisualStyleBackColor = true;
+            this.btnLimpiarBusqueda.Click += new System.EventHandler(this.btnLimpiarBusqueda_Click);
+            // 
+            // txtBuscarCuentaNumero
+            // 
+            this.txtBuscarCuentaNumero.Location = new System.Drawing.Point(122, 18);
+            this.txtBuscarCuentaNumero.Name = "txtBuscarCuentaNumero";
+            this.txtBuscarCuentaNumero.Size = new System.Drawing.Size(210, 20);
+            this.txtBuscarCuentaNumero.TabIndex = 2;
+            // 
+            // btnBuscarCuenta
+            // 
+            this.btnBuscarCuenta.Location = new System.Drawing.Point(144, 76);
+            this.btnBuscarCuenta.Name = "btnBuscarCuenta";
+            this.btnBuscarCuenta.Size = new System.Drawing.Size(75, 23);
+            this.btnBuscarCuenta.TabIndex = 1;
+            this.btnBuscarCuenta.Text = "Buscar";
+            this.btnBuscarCuenta.UseVisualStyleBackColor = true;
+            this.btnBuscarCuenta.Click += new System.EventHandler(this.btnBuscarCuenta_Click);
+            // 
+            // lblCuentaNumero
+            // 
+            this.lblCuentaNumero.AutoSize = true;
+            this.lblCuentaNumero.Location = new System.Drawing.Point(17, 21);
+            this.lblCuentaNumero.Name = "lblCuentaNumero";
+            this.lblCuentaNumero.Size = new System.Drawing.Size(99, 13);
+            this.lblCuentaNumero.TabIndex = 0;
+            this.lblCuentaNumero.Text = "Numero de Cuenta:";
             // 
             // ABMCuentaPrincipal
             // 

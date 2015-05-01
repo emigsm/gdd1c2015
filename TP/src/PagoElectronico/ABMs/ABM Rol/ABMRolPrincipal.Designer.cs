@@ -29,22 +29,22 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.Rol_CodTextBox = new System.Windows.Forms.TextBox();
-            this.Rol_NombreTextBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.BuscarRolesButton = new System.Windows.Forms.Button();
             this.LimpiarBusquedaButton = new System.Windows.Forms.Button();
+            this.BuscarRolesButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.Rol_NombreTextBox = new System.Windows.Forms.TextBox();
+            this.Rol_CodTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.VolverButton = new System.Windows.Forms.Button();
             this.dgvRoles = new System.Windows.Forms.DataGridView();
-            this.CrearRolButton = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.Rol_Cod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Rol_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.ModificarButton = new System.Windows.Forms.DataGridViewButtonColumn();
             this.EliminarButton = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.CrearRolButton = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRoles)).BeginInit();
             this.SuspendLayout();
@@ -62,46 +62,15 @@
             this.panel1.Size = new System.Drawing.Size(387, 129);
             this.panel1.TabIndex = 0;
             // 
-            // label1
+            // LimpiarBusquedaButton
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 21);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(231, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Utilice los filtros para buscar un rol en particular.";
-            // 
-            // Rol_CodTextBox
-            // 
-            this.Rol_CodTextBox.Location = new System.Drawing.Point(145, 14);
-            this.Rol_CodTextBox.Name = "Rol_CodTextBox";
-            this.Rol_CodTextBox.Size = new System.Drawing.Size(113, 20);
-            this.Rol_CodTextBox.TabIndex = 0;
-            // 
-            // Rol_NombreTextBox
-            // 
-            this.Rol_NombreTextBox.Location = new System.Drawing.Point(145, 48);
-            this.Rol_NombreTextBox.Name = "Rol_NombreTextBox";
-            this.Rol_NombreTextBox.Size = new System.Drawing.Size(113, 20);
-            this.Rol_NombreTextBox.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Código del Rol";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 49);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 13);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Nombre del Rol";
+            this.LimpiarBusquedaButton.Location = new System.Drawing.Point(271, 87);
+            this.LimpiarBusquedaButton.Name = "LimpiarBusquedaButton";
+            this.LimpiarBusquedaButton.Size = new System.Drawing.Size(113, 23);
+            this.LimpiarBusquedaButton.TabIndex = 5;
+            this.LimpiarBusquedaButton.Text = "Limpiar Búsqueda";
+            this.LimpiarBusquedaButton.UseVisualStyleBackColor = true;
+            this.LimpiarBusquedaButton.Click += new System.EventHandler(this.LimpiarBusquedaButton_Click);
             // 
             // BuscarRolesButton
             // 
@@ -113,15 +82,46 @@
             this.BuscarRolesButton.UseVisualStyleBackColor = true;
             this.BuscarRolesButton.Click += new System.EventHandler(this.BuscarRolesButton_Click);
             // 
-            // LimpiarBusquedaButton
+            // label3
             // 
-            this.LimpiarBusquedaButton.Location = new System.Drawing.Point(271, 87);
-            this.LimpiarBusquedaButton.Name = "LimpiarBusquedaButton";
-            this.LimpiarBusquedaButton.Size = new System.Drawing.Size(113, 23);
-            this.LimpiarBusquedaButton.TabIndex = 5;
-            this.LimpiarBusquedaButton.Text = "Limpiar Búsqueda";
-            this.LimpiarBusquedaButton.UseVisualStyleBackColor = true;
-            this.LimpiarBusquedaButton.Click += new System.EventHandler(this.LimpiarBusquedaButton_Click);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(17, 49);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 13);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Nombre del Rol";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(18, 17);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Código del Rol";
+            // 
+            // Rol_NombreTextBox
+            // 
+            this.Rol_NombreTextBox.Location = new System.Drawing.Point(145, 48);
+            this.Rol_NombreTextBox.Name = "Rol_NombreTextBox";
+            this.Rol_NombreTextBox.Size = new System.Drawing.Size(113, 20);
+            this.Rol_NombreTextBox.TabIndex = 1;
+            // 
+            // Rol_CodTextBox
+            // 
+            this.Rol_CodTextBox.Location = new System.Drawing.Point(145, 14);
+            this.Rol_CodTextBox.Name = "Rol_CodTextBox";
+            this.Rol_CodTextBox.Size = new System.Drawing.Size(113, 20);
+            this.Rol_CodTextBox.TabIndex = 0;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(231, 13);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Utilice los filtros para buscar un rol en particular.";
             // 
             // VolverButton
             // 
@@ -148,25 +148,7 @@
             this.dgvRoles.Name = "dgvRoles";
             this.dgvRoles.Size = new System.Drawing.Size(543, 147);
             this.dgvRoles.TabIndex = 3;
-            // 
-            // CrearRolButton
-            // 
-            this.CrearRolButton.Location = new System.Drawing.Point(466, 67);
-            this.CrearRolButton.Name = "CrearRolButton";
-            this.CrearRolButton.Size = new System.Drawing.Size(193, 71);
-            this.CrearRolButton.TabIndex = 4;
-            this.CrearRolButton.Text = "Crear Nuevo Rol";
-            this.CrearRolButton.UseVisualStyleBackColor = true;
-            this.CrearRolButton.Click += new System.EventHandler(this.CrearRolButton_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(421, 22);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(267, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "Puede crear un nuevo rol utilizando el respectivo botón";
+            this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellContentClick);
             // 
             // Rol_Cod
             // 
@@ -202,6 +184,25 @@
             this.EliminarButton.HeaderText = "Eliminar";
             this.EliminarButton.Name = "EliminarButton";
             this.EliminarButton.ReadOnly = true;
+            // 
+            // CrearRolButton
+            // 
+            this.CrearRolButton.Location = new System.Drawing.Point(466, 67);
+            this.CrearRolButton.Name = "CrearRolButton";
+            this.CrearRolButton.Size = new System.Drawing.Size(193, 71);
+            this.CrearRolButton.TabIndex = 4;
+            this.CrearRolButton.Text = "Crear Nuevo Rol";
+            this.CrearRolButton.UseVisualStyleBackColor = true;
+            this.CrearRolButton.Click += new System.EventHandler(this.CrearRolButton_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(421, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(267, 13);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "Puede crear un nuevo rol utilizando el respectivo botón";
             // 
             // ABMRolPrincipal
             // 

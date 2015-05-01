@@ -231,7 +231,7 @@ CREATE TABLE GEM4.Tipo_Cuenta(
 	Tipo_Cuenta_Costo_Creacion			NUMERIC(18,2),
 	Tipo_Cuenta_Costo_Modificacion		NUMERIC(18,2),
 	Tipo_Cuenta_Costo_Transf			NUMERIC(18,2), 
-	Tipo_Cuenta_Duracion				TIME,
+	Tipo_Cuenta_Duracion				INT,
 	Habilitado							BIT DEFAULT 1
 	PRIMARY KEY (Tipo_Cuenta_ID)
 	)	
@@ -243,7 +243,7 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Pais								NUMERIC(18,0),
 	Cuenta_Fecha_Cierre						DATETIME,
 	Cuenta_Moneda							INT	DEFAULT 1,--no estan en maestra
-	Cuenta_Tipo								INT	DEFAULT 1,--idem
+	Cuenta_Tipo								INT	DEFAULT 4,--idem
 	Cuenta_Cliente_ID						INT,--idem
 	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 0,--LO HARDCODEO PARA AVANZAR DESPUES HAY Q HACER ALGUN ALGORITMO
 	PRIMARY KEY(Cuenta_Numero),
@@ -466,14 +466,17 @@ VALUES('Deposito'),('Retiro'),('Transferencia'),('Apertura Cuenta'),('Cierre Cue
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta ON;
 INSERT INTO GEM4.Tipo_Cuenta(Tipo_Cuenta_ID,Tipo_Cuenta_Descripcion,Tipo_Cuenta_Costo_Creacion,Tipo_Cuenta_Costo_Modificacion,Tipo_Cuenta_Costo_Transf,Tipo_Cuenta_Duracion)
-VALUES (1,'STANDARD',100,100,20,
-		GETDATE());
+/*VALUES (1,'STANDARD',100,100,20,
+		GETDATE());*/
+VALUES(1,'Oro',500,500,200,360),(2,'Plata',400,400,100,160),
+		(3,'BRONCE',300,300,50,80),(4,'Gratuita',0,0,0,80);
+
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
 
 
 SET IDENTITY_INSERT GEM4.Estado_Cuenta ON;
 INSERT INTO GEM4.Estado_Cuenta(Estado_Codigo,Estado_Descripcion)
-VALUES(1,'ACTIVA'),(2,'INACTIVA');
+VALUES(1,'HABILITADA'),(2,'INHABILITADA'),(3,'CERRADA'),(4,'PENDIENTE ACTIVACION');
 SET IDENTITY_INSERT GEM4.Estado_Cuenta OFF;
 
 GO

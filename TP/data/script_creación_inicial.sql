@@ -59,6 +59,22 @@ BEGIN
 END;
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarFecha')
+	DROP FUNCTION GEM4.fnValidarFecha
+GO
+CREATE FUNCTION GEM4.fnValidarFecha(@unaFecha DATETIME)
+RETURNS DATETIME
+AS
+	BEGIN
+		IF((@unaFecha IS NULL)OR(@unaFecha > GETDATE()))
+			BEGIN
+				RETURN GEM4.fnDevolverFechaSistema();
+			END
+		RETURN @unaFecha;
+	END
+GO
+
+
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
 	DROP TABLE GEM4.Deposito;
@@ -470,7 +486,10 @@ BEGIN
 			@tarjeta NVARCHAR(16),@cuentaNumero NUMERIC(18,0),@usuarioID INT,
 			@retiroCodigo NUMERIC(18,0),@retiroFecha DATETIME,@retiroImporte NUMERIC(18,2),
 			@chequeNumero NUMERIC(18,0),@chequeFecha DATETIME,@chequeImporte NUMERIC(18,2),@banco NUMERIC(18,0),
-			@transfFecha DATETIME,@transfImporte NUMERIC(18,2),@transfCosto NUMERIC(18,2),@cuentaDestino NUMERIC(18,0) ;
+			@transfFecha DATETIME,@transfImporte NUMERIC(18,2),@transfCosto NUMERIC(18,2),
+			@cuentaDestino NUMERIC(18,0);
+	
+	
 
 	DECLARE Cursor1 CURSOR FOR
 	SELECT DISTINCT Factura_Numero,Cli_Mail,Retiro_Codigo,Retiro_Fecha,Retiro_Importe,
@@ -502,14 +521,14 @@ BEGIN
 				SET IDENTITY_INSERT GEM4.Operacion ON;
 				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
 											Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,1,@depositoFecha,@usuarioID,0,@nFactura);
+				VALUES(@nOperacion,1,GEM4.fnValidarFecha(@depositoFecha),@usuarioID,0,@nFactura);
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				SET IDENTITY_INSERT GEM4.Deposito ON;
 				INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,
 									  Deposito_Cliente,Deposito_Tarjeta,
 									  Deposito_Cuenta,Deposito_Operacion_ID)
-				VALUES(@depositoCodigo,@depositoFecha,@depositoImporte,@clienteID,@tarjeta,@cuentaNumero,@nOperacion);
+				VALUES(@depositoCodigo,GEM4.fnValidarFecha(@depositoFecha),@depositoImporte,@clienteID,@tarjeta,@cuentaNumero,@nOperacion);
 				SET IDENTITY_INSERT GEM4.Deposito OFF;
 				
 			END;	
@@ -519,17 +538,17 @@ BEGIN
 				SET IDENTITY_INSERT GEM4.Operacion ON;
 				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
 											Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,2,@retiroFecha,@usuarioID,0,@nFactura);
+				VALUES(@nOperacion,2,GEM4.fnValidarFecha(@retiroFecha),@usuarioID,0,@nFactura);
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				SET IDENTITY_INSERT GEM4.Cheque ON; 
 				INSERT INTO GEM4.Cheque(Cheque_Numero,Cheque_Fecha,Cheque_Importe,Cheque_Cliente_ID,Cheque_Banco)
-				VALUES(@chequeNumero,@chequeFecha,@chequeImporte,@clienteID,@banco);
+				VALUES(@chequeNumero,GEM4.fnValidarFecha(@chequeFecha),@chequeImporte,@clienteID,@banco);
 				SET IDENTITY_INSERT GEM4.Cheque OFF;
 				
 				SET IDENTITY_INSERT GEM4.Retiro ON;
 				INSERT INTO GEM4.Retiro(Retiro_Codigo,Retiro_Importe,Retiro_Fecha,Retiro_Cheque,Operacion_ID,Retiro_Cuenta)
-				VALUES(@retiroCodigo,@retiroImporte,@retiroFecha,@chequeNumero,@nOperacion,@cuentaNumero);
+				VALUES(@retiroCodigo,@retiroImporte,GEM4.fnValidarFecha(@retiroFecha),@chequeNumero,@nOperacion,@cuentaNumero);
 				SET IDENTITY_INSERT GEM4.Retiro OFF;
 				 
 			END;
@@ -549,12 +568,12 @@ BEGIN
 				SET IDENTITY_INSERT GEM4.Operacion ON;
 				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
 											Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,3,@retiroFecha,@usuarioID,0,@nFactura);
+				VALUES(@nOperacion,3,GEM4.fnValidarFecha(@retiroFecha),@usuarioID,0,@nFactura);
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				INSERT INTO GEM4.Transferencia(Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans
 											,Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino,Transferencia_Operacion_ID)
-				VALUES(@transfFecha,@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion)
+				VALUES(GEM4.fnValidarFecha(@transfFecha),@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion)
 			END;	
 		SET @nOperacion=@nOperacion+1;				
 		FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
@@ -610,7 +629,7 @@ WHERE Usuario_ID > 3
 
 INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Codigo_Seg,
 						 Tarjeta_Emisor_Descripcion,Tarjeta_Cliente_ID)
-SELECT DISTINCT m.Tarjeta_Numero,m.Tarjeta_Fecha_Emision,m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
+SELECT DISTINCT m.Tarjeta_Numero,GEM4.fnValidarFecha(m.Tarjeta_Fecha_Emision),m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
 	   m.Tarjeta_Emisor_Descripcion,c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL
@@ -625,22 +644,21 @@ SET IDENTITY_INSERT GEM4.Banco OFF;
 
 SET IDENTITY_INSERT GEM4.Factura ON;
 INSERT INTO GEM4.Factura(Factura_Numero,Factura_Fecha)
-SELECT DISTINCT m.Factura_Numero,m.Factura_Fecha
+SELECT DISTINCT m.Factura_Numero,GEM4.fnValidarFecha(m.Factura_Fecha)
 FROM gd_esquema.Maestra m
 WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;
 
-
-
 SET IDENTITY_INSERT GEM4.Cuenta ON;
 INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Cliente_ID)
-SELECT	DISTINCT m.Cuenta_Numero,m.Cuenta_Fecha_Creacion,m.Cuenta_Fecha_Cierre,m.Cuenta_Pais_Codigo,c.Cliente_ID
+SELECT	DISTINCT m.Cuenta_Numero,GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion),m.Cuenta_Fecha_Cierre,m.Cuenta_Pais_Codigo,c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
+
 EXEC GEM4.spInsertaOperaciones
-go
+GO
 
 
 

@@ -41,6 +41,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_ALTAUSUARIO = "GEM4.spAltaUsuario";
         private const string STORE_USUARIOEXISTE = "GEM4.spUsuarioExiste";
         private const string STORE_OBTENERDATOSCUENTA = "GEM4.spObtenerDatosCuenta";
+        private const string STORE_HABILITARODESHABILITARROL = "GEM4.sphabilitarODeshabilitarRol";
 
         
 
@@ -282,7 +283,14 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerDatosCuenta.Dispose();
             return datosCuenta;
         }
-        
 
+        public static void habilitarODeshabilitarRol(int rolCod, byte rolHabilitado)
+        {
+            List<SqlParameter> parametrosStore = new List<SqlParameter>();
+            parametrosStore.Add(new SqlParameter("@Rol_Cod", rolCod));
+            parametrosStore.Add(new SqlParameter("@Rol_Habilitado", rolHabilitado));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure("GEM4.sphabilitarODeshabilitarRol", NONQUERY, parametrosStore);
+        }
     }
 }

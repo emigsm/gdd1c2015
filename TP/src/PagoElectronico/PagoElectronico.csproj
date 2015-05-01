@@ -149,6 +149,9 @@
     <EmbeddedResource Include="ABMs\ABM Cliente\ABMClientePrincipal.resx">
       <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.resx">
+      <DependentUpon>ABMCuentaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM de Usuario\ABMUsuarioPrincipal.resx">
       <DependentUpon>ABMUsuarioPrincipal.cs</DependentUpon>
     </EmbeddedResource>

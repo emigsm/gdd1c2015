@@ -32,6 +32,8 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvCuenta = new System.Windows.Forms.DataGridView();
             this.panelBusqueda = new System.Windows.Forms.Panel();
+            this.txtClienteID = new System.Windows.Forms.TextBox();
+            this.lblClienteID = new System.Windows.Forms.Label();
             this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
             this.txtBuscarCuentaNumero = new System.Windows.Forms.TextBox();
             this.btnBuscarCuenta = new System.Windows.Forms.Button();
@@ -47,9 +49,6 @@
             this.Cuenta_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Usuario_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.lblClienteID = new System.Windows.Forms.Label();
-            this.txtClienteID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuenta)).BeginInit();
             this.panelBusqueda.SuspendLayout();
             this.SuspendLayout();
@@ -88,8 +87,7 @@
             this.Cuenta_Moneda,
             this.Cuenta_Pais,
             this.Modificar,
-            this.Eliminar,
-            this.Usuario_Habilitado});
+            this.Eliminar});
             this.dgvCuenta.Location = new System.Drawing.Point(12, 144);
             this.dgvCuenta.Name = "dgvCuenta";
             this.dgvCuenta.RowHeadersVisible = false;
@@ -108,6 +106,24 @@
             this.panelBusqueda.Name = "panelBusqueda";
             this.panelBusqueda.Size = new System.Drawing.Size(346, 108);
             this.panelBusqueda.TabIndex = 7;
+            // 
+            // txtClienteID
+            // 
+            this.txtClienteID.Enabled = false;
+            this.txtClienteID.Location = new System.Drawing.Point(122, 50);
+            this.txtClienteID.Name = "txtClienteID";
+            this.txtClienteID.Size = new System.Drawing.Size(210, 20);
+            this.txtClienteID.TabIndex = 5;
+            // 
+            // lblClienteID
+            // 
+            this.lblClienteID.AutoSize = true;
+            this.lblClienteID.Enabled = false;
+            this.lblClienteID.Location = new System.Drawing.Point(17, 53);
+            this.lblClienteID.Name = "lblClienteID";
+            this.lblClienteID.Size = new System.Drawing.Size(56, 13);
+            this.lblClienteID.TabIndex = 4;
+            this.lblClienteID.Text = "Cliente ID:";
             // 
             // btnLimpiarBusqueda
             // 
@@ -213,33 +229,6 @@
             this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
-            // Usuario_Habilitado
-            // 
-            this.Usuario_Habilitado.HeaderText = "Habilitado";
-            this.Usuario_Habilitado.Name = "Usuario_Habilitado";
-            this.Usuario_Habilitado.ReadOnly = true;
-            this.Usuario_Habilitado.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Usuario_Habilitado.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Usuario_Habilitado.TrueValue = "True";
-            // 
-            // lblClienteID
-            // 
-            this.lblClienteID.AutoSize = true;
-            this.lblClienteID.Enabled = false;
-            this.lblClienteID.Location = new System.Drawing.Point(17, 53);
-            this.lblClienteID.Name = "lblClienteID";
-            this.lblClienteID.Size = new System.Drawing.Size(56, 13);
-            this.lblClienteID.TabIndex = 4;
-            this.lblClienteID.Text = "Cliente ID:";
-            // 
-            // txtClienteID
-            // 
-            this.txtClienteID.Enabled = false;
-            this.txtClienteID.Location = new System.Drawing.Point(122, 50);
-            this.txtClienteID.Name = "txtClienteID";
-            this.txtClienteID.Size = new System.Drawing.Size(210, 20);
-            this.txtClienteID.TabIndex = 5;
-            // 
             // ABMCuentaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -268,6 +257,8 @@
         private System.Windows.Forms.TextBox txtBuscarCuentaNumero;
         private System.Windows.Forms.Button btnBuscarCuenta;
         private System.Windows.Forms.Label lblCuentaNumero;
+        private System.Windows.Forms.TextBox txtClienteID;
+        private System.Windows.Forms.Label lblClienteID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Cliente_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Fecha_Creacion;
@@ -279,9 +270,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Pais;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
         private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Usuario_Habilitado;
-        private System.Windows.Forms.TextBox txtClienteID;
-        private System.Windows.Forms.Label lblClienteID;
 
     }
 }

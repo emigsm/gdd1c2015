@@ -38,6 +38,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_AGREGARROLAUSUARIO = "GEM4.spAgregarRolAUsuario";
         private const string STORE_MODIFICARROLAUSUARIO = "GEM4.spModificarRolAUsuario";
         private const string STORE_ELIMINARROLAUSUARIO = "GEM4.spEliminarRolAUsuario";
+        private const string STORE_ALTAUSUARIO = "GEM4.spAltaUsuario";
+        private const string STORE_USUARIOEXISTE = "GEM4.spUsuarioExiste";
 
         
 
@@ -240,6 +242,29 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@usuarioID", usuarioID));
             parametros.Add(new SqlParameter("@rolCod", rolCod));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ELIMINARROLAUSUARIO, NONQUERY, parametros);
+        }
+
+        public static void altaUsuario(string username, string contraseña, int rolCod, string pregSec, string respSec)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@username", username));
+            parametros.Add(new SqlParameter("@contraseña", contraseña));
+            parametros.Add(new SqlParameter("@rolCod", rolCod));
+            parametros.Add(new SqlParameter("@pregSec", pregSec));
+            parametros.Add(new SqlParameter("@respSec", respSec));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTAUSUARIO, NONQUERY, parametros);
+        }
+
+        public static bool usuarioExiste(string usuario)
+        {
+            int existe;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter user = new SqlParameter("@username", usuario);
+            parametros.Add(user);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_USUARIOEXISTE, SCALAR, parametros);
+            existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return Convert.ToBoolean(existe);
+
         }
         
 

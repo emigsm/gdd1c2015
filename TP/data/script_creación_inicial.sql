@@ -869,5 +869,35 @@ AS
 	WHERE Usuario_ID = @usuarioID AND Rol_Cod = @rolCod
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAltaUsuario')
+	DROP PROCEDURE GEM4.spAltaUsuario;
+GO
+CREATE PROCEDURE GEM4.spAltaUsuario
+	@username		NVARCHAR(30),
+	@contraseña		CHAR(44),
+	@rolCod			INT,
+	@pregSec		NVARCHAR(60),
+	@respSec		NVARCHAR(60)
+AS
+	INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion) VALUES
+		(@username, @contraseña, @pregSec, @respSec, SYSDATETIME(), SYSDATETIME());
+	DECLARE @usuarioID INT
+	SET @usuarioID = (SELECT Usuario_ID FROM GEM4.Usuario WHERE Usuario_Username = @username)
+	INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
+		(@usuarioID, @rolCod, 1);
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spUsuarioExiste')
+	DROP PROCEDURE GEM4.spUsuarioExiste;
+GO
+CREATE PROCEDURE GEM4.spUsuarioExiste
+	@username		NVARCHAR(30)
+AS
+	SELECT COUNT(Usuario_Username) FROM GEM4.Usuario WHERE Usuario_Username = @username
+GO
+
+
+
+
 
 				

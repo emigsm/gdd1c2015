@@ -35,15 +35,15 @@
             this.lblPreguntaSecreta = new System.Windows.Forms.Label();
             this.lblRespuestaSecreta = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtUsuario = new System.Windows.Forms.TextBox();
-            this.txtContraseña = new System.Windows.Forms.TextBox();
-            this.txtVerificarContraseña = new System.Windows.Forms.TextBox();
-            this.cmbRol = new System.Windows.Forms.ComboBox();
-            this.txtPreguntaSecreta = new System.Windows.Forms.TextBox();
             this.txtRespuestaSecreta = new System.Windows.Forms.TextBox();
-            this.btnVerificarUsuario = new System.Windows.Forms.Button();
+            this.txtPreguntaSecreta = new System.Windows.Forms.TextBox();
+            this.cmbRol = new System.Windows.Forms.ComboBox();
+            this.txtVerificarContraseña = new System.Windows.Forms.TextBox();
+            this.txtContraseña = new System.Windows.Forms.TextBox();
+            this.txtUsuario = new System.Windows.Forms.TextBox();
             this.btnAltaUsuario = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.btnRegistrarCliente = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -123,34 +123,13 @@
             this.groupBox1.Text = "Ingrese los siguientes datos:";
             this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
-            // txtUsuario
+            // txtRespuestaSecreta
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(112, 30);
-            this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(128, 20);
-            this.txtUsuario.TabIndex = 2;
-            // 
-            // txtContraseña
-            // 
-            this.txtContraseña.Location = new System.Drawing.Point(112, 56);
-            this.txtContraseña.Name = "txtContraseña";
-            this.txtContraseña.Size = new System.Drawing.Size(128, 20);
-            this.txtContraseña.TabIndex = 3;
-            // 
-            // txtVerificarContraseña
-            // 
-            this.txtVerificarContraseña.Location = new System.Drawing.Point(112, 82);
-            this.txtVerificarContraseña.Name = "txtVerificarContraseña";
-            this.txtVerificarContraseña.Size = new System.Drawing.Size(128, 20);
-            this.txtVerificarContraseña.TabIndex = 6;
-            // 
-            // cmbRol
-            // 
-            this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(112, 120);
-            this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(130, 21);
-            this.cmbRol.TabIndex = 7;
+            this.txtRespuestaSecreta.Location = new System.Drawing.Point(111, 194);
+            this.txtRespuestaSecreta.Name = "txtRespuestaSecreta";
+            this.txtRespuestaSecreta.Size = new System.Drawing.Size(128, 20);
+            this.txtRespuestaSecreta.TabIndex = 9;
+            this.txtRespuestaSecreta.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // txtPreguntaSecreta
             // 
@@ -160,31 +139,47 @@
             this.txtPreguntaSecreta.TabIndex = 8;
             this.txtPreguntaSecreta.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
-            // txtRespuestaSecreta
+            // cmbRol
             // 
-            this.txtRespuestaSecreta.Location = new System.Drawing.Point(111, 194);
-            this.txtRespuestaSecreta.Name = "txtRespuestaSecreta";
-            this.txtRespuestaSecreta.Size = new System.Drawing.Size(128, 20);
-            this.txtRespuestaSecreta.TabIndex = 9;
-            this.txtRespuestaSecreta.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.cmbRol.FormattingEnabled = true;
+            this.cmbRol.Location = new System.Drawing.Point(112, 120);
+            this.cmbRol.Name = "cmbRol";
+            this.cmbRol.Size = new System.Drawing.Size(130, 21);
+            this.cmbRol.TabIndex = 7;
+            this.cmbRol.SelectedIndexChanged += new System.EventHandler(this.cmbRol_SelectedIndexChanged);
             // 
-            // btnVerificarUsuario
+            // txtVerificarContraseña
             // 
-            this.btnVerificarUsuario.Location = new System.Drawing.Point(272, 40);
-            this.btnVerificarUsuario.Name = "btnVerificarUsuario";
-            this.btnVerificarUsuario.Size = new System.Drawing.Size(75, 23);
-            this.btnVerificarUsuario.TabIndex = 7;
-            this.btnVerificarUsuario.Text = "Verificar";
-            this.btnVerificarUsuario.UseVisualStyleBackColor = true;
+            this.txtVerificarContraseña.Location = new System.Drawing.Point(112, 82);
+            this.txtVerificarContraseña.Name = "txtVerificarContraseña";
+            this.txtVerificarContraseña.PasswordChar = '*';
+            this.txtVerificarContraseña.Size = new System.Drawing.Size(128, 20);
+            this.txtVerificarContraseña.TabIndex = 6;
+            // 
+            // txtContraseña
+            // 
+            this.txtContraseña.Location = new System.Drawing.Point(112, 56);
+            this.txtContraseña.Name = "txtContraseña";
+            this.txtContraseña.PasswordChar = '*';
+            this.txtContraseña.Size = new System.Drawing.Size(128, 20);
+            this.txtContraseña.TabIndex = 3;
+            // 
+            // txtUsuario
+            // 
+            this.txtUsuario.Location = new System.Drawing.Point(112, 30);
+            this.txtUsuario.Name = "txtUsuario";
+            this.txtUsuario.Size = new System.Drawing.Size(128, 20);
+            this.txtUsuario.TabIndex = 2;
             // 
             // btnAltaUsuario
             // 
-            this.btnAltaUsuario.Location = new System.Drawing.Point(272, 132);
+            this.btnAltaUsuario.Location = new System.Drawing.Point(12, 242);
             this.btnAltaUsuario.Name = "btnAltaUsuario";
-            this.btnAltaUsuario.Size = new System.Drawing.Size(75, 69);
+            this.btnAltaUsuario.Size = new System.Drawing.Size(132, 31);
             this.btnAltaUsuario.TabIndex = 8;
             this.btnAltaUsuario.Text = "Alta de Usuario";
             this.btnAltaUsuario.UseVisualStyleBackColor = true;
+            this.btnAltaUsuario.Click += new System.EventHandler(this.btnAltaUsuario_Click);
             // 
             // btnVolver
             // 
@@ -196,14 +191,25 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // btnRegistrarCliente
+            // 
+            this.btnRegistrarCliente.Enabled = false;
+            this.btnRegistrarCliente.Location = new System.Drawing.Point(167, 242);
+            this.btnRegistrarCliente.Name = "btnRegistrarCliente";
+            this.btnRegistrarCliente.Size = new System.Drawing.Size(132, 31);
+            this.btnRegistrarCliente.TabIndex = 10;
+            this.btnRegistrarCliente.Text = "Registrarse como Cliente";
+            this.btnRegistrarCliente.UseVisualStyleBackColor = true;
+            this.btnRegistrarCliente.Click += new System.EventHandler(this.btnRegistrarCliente_Click);
+            // 
             // AltaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 238);
+            this.ClientSize = new System.Drawing.Size(356, 291);
+            this.Controls.Add(this.btnRegistrarCliente);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAltaUsuario);
-            this.Controls.Add(this.btnVerificarUsuario);
             this.Controls.Add(this.groupBox1);
             this.Name = "AltaUsuario";
             this.Text = "Alta de Usuario";
@@ -228,8 +234,8 @@
         private System.Windows.Forms.ComboBox cmbRol;
         private System.Windows.Forms.TextBox txtRespuestaSecreta;
         private System.Windows.Forms.TextBox txtPreguntaSecreta;
-        private System.Windows.Forms.Button btnVerificarUsuario;
         private System.Windows.Forms.Button btnAltaUsuario;
         private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnRegistrarCliente;
     }
 }

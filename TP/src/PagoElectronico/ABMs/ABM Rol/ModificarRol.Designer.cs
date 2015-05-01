@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.NombreDelRolAModificarLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.Funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.HabilitarRolCheckbox = new System.Windows.Forms.CheckBox();
@@ -44,20 +43,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 24);
+            this.label1.Location = new System.Drawing.Point(18, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nombre Del Rol:";
-            // 
-            // NombreDelRolAModificarLabel
-            // 
-            this.NombreDelRolAModificarLabel.AutoSize = true;
-            this.NombreDelRolAModificarLabel.Location = new System.Drawing.Point(130, 24);
-            this.NombreDelRolAModificarLabel.Name = "NombreDelRolAModificarLabel";
-            this.NombreDelRolAModificarLabel.Size = new System.Drawing.Size(54, 13);
-            this.NombreDelRolAModificarLabel.TabIndex = 1;
-            this.NombreDelRolAModificarLabel.Text = "\"Nombre\"";
             // 
             // groupBox1
             // 
@@ -125,6 +115,8 @@
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
             // 
+            // 
+            // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -134,7 +126,6 @@
             this.Controls.Add(this.ModificarButton);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.NombreDelRolAModificarLabel);
             this.Controls.Add(this.label1);
             this.Name = "ModificarRol";
             this.Text = "Modificar Rol";
@@ -150,7 +141,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label NombreDelRolAModificarLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckedListBox Funcionalidades;
         private System.Windows.Forms.CheckBox HabilitarRolCheckbox;

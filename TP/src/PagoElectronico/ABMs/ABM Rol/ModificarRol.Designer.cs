@@ -36,6 +36,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.ModificarButton = new System.Windows.Forms.Button();
             this.VolverButton = new System.Windows.Forms.Button();
+            this.RolNombreTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -115,13 +116,20 @@
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
             // 
+            // RolNombreTextBox
             // 
+            this.RolNombreTextBox.Location = new System.Drawing.Point(126, 21);
+            this.RolNombreTextBox.Name = "RolNombreTextBox";
+            this.RolNombreTextBox.Size = new System.Drawing.Size(129, 20);
+            this.RolNombreTextBox.TabIndex = 7;
+            this.RolNombreTextBox.Text = "\"NombreActual\"";
             // 
             // ModificarRol
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(359, 325);
+            this.Controls.Add(this.RolNombreTextBox);
             this.Controls.Add(this.VolverButton);
             this.Controls.Add(this.ModificarButton);
             this.Controls.Add(this.groupBox2);
@@ -148,5 +156,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button ModificarButton;
         private System.Windows.Forms.Button VolverButton;
+        private System.Windows.Forms.TextBox RolNombreTextBox;
     }
 }

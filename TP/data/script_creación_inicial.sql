@@ -940,6 +940,18 @@ AS
 	WHERE Cuenta_Cliente_ID = @clienteID OR Cuenta_Numero = @numeroCuenta
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'sphabilitarODeshabilitarRol')
+	DROP PROCEDURE GEM4.sphabilitarODeshabilitarRol;
+go
+CREATE PROCEDURE GEM4.sphabilitarODeshabilitarRol
+    @Rol_Cod			INT,
+    @Rol_Habilitado		BIT
+AS 
+	UPDATE GEM4.Rol
+		SET Rol_Habilitado=@Rol_Habilitado
+		WHERE @Rol_Cod  = Rol_Cod
+GO
+
 
 
 				

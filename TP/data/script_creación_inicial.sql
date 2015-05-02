@@ -780,6 +780,7 @@ CREATE PROCEDURE GEM4.spObtenerFuncionalidadesAsignables
 AS
 	SELECT F.Funcionalidad_Descripcion,F.Funcionalidad_Cod
 	FROM GEM4.Funcionalidad F
+	WHERE F.Funcionalidad_Habilitada= 1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCambiarHabilitacionUsuario')

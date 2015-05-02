@@ -676,7 +676,7 @@ EXEC GEM4.spInsertaOperaciones
 GO
 /* ******************************************TRIGGERS************************************************************ */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaUsuario')
-	DROP PROCEDURE GEM4.tgInhabilitarUsuario;
+	DROP PROCEDURE GEM4.tgActualizaUsuario;
 GO
 CREATE TRIGGER GEM4.tgModificacionUsuario
 ON  GEM4.Usuario 
@@ -709,8 +709,27 @@ AS
 		
 	END
 GO
-		
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaRol')
+	DROP PROCEDURE GEM4.tgActualizaRol;
+GO
+
+CREATE TRIGGER GEM4.tgActualizaRol
+ON GEM4.Rol
+FOR UPDATE
+AS
+	BEGIN
+		DECLARE @rolCod INT	,@habilitado BIT;
+		
+		SELECT @rolCod=Rol_Cod,@habilitado=Rol_Habilitado
+		FROM inserted;
+		
+		UPDATE GEM4.Rol_Por_Funcionalidad
+		SET Rol_Por_Funcionalidad_Habilitado=@habilitado
+		WHERE Rol_Cod=@rolCod;
+		
+	END		
+GO
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')

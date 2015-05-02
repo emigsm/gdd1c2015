@@ -13,9 +13,12 @@ namespace PagoElectronico
 {
     public partial class SeleccionRol : Form
     {
-        public SeleccionRol()
+        string username;
+        
+        public SeleccionRol(string usernameP)
         {
             InitializeComponent();
+            username = usernameP;
             DataTable roles = GestorDeSistema.obtenerRoles();
             cmbRol.DisplayMember = "Rol_Nombre";
             cmbRol.ValueMember = "Rol_Cod";
@@ -30,7 +33,7 @@ namespace PagoElectronico
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
             int rol = Convert.ToInt32(cmbRol.SelectedValue.ToString());
-            Principal frmPrincipal = new Principal(rol);
+            Principal frmPrincipal = new Principal(rol, username);
             frmPrincipal.Show(this);
             this.Hide();
         }

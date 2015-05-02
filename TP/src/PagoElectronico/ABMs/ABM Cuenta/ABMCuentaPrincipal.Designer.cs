@@ -61,6 +61,7 @@
             this.btnNuevaCuenta.TabIndex = 10;
             this.btnNuevaCuenta.Text = "Nueva Cuenta";
             this.btnNuevaCuenta.UseVisualStyleBackColor = true;
+            this.btnNuevaCuenta.Click += new System.EventHandler(this.btnNuevaCuenta_Click);
             // 
             // btnVolver
             // 
@@ -207,6 +208,7 @@
             // 
             // txtBuscarCuentaNumero
             // 
+            this.txtBuscarCuentaNumero.Enabled = false;
             this.txtBuscarCuentaNumero.Location = new System.Drawing.Point(122, 18);
             this.txtBuscarCuentaNumero.Name = "txtBuscarCuentaNumero";
             this.txtBuscarCuentaNumero.Size = new System.Drawing.Size(210, 20);
@@ -225,6 +227,7 @@
             // lblCuentaNumero
             // 
             this.lblCuentaNumero.AutoSize = true;
+            this.lblCuentaNumero.Enabled = false;
             this.lblCuentaNumero.Location = new System.Drawing.Point(17, 21);
             this.lblCuentaNumero.Name = "lblCuentaNumero";
             this.lblCuentaNumero.Size = new System.Drawing.Size(99, 13);

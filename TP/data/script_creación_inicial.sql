@@ -1023,6 +1023,17 @@ AS
 		WHERE @Rol_Cod  = Rol_Cod
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerNumeroCliente')
+	DROP PROCEDURE GEM4.spObtenerNumeroCliente;
+GO
+CREATE PROCEDURE GEM4.spObtenerNumeroCliente
+	@username			NVARCHAR(30)
+AS
+	SELECT Cliente_ID
+	FROM GEM4.Usuario
+	WHERE Usuario_Username = @username
+GO
+
 
 
 				

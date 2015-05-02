@@ -14,13 +14,25 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
     public partial class ABMCuentaPrincipal : Form
     {
         int rolCod;
+        string username;
 
-        public ABMCuentaPrincipal(int rolCodP)
+        public ABMCuentaPrincipal(int rolCodP, string usernameP)
         {
             InitializeComponent();
             rolCod = rolCodP;
+            username = usernameP;
 
-            if (rolCod == 1) { lblClienteID.Enabled = true; txtClienteID.Enabled = true; }
+            if (rolCod == 1)
+            {
+                lblClienteID.Enabled = true;
+                txtClienteID.Enabled = true;
+                lblCuentaNumero.Enabled = true;
+                txtBuscarCuentaNumero.Enabled = true;
+            }
+            else
+            {
+                txtClienteID.Text = (GestorDeSistema.obtenerNumeroCliente(username)).ToString();
+            }
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -63,6 +75,13 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
         private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
         {
             dgvCuenta.Rows.Clear();
+        }
+
+        private void btnNuevaCuenta_Click(object sender, EventArgs e)
+        {
+            AltaCuenta nuevaCuenta = new AltaCuenta();
+            nuevaCuenta.Show(this);
+            this.Hide();
         }
 
     }

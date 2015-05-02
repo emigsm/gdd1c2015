@@ -60,6 +60,12 @@
     <Compile Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.Designer.cs">
       <DependentUpon>ABMCuentaPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABMs\ABM Cuenta\AltaCuenta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM Cuenta\AltaCuenta.Designer.cs">
+      <DependentUpon>AltaCuenta.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABMs\ABM de Usuario\ABMUsuarioPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.resx">
       <DependentUpon>ABMCuentaPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMs\ABM Cuenta\AltaCuenta.resx">
+      <DependentUpon>AltaCuenta.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM de Usuario\ABMUsuarioPrincipal.resx">
       <DependentUpon>ABMUsuarioPrincipal.cs</DependentUpon>

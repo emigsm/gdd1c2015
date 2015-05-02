@@ -26,10 +26,12 @@ namespace PagoElectronico
     {
         private int rolCod;
 
-        public Principal(int rolCodP)
+        string username;
+
+        public Principal(int rolCodP, string usernameP)
         {
             InitializeComponent();
-
+            username = usernameP;
             rolCod = rolCodP;
             DataTable funcionalidades = GestorDeSistema.obtenerFuncionalidades(rolCod);
             cmbFuncionalidades.DisplayMember = "Funcionalidad_Descripcion";
@@ -67,7 +69,7 @@ namespace PagoElectronico
                     break;
 
                 case "ABM de Cuenta":
-                    ABMCuentaPrincipal frmABMCuentaPrincipal = new ABMCuentaPrincipal(rolCod);
+                    ABMCuentaPrincipal frmABMCuentaPrincipal = new ABMCuentaPrincipal(rolCod, username);
                     frmABMCuentaPrincipal.Show(this);
                     this.Hide();
                     break;

@@ -42,7 +42,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_USUARIOEXISTE = "GEM4.spUsuarioExiste";
         private const string STORE_OBTENERDATOSCUENTA = "GEM4.spObtenerDatosCuenta";
         private const string STORE_HABILITARODESHABILITARROL = "GEM4.sphabilitarODeshabilitarRol";
-
+        private const string STORE_OBTENERNUMEROCLIENTE = "GEM4.spObtenerNumeroCliente";
         
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -291,6 +291,18 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametrosStore.Add(new SqlParameter("@Rol_Habilitado", rolHabilitado));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure("GEM4.sphabilitarODeshabilitarRol", NONQUERY, parametrosStore);
+        }
+
+        public static int obtenerNumeroCliente(string username)
+        {
+            int numeroCliente;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter user = new SqlParameter("@username", username);
+            parametros.Add(user);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERNUMEROCLIENTE, SCALAR, parametros);
+            numeroCliente = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return numeroCliente;
+
         }
     }
 }

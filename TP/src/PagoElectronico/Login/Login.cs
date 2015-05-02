@@ -37,14 +37,14 @@ namespace PagoElectronico
                 if (cantidadRoles > 1)
                 {
                     /*Tiene mas de un Rol*/
-                    SeleccionRol frmSeleccionRol = new SeleccionRol();
+                    SeleccionRol frmSeleccionRol = new SeleccionRol(txtUsuario.Text);
                     frmSeleccionRol.Show(this);
                     this.Hide();
                 }
                 else
                 {
                     /*Tiene un solo Rol*/
-                    Principal frmPrincipal = new Principal(rolCod);
+                    Principal frmPrincipal = new Principal(rolCod, txtUsuario.Text);
                     frmPrincipal.Show(this);
                     this.Hide();
                 }
@@ -57,14 +57,14 @@ namespace PagoElectronico
                 if (cantidadRoles > 1)
                 {
                     /*Tiene mas de un Rol*/
-                    SeleccionRol frmSeleccionRol = new SeleccionRol();
+                    SeleccionRol frmSeleccionRol = new SeleccionRol(txtUsuario.Text);
                     frmSeleccionRol.Show(this);
                     this.Hide();
                 }
                 else
                 {
                     /*Tiene un solo Rol*/
-                    Principal frmPrincipal = new Principal(rolCod);
+                    Principal frmPrincipal = new Principal(rolCod, txtUsuario.Text);
                     frmPrincipal.Show(this);
                     this.Hide();
                 }

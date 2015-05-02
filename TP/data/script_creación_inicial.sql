@@ -674,8 +674,42 @@ SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
 EXEC GEM4.spInsertaOperaciones
 GO
-
-
+/* ******************************************TRIGGERS************************************************************ */
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaUsuario')
+	DROP PROCEDURE GEM4.tgInhabilitarUsuario;
+GO
+CREATE TRIGGER GEM4.tgModificacionUsuario
+ON  GEM4.Usuario 
+FOR UPDATE
+AS
+	BEGIN
+		DECLARE @usuarioID INT,@usuarioHab BIT,@cliente INT,
+				@username NVARCHAR(30),@pass CHAR(44),
+				@fechaCreacion	DATETIME,@pregSecreta NVARCHAR(60),
+				@respSecreta NVARCHAR(60),@habilitado BIT,@cuentaEstado TINYINT;
+		
+		SELECT @usuarioID=Usuario_ID,@usuarioHab=Usuario_Habilitado,
+				@cliente=Cliente_ID,@habilitado=Usuario_Habilitado
+		FROM inserted;
+		
+		UPDATE GEM4.Cliente
+		SET	Cliente_Habilitado=@habilitado
+		WHERE Cliente_ID=@cliente;
+		
+		IF(@habilitado=0)
+		BEGIN
+			SET	@cuentaEstado=2;
+		UPDATE GEM4.Cuenta
+			SET	Cuenta_Estado=@cuentaEstado
+		WHERE Cuenta_Cliente_ID=@cliente;
+		
+		END;
+		
+		
+		
+	END
+GO
+		
 
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
@@ -730,7 +764,8 @@ CREATE PROCEDURE GEM4.spInhabilitarUsuario
 	@username	NVARCHAR(30)
 AS
 	UPDATE GEM4.Usuario
-	SET Usuario_Habilitado = 0
+	SET Usuario_Habilitado = 0,
+		Usuario_Fecha_Ultima_Modificacion=GETDATE()
 	WHERE Usuario_Username = @username
 GO
 
@@ -766,7 +801,8 @@ CREATE PROCEDURE GEM4.spBajaLogicaUsuario
 	@usuarioID	INT
 AS
 	UPDATE GEM4.Usuario
-	SET Usuario_Habilitado = 0 
+	SET Usuario_Habilitado = 0,
+		Usuario_Fecha_Ultima_Modificacion=GETDATE() 
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -804,7 +840,8 @@ CREATE PROCEDURE GEM4.spCambiarHabilitacionUsuario
 	@usuarioID INT
 AS
 	UPDATE GEM4.Usuario
-	SET Usuario_Habilitado = @estado 
+	SET Usuario_Habilitado = @estado,
+		Usuario_Fecha_Ultima_Modificacion=GETDATE() 
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -848,7 +885,8 @@ CREATE PROCEDURE GEM4.spCambiarContraseña
 	@nuevaPass		CHAR(44)
 AS
 	UPDATE GEM4.Usuario
-	SET Usuario_Contrasena = @nuevaPass
+	SET Usuario_Contrasena = @nuevaPass,
+	Usuario_Fecha_Ultima_Modificacion=GETDATE()
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -863,7 +901,8 @@ CREATE PROCEDURE GEM4.spCambiarPreguntaSecreta
 AS
 	UPDATE GEM4.Usuario
 	SET Usuario_Pregunta_Secreta = @nuevaPreg,
-		Usuario_Respuesta_Secreta = @nuevaResp
+		Usuario_Respuesta_Secreta = @nuevaResp,
+		Usuario_Fecha_Ultima_Modificacion=GETDATE()
 	WHERE Usuario_ID = @usuarioID
 GO
 

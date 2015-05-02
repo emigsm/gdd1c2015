@@ -74,6 +74,21 @@ AS
 	END
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarSaldoCuenta')
+	DROP FUNCTION GEM4.fnValidarSaldoCuenta
+GO
+CREATE FUNCTION GEM4.fnValidarSaldoCuenta(@saldo NUMERIC(18,2))
+RETURNS NUMERIC(18,2)
+AS
+	BEGIN
+		IF(@saldo <1)
+			BEGIN
+				RETURN 1000;
+			END
+		RETURN @saldo;
+	END
+GO
+
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
@@ -245,7 +260,7 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Moneda							INT	DEFAULT 1,--no estan en maestra
 	Cuenta_Tipo								INT	DEFAULT 4,--idem
 	Cuenta_Cliente_ID						INT,--idem
-	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 0,--LO HARDCODEO PARA AVANZAR DESPUES HAY Q HACER ALGUN ALGORITMO
+	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 10000,--LO HARDCODEO PARA AVANZAR DESPUES HAY Q HACER ALGUN ALGORITMO
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
 	FOREIGN KEY(Cuenta_Moneda) REFERENCES GEM4.Moneda(Moneda_Codigo),
@@ -357,25 +372,6 @@ CREATE TABLE GEM4.Retiro(
 	FOREIGN KEY(Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
 	)
 
-
-
-
-
-	
-/*
-NO ES NECESARIA, O SEA CADA OPERACION TIENE UN SOLO NRO DE FACTURA, ES DE UNO A MUCHOS
-CREATE TABLE GEM4.Operacion_Por_Factura
-	(Factura_Por_Operacion_ID		NUMERIC(18,0) IDENTITY(1,1),
-	Factura_Numero					NUMERIC(18,0),
-	Operacion_ID					INT,
-	PRIMARY KEY(Factura_Por_Operacion_ID),
-	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
-	FOREIGN KEY(Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID)
-	)--el importe y la descripcion no los pongo porque ya existe en Operacion,
-	-- se puede acceder a esos datos a traver de Operacion_ID
-
-
-*/	
 CREATE TABLE GEM4.Log_Login(
 	Log_Login_Numero						INT IDENTITY(1,1),
 	Log_Login_Usuario_ID					INT,
@@ -466,10 +462,8 @@ VALUES('Deposito'),('Retiro'),('Transferencia'),('Apertura Cuenta'),('Cierre Cue
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta ON;
 INSERT INTO GEM4.Tipo_Cuenta(Tipo_Cuenta_ID,Tipo_Cuenta_Descripcion,Tipo_Cuenta_Costo_Creacion,Tipo_Cuenta_Costo_Modificacion,Tipo_Cuenta_Costo_Transf,Tipo_Cuenta_Duracion)
-/*VALUES (1,'STANDARD',100,100,20,
-		GETDATE());*/
-VALUES(1,'Oro',500,500,200,360),(2,'Plata',400,400,100,160),
-		(3,'BRONCE',300,300,50,80),(4,'Gratuita',0,0,0,80);
+VALUES(1,'Oro',500,500,20,360),(2,'Plata',400,400,10,160),
+		(3,'BRONCE',300,300,5,80),(4,'Gratuita',0,0,0,80);
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
 
@@ -534,6 +528,11 @@ BEGIN
 				VALUES(@depositoCodigo,GEM4.fnValidarFecha(@depositoFecha),@depositoImporte,@clienteID,@tarjeta,@cuentaNumero,@nOperacion);
 				SET IDENTITY_INSERT GEM4.Deposito OFF;
 				
+				UPDATE GEM4.Cuenta
+				SET Cuenta_Saldo=Cuenta_Saldo + @depositoImporte
+				WHERE Cuenta_Numero=@cuentaNumero
+				
+				
 			END;	
 		IF(@retiroCodigo IS NOT NULL)
 			BEGIN
@@ -553,6 +552,10 @@ BEGIN
 				INSERT INTO GEM4.Retiro(Retiro_Codigo,Retiro_Importe,Retiro_Fecha,Retiro_Cheque,Operacion_ID,Retiro_Cuenta)
 				VALUES(@retiroCodigo,@retiroImporte,GEM4.fnValidarFecha(@retiroFecha),@chequeNumero,@nOperacion,@cuentaNumero);
 				SET IDENTITY_INSERT GEM4.Retiro OFF;
+				
+				UPDATE GEM4.Cuenta
+				SET Cuenta_Saldo=Cuenta_Saldo - @retiroImporte
+				WHERE Cuenta_Numero=@cuentaNumero
 				 
 			END;
 		IF(@cuentaDestino IS NOT NULL)
@@ -576,7 +579,16 @@ BEGIN
 				
 				INSERT INTO GEM4.Transferencia(Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans
 											,Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino,Transferencia_Operacion_ID)
-				VALUES(GEM4.fnValidarFecha(@transfFecha),@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion)
+				VALUES(GEM4.fnValidarFecha(@transfFecha),@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion);
+				
+				UPDATE GEM4.Cuenta
+				SET Cuenta_Saldo=Cuenta_Saldo - @transfImporte -@transfCosto
+				WHERE Cuenta_Numero=@cuentaNumero;
+				
+				UPDATE GEM4.Cuenta
+				SET Cuenta_Saldo=Cuenta_Saldo + @transfImporte 
+				WHERE Cuenta_Numero=@cuentaDestino;
+				
 			END;	
 		SET @nOperacion=@nOperacion+1;				
 		FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,

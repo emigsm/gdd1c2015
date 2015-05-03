@@ -43,7 +43,10 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERDATOSCUENTA = "GEM4.spObtenerDatosCuenta";
         private const string STORE_HABILITARODESHABILITARROL = "GEM4.sphabilitarODeshabilitarRol";
         private const string STORE_OBTENERNUMEROCLIENTE = "GEM4.spObtenerNumeroCliente";
-        
+        private const string STORE_OBTENERPAISES = "GEM4.spObtenerPaises";
+        private const string STORE_OBTENERMONEDAS = "GEM4.spObtenerMonedas";
+        private const string STORE_OBTENERTIPOCUENTAS = "GEM4.spObtenerTipoCuentas";
+        private const string STORE_ALTACUENTA = "GEM4.spAltaCuenta";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -304,5 +307,58 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return numeroCliente;
 
         }
+
+        public static DataTable obtenerPaises()
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlDataReader readerPaises = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERPAISES, READER, parametros);
+            DataTable paises = new DataTable();
+            if (readerPaises.HasRows)
+            {
+                paises.Load(readerPaises);
+            }
+            readerPaises.Dispose();
+            return paises;
+        }
+
+        public static DataTable obtenerMonedas()
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlDataReader readerMonedas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERMONEDAS, READER, parametros);
+            DataTable monedas = new DataTable();
+            if (readerMonedas.HasRows)
+            {
+                monedas.Load(readerMonedas);
+            }
+            readerMonedas.Dispose();
+            return monedas;
+        }
+
+        public static DataTable obtenerTipoCuentas()
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlDataReader readerTipoCuentas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTIPOCUENTAS, READER, parametros);
+            DataTable tipoCuentas = new DataTable();
+            if (readerTipoCuentas.HasRows)
+            {
+                tipoCuentas.Load(readerTipoCuentas);
+            }
+            readerTipoCuentas.Dispose();
+            return tipoCuentas;
+        }
+
+        public static int altaCuenta(string clienteID, int codPais, int codMoneda, int tipoCuenta)
+        {
+            int numeroCuenta;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@codPais", codPais));
+            parametros.Add(new SqlParameter("@codMoneda", codMoneda));
+            parametros.Add(new SqlParameter("@tipoCuenta", tipoCuenta));
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTACUENTA, NONQUERY, parametros);
+            numeroCuenta = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return numeroCuenta;
+        }
+
     }
 }

@@ -1034,6 +1034,56 @@ AS
 	WHERE Usuario_Username = @username
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerPaises')
+	DROP PROCEDURE GEM4.spObtenerPaises;
+GO
+CREATE PROCEDURE GEM4.spObtenerPaises
+AS
+	SELECT Pais_Descripcion, Pais_Cod
+	FROM GEM4.Pais
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerMonedas')
+	DROP PROCEDURE GEM4.spObtenerMonedas;
+GO
+CREATE PROCEDURE GEM4.spObtenerMonedas
+AS
+	SELECT Moneda_Descripcion, Moneda_Codigo
+	FROM GEM4.Moneda
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTipoCuentas')
+	DROP PROCEDURE GEM4.spObtenerTipoCuentas;
+GO
+CREATE PROCEDURE GEM4.spObtenerTipoCuentas
+AS
+	SELECT Tipo_Cuenta_Descripcion, Tipo_Cuenta_ID
+	FROM GEM4.Tipo_Cuenta
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAltaCuenta')
+	DROP PROCEDURE GEM4.spAltaCuenta;
+GO
+CREATE PROCEDURE GEM4.spAltaCuenta
+	@clienteID		INT,
+	@codPais		INT,
+	@codMoneda		INT,
+	@tipoCuenta		INT
+AS
+	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo) VALUES
+		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0)
+	
+	SELECT CONVERT(BIGINT, 
+	(	
+		SELECT TOP 1 Cuenta_Numero 
+		FROM GEM4.Cuenta 
+		WHERE Cuenta_Cliente_ID = @clienteID 
+		ORDER BY Cuenta_Fecha_Creacion DESC)
+	)
+GO
+
+
+
 
 
 				

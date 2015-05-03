@@ -14,7 +14,8 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
     public partial class ABMCuentaPrincipal : Form
     {
         int rolCod;
-        string username;
+        string username, clienteID;
+        
 
         public ABMCuentaPrincipal(int rolCodP, string usernameP)
         {
@@ -31,7 +32,8 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             }
             else
             {
-                txtClienteID.Text = (GestorDeSistema.obtenerNumeroCliente(username)).ToString();
+                clienteID = GestorDeSistema.obtenerNumeroCliente(username).ToString();
+                txtClienteID.Text = clienteID;
             }
         }
 
@@ -79,7 +81,7 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
 
         private void btnNuevaCuenta_Click(object sender, EventArgs e)
         {
-            AltaCuenta nuevaCuenta = new AltaCuenta();
+            AltaCuenta nuevaCuenta = new AltaCuenta(rolCod, clienteID);
             nuevaCuenta.Show(this);
             this.Hide();
         }

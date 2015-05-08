@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PagoElectronico.Utilidades.ModeloSistema;
 
 namespace PagoElectronico.ABMs.ABM_Cliente
 {
@@ -14,6 +15,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         /*public ABMClientePrincipal()
         {
             InitializeComponent();
+            
         }*/
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -25,6 +27,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         {
             Owner.Show();
             this.Hide();
+        }
+
+        private void buscarButton_Click(object sender, EventArgs e)
+        {
+            dgvClientes.Rows.Clear();
+            DataTable clientesEncontrados = GestorDeSistema.buscarClientes(nombreClienteTextBox.Text,ApellidoClienteTextBox.Text,tipoDocComboBox.SelectedItem,nroDocTextBox.Text,mailTextBox.Text);
         }
     }
 }

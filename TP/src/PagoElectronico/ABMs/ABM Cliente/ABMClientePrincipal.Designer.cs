@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvClientes = new System.Windows.Forms.DataGridView();
             this.nombreClienteTextBox = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ApellidoClienteTextBox = new System.Windows.Forms.TextBox();
             this.nombreClienteLabek = new System.Windows.Forms.Label();
             this.apellidoLabel = new System.Windows.Forms.Label();
             this.tipoDocComboBox = new System.Windows.Forms.ComboBox();
@@ -44,18 +44,18 @@
             this.limpiarButton = new System.Windows.Forms.Button();
             this.ModificarClienteButton = new System.Windows.Forms.Button();
             this.volverButton = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // dgvClientes
             // 
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(22, 281);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(485, 176);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvClientes.AllowUserToDeleteRows = false;
+            this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientes.Location = new System.Drawing.Point(22, 281);
+            this.dgvClientes.Name = "dgvClientes";
+            this.dgvClientes.ReadOnly = true;
+            this.dgvClientes.Size = new System.Drawing.Size(485, 176);
+            this.dgvClientes.TabIndex = 0;
             // 
             // nombreClienteTextBox
             // 
@@ -64,12 +64,12 @@
             this.nombreClienteTextBox.Size = new System.Drawing.Size(114, 20);
             this.nombreClienteTextBox.TabIndex = 1;
             // 
-            // textBox2
+            // ApellidoClienteTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(135, 62);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(114, 20);
-            this.textBox2.TabIndex = 2;
+            this.ApellidoClienteTextBox.Location = new System.Drawing.Point(135, 62);
+            this.ApellidoClienteTextBox.Name = "ApellidoClienteTextBox";
+            this.ApellidoClienteTextBox.Size = new System.Drawing.Size(114, 20);
+            this.ApellidoClienteTextBox.TabIndex = 2;
             // 
             // nombreClienteLabek
             // 
@@ -155,6 +155,7 @@
             this.buscarButton.TabIndex = 12;
             this.buscarButton.Text = "Buscar";
             this.buscarButton.UseVisualStyleBackColor = true;
+            this.buscarButton.Click += new System.EventHandler(this.buscarButton_Click);
             // 
             // limpiarButton
             // 
@@ -202,12 +203,12 @@
             this.Controls.Add(this.tipoDocComboBox);
             this.Controls.Add(this.apellidoLabel);
             this.Controls.Add(this.nombreClienteLabek);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.ApellidoClienteTextBox);
             this.Controls.Add(this.nombreClienteTextBox);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvClientes);
             this.Name = "ABMClientePrincipal";
             this.Text = "ABMClientePrincipal";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -215,9 +216,9 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvClientes;
         private System.Windows.Forms.TextBox nombreClienteTextBox;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox ApellidoClienteTextBox;
         private System.Windows.Forms.Label nombreClienteLabek;
         private System.Windows.Forms.Label apellidoLabel;
         private System.Windows.Forms.ComboBox tipoDocComboBox;

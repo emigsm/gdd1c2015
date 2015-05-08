@@ -11,10 +11,10 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class ABMClientePrincipal : Form
     {
-        public ABMClientePrincipal()
+        /*public ABMClientePrincipal()
         {
             InitializeComponent();
-        }
+        }*/
 
         private void btnVolver_Click(object sender, EventArgs e)
         {

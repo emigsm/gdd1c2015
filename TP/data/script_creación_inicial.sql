@@ -188,7 +188,7 @@ CREATE TABLE GEM4.Cliente(
 	Cliente_Nombre				NVARCHAR(255),
 	Cliente_Apellido			NVARCHAR(255),
 	Cliente_Tipo_Doc			NUMERIC(18,0),
-	Cliente_Numero_Documento	INT,						--no esta en maestra (no tienen ndoc)
+	Cliente_Numero_Documento	NUMERIC(18,0),					
 	Cliente_Mail				NVARCHAR(255) UNIQUE,
 	Cliente_Pais				NUMERIC(18,0),
 	Cliente_Dom_Calle			NVARCHAR(255),
@@ -1082,7 +1082,28 @@ AS
 	)
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarClientes')
+	DROP PROCEDURE GEM4.spBuscarClientes;
+GO
 
+CREATE PROCEDURE GEM4.spBuscarClientes
+	@nombreCliente		NVARCHAR(255),
+	@apellidoCliente	NVARCHAR(255),
+	@tipoDoc			NUMERIC(18,0),
+	@nroDoc				NUMERIC(18,0),
+	@mail				NVARCHAR(255)
+AS
+	SELECT *
+	FROM GEM4.Cliente c
+	WHERE (@nombreCliente='' OR @nombreCliente=c.Cliente_Nombre)
+		   AND(@apellidoCliente='' OR @apellidoCliente=c.Cliente_Apellido)
+		   AND (@tipoDoc='' OR @tipoDoc=c.Cliente_Tipo_Doc)
+		   AND(@nroDoc='' OR @nroDoc=c.Cliente_Numero_Documento)
+		   AND (@mail='' OR @mail=c.Cliente_Mail);
+			
+
+GO
+	
 
 
 

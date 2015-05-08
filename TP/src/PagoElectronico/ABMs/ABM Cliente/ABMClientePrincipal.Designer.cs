@@ -182,6 +182,7 @@
             this.volverButton.TabIndex = 15;
             this.volverButton.Text = "Volver";
             this.volverButton.UseVisualStyleBackColor = true;
+            this.volverButton.Click += new System.EventHandler(this.volverButton_Click);
             // 
             // ABMClientePrincipal
             // 
@@ -230,6 +231,12 @@
         private System.Windows.Forms.Button limpiarButton;
         private System.Windows.Forms.Button ModificarClienteButton;
         private System.Windows.Forms.Button volverButton;
+
+
+        public ABMClientePrincipal()
+        {
+            InitializeComponent();
+        }
 
     }
 }

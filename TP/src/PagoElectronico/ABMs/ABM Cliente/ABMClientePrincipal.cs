@@ -20,5 +20,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         {
 
         }
+
+        private void volverButton_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
+        }
     }
 }

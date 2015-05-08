@@ -47,6 +47,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERMONEDAS = "GEM4.spObtenerMonedas";
         private const string STORE_OBTENERTIPOCUENTAS = "GEM4.spObtenerTipoCuentas";
         private const string STORE_ALTACUENTA = "GEM4.spAltaCuenta";
+        private const string STORE_BUSCARCLIENTES = "GEM4.spBuscarClientes";
 
         public static int loginUsuario(string usuario, string contrasena)
         {

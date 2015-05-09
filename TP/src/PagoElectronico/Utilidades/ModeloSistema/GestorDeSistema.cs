@@ -48,6 +48,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERTIPOCUENTAS = "GEM4.spObtenerTipoCuentas";
         private const string STORE_ALTACUENTA = "GEM4.spAltaCuenta";
         private const string STORE_BUSCARCLIENTES = "GEM4.spBuscarClientes";
+        private const string STORE_OBTENERTIPODOCS = "GEM4.spObtenerTiposDoc";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -378,6 +379,18 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerClientes.Dispose();
             return clientes;
         }
+        public static DataTable obtenerTiposDoc()
+        {
+            SqlDataReader readerTiposDoc = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTIPODOCS, READER, null);
+            DataTable tiposDoc=new DataTable();
+            if (readerTiposDoc.HasRows)
+            {
+                tiposDoc.Load(readerTiposDoc);
+            }
+            readerTiposDoc.Dispose();
+            return tiposDoc;
+        }
+
 
     }
 }

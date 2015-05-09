@@ -12,11 +12,17 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class ABMClientePrincipal : Form
     {
-        /*public ABMClientePrincipal()
+        private  ABMClientePrincipal()
         {
-            InitializeComponent();
             
-        }*/
+            InitializeComponent();
+            DataTable tiposDoc = GestorDeSistema.obtenerTiposDoc();
+            tipoDocComboBox.DisplayMember = "Documento_Tipo_Descripcion";
+            tipoDocComboBox.ValueMember = "Documento_Tipo_Descripcion";
+            tipoDocComboBox.DataSource = tiposDoc;
+
+
+        }
 
         private void btnVolver_Click(object sender, EventArgs e)
         {
@@ -33,6 +39,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         {
             dgvClientes.Rows.Clear();
             DataTable clientesEncontrados = GestorDeSistema.buscarClientes(nombreClienteTextBox.Text,ApellidoClienteTextBox.Text,tipoDocComboBox.SelectedItem,nroDocTextBox.Text,mailTextBox.Text);
+        }
+
+        private void nombreClienteTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -63,6 +63,7 @@
             this.nombreClienteTextBox.Name = "nombreClienteTextBox";
             this.nombreClienteTextBox.Size = new System.Drawing.Size(114, 20);
             this.nombreClienteTextBox.TabIndex = 1;
+            this.nombreClienteTextBox.TextChanged += new System.EventHandler(this.nombreClienteTextBox_TextChanged);
             // 
             // ApellidoClienteTextBox
             // 

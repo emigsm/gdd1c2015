@@ -1103,8 +1103,19 @@ AS
 			
 
 GO
-	
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTiposDoc')
+	DROP PROCEDURE GEM4.spObtenerTiposDoc;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerTiposDoc
+
+AS
+	
+	SELECT *
+	FROM GEM4.Documento;
+	
+GO
 
 
 				

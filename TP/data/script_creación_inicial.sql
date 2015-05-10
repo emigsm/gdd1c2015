@@ -1117,5 +1117,15 @@ AS
 	
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerFuncionesHabilitadasPorRol')
+	DROP PROCEDURE GEM4.spObtenerFuncionesHabilitadasPorRol;
+GO
+CREATE PROCEDURE GEM4.spObtenerFuncionesHabilitadasPorRol
+	@rol_cod	TINYINT
+AS
+	SELECT Funcionalidad.Funcionalidad_Cod
+	FROM GEM4.Funcionalidad JOIN GEM4.Rol_Por_Funcionalidad ON (Funcionalidad.Funcionalidad_Cod = Rol_Por_Funcionalidad.Funcionalidad_Cod)
+	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
+GO
 
 				

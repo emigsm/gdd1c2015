@@ -49,6 +49,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_ALTACUENTA = "GEM4.spAltaCuenta";
         private const string STORE_BUSCARCLIENTES = "GEM4.spBuscarClientes";
         private const string STORE_OBTENERTIPODOCS = "GEM4.spObtenerTiposDoc";
+        private const string STORE_OBTENERFUNCIONESHABILITADASPORROL = "GEM4.spObtenerFuncionesHabilitadasPorRol";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -389,6 +390,19 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerTiposDoc.Dispose();
             return tiposDoc;
+        }
+
+        internal static List<byte> obtenerFuncionesHabilitadasPorRol(int codigo_rol)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@rol_cod", codigo_rol));
+
+            SqlDataReader readerroles = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERFUNCIONESHABILITADASPORROL, READER, parametros);
+            List<byte> lista = new List<byte>();
+            while (readerroles.Read())
+                lista.Add((byte)readerroles["Funcionalidad_Cod"]);
+            readerroles.Dispose();
+            return lista;
         }
 
 

@@ -33,7 +33,7 @@
             this.Funcionalidades = new System.Windows.Forms.CheckedListBox();
             this.HabilitarRolCheckbox = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.EstadoLabel = new System.Windows.Forms.Label();
             this.ModificarButton = new System.Windows.Forms.Button();
             this.VolverButton = new System.Windows.Forms.Button();
             this.RolNombreTextBox = new System.Windows.Forms.TextBox();
@@ -80,7 +80,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.EstadoLabel);
             this.groupBox2.Controls.Add(this.HabilitarRolCheckbox);
             this.groupBox2.Location = new System.Drawing.Point(12, 192);
             this.groupBox2.Name = "groupBox2";
@@ -89,14 +89,14 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Estado Del Rol";
             // 
-            // label3
+            // EstadoLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "\"Estado\"";
+            this.EstadoLabel.AutoSize = true;
+            this.EstadoLabel.Location = new System.Drawing.Point(18, 21);
+            this.EstadoLabel.Name = "EstadoLabel";
+            this.EstadoLabel.Size = new System.Drawing.Size(50, 13);
+            this.EstadoLabel.TabIndex = 4;
+            this.EstadoLabel.Text = "\"Estado\"";
             // 
             // ModificarButton
             // 
@@ -106,6 +106,7 @@
             this.ModificarButton.TabIndex = 5;
             this.ModificarButton.Text = "Modificar";
             this.ModificarButton.UseVisualStyleBackColor = true;
+            this.ModificarButton.Click += new System.EventHandler(this.ModificarButton_Click);
             // 
             // VolverButton
             // 
@@ -115,6 +116,7 @@
             this.VolverButton.TabIndex = 6;
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
+            this.VolverButton.Click += new System.EventHandler(this.VolverButton_Click);
             // 
             // RolNombreTextBox
             // 
@@ -153,7 +155,7 @@
         private System.Windows.Forms.CheckedListBox Funcionalidades;
         private System.Windows.Forms.CheckBox HabilitarRolCheckbox;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label EstadoLabel;
         private System.Windows.Forms.Button ModificarButton;
         private System.Windows.Forms.Button VolverButton;
         private System.Windows.Forms.TextBox RolNombreTextBox;

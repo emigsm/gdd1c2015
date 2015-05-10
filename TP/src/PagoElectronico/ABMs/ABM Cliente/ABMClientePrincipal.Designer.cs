@@ -175,6 +175,7 @@
             this.ModificarClienteButton.TabIndex = 14;
             this.ModificarClienteButton.Text = "Modificar Cliente";
             this.ModificarClienteButton.UseVisualStyleBackColor = true;
+            this.ModificarClienteButton.Click += new System.EventHandler(this.ModificarClienteButton_Click);
             // 
             // volverButton
             // 
@@ -209,6 +210,7 @@
             this.Controls.Add(this.dgvClientes);
             this.Name = "ABMClientePrincipal";
             this.Text = "ABMClientePrincipal";
+            this.Load += new System.EventHandler(this.ABMClientePrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

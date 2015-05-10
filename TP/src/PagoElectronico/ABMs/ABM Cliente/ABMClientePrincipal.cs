@@ -12,7 +12,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class ABMClientePrincipal : Form
     {
-        private  ABMClientePrincipal()
+        public  ABMClientePrincipal()
         {
             
             InitializeComponent();
@@ -38,12 +38,25 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         private void buscarButton_Click(object sender, EventArgs e)
         {
             dgvClientes.Rows.Clear();
-            DataTable clientesEncontrados = GestorDeSistema.buscarClientes(nombreClienteTextBox.Text,ApellidoClienteTextBox.Text,tipoDocComboBox.SelectedItem,nroDocTextBox.Text,mailTextBox.Text);
+            //DataTable clientesEncontrados = GestorDeSistema.buscarClientes(nombreClienteTextBox.Text,ApellidoClienteTextBox.Text,tipoDocComboBox.SelectedItem,nroDocTextBox.Text,mailTextBox.Text);
         }
 
         private void nombreClienteTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }
+
+        private void ModificarClienteButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ABMClientePrincipal_Load(object sender, EventArgs e)
+        {
+
+         
+        }
+
+      
     }
 }

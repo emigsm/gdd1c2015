@@ -363,12 +363,12 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return numeroCuenta;
         }
 
-        public static DataTable buscarClientes(string nombre, string apellido, int tipoDoc, int nroDoc, string mail)
+        public static DataTable buscarClientes(string nombre, string apellido, string tipoDoc, string nroDoc, string mail)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@nombreCliente", nombre));
             parametros.Add(new SqlParameter("@apellidoCliente",apellido));
-            parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
+            parametros.Add(new SqlParameter("@tipoDoc",tipoDoc));
             parametros.Add(new SqlParameter("@nroDoc", nroDoc));
             parametros.Add(new SqlParameter("@mail", mail));
             SqlDataReader readerClientes = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BUSCARCLIENTES, READER, parametros);

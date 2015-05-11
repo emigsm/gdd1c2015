@@ -365,6 +365,9 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
         public static DataTable buscarClientes(string nombre, string apellido, string tipoDoc, string nroDoc, string mail)
         {
+
+            
+
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@nombreCliente", nombre));
             parametros.Add(new SqlParameter("@apellidoCliente",apellido));

@@ -44,13 +44,47 @@
             this.limpiarButton = new System.Windows.Forms.Button();
             this.ModificarClienteButton = new System.Windows.Forms.Button();
             this.volverButton = new System.Windows.Forms.Button();
+            this.TipoDocPrubelabel = new System.Windows.Forms.Label();
+            this.prubaDoc1 = new System.Windows.Forms.Label();
+            this.Cliente_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Tipo_Doc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Numero_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Depto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Nacionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Fecha_Nacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvClientes
             // 
+            this.dgvClientes.AllowUserToAddRows = false;
             this.dgvClientes.AllowUserToDeleteRows = false;
             this.dgvClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvClientes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Cliente_ID,
+            this.Cliente_Nombre,
+            this.Cliente_Apellido,
+            this.Cliente_Tipo_Doc,
+            this.Cliente_Numero_Documento,
+            this.Cliente_Mail,
+            this.Cliente_Pais,
+            this.Cliente_Dom_Calle,
+            this.Cliente_Dom_Numero,
+            this.Cliente_Dom_Piso,
+            this.Cliente_Dom_Depto,
+            this.Cliente_Localidad,
+            this.Cliente_Nacionalidad,
+            this.Cliente_Fecha_Nacimiento,
+            this.Cliente_Habilitado});
             this.dgvClientes.Location = new System.Drawing.Point(22, 281);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
@@ -166,6 +200,7 @@
             this.limpiarButton.TabIndex = 13;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
+            this.limpiarButton.Click += new System.EventHandler(this.limpiarButton_Click);
             // 
             // ModificarClienteButton
             // 
@@ -187,11 +222,120 @@
             this.volverButton.UseVisualStyleBackColor = true;
             this.volverButton.Click += new System.EventHandler(this.volverButton_Click);
             // 
+            // TipoDocPrubelabel
+            // 
+            this.TipoDocPrubelabel.AutoSize = true;
+            this.TipoDocPrubelabel.Location = new System.Drawing.Point(329, 136);
+            this.TipoDocPrubelabel.Name = "TipoDocPrubelabel";
+            this.TipoDocPrubelabel.Size = new System.Drawing.Size(0, 13);
+            this.TipoDocPrubelabel.TabIndex = 16;
+            // 
+            // prubaDoc1
+            // 
+            this.prubaDoc1.AutoSize = true;
+            this.prubaDoc1.Location = new System.Drawing.Point(310, 138);
+            this.prubaDoc1.Name = "prubaDoc1";
+            this.prubaDoc1.Size = new System.Drawing.Size(75, 13);
+            this.prubaDoc1.TabIndex = 17;
+            this.prubaDoc1.Text = "prubaTipoDoc";
+            // 
+            // Cliente_ID
+            // 
+            this.Cliente_ID.HeaderText = "Cliente_ID";
+            this.Cliente_ID.Name = "Cliente_ID";
+            this.Cliente_ID.ReadOnly = true;
+            // 
+            // Cliente_Nombre
+            // 
+            this.Cliente_Nombre.HeaderText = "Cliente_Nombre";
+            this.Cliente_Nombre.Name = "Cliente_Nombre";
+            this.Cliente_Nombre.ReadOnly = true;
+            // 
+            // Cliente_Apellido
+            // 
+            this.Cliente_Apellido.HeaderText = "Cliente_Apellido";
+            this.Cliente_Apellido.Name = "Cliente_Apellido";
+            this.Cliente_Apellido.ReadOnly = true;
+            // 
+            // Cliente_Tipo_Doc
+            // 
+            this.Cliente_Tipo_Doc.HeaderText = "Cliente_Tipo_Doc";
+            this.Cliente_Tipo_Doc.Name = "Cliente_Tipo_Doc";
+            this.Cliente_Tipo_Doc.ReadOnly = true;
+            // 
+            // Cliente_Numero_Documento
+            // 
+            this.Cliente_Numero_Documento.HeaderText = "Cliente_Numero_Documento";
+            this.Cliente_Numero_Documento.Name = "Cliente_Numero_Documento";
+            this.Cliente_Numero_Documento.ReadOnly = true;
+            // 
+            // Cliente_Mail
+            // 
+            this.Cliente_Mail.HeaderText = "Cliente_Mail";
+            this.Cliente_Mail.Name = "Cliente_Mail";
+            this.Cliente_Mail.ReadOnly = true;
+            // 
+            // Cliente_Pais
+            // 
+            this.Cliente_Pais.HeaderText = "Cliente_Pais";
+            this.Cliente_Pais.Name = "Cliente_Pais";
+            this.Cliente_Pais.ReadOnly = true;
+            // 
+            // Cliente_Dom_Calle
+            // 
+            this.Cliente_Dom_Calle.HeaderText = "Cliente_Dom_Calle";
+            this.Cliente_Dom_Calle.Name = "Cliente_Dom_Calle";
+            this.Cliente_Dom_Calle.ReadOnly = true;
+            // 
+            // Cliente_Dom_Numero
+            // 
+            this.Cliente_Dom_Numero.HeaderText = "Cliente_Dom_Numero";
+            this.Cliente_Dom_Numero.Name = "Cliente_Dom_Numero";
+            this.Cliente_Dom_Numero.ReadOnly = true;
+            // 
+            // Cliente_Dom_Piso
+            // 
+            this.Cliente_Dom_Piso.HeaderText = "Cliente_Dom_Piso";
+            this.Cliente_Dom_Piso.Name = "Cliente_Dom_Piso";
+            this.Cliente_Dom_Piso.ReadOnly = true;
+            // 
+            // Cliente_Dom_Depto
+            // 
+            this.Cliente_Dom_Depto.HeaderText = "Cliente_Dom_Depto";
+            this.Cliente_Dom_Depto.Name = "Cliente_Dom_Depto";
+            this.Cliente_Dom_Depto.ReadOnly = true;
+            // 
+            // Cliente_Localidad
+            // 
+            this.Cliente_Localidad.HeaderText = "Cliente_Localidad";
+            this.Cliente_Localidad.Name = "Cliente_Localidad";
+            this.Cliente_Localidad.ReadOnly = true;
+            // 
+            // Cliente_Nacionalidad
+            // 
+            this.Cliente_Nacionalidad.HeaderText = "Cliente_Nacionalidad";
+            this.Cliente_Nacionalidad.Name = "Cliente_Nacionalidad";
+            this.Cliente_Nacionalidad.ReadOnly = true;
+            // 
+            // Cliente_Fecha_Nacimiento
+            // 
+            this.Cliente_Fecha_Nacimiento.HeaderText = "Cliente_Fecha_Nacimiento";
+            this.Cliente_Fecha_Nacimiento.Name = "Cliente_Fecha_Nacimiento";
+            this.Cliente_Fecha_Nacimiento.ReadOnly = true;
+            // 
+            // Cliente_Habilitado
+            // 
+            this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
+            this.Cliente_Habilitado.Name = "Cliente_Habilitado";
+            this.Cliente_Habilitado.ReadOnly = true;
+            // 
             // ABMClientePrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(536, 479);
+            this.Controls.Add(this.prubaDoc1);
+            this.Controls.Add(this.TipoDocPrubelabel);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.ModificarClienteButton);
             this.Controls.Add(this.limpiarButton);
@@ -235,6 +379,23 @@
         private System.Windows.Forms.Button limpiarButton;
         private System.Windows.Forms.Button ModificarClienteButton;
         private System.Windows.Forms.Button volverButton;
+        private System.Windows.Forms.Label TipoDocPrubelabel;
+        private System.Windows.Forms.Label prubaDoc1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Apellido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Tipo_Doc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Numero_Documento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Mail;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Pais;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Dom_Calle;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Dom_Numero;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Dom_Piso;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Dom_Depto;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Localidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Nacionalidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Fecha_Nacimiento;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Habilitado;
                     
     }
 }

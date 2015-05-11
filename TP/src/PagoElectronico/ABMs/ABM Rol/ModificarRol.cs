@@ -27,6 +27,12 @@ namespace PagoElectronico.ABMs.ABM_Rol
             RolNombreTextBox.Text = nombre;
             HabilitarRolCheckbox.Checked = hab;
 
+            if (hab)
+            {
+                HabilitarRolCheckbox.Visible = false;
+            }
+            EstadoLabel.Text = hab ? "Habilitado" : "Inhabilitado";
+
             Funcionalidades.DataSource = GestorDeSistema.obtenerFuncionalidadesAsignables();
             Funcionalidades.DisplayMember = "Funcionalidad_Descripcion";
             Funcionalidades.ValueMember = "Funcionalidad_Cod";
@@ -44,18 +50,8 @@ namespace PagoElectronico.ABMs.ABM_Rol
             }
         }
 
-        private void ModificarRol_Load(object sender, EventArgs e)
+       private void ModificarButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void ModificarButton_Click(object sender, EventArgs e)
-        {
-            if (hab)
-            {
-                HabilitarRolCheckbox.Visible = false;
-            }
-            EstadoLabel.Text = hab ? "Habilitado" : "Inhabilitado";
             if (hab =!HabilitarRolCheckbox.Checked)
             {
                 GestorDeSistema.habilitarODeshabilitarRol(rol_cod, (byte)((HabilitarRolCheckbox.Checked) ? 1 : 0));
@@ -72,6 +68,11 @@ namespace PagoElectronico.ABMs.ABM_Rol
         {
             Owner.Show();
              this.Hide();
+        }
+
+        private void ModificarRol_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

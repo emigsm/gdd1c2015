@@ -235,12 +235,6 @@
         private System.Windows.Forms.Button limpiarButton;
         private System.Windows.Forms.Button ModificarClienteButton;
         private System.Windows.Forms.Button volverButton;
-
-
-        public ABMClientePrincipal()
-        {
-            InitializeComponent();
-        }
-
+                    
     }
 }

@@ -1090,16 +1090,19 @@ CREATE PROCEDURE GEM4.spBuscarClientes
 	@nombreCliente		NVARCHAR(255),
 	@apellidoCliente	NVARCHAR(255),
 	@tipoDoc			NVARCHAR(255),
-	@nroDoc				NVARCHAR(255),
+	@nroDoc				VARCHAR(255),
 	@mail				NVARCHAR(255)
 AS
+	
+
+	
 	SELECT *
 	FROM GEM4.Cliente c
-WHERE (@nombreCliente='' OR c.Cliente_Nombre LIKE '%'+@nombreCliente+'%')
-		   AND(@apellidoCliente='' OR c.Cliente_Apellido LIKE '%'+@apellidoCliente+'%')
+	WHERE (@nombreCliente='' OR c.Cliente_Nombre LIKE @nombreCliente+'%')
+		   AND(@apellidoCliente='' OR c.Cliente_Apellido LIKE @apellidoCliente+'%')
 		   AND (@tipoDoc='' OR CONVERT(numeric(18, 2),@tipoDoc)=c.Cliente_Tipo_Doc)
-		   AND(@nroDoc='' OR CONVERT(numeric(18, 2),@nroDoc)=c.Cliente_Numero_Documento)
-		   AND (@mail='' OR c.Cliente_Mail LIKE '%'+@mail+'%');
+		   AND (@nroDoc=''OR /*(CONVERT(numeric(18, 2),@nroDoc)=c.Cliente_Numero_Documento)OR*/ c.Cliente_Numero_Documento LIKE @nroDoc+'%')
+		   AND (@mail='' OR c.Cliente_Mail LIKE @mail+'%');
 			
 
 GO

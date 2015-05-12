@@ -95,7 +95,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void limpiarButton_Click(object sender, EventArgs e)
         {
-            dgvClientes.ClearSelection();
+            dgvClientes.Rows.Clear();
+            nroDocTextBox.Text = "";
+            nombreClienteTextBox.Text = "";
+            ApellidoClienteTextBox.Text = "";
+            mailTextBox.Text = "";
         }
 
       

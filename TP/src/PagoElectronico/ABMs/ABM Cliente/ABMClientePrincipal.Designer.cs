@@ -60,7 +60,8 @@
             this.Cliente_Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Nacionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cliente_Fecha_Nacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tarjetas = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,8 +85,9 @@
             this.Cliente_Localidad,
             this.Cliente_Nacionalidad,
             this.Cliente_Fecha_Nacimiento,
+            this.Tarjetas,
             this.Cliente_Habilitado});
-            this.dgvClientes.Location = new System.Drawing.Point(22, 281);
+            this.dgvClientes.Location = new System.Drawing.Point(16, 279);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.Size = new System.Drawing.Size(485, 176);
@@ -129,7 +131,7 @@
             this.tipoDocComboBox.FormattingEnabled = true;
             this.tipoDocComboBox.Location = new System.Drawing.Point(135, 99);
             this.tipoDocComboBox.Name = "tipoDocComboBox";
-            this.tipoDocComboBox.Size = new System.Drawing.Size(55, 21);
+            this.tipoDocComboBox.Size = new System.Drawing.Size(114, 21);
             this.tipoDocComboBox.TabIndex = 5;
             // 
             // tipoDocLabel
@@ -144,7 +146,7 @@
             // nroDocLabel
             // 
             this.nroDocLabel.AutoSize = true;
-            this.nroDocLabel.Location = new System.Drawing.Point(222, 102);
+            this.nroDocLabel.Location = new System.Drawing.Point(298, 102);
             this.nroDocLabel.Name = "nroDocLabel";
             this.nroDocLabel.Size = new System.Drawing.Size(82, 13);
             this.nroDocLabel.TabIndex = 7;
@@ -152,7 +154,7 @@
             // 
             // nroDocTextBox
             // 
-            this.nroDocTextBox.Location = new System.Drawing.Point(310, 99);
+            this.nroDocTextBox.Location = new System.Drawing.Point(386, 99);
             this.nroDocTextBox.Name = "nroDocTextBox";
             this.nroDocTextBox.Size = new System.Drawing.Size(139, 20);
             this.nroDocTextBox.TabIndex = 8;
@@ -184,9 +186,9 @@
             // 
             // buscarButton
             // 
-            this.buscarButton.Location = new System.Drawing.Point(22, 181);
+            this.buscarButton.Location = new System.Drawing.Point(16, 181);
             this.buscarButton.Name = "buscarButton";
-            this.buscarButton.Size = new System.Drawing.Size(168, 32);
+            this.buscarButton.Size = new System.Drawing.Size(171, 32);
             this.buscarButton.TabIndex = 12;
             this.buscarButton.Text = "Buscar";
             this.buscarButton.UseVisualStyleBackColor = true;
@@ -194,7 +196,7 @@
             // 
             // limpiarButton
             // 
-            this.limpiarButton.Location = new System.Drawing.Point(19, 219);
+            this.limpiarButton.Location = new System.Drawing.Point(16, 219);
             this.limpiarButton.Name = "limpiarButton";
             this.limpiarButton.Size = new System.Drawing.Size(171, 32);
             this.limpiarButton.TabIndex = 13;
@@ -214,7 +216,7 @@
             // 
             // volverButton
             // 
-            this.volverButton.Location = new System.Drawing.Point(432, 181);
+            this.volverButton.Location = new System.Drawing.Point(557, 181);
             this.volverButton.Name = "volverButton";
             this.volverButton.Size = new System.Drawing.Size(75, 70);
             this.volverButton.TabIndex = 15;
@@ -233,7 +235,7 @@
             // prubaDoc1
             // 
             this.prubaDoc1.AutoSize = true;
-            this.prubaDoc1.Location = new System.Drawing.Point(310, 138);
+            this.prubaDoc1.Location = new System.Drawing.Point(298, 136);
             this.prubaDoc1.Name = "prubaDoc1";
             this.prubaDoc1.Size = new System.Drawing.Size(75, 13);
             this.prubaDoc1.TabIndex = 17;
@@ -323,6 +325,13 @@
             this.Cliente_Fecha_Nacimiento.Name = "Cliente_Fecha_Nacimiento";
             this.Cliente_Fecha_Nacimiento.ReadOnly = true;
             // 
+            // Tarjetas
+            // 
+            this.Tarjetas.HeaderText = "Tarjetas";
+            this.Tarjetas.Name = "Tarjetas";
+            this.Tarjetas.ReadOnly = true;
+            this.Tarjetas.Text = "Ver";
+            // 
             // Cliente_Habilitado
             // 
             this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
@@ -333,7 +342,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(536, 479);
+            this.ClientSize = new System.Drawing.Size(644, 479);
             this.Controls.Add(this.prubaDoc1);
             this.Controls.Add(this.TipoDocPrubelabel);
             this.Controls.Add(this.volverButton);
@@ -395,7 +404,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Localidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Nacionalidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Fecha_Nacimiento;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Habilitado;
+        private System.Windows.Forms.DataGridViewButtonColumn Tarjetas;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Cliente_Habilitado;
                     
     }
 }

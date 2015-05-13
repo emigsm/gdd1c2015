@@ -50,6 +50,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_BUSCARCLIENTES = "GEM4.spBuscarClientes";
         private const string STORE_OBTENERTIPODOCS = "GEM4.spObtenerTiposDoc";
         private const string STORE_OBTENERFUNCIONESHABILITADASPORROL = "GEM4.spObtenerFuncionesHabilitadasPorRol";
+        private const string STORE_OBTENERTARJETASCLIENTE = "GEM4.spObtenerTarjetasCliente";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -383,6 +384,22 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerClientes.Dispose();
             return clientes;
         }
+
+
+        public static DataTable obtenerTarjetasCliente(Int32 clienteID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("ClienteID",clienteID));
+            SqlDataReader readerTarjetas= (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTARJETASCLIENTE,READER,parametros);
+            DataTable tarjetas=new DataTable();
+            if(readerTarjetas.HasRows)
+            {
+                tarjetas.Load(readerTarjetas);
+            }
+            readerTarjetas.Dispose();
+            return tarjetas;
+        }
+
         public static DataTable obtenerTiposDoc()
         {
             SqlDataReader readerTiposDoc = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTIPODOCS, READER, null);
@@ -394,6 +411,9 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerTiposDoc.Dispose();
             return tiposDoc;
         }
+
+
+
 
         internal static List<byte> obtenerFuncionesHabilitadasPorRol(int codigo_rol)
         {

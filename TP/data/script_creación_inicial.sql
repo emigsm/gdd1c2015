@@ -257,9 +257,9 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Estado							INT	DEFAULT 1,
 	Cuenta_Pais								NUMERIC(18,0),
 	Cuenta_Fecha_Cierre						DATETIME,
-	Cuenta_Moneda							INT	DEFAULT 1,--no estan en maestra
-	Cuenta_Tipo								INT	DEFAULT 4,--idem
-	Cuenta_Cliente_ID						INT,--idem
+	Cuenta_Moneda							INT	DEFAULT 1,
+	Cuenta_Tipo								INT	DEFAULT 4,
+	Cuenta_Cliente_ID						INT,
 	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 10000,--LO HARDCODEO PARA AVANZAR DESPUES HAY Q HACER ALGUN ALGORITMO
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
@@ -275,6 +275,7 @@ CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
 	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
 	Tarjeta_Cliente_ID						INT,
+	--agregar un habilitado????????????
 	PRIMARY KEY(Tarjeta_Numero),
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
 	)
@@ -1131,4 +1132,13 @@ AS
 	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
 GO
 
-				
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasCliente')
+	DROP PROCEDURE GEM4.spObtenerTarjetasCliente;
+GO
+CREATE PROCEDURE GEM4.spObtenerObtenerTarjetasCliente
+	@clienteID	INT
+AS
+	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,t.Tarjeta_Emisor_Descripcion,t.Tarjeta_Fecha_Emision
+	FROM GEM4.Tarjeta t
+	WHERE t.Tarjeta_Cliente_ID=@clienteID
+GO				

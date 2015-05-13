@@ -54,6 +54,12 @@
     <Compile Include="ABMs\ABM Cliente\ABMClientePrincipal.Designer.cs">
       <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABMs\ABM Cliente\VistaTarjetas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABMs\ABM Cliente\VistaTarjetas.Designer.cs">
+      <DependentUpon>VistaTarjetas.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -160,6 +166,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ABMs\ABM Cliente\ABMClientePrincipal.resx">
       <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABMs\ABM Cliente\VistaTarjetas.resx">
+      <DependentUpon>VistaTarjetas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM Cuenta\ABMCuentaPrincipal.resx">
       <DependentUpon>ABMCuentaPrincipal.cs</DependentUpon>

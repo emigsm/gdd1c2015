@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using PagoElectronico.Utilidades.ModeloSistema;
+using PagoElectronico.ABMs.ABM_Cliente;
+
 
 namespace PagoElectronico.ABMs.ABM_Cliente
 {
@@ -66,6 +68,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                     clienteEncontrado.ItemArray[11],
                     clienteEncontrado.ItemArray[12],
                     clienteEncontrado.ItemArray[13],
+                    "Ver",
                     clienteEncontrado.ItemArray[14]
                         );
                 }
@@ -101,7 +104,22 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             ApellidoClienteTextBox.Text = "";
             mailTextBox.Text = "";
         }
+        private void dgvClientes_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 2)
+            {
+                int id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
+                String nombre = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nombre"].Value.ToString();
+                String apellido = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Apellido"].Value.ToString();
+                VistaTarjetas tarjetas = new VistaTarjetas(nombre,apellido,id);
+                tarjetas.Show(this);
+                this.Hide();
+            }
+          
+        }
 
+     
+        
       
     }
 }

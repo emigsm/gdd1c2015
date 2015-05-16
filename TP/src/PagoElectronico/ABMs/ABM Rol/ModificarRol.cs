@@ -60,6 +60,9 @@ namespace PagoElectronico.ABMs.ABM_Rol
                 GestorDeSistema.agregarFuncionalidadARol(nombre, Convert.ToInt32(view["Funcionalidad_Cod"]), 0);
             foreach (DataRowView view in Funcionalidades.CheckedItems)
                 GestorDeSistema.agregarFuncionalidadARol(nombre, Convert.ToInt32(view["Funcionalidad_Cod"]), 1);
+
+            GestorDeSistema.modificarNombreRol(rol_cod, RolNombreTextBox.Text);
+
             Owner.Show();
             this.Hide();
         }

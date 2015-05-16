@@ -445,7 +445,7 @@ INSERT INTO GEM4.Rol_Por_Funcionalidad (Rol_Cod, Funcionalidad_Cod) VALUES
 INSERT INTO GEM4.Rol_Por_Funcionalidad (Funcionalidad_Cod,Rol_Cod,Rol_Por_Funcionalidad_Habilitado)
 		SELECT F.Funcionalidad_Cod,R.Rol_Cod,0
 			FROM GEM4.Funcionalidad F,GEM4.Rol R
-			WHERE F.Funcionalidad_Cod not in (select Q.Funcionalidad_Cod  from GEM4.Rol_Por_Funcionalidad Q
+			WHERE F.Funcionalidad_Cod not in (SELECT Q.Funcionalidad_Cod  FROM GEM4.Rol_Por_Funcionalidad Q
 			WHERE Q.Rol_Cod =R.Rol_Cod)
 ;
 	
@@ -685,9 +685,10 @@ SET IDENTITY_INSERT GEM4.Cuenta OFF;
 EXEC GEM4.spInsertaOperaciones
 GO
 /* ******************************************TRIGGERS************************************************************ */
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgModificacionUsuario')
-	DROP TRIGGER GEM4.tgModificacionUsuario;
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaUsuario')
+	DROP PROCEDURE GEM4.tgActualizaUsuario;
 GO
+
 CREATE TRIGGER GEM4.tgModificacionUsuario
 ON  GEM4.Usuario 
 FOR UPDATE
@@ -724,8 +725,8 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaRol')
 	DROP TRIGGER GEM4.tgActualizaRol;
 GO
 
--- OJO CON ROLES DESHABILITADOS DE AMB, DESHABILITA SUS FUNCIONALIDADES
-
+-- Creo que no lo necesito
+/*
 CREATE TRIGGER GEM4.tgActualizaRol
 ON GEM4.Rol
 FOR UPDATE
@@ -742,6 +743,8 @@ AS
 		
 	END		
 GO
+*/
+
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')
@@ -1153,3 +1156,17 @@ AS
 	FROM GEM4.Tarjeta t
 	WHERE t.Tarjeta_Cliente_ID=@clienteID
 GO				
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarNombreRol')
+	DROP PROCEDURE GEM4.spModificarNombreRol;
+GO
+
+CREATE PROCEDURE GEM4.spModificarNombreRol
+	@Rol_Cod INT,
+	@Rol_Nombre	NVARCHAR(255)
+	
+AS
+	UPDATE GEM4.Rol
+	SET Rol_Nombre =@Rol_Nombre
+	WHERE Rol_Cod =@Rol_Cod
+GO	

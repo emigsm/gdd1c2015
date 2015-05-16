@@ -51,6 +51,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERTIPODOCS = "GEM4.spObtenerTiposDoc";
         private const string STORE_OBTENERFUNCIONESHABILITADASPORROL = "GEM4.spObtenerFuncionesHabilitadasPorRol";
         private const string STORE_OBTENERTARJETASCLIENTE = "GEM4.spObtenerTarjetasCliente";
+        private const string STORE_MODIFICARNOMBREROL = "GEM4.spModificarNombreRol";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -412,9 +413,6 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return tiposDoc;
         }
 
-
-
-
         internal static List<byte> obtenerFuncionesHabilitadasPorRol(int codigo_rol)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
@@ -428,6 +426,13 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return lista;
         }
 
+        public static void modificarNombreRol(int rolCod, string rolNombre)
+        {
+            List<SqlParameter> parametrosStore = new List<SqlParameter>();
+            parametrosStore.Add(new SqlParameter("@Rol_Cod", rolCod));
+            parametrosStore.Add(new SqlParameter("@Rol_Nombre", rolNombre));
 
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARNOMBREROL, NONQUERY, parametrosStore);
+        }
     }
 }

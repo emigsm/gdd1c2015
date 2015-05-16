@@ -9,17 +9,22 @@ using System.Windows.Forms;
 
 namespace PagoElectronico.ABMs.ABM_Cliente
 {
-    public partial class CrearModificarCliente : Form
+    public partial class AltaCliente : Form
     {
-        public CrearModificarCliente()
+        public AltaCliente()
         {
             InitializeComponent();
         }
 
-        public void dehabilitarModificacion()
+      /*  public void dehabilitarModificacion()
         {
             Guardarbutton.Enabled = false;
-        }
+            ClienteHabilitadoCheckBox.Checked = true;
+            ClienteHabilitadoCheckBox.Enabled = false;
+            ClienteHabilitadoCheckBox.Text="Habilitado";
+        }*/
+
+   
     }
 
   

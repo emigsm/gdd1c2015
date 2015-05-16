@@ -1,6 +1,6 @@
 ﻿namespace PagoElectronico.ABMs.ABM_Cliente
 {
-    partial class CrearModificarCliente
+    partial class AltaCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -54,9 +54,6 @@
             this.fechaNacimientodateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FechaNaclabel = new System.Windows.Forms.Label();
             this.nacionalidadComboBox = new System.Windows.Forms.ComboBox();
-            this.ClienteHabilitadoCheckBox = new System.Windows.Forms.CheckBox();
-            this.TarjetasButton = new System.Windows.Forms.Button();
-            this.Guardarbutton = new System.Windows.Forms.Button();
             this.Crearbutton = new System.Windows.Forms.Button();
             this.VolverButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -271,37 +268,9 @@
             this.nacionalidadComboBox.Size = new System.Drawing.Size(121, 21);
             this.nacionalidadComboBox.TabIndex = 26;
             // 
-            // ClienteHabilitadoCheckBox
-            // 
-            this.ClienteHabilitadoCheckBox.AutoSize = true;
-            this.ClienteHabilitadoCheckBox.Location = new System.Drawing.Point(19, 431);
-            this.ClienteHabilitadoCheckBox.Name = "ClienteHabilitadoCheckBox";
-            this.ClienteHabilitadoCheckBox.Size = new System.Drawing.Size(59, 17);
-            this.ClienteHabilitadoCheckBox.TabIndex = 27;
-            this.ClienteHabilitadoCheckBox.Text = "Estado";
-            this.ClienteHabilitadoCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // TarjetasButton
-            // 
-            this.TarjetasButton.Location = new System.Drawing.Point(12, 465);
-            this.TarjetasButton.Name = "TarjetasButton";
-            this.TarjetasButton.Size = new System.Drawing.Size(167, 39);
-            this.TarjetasButton.TabIndex = 28;
-            this.TarjetasButton.Text = "Tarjetas";
-            this.TarjetasButton.UseVisualStyleBackColor = true;
-            // 
-            // Guardarbutton
-            // 
-            this.Guardarbutton.Location = new System.Drawing.Point(185, 524);
-            this.Guardarbutton.Name = "Guardarbutton";
-            this.Guardarbutton.Size = new System.Drawing.Size(139, 44);
-            this.Guardarbutton.TabIndex = 29;
-            this.Guardarbutton.Text = "Guardar";
-            this.Guardarbutton.UseVisualStyleBackColor = true;
-            // 
             // Crearbutton
             // 
-            this.Crearbutton.Location = new System.Drawing.Point(12, 524);
+            this.Crearbutton.Location = new System.Drawing.Point(19, 484);
             this.Crearbutton.Name = "Crearbutton";
             this.Crearbutton.Size = new System.Drawing.Size(167, 44);
             this.Crearbutton.TabIndex = 30;
@@ -310,23 +279,20 @@
             // 
             // VolverButton
             // 
-            this.VolverButton.Location = new System.Drawing.Point(330, 524);
+            this.VolverButton.Location = new System.Drawing.Point(284, 484);
             this.VolverButton.Name = "VolverButton";
             this.VolverButton.Size = new System.Drawing.Size(162, 44);
             this.VolverButton.TabIndex = 31;
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
             // 
-            // CrearModificarCliente
+            // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 580);
             this.Controls.Add(this.VolverButton);
             this.Controls.Add(this.Crearbutton);
-            this.Controls.Add(this.Guardarbutton);
-            this.Controls.Add(this.TarjetasButton);
-            this.Controls.Add(this.ClienteHabilitadoCheckBox);
             this.Controls.Add(this.nacionalidadComboBox);
             this.Controls.Add(this.FechaNaclabel);
             this.Controls.Add(this.fechaNacimientodateTimePicker);
@@ -353,7 +319,7 @@
             this.Controls.Add(this.TipoLabel);
             this.Controls.Add(this.apellidoClilabel);
             this.Controls.Add(this.NombreLabel);
-            this.Name = "CrearModificarCliente";
+            this.Name = "AltaCliente";
             this.Text = "NuevoCliente";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -388,9 +354,6 @@
         private System.Windows.Forms.DateTimePicker fechaNacimientodateTimePicker;
         private System.Windows.Forms.Label FechaNaclabel;
         private System.Windows.Forms.ComboBox nacionalidadComboBox;
-        private System.Windows.Forms.CheckBox ClienteHabilitadoCheckBox;
-        private System.Windows.Forms.Button TarjetasButton;
-        private System.Windows.Forms.Button Guardarbutton;
         private System.Windows.Forms.Button Crearbutton;
         private System.Windows.Forms.Button VolverButton;
     }

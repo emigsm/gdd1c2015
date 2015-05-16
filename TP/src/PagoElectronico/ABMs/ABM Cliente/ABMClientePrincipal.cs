@@ -130,7 +130,10 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void nuevoClienteButton_Click(object sender, EventArgs e)
         {
-
+            AltaCliente nuevoCliente = new AltaCliente();
+           
+            nuevoCliente.Show(this);
+            this.Hide();
         }
 
      

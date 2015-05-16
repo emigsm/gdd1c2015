@@ -54,11 +54,11 @@
     <Compile Include="ABMs\ABM Cliente\ABMClientePrincipal.Designer.cs">
       <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="ABMs\ABM Cliente\NuevoCliente.cs">
+    <Compile Include="ABMs\ABM Cliente\AltaCliente.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ABMs\ABM Cliente\NuevoCliente.Designer.cs">
-      <DependentUpon>NuevoCliente.cs</DependentUpon>
+    <Compile Include="ABMs\ABM Cliente\AltaCliente.Designer.cs">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
     <Compile Include="ABMs\ABM Cliente\VistaTarjetas.cs">
       <SubType>Form</SubType>
@@ -173,8 +173,8 @@
     <EmbeddedResource Include="ABMs\ABM Cliente\ABMClientePrincipal.resx">
       <DependentUpon>ABMClientePrincipal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ABMs\ABM Cliente\NuevoCliente.resx">
-      <DependentUpon>NuevoCliente.cs</DependentUpon>
+    <EmbeddedResource Include="ABMs\ABM Cliente\AltaCliente.resx">
+      <DependentUpon>AltaCliente.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABMs\ABM Cliente\VistaTarjetas.resx">
       <DependentUpon>VistaTarjetas.cs</DependentUpon>

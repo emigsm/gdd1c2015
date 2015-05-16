@@ -1,0 +1,9 @@
+-fechas de sistema, 
+-tipo de dato duracion cuentas,costo cuentas etc
+-asignar tarjeta
+-crear tarjeta
+-desvincular tarjeta
+-cual es el codigo tarjeta encriptado,como lo quieren?
+
+
+

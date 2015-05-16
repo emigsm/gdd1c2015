@@ -72,6 +72,7 @@
             this.Controls.Add(this.cmbFuncionalidades);
             this.Name = "Principal";
             this.Text = "Principal";
+            this.Load += new System.EventHandler(this.Principal_Load);
             this.ResumeLayout(false);
 
         }

@@ -81,7 +81,7 @@ namespace PagoElectronico
                     break;
 
                 case "Depositos":
-                    DepositosPrincipal frmDepositosTCPrincipal = new DepositosPrincipal();
+                    DepositosPrincipal frmDepositosTCPrincipal = new DepositosPrincipal(username);
                     frmDepositosTCPrincipal.Show(this);
                     this.Hide();
                     break;
@@ -124,6 +124,11 @@ namespace PagoElectronico
             {
                 btnSeleccionar.PerformClick();
             }
+        }
+
+        private void Principal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

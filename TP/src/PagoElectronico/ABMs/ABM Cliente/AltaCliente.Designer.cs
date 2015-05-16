@@ -39,7 +39,6 @@
             this.Maillabel = new System.Windows.Forms.Label();
             this.MailtextBox = new System.Windows.Forms.TextBox();
             this.Paislabel = new System.Windows.Forms.Label();
-            this.PaistextBox = new System.Windows.Forms.TextBox();
             this.domiciliolabel = new System.Windows.Forms.Label();
             this.DomicilioCalletextBox = new System.Windows.Forms.TextBox();
             this.DomNrolabel = new System.Windows.Forms.Label();
@@ -53,9 +52,10 @@
             this.NacionalidadLabel = new System.Windows.Forms.Label();
             this.fechaNacimientodateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FechaNaclabel = new System.Windows.Forms.Label();
-            this.nacionalidadComboBox = new System.Windows.Forms.ComboBox();
             this.Crearbutton = new System.Windows.Forms.Button();
             this.VolverButton = new System.Windows.Forms.Button();
+            this.PaiscomboBox = new System.Windows.Forms.ComboBox();
+            this.NacionalidadtextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // NombreLabel
@@ -147,13 +147,6 @@
             this.Paislabel.Size = new System.Drawing.Size(30, 13);
             this.Paislabel.TabIndex = 10;
             this.Paislabel.Text = "Pais:";
-            // 
-            // PaistextBox
-            // 
-            this.PaistextBox.Location = new System.Drawing.Point(126, 152);
-            this.PaistextBox.Name = "PaistextBox";
-            this.PaistextBox.Size = new System.Drawing.Size(121, 20);
-            this.PaistextBox.TabIndex = 11;
             // 
             // domiciliolabel
             // 
@@ -260,14 +253,6 @@
             this.FechaNaclabel.TabIndex = 25;
             this.FechaNaclabel.Text = "Fecha de Nacimiento:";
             // 
-            // nacionalidadComboBox
-            // 
-            this.nacionalidadComboBox.FormattingEnabled = true;
-            this.nacionalidadComboBox.Location = new System.Drawing.Point(126, 338);
-            this.nacionalidadComboBox.Name = "nacionalidadComboBox";
-            this.nacionalidadComboBox.Size = new System.Drawing.Size(121, 21);
-            this.nacionalidadComboBox.TabIndex = 26;
-            // 
             // Crearbutton
             // 
             this.Crearbutton.Location = new System.Drawing.Point(19, 484);
@@ -286,14 +271,30 @@
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
             // 
+            // PaiscomboBox
+            // 
+            this.PaiscomboBox.FormattingEnabled = true;
+            this.PaiscomboBox.Location = new System.Drawing.Point(126, 152);
+            this.PaiscomboBox.Name = "PaiscomboBox";
+            this.PaiscomboBox.Size = new System.Drawing.Size(121, 21);
+            this.PaiscomboBox.TabIndex = 32;
+            // 
+            // NacionalidadtextBox
+            // 
+            this.NacionalidadtextBox.Location = new System.Drawing.Point(129, 338);
+            this.NacionalidadtextBox.Name = "NacionalidadtextBox";
+            this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
+            this.NacionalidadtextBox.TabIndex = 33;
+            // 
             // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 580);
+            this.Controls.Add(this.NacionalidadtextBox);
+            this.Controls.Add(this.PaiscomboBox);
             this.Controls.Add(this.VolverButton);
             this.Controls.Add(this.Crearbutton);
-            this.Controls.Add(this.nacionalidadComboBox);
             this.Controls.Add(this.FechaNaclabel);
             this.Controls.Add(this.fechaNacimientodateTimePicker);
             this.Controls.Add(this.NacionalidadLabel);
@@ -307,7 +308,6 @@
             this.Controls.Add(this.DomNrolabel);
             this.Controls.Add(this.DomicilioCalletextBox);
             this.Controls.Add(this.domiciliolabel);
-            this.Controls.Add(this.PaistextBox);
             this.Controls.Add(this.Paislabel);
             this.Controls.Add(this.MailtextBox);
             this.Controls.Add(this.Maillabel);
@@ -339,7 +339,6 @@
         private System.Windows.Forms.Label Maillabel;
         private System.Windows.Forms.TextBox MailtextBox;
         private System.Windows.Forms.Label Paislabel;
-        private System.Windows.Forms.TextBox PaistextBox;
         private System.Windows.Forms.Label domiciliolabel;
         private System.Windows.Forms.TextBox DomicilioCalletextBox;
         private System.Windows.Forms.Label DomNrolabel;
@@ -353,8 +352,9 @@
         private System.Windows.Forms.Label NacionalidadLabel;
         private System.Windows.Forms.DateTimePicker fechaNacimientodateTimePicker;
         private System.Windows.Forms.Label FechaNaclabel;
-        private System.Windows.Forms.ComboBox nacionalidadComboBox;
         private System.Windows.Forms.Button Crearbutton;
         private System.Windows.Forms.Button VolverButton;
+        private System.Windows.Forms.ComboBox PaiscomboBox;
+        private System.Windows.Forms.TextBox NacionalidadtextBox;
     }
 }

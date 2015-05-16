@@ -53,5 +53,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         {
 
         }
+
+        public void deshabilitarModificaciones()
+        {
+            AsociarTarjetabutton.Enabled = false;
+            DesvincularTarjetabutton.Enabled = false;
+        }
     }
 }

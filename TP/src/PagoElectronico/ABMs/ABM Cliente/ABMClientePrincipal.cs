@@ -114,7 +114,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 String nombre = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nombre"].Value.ToString();
                 String apellido = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Apellido"].Value.ToString();
                 VistaTarjetas tarjetas = new VistaTarjetas(nombre, apellido, id);
-                
+                tarjetas.deshabilitarModificaciones();
                 tarjetas.Show(this);
                 this.Hide();
             }

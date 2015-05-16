@@ -52,7 +52,7 @@ namespace PagoElectronico.ABMs.ABM_Rol
 
        private void ModificarButton_Click(object sender, EventArgs e)
         {
-            if (hab =!HabilitarRolCheckbox.Checked)
+            if (hab != HabilitarRolCheckbox.Checked)
             {
                 GestorDeSistema.habilitarODeshabilitarRol(rol_cod, (byte)((HabilitarRolCheckbox.Checked) ? 1 : 0));
             }

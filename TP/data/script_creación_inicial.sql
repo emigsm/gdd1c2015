@@ -440,6 +440,15 @@ INSERT INTO GEM4.Rol_Por_Funcionalidad (Rol_Cod, Funcionalidad_Cod) VALUES
 	(2,10),
 	(1,11);
 	
+--Completa las funcionalidades deshabilitadas--
+ 	
+INSERT INTO GEM4.Rol_Por_Funcionalidad (Funcionalidad_Cod,Rol_Cod,Rol_Por_Funcionalidad_Habilitado)
+		SELECT F.Funcionalidad_Cod,R.Rol_Cod,0
+			FROM GEM4.Funcionalidad F,GEM4.Rol R
+			WHERE F.Funcionalidad_Cod not in (select Q.Funcionalidad_Cod  from GEM4.Rol_Por_Funcionalidad Q
+			WHERE Q.Rol_Cod =R.Rol_Cod)
+;
+	
 SET IDENTITY_INSERT GEM4.Usuario ON;
 INSERT INTO GEM4.Usuario (Usuario_ID,Usuario_Username,Usuario_Contrasena) VALUES 
 	(1,'admin','5rhwUL/LgUP8uNsBcKTcntANkE3dPipK0bHo3A/cm+c='), --contrasena w23e
@@ -676,8 +685,8 @@ SET IDENTITY_INSERT GEM4.Cuenta OFF;
 EXEC GEM4.spInsertaOperaciones
 GO
 /* ******************************************TRIGGERS************************************************************ */
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaUsuario')
-	DROP PROCEDURE GEM4.tgActualizaUsuario;
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgModificacionUsuario')
+	DROP TRIGGER GEM4.tgModificacionUsuario;
 GO
 CREATE TRIGGER GEM4.tgModificacionUsuario
 ON  GEM4.Usuario 
@@ -712,8 +721,10 @@ AS
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaRol')
-	DROP PROCEDURE GEM4.tgActualizaRol;
+	DROP TRIGGER GEM4.tgActualizaRol;
 GO
+
+-- OJO CON ROLES DESHABILITADOS DE AMB, DESHABILITA SUS FUNCIONALIDADES
 
 CREATE TRIGGER GEM4.tgActualizaRol
 ON GEM4.Rol
@@ -1129,7 +1140,7 @@ CREATE PROCEDURE GEM4.spObtenerFuncionesHabilitadasPorRol
 AS
 	SELECT Funcionalidad.Funcionalidad_Cod
 	FROM GEM4.Funcionalidad JOIN GEM4.Rol_Por_Funcionalidad ON (Funcionalidad.Funcionalidad_Cod = Rol_Por_Funcionalidad.Funcionalidad_Cod)
-	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
+	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod AND Rol_Por_Funcionalidad.Rol_Por_Funcionalidad_Habilitado=1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasCliente')

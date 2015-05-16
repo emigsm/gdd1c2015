@@ -72,3 +72,4 @@ Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.A
 Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.AltaCuenta.resources
 Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.ModificarRol.resources
 C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.VistaTarjetas.resources
+Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.VistaTarjetas.resources

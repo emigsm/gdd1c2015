@@ -53,6 +53,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERTARJETASCLIENTE = "GEM4.spObtenerTarjetasCliente";
         private const string STORE_MODIFICARNOMBREROL = "GEM4.spModificarNombreRol";
         private const string STORE_DARBAJACLIENTE = "GEM4.spDarBajaCliente";
+        private const string STORE_CREARCLIENTE = "GEM4.spCrearCliente";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -441,6 +442,26 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@clienteID", id));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DARBAJACLIENTE, NONQUERY, parametros);
+        }
+
+        public static void crearCliente(string nombre,string apellido,int tipoDoc,int nroDoc,string mail,int pais,string domCalle,
+                                        Decimal domNumero,Decimal domPiso,string domDepto,string localidad, string nacionalidad, DateTime fechaNac)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@nombre",nombre));
+            parametros.Add(new SqlParameter("@apellido",apellido ));
+            parametros.Add(new SqlParameter("@tipoDoc",tipoDoc));
+            parametros.Add(new SqlParameter("@nroDoc",nroDoc));
+            parametros.Add(new SqlParameter("@mail", mail));
+            parametros.Add(new SqlParameter("@pais", pais));
+            parametros.Add(new SqlParameter("@domicilio", domCalle));
+            parametros.Add(new SqlParameter("@domicilioNumero", domNumero));
+            parametros.Add(new SqlParameter("@domicilioPiso", domPiso));
+            parametros.Add(new SqlParameter("@domicilioDepto", domDepto));
+            parametros.Add(new SqlParameter("@localidad", localidad));
+            parametros.Add(new SqlParameter("@nacionalidad", nacionalidad));
+            parametros.Add(new SqlParameter("@fechaNac", fechaNac));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CREARCLIENTE, NONQUERY, parametros);
         }
     }
 }

@@ -30,7 +30,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                     tarjeta.ItemArray[0],
                     tarjeta.ItemArray[1],
                     tarjeta.ItemArray[2],
-                    tarjeta.ItemArray[3]);
+                    tarjeta.ItemArray[3],
+                    tarjeta.ItemArray[4]);
                 }
                 dgvTarjetas.Update();
             }

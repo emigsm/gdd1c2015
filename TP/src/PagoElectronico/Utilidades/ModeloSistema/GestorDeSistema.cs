@@ -54,6 +54,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_MODIFICARNOMBREROL = "GEM4.spModificarNombreRol";
         private const string STORE_DARBAJACLIENTE = "GEM4.spDarBajaCliente";
         private const string STORE_CREARCLIENTE = "GEM4.spCrearCliente";
+        private const string STORE_OBTENERCUENTASDEUSUARIO = "GEM4.spObtenerCuentasDeUsuario";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -462,6 +463,21 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@nacionalidad", nacionalidad));
             parametros.Add(new SqlParameter("@fechaNac", fechaNac));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CREARCLIENTE, NONQUERY, parametros);
+        }
+
+        public static DataTable obtenerCuentasDeUsuario(string usuario)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Username", usuario));
+            SqlDataReader readerCuentas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERCUENTASDEUSUARIO, READER, parametros);
+            DataTable cuentasUsuario = new DataTable();
+            if (readerCuentas.HasRows)
+            {
+                cuentasUsuario.Load(readerCuentas);
+            }
+            readerCuentas.Dispose();
+            return cuentasUsuario;
+            
         }
     }
 }

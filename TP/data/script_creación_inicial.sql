@@ -1209,3 +1209,14 @@ AS
 			@domicilioNumero,@domicilioPiso,@domicilioDepto,@localidad,@nacionalidad,@fechaNac,1)
 			
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerCuentasDeUsuario')
+	DROP PROCEDURE GEM4.spObtenerCuentasDeUsuario
+GO
+CREATE PROCEDURE GEM4.spObtenerCuentasDeUsuario
+	@Username	NVARCHAR(30)
+AS
+	SELECT C.Cuenta_Numero
+	FROM GEM4.Cuenta C, GEM4.Usuario U
+	WHERE U.Usuario_Username = @Username and U.Cliente_ID = C.Cuenta_Cliente_ID
+GO

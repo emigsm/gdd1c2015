@@ -16,7 +16,10 @@ namespace PagoElectronico.Operaciones.Depositos
         {
             InitializeComponent();
             string usuario = username;
-            DataTable cuenta = GestorDeSistema.obtenerCuentas(usuario);
+            DataTable cuenta = GestorDeSistema.obtenerCuentasDeUsuario(usuario);
+            cmbCuenta.DisplayMember = "Cuenta_Numero";
+            cmbCuenta.ValueMember = "Cuenta_Numero";
+            cmbCuenta.DataSource = cuenta;
         }
                 
     }

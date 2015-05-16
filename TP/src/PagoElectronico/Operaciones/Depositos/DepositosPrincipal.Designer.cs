@@ -33,10 +33,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.CuentaComboBox = new System.Windows.Forms.ComboBox();
+            this.cmbCuenta = new System.Windows.Forms.ComboBox();
             this.ImporteTextBox = new System.Windows.Forms.TextBox();
-            this.MonedaComboBox = new System.Windows.Forms.ComboBox();
-            this.TarjetaComboBox = new System.Windows.Forms.ComboBox();
+            this.cmbMoneda = new System.Windows.Forms.ComboBox();
+            this.cmbTarjeta = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -89,13 +89,13 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Fecha a realizar:";
             // 
-            // CuentaComboBox
+            // cmbCuenta
             // 
-            this.CuentaComboBox.FormattingEnabled = true;
-            this.CuentaComboBox.Location = new System.Drawing.Point(216, 22);
-            this.CuentaComboBox.Name = "CuentaComboBox";
-            this.CuentaComboBox.Size = new System.Drawing.Size(235, 21);
-            this.CuentaComboBox.TabIndex = 5;
+            this.cmbCuenta.FormattingEnabled = true;
+            this.cmbCuenta.Location = new System.Drawing.Point(216, 22);
+            this.cmbCuenta.Name = "cmbCuenta";
+            this.cmbCuenta.Size = new System.Drawing.Size(235, 21);
+            this.cmbCuenta.TabIndex = 5;
             // 
             // ImporteTextBox
             // 
@@ -104,21 +104,21 @@
             this.ImporteTextBox.Size = new System.Drawing.Size(235, 20);
             this.ImporteTextBox.TabIndex = 6;
             // 
-            // MonedaComboBox
+            // cmbMoneda
             // 
-            this.MonedaComboBox.FormattingEnabled = true;
-            this.MonedaComboBox.Location = new System.Drawing.Point(216, 90);
-            this.MonedaComboBox.Name = "MonedaComboBox";
-            this.MonedaComboBox.Size = new System.Drawing.Size(235, 21);
-            this.MonedaComboBox.TabIndex = 7;
+            this.cmbMoneda.FormattingEnabled = true;
+            this.cmbMoneda.Location = new System.Drawing.Point(216, 90);
+            this.cmbMoneda.Name = "cmbMoneda";
+            this.cmbMoneda.Size = new System.Drawing.Size(235, 21);
+            this.cmbMoneda.TabIndex = 7;
             // 
-            // TarjetaComboBox
+            // cmbTarjeta
             // 
-            this.TarjetaComboBox.FormattingEnabled = true;
-            this.TarjetaComboBox.Location = new System.Drawing.Point(216, 124);
-            this.TarjetaComboBox.Name = "TarjetaComboBox";
-            this.TarjetaComboBox.Size = new System.Drawing.Size(235, 21);
-            this.TarjetaComboBox.TabIndex = 8;
+            this.cmbTarjeta.FormattingEnabled = true;
+            this.cmbTarjeta.Location = new System.Drawing.Point(216, 124);
+            this.cmbTarjeta.Name = "cmbTarjeta";
+            this.cmbTarjeta.Size = new System.Drawing.Size(235, 21);
+            this.cmbTarjeta.TabIndex = 8;
             // 
             // label6
             // 
@@ -150,10 +150,10 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.TarjetaComboBox);
-            this.groupBox1.Controls.Add(this.MonedaComboBox);
+            this.groupBox1.Controls.Add(this.cmbTarjeta);
+            this.groupBox1.Controls.Add(this.cmbMoneda);
             this.groupBox1.Controls.Add(this.ImporteTextBox);
-            this.groupBox1.Controls.Add(this.CuentaComboBox);
+            this.groupBox1.Controls.Add(this.cmbCuenta);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -176,7 +176,6 @@
             this.Controls.Add(this.button1);
             this.Name = "DepositosPrincipal";
             this.Text = "DepositosPrincipal";
-            this.Load += new System.EventHandler(this.DepositosPrincipal_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -190,10 +189,10 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ComboBox CuentaComboBox;
+        private System.Windows.Forms.ComboBox cmbCuenta;
         private System.Windows.Forms.TextBox ImporteTextBox;
-        private System.Windows.Forms.ComboBox MonedaComboBox;
-        private System.Windows.Forms.ComboBox TarjetaComboBox;
+        private System.Windows.Forms.ComboBox cmbMoneda;
+        private System.Windows.Forms.ComboBox cmbTarjeta;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

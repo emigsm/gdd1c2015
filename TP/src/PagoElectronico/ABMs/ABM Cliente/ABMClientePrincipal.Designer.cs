@@ -171,6 +171,7 @@
             this.nuevoClienteButton.TabIndex = 9;
             this.nuevoClienteButton.Text = "Nuevo Cliente";
             this.nuevoClienteButton.UseVisualStyleBackColor = true;
+            this.nuevoClienteButton.Click += new System.EventHandler(this.nuevoClienteButton_Click);
             // 
             // mailLabel
             // 

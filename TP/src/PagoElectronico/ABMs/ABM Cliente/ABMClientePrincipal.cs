@@ -128,6 +128,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             prubaDoc1.Text = "el btn ver funciona";
         }
 
+        private void nuevoClienteButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
      
         
       

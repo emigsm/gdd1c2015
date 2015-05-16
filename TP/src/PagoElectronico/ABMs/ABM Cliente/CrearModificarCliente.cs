@@ -9,11 +9,19 @@ using System.Windows.Forms;
 
 namespace PagoElectronico.ABMs.ABM_Cliente
 {
-    public partial class NuevoCliente : Form
+    public partial class CrearModificarCliente : Form
     {
-        public NuevoCliente()
+        public CrearModificarCliente()
         {
             InitializeComponent();
         }
+
+        public void dehabilitarModificacion()
+        {
+            Guardarbutton.Enabled = false;
+        }
     }
+
+  
+
 }

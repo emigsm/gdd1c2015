@@ -32,14 +32,15 @@
             this.tarjetaNombreCliLabel = new System.Windows.Forms.Label();
             this.tarjetaCliIdLabel = new System.Windows.Forms.Label();
             this.dgvTarjetas = new System.Windows.Forms.DataGridView();
-            this.TarjetaVolverBtn = new System.Windows.Forms.Button();
-            this.ClienteIDlabelDesc = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.Tarjeta_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Codigo_Seg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Emisor_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Fecha_Emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Fecha_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TarjetaVolverBtn = new System.Windows.Forms.Button();
+            this.ClienteIDlabelDesc = new System.Windows.Forms.Label();
+            this.DesvincularTarjetabutton = new System.Windows.Forms.Button();
+            this.AsociarTarjetabutton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,34 +89,6 @@
             this.dgvTarjetas.TabIndex = 3;
             this.dgvTarjetas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTarjetas_CellContentClick);
             // 
-            // TarjetaVolverBtn
-            // 
-            this.TarjetaVolverBtn.Location = new System.Drawing.Point(15, 268);
-            this.TarjetaVolverBtn.Name = "TarjetaVolverBtn";
-            this.TarjetaVolverBtn.Size = new System.Drawing.Size(124, 23);
-            this.TarjetaVolverBtn.TabIndex = 4;
-            this.TarjetaVolverBtn.Text = "Volver";
-            this.TarjetaVolverBtn.UseVisualStyleBackColor = true;
-            this.TarjetaVolverBtn.Click += new System.EventHandler(this.TarjetaVolverBtn_Click);
-            // 
-            // ClienteIDlabelDesc
-            // 
-            this.ClienteIDlabelDesc.AutoSize = true;
-            this.ClienteIDlabelDesc.Location = new System.Drawing.Point(15, 68);
-            this.ClienteIDlabelDesc.Name = "ClienteIDlabelDesc";
-            this.ClienteIDlabelDesc.Size = new System.Drawing.Size(18, 13);
-            this.ClienteIDlabelDesc.TabIndex = 5;
-            this.ClienteIDlabelDesc.Text = "ID";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(353, 95);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(148, 52);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // Tarjeta_Numero
             // 
             this.Tarjeta_Numero.HeaderText = "Numero de Tarjeta";
@@ -146,12 +119,50 @@
             this.Tarjeta_Fecha_Vencimiento.Name = "Tarjeta_Fecha_Vencimiento";
             this.Tarjeta_Fecha_Vencimiento.ReadOnly = true;
             // 
+            // TarjetaVolverBtn
+            // 
+            this.TarjetaVolverBtn.Location = new System.Drawing.Point(15, 287);
+            this.TarjetaVolverBtn.Name = "TarjetaVolverBtn";
+            this.TarjetaVolverBtn.Size = new System.Drawing.Size(124, 23);
+            this.TarjetaVolverBtn.TabIndex = 4;
+            this.TarjetaVolverBtn.Text = "Volver";
+            this.TarjetaVolverBtn.UseVisualStyleBackColor = true;
+            this.TarjetaVolverBtn.Click += new System.EventHandler(this.TarjetaVolverBtn_Click);
+            // 
+            // ClienteIDlabelDesc
+            // 
+            this.ClienteIDlabelDesc.AutoSize = true;
+            this.ClienteIDlabelDesc.Location = new System.Drawing.Point(15, 68);
+            this.ClienteIDlabelDesc.Name = "ClienteIDlabelDesc";
+            this.ClienteIDlabelDesc.Size = new System.Drawing.Size(18, 13);
+            this.ClienteIDlabelDesc.TabIndex = 5;
+            this.ClienteIDlabelDesc.Text = "ID";
+            // 
+            // DesvincularTarjetabutton
+            // 
+            this.DesvincularTarjetabutton.Location = new System.Drawing.Point(353, 95);
+            this.DesvincularTarjetabutton.Name = "DesvincularTarjetabutton";
+            this.DesvincularTarjetabutton.Size = new System.Drawing.Size(148, 64);
+            this.DesvincularTarjetabutton.TabIndex = 6;
+            this.DesvincularTarjetabutton.Text = "Desvincular";
+            this.DesvincularTarjetabutton.UseVisualStyleBackColor = true;
+            // 
+            // AsociarTarjetabutton
+            // 
+            this.AsociarTarjetabutton.Location = new System.Drawing.Point(353, 177);
+            this.AsociarTarjetabutton.Name = "AsociarTarjetabutton";
+            this.AsociarTarjetabutton.Size = new System.Drawing.Size(148, 68);
+            this.AsociarTarjetabutton.TabIndex = 7;
+            this.AsociarTarjetabutton.Text = "AsociarTarjeta";
+            this.AsociarTarjetabutton.UseVisualStyleBackColor = true;
+            // 
             // VistaTarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(537, 343);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.AsociarTarjetabutton);
+            this.Controls.Add(this.DesvincularTarjetabutton);
             this.Controls.Add(this.ClienteIDlabelDesc);
             this.Controls.Add(this.TarjetaVolverBtn);
             this.Controls.Add(this.dgvTarjetas);
@@ -174,11 +185,12 @@
         private System.Windows.Forms.DataGridView dgvTarjetas;
         private System.Windows.Forms.Button TarjetaVolverBtn;
         private System.Windows.Forms.Label ClienteIDlabelDesc;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button DesvincularTarjetabutton;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Codigo_Seg;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Emisor_Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Fecha_Emision;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Fecha_Vencimiento;
+        private System.Windows.Forms.Button AsociarTarjetabutton;
     }
 }

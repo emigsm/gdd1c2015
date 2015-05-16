@@ -685,8 +685,8 @@ SET IDENTITY_INSERT GEM4.Cuenta OFF;
 EXEC GEM4.spInsertaOperaciones
 GO
 /* ******************************************TRIGGERS************************************************************ */
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaUsuario')
-	DROP PROCEDURE GEM4.tgActualizaUsuario;
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgModificacionUsuario')
+	DROP PROCEDURE GEM4.tgModificacionUsuario;
 GO
 
 CREATE TRIGGER GEM4.tgModificacionUsuario

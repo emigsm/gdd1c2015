@@ -120,12 +120,35 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 tarjetas.Show(this);
                 this.Hide();
             }
+            if (e.ColumnIndex == 15)
+            {
+                Int32 id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
+                String nombre = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nombre"].Value.ToString();
+                String apellido = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Apellido"].Value.ToString();
+                Int32 tipoDoc=Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Tipo_Doc"].Value.ToString());
+                Int32 nroDoc= Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Numero_Documento"].Value.ToString());
+                String mail = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Mail"].Value.ToString();
+                Int32 pais = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Pais"].Value.ToString());
+                String domCalle = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Calle"].Value.ToString();
+                Decimal domNumero =Convert.ToDecimal(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Numero"].Value.ToString());
+                Decimal domPiso =Convert.ToDecimal(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Piso"].Value.ToString());
+                String domDepto = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Depto"].Value.ToString();
+                String localidad = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Localidad"].Value.ToString();
+                String nacionalidad = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nacionalidad"].Value.ToString();
+                DateTime fechaNac = Convert.ToDateTime(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Fecha_Nacimiento"].Value);
+                bool habilitado= Convert.ToBoolean(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Habilitado"].Value);
+
+
+
+                ModificacionCliente cliente = new ModificacionCliente(id, nombre,apellido,tipoDoc,nroDoc,mail,pais,domCalle,
+                                        domNumero,domPiso,domDepto,localidad,nacionalidad,fechaNac,habilitado);
+            }
             if (e.ColumnIndex == 16)
             {
               int id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
               GestorDeSistema.darBajaCliente(id);
             }
-            prubaDoc1.Text = "el btn ver funciona";
+           
         }
 
         private void nuevoClienteButton_Click(object sender, EventArgs e)

@@ -12,7 +12,9 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class ModificacionCliente : Form
     {
-        public ModificacionCliente()
+        public ModificacionCliente(Int32 id, string nombre, string apellido, int tipoDoc, int nroDoc, string mail, int pais, string domCalle,
+                                        Decimal domNumero, Decimal domPiso, string domDepto,
+                                        string localidad, string nacionalidad, DateTime fechaNac, bool habilitado)
         {
             InitializeComponent();
             DataTable tiposDoc = GestorDeSistema.obtenerTiposDoc();
@@ -24,6 +26,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             PaiscomboBox.DisplayMember = "Pais_Descripcion";
             PaiscomboBox.ValueMember = "Pais_Cod";
             PaiscomboBox.DataSource = paises;
+
+
         }
 
 

@@ -60,6 +60,7 @@
     <Compile Include="ABMs\ABM Cliente\AltaCliente.Designer.cs">
       <DependentUpon>AltaCliente.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABMs\ABM Cliente\Cliente.cs" />
     <Compile Include="ABMs\ABM Cliente\VistaTarjetas.cs">
       <SubType>Form</SubType>
     </Compile>

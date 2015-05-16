@@ -46,7 +46,7 @@
             this.DomPisolabel = new System.Windows.Forms.Label();
             this.DomicilioPisoTextBox = new System.Windows.Forms.TextBox();
             this.DomicilioDeptoNuevolabel = new System.Windows.Forms.Label();
-            this.DomiciliotextBox = new System.Windows.Forms.TextBox();
+            this.DomicilioDeptotextBox = new System.Windows.Forms.TextBox();
             this.localLabel = new System.Windows.Forms.Label();
             this.LocalidadtextBox = new System.Windows.Forms.TextBox();
             this.NacionalidadLabel = new System.Windows.Forms.Label();
@@ -205,12 +205,12 @@
             this.DomicilioDeptoNuevolabel.TabIndex = 18;
             this.DomicilioDeptoNuevolabel.Text = "Domicilio Depto:";
             // 
-            // DomiciliotextBox
+            // DomicilioDeptotextBox
             // 
-            this.DomiciliotextBox.Location = new System.Drawing.Point(129, 273);
-            this.DomiciliotextBox.Name = "DomiciliotextBox";
-            this.DomiciliotextBox.Size = new System.Drawing.Size(118, 20);
-            this.DomiciliotextBox.TabIndex = 19;
+            this.DomicilioDeptotextBox.Location = new System.Drawing.Point(129, 273);
+            this.DomicilioDeptotextBox.Name = "DomicilioDeptotextBox";
+            this.DomicilioDeptotextBox.Size = new System.Drawing.Size(118, 20);
+            this.DomicilioDeptotextBox.TabIndex = 19;
             // 
             // localLabel
             // 
@@ -261,6 +261,7 @@
             this.Crearbutton.TabIndex = 30;
             this.Crearbutton.Text = "Crear";
             this.Crearbutton.UseVisualStyleBackColor = true;
+            this.Crearbutton.Click += new System.EventHandler(this.Crearbutton_Click);
             // 
             // VolverButton
             // 
@@ -270,6 +271,7 @@
             this.VolverButton.TabIndex = 31;
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
+            this.VolverButton.Click += new System.EventHandler(this.VolverButton_Click);
             // 
             // PaiscomboBox
             // 
@@ -300,7 +302,7 @@
             this.Controls.Add(this.NacionalidadLabel);
             this.Controls.Add(this.LocalidadtextBox);
             this.Controls.Add(this.localLabel);
-            this.Controls.Add(this.DomiciliotextBox);
+            this.Controls.Add(this.DomicilioDeptotextBox);
             this.Controls.Add(this.DomicilioDeptoNuevolabel);
             this.Controls.Add(this.DomicilioPisoTextBox);
             this.Controls.Add(this.DomPisolabel);
@@ -346,7 +348,7 @@
         private System.Windows.Forms.Label DomPisolabel;
         private System.Windows.Forms.TextBox DomicilioPisoTextBox;
         private System.Windows.Forms.Label DomicilioDeptoNuevolabel;
-        private System.Windows.Forms.TextBox DomiciliotextBox;
+        private System.Windows.Forms.TextBox DomicilioDeptotextBox;
         private System.Windows.Forms.Label localLabel;
         private System.Windows.Forms.TextBox LocalidadtextBox;
         private System.Windows.Forms.Label NacionalidadLabel;

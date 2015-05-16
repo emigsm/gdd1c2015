@@ -69,6 +69,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                     clienteEncontrado.ItemArray[12],
                     clienteEncontrado.ItemArray[13],
                     "Ver",
+                    "Modificar",
+                    "Borrar",
                     clienteEncontrado.ItemArray[14]
                         );
                 }
@@ -117,6 +119,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 tarjetas.deshabilitarModificaciones();
                 tarjetas.Show(this);
                 this.Hide();
+            }
+            if (e.ColumnIndex == 16)
+            {
+              int id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
+              GestorDeSistema.darBajaCliente(id);
             }
             prubaDoc1.Text = "el btn ver funciona";
         }

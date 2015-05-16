@@ -4,6 +4,9 @@
 -crear tarjeta
 -desvincular tarjeta
 -cual es el codigo tarjeta encriptado,como lo quieren?
+-si se da de baja el cliente, se tienen que dar de baja 
+	las cuentas tambien?(trigger o procedure??)
+
 
 
 

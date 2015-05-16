@@ -52,6 +52,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERFUNCIONESHABILITADASPORROL = "GEM4.spObtenerFuncionesHabilitadasPorRol";
         private const string STORE_OBTENERTARJETASCLIENTE = "GEM4.spObtenerTarjetasCliente";
         private const string STORE_MODIFICARNOMBREROL = "GEM4.spModificarNombreRol";
+        private const string STORE_DARBAJACLIENTE = "GEM4.spDarBajaCliente";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -433,6 +434,13 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametrosStore.Add(new SqlParameter("@Rol_Nombre", rolNombre));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARNOMBREROL, NONQUERY, parametrosStore);
+        }
+
+        public static void darBajaCliente(int id)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", id));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DARBAJACLIENTE, NONQUERY, parametros);
         }
     }
 }

@@ -1170,3 +1170,16 @@ AS
 	SET Rol_Nombre =@Rol_Nombre
 	WHERE Rol_Cod =@Rol_Cod
 GO	
+
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDarBajaCliente')
+	DROP PROCEDURE GEM4.spDarBajaCliente;
+GO
+
+CREATE PROCEDURE GEM4.spDarBajaCliente
+	@clienteID INT
+AS
+	UPDATE GEM4.Cliente
+	SET Cliente_Habilitado=0
+	WHERE Cliente_ID=@clienteID;
+GO

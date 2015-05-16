@@ -29,7 +29,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                     dgvTarjetas.Rows.Add(
                     tarjeta.ItemArray[0],
                     tarjeta.ItemArray[1],
-                    tarjeta.ItemArray[2]);
+                    tarjeta.ItemArray[2],
+                    tarjeta.ItemArray[3]);
                 }
                 dgvTarjetas.Update();
             }
@@ -45,6 +46,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         {
             Owner.Show();
             this.Hide();
+        }
+
+        private void dgvTarjetas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -29,6 +29,22 @@
         private void InitializeComponent()
         {
             this.dgvClientes = new System.Windows.Forms.DataGridView();
+            this.Cliente_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Tipo_Doc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Numero_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Dom_Depto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Nacionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cliente_Fecha_Nacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tarjetas = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.nombreClienteTextBox = new System.Windows.Forms.TextBox();
             this.ApellidoClienteTextBox = new System.Windows.Forms.TextBox();
             this.nombreClienteLabek = new System.Windows.Forms.Label();
@@ -46,22 +62,6 @@
             this.volverButton = new System.Windows.Forms.Button();
             this.TipoDocPrubelabel = new System.Windows.Forms.Label();
             this.prubaDoc1 = new System.Windows.Forms.Label();
-            this.Cliente_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Apellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Tipo_Doc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Numero_Documento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Mail = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Dom_Calle = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Dom_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Dom_Piso = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Dom_Depto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Nacionalidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Cliente_Fecha_Nacimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Tarjetas = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Cliente_Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,6 +92,104 @@
             this.dgvClientes.ReadOnly = true;
             this.dgvClientes.Size = new System.Drawing.Size(485, 176);
             this.dgvClientes.TabIndex = 0;
+            this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
+            // 
+            // Cliente_ID
+            // 
+            this.Cliente_ID.HeaderText = "Cliente_ID";
+            this.Cliente_ID.Name = "Cliente_ID";
+            this.Cliente_ID.ReadOnly = true;
+            // 
+            // Cliente_Nombre
+            // 
+            this.Cliente_Nombre.HeaderText = "Cliente_Nombre";
+            this.Cliente_Nombre.Name = "Cliente_Nombre";
+            this.Cliente_Nombre.ReadOnly = true;
+            // 
+            // Cliente_Apellido
+            // 
+            this.Cliente_Apellido.HeaderText = "Cliente_Apellido";
+            this.Cliente_Apellido.Name = "Cliente_Apellido";
+            this.Cliente_Apellido.ReadOnly = true;
+            // 
+            // Cliente_Tipo_Doc
+            // 
+            this.Cliente_Tipo_Doc.HeaderText = "Cliente_Tipo_Doc";
+            this.Cliente_Tipo_Doc.Name = "Cliente_Tipo_Doc";
+            this.Cliente_Tipo_Doc.ReadOnly = true;
+            // 
+            // Cliente_Numero_Documento
+            // 
+            this.Cliente_Numero_Documento.HeaderText = "Cliente_Numero_Documento";
+            this.Cliente_Numero_Documento.Name = "Cliente_Numero_Documento";
+            this.Cliente_Numero_Documento.ReadOnly = true;
+            // 
+            // Cliente_Mail
+            // 
+            this.Cliente_Mail.HeaderText = "Cliente_Mail";
+            this.Cliente_Mail.Name = "Cliente_Mail";
+            this.Cliente_Mail.ReadOnly = true;
+            // 
+            // Cliente_Pais
+            // 
+            this.Cliente_Pais.HeaderText = "Cliente_Pais";
+            this.Cliente_Pais.Name = "Cliente_Pais";
+            this.Cliente_Pais.ReadOnly = true;
+            // 
+            // Cliente_Dom_Calle
+            // 
+            this.Cliente_Dom_Calle.HeaderText = "Cliente_Dom_Calle";
+            this.Cliente_Dom_Calle.Name = "Cliente_Dom_Calle";
+            this.Cliente_Dom_Calle.ReadOnly = true;
+            // 
+            // Cliente_Dom_Numero
+            // 
+            this.Cliente_Dom_Numero.HeaderText = "Cliente_Dom_Numero";
+            this.Cliente_Dom_Numero.Name = "Cliente_Dom_Numero";
+            this.Cliente_Dom_Numero.ReadOnly = true;
+            // 
+            // Cliente_Dom_Piso
+            // 
+            this.Cliente_Dom_Piso.HeaderText = "Cliente_Dom_Piso";
+            this.Cliente_Dom_Piso.Name = "Cliente_Dom_Piso";
+            this.Cliente_Dom_Piso.ReadOnly = true;
+            // 
+            // Cliente_Dom_Depto
+            // 
+            this.Cliente_Dom_Depto.HeaderText = "Cliente_Dom_Depto";
+            this.Cliente_Dom_Depto.Name = "Cliente_Dom_Depto";
+            this.Cliente_Dom_Depto.ReadOnly = true;
+            // 
+            // Cliente_Localidad
+            // 
+            this.Cliente_Localidad.HeaderText = "Cliente_Localidad";
+            this.Cliente_Localidad.Name = "Cliente_Localidad";
+            this.Cliente_Localidad.ReadOnly = true;
+            // 
+            // Cliente_Nacionalidad
+            // 
+            this.Cliente_Nacionalidad.HeaderText = "Cliente_Nacionalidad";
+            this.Cliente_Nacionalidad.Name = "Cliente_Nacionalidad";
+            this.Cliente_Nacionalidad.ReadOnly = true;
+            // 
+            // Cliente_Fecha_Nacimiento
+            // 
+            this.Cliente_Fecha_Nacimiento.HeaderText = "Cliente_Fecha_Nacimiento";
+            this.Cliente_Fecha_Nacimiento.Name = "Cliente_Fecha_Nacimiento";
+            this.Cliente_Fecha_Nacimiento.ReadOnly = true;
+            // 
+            // Tarjetas
+            // 
+            this.Tarjetas.HeaderText = "Tarjetas";
+            this.Tarjetas.Name = "Tarjetas";
+            this.Tarjetas.ReadOnly = true;
+            this.Tarjetas.Text = "Ver";
+            // 
+            // Cliente_Habilitado
+            // 
+            this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
+            this.Cliente_Habilitado.Name = "Cliente_Habilitado";
+            this.Cliente_Habilitado.ReadOnly = true;
             // 
             // nombreClienteTextBox
             // 
@@ -240,103 +338,6 @@
             this.prubaDoc1.Size = new System.Drawing.Size(75, 13);
             this.prubaDoc1.TabIndex = 17;
             this.prubaDoc1.Text = "prubaTipoDoc";
-            // 
-            // Cliente_ID
-            // 
-            this.Cliente_ID.HeaderText = "Cliente_ID";
-            this.Cliente_ID.Name = "Cliente_ID";
-            this.Cliente_ID.ReadOnly = true;
-            // 
-            // Cliente_Nombre
-            // 
-            this.Cliente_Nombre.HeaderText = "Cliente_Nombre";
-            this.Cliente_Nombre.Name = "Cliente_Nombre";
-            this.Cliente_Nombre.ReadOnly = true;
-            // 
-            // Cliente_Apellido
-            // 
-            this.Cliente_Apellido.HeaderText = "Cliente_Apellido";
-            this.Cliente_Apellido.Name = "Cliente_Apellido";
-            this.Cliente_Apellido.ReadOnly = true;
-            // 
-            // Cliente_Tipo_Doc
-            // 
-            this.Cliente_Tipo_Doc.HeaderText = "Cliente_Tipo_Doc";
-            this.Cliente_Tipo_Doc.Name = "Cliente_Tipo_Doc";
-            this.Cliente_Tipo_Doc.ReadOnly = true;
-            // 
-            // Cliente_Numero_Documento
-            // 
-            this.Cliente_Numero_Documento.HeaderText = "Cliente_Numero_Documento";
-            this.Cliente_Numero_Documento.Name = "Cliente_Numero_Documento";
-            this.Cliente_Numero_Documento.ReadOnly = true;
-            // 
-            // Cliente_Mail
-            // 
-            this.Cliente_Mail.HeaderText = "Cliente_Mail";
-            this.Cliente_Mail.Name = "Cliente_Mail";
-            this.Cliente_Mail.ReadOnly = true;
-            // 
-            // Cliente_Pais
-            // 
-            this.Cliente_Pais.HeaderText = "Cliente_Pais";
-            this.Cliente_Pais.Name = "Cliente_Pais";
-            this.Cliente_Pais.ReadOnly = true;
-            // 
-            // Cliente_Dom_Calle
-            // 
-            this.Cliente_Dom_Calle.HeaderText = "Cliente_Dom_Calle";
-            this.Cliente_Dom_Calle.Name = "Cliente_Dom_Calle";
-            this.Cliente_Dom_Calle.ReadOnly = true;
-            // 
-            // Cliente_Dom_Numero
-            // 
-            this.Cliente_Dom_Numero.HeaderText = "Cliente_Dom_Numero";
-            this.Cliente_Dom_Numero.Name = "Cliente_Dom_Numero";
-            this.Cliente_Dom_Numero.ReadOnly = true;
-            // 
-            // Cliente_Dom_Piso
-            // 
-            this.Cliente_Dom_Piso.HeaderText = "Cliente_Dom_Piso";
-            this.Cliente_Dom_Piso.Name = "Cliente_Dom_Piso";
-            this.Cliente_Dom_Piso.ReadOnly = true;
-            // 
-            // Cliente_Dom_Depto
-            // 
-            this.Cliente_Dom_Depto.HeaderText = "Cliente_Dom_Depto";
-            this.Cliente_Dom_Depto.Name = "Cliente_Dom_Depto";
-            this.Cliente_Dom_Depto.ReadOnly = true;
-            // 
-            // Cliente_Localidad
-            // 
-            this.Cliente_Localidad.HeaderText = "Cliente_Localidad";
-            this.Cliente_Localidad.Name = "Cliente_Localidad";
-            this.Cliente_Localidad.ReadOnly = true;
-            // 
-            // Cliente_Nacionalidad
-            // 
-            this.Cliente_Nacionalidad.HeaderText = "Cliente_Nacionalidad";
-            this.Cliente_Nacionalidad.Name = "Cliente_Nacionalidad";
-            this.Cliente_Nacionalidad.ReadOnly = true;
-            // 
-            // Cliente_Fecha_Nacimiento
-            // 
-            this.Cliente_Fecha_Nacimiento.HeaderText = "Cliente_Fecha_Nacimiento";
-            this.Cliente_Fecha_Nacimiento.Name = "Cliente_Fecha_Nacimiento";
-            this.Cliente_Fecha_Nacimiento.ReadOnly = true;
-            // 
-            // Tarjetas
-            // 
-            this.Tarjetas.HeaderText = "Tarjetas";
-            this.Tarjetas.Name = "Tarjetas";
-            this.Tarjetas.ReadOnly = true;
-            this.Tarjetas.Text = "Ver";
-            // 
-            // Cliente_Habilitado
-            // 
-            this.Cliente_Habilitado.HeaderText = "Cliente_Habilitado";
-            this.Cliente_Habilitado.Name = "Cliente_Habilitado";
-            this.Cliente_Habilitado.ReadOnly = true;
             // 
             // ABMClientePrincipal
             // 

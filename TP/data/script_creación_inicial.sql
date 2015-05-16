@@ -1135,7 +1135,7 @@ GO
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasCliente')
 	DROP PROCEDURE GEM4.spObtenerTarjetasCliente;
 GO
-CREATE PROCEDURE GEM4.spObtenerObtenerTarjetasCliente
+CREATE PROCEDURE GEM4.spObtenerTarjetasCliente
 	@clienteID	INT
 AS
 	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,t.Tarjeta_Emisor_Descripcion,t.Tarjeta_Fecha_Emision

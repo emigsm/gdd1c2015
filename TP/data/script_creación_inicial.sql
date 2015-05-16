@@ -1183,3 +1183,29 @@ AS
 	SET Cliente_Habilitado=0
 	WHERE Cliente_ID=@clienteID;
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearCliente')
+	DROP PROCEDURE GEM4.spCrearCliente;
+GO
+
+CREATE PROCEDURE GEM4.spCrearCliente
+	@nombre NVARCHAR(255),
+	@apellido NVARCHAR(255),
+	@tipoDoc  NUMERIC(18,0),
+	@nroDoc	  NUMERIC(18,0),
+	@mail	  NVARCHAR(255),
+	@pais	  NUMERIC(18,0),
+	@domicilio NVARCHAR(255),
+	@domicilioNumero NUMERIC(18,0),
+	@domicilioPiso	 NUMERIC(18,0),
+	@domicilioDepto	 NVARCHAR(10),
+	@localidad		 NVARCHAR(60),
+	@nacionalidad	 NVARCHAR(60),
+	@fechaNac		 DATETIME
+AS
+	INSERT INTO GEM4.Cliente(Cliente_Nombre,Cliente_Apellido,Cliente_Tipo_Doc,Cliente_Numero_Documento,Cliente_Mail,Cliente_Pais,
+				Cliente_Dom_Calle,Cliente_Dom_Numero,Cliente_Dom_Piso,Cliente_Dom_Depto,Cliente_Localidad,Cliente_Nacionalidad,Cliente_Fecha_Nacimiento,Cliente_Habilitado)
+	VALUES (@nombre,@apellido,@tipoDoc,@nroDoc,@mail,@pais,@domicilio,
+			@domicilioNumero,@domicilioPiso,@domicilioDepto,@localidad,@nacionalidad,@fechaNac,1)
+			
+GO

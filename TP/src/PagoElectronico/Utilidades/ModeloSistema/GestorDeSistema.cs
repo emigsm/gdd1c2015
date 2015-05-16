@@ -55,6 +55,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_DARBAJACLIENTE = "GEM4.spDarBajaCliente";
         private const string STORE_CREARCLIENTE = "GEM4.spCrearCliente";
         private const string STORE_OBTENERCUENTASDEUSUARIO = "GEM4.spObtenerCuentasDeUsuario";
+        private const string STORE_MODIFICARCLIENTE = "GEM4.spModificarCliente";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -478,6 +479,30 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerCuentas.Dispose();
             return cuentasUsuario;
             
+        }
+
+
+        public static void modificarCliente(Int32 id,string nombre, string apellido, int tipoDoc, int nroDoc, string mail, int pais, string domCalle,
+                                        Decimal domNumero, Decimal domPiso, string domDepto,
+                                        string localidad, string nacionalidad, DateTime fechaNac,bool habilitado)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", id));
+            parametros.Add(new SqlParameter("@nombre", nombre));
+            parametros.Add(new SqlParameter("@apellido", apellido));
+            parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
+            parametros.Add(new SqlParameter("@nroDoc", nroDoc));
+            parametros.Add(new SqlParameter("@mail", mail));
+            parametros.Add(new SqlParameter("@pais", pais));
+            parametros.Add(new SqlParameter("@domicilio", domCalle));
+            parametros.Add(new SqlParameter("@domicilioNumero", domNumero));
+            parametros.Add(new SqlParameter("@domicilioPiso", domPiso));
+            parametros.Add(new SqlParameter("@domicilioDepto", domDepto));
+            parametros.Add(new SqlParameter("@localidad", localidad));
+            parametros.Add(new SqlParameter("@nacionalidad", nacionalidad));
+            parametros.Add(new SqlParameter("@fechaNac", fechaNac));
+            parametros.Add(new SqlParameter("@habilitado", habilitado));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARCLIENTE, NONQUERY, parametros);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PagoElectronico.ABMs.ABM_Cliente
 {
-    partial class AltaCliente
+    partial class ModificacionCliente
     {
         /// <summary>
         /// Required designer variable.
@@ -34,7 +34,7 @@
             this.TipoDcomboBox = new System.Windows.Forms.ComboBox();
             this.NroDocLabel = new System.Windows.Forms.Label();
             this.NroDocClitextBox = new System.Windows.Forms.TextBox();
-            this.ApellidoNuevoClitextBox = new System.Windows.Forms.TextBox();
+            this.ApellidoClitextBox = new System.Windows.Forms.TextBox();
             this.NombreClitextBox = new System.Windows.Forms.TextBox();
             this.Maillabel = new System.Windows.Forms.Label();
             this.MailtextBox = new System.Windows.Forms.TextBox();
@@ -56,12 +56,16 @@
             this.VolverButton = new System.Windows.Forms.Button();
             this.PaiscomboBox = new System.Windows.Forms.ComboBox();
             this.NacionalidadtextBox = new System.Windows.Forms.TextBox();
+            this.habilitadocheckBox = new System.Windows.Forms.CheckBox();
+            this.IDClienteDesclabel = new System.Windows.Forms.Label();
+            this.IDLabelValor = new System.Windows.Forms.Label();
+            this.modificarTarjetasbutton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NombreLabel
             // 
             this.NombreLabel.AutoSize = true;
-            this.NombreLabel.Location = new System.Drawing.Point(16, 31);
+            this.NombreLabel.Location = new System.Drawing.Point(18, 35);
             this.NombreLabel.Name = "NombreLabel";
             this.NombreLabel.Size = new System.Drawing.Size(47, 13);
             this.NombreLabel.TabIndex = 0;
@@ -70,7 +74,7 @@
             // apellidoClilabel
             // 
             this.apellidoClilabel.AutoSize = true;
-            this.apellidoClilabel.Location = new System.Drawing.Point(16, 61);
+            this.apellidoClilabel.Location = new System.Drawing.Point(18, 61);
             this.apellidoClilabel.Name = "apellidoClilabel";
             this.apellidoClilabel.Size = new System.Drawing.Size(47, 13);
             this.apellidoClilabel.TabIndex = 1;
@@ -79,7 +83,7 @@
             // TipoLabel
             // 
             this.TipoLabel.AutoSize = true;
-            this.TipoLabel.Location = new System.Drawing.Point(16, 101);
+            this.TipoLabel.Location = new System.Drawing.Point(18, 96);
             this.TipoLabel.Name = "TipoLabel";
             this.TipoLabel.Size = new System.Drawing.Size(54, 13);
             this.TipoLabel.TabIndex = 2;
@@ -90,7 +94,7 @@
             this.TipoDcomboBox.FormattingEnabled = true;
             this.TipoDcomboBox.Location = new System.Drawing.Point(126, 93);
             this.TipoDcomboBox.Name = "TipoDcomboBox";
-            this.TipoDcomboBox.Size = new System.Drawing.Size(124, 21);
+            this.TipoDcomboBox.Size = new System.Drawing.Size(121, 21);
             this.TipoDcomboBox.TabIndex = 3;
             // 
             // NroDocLabel
@@ -109,16 +113,16 @@
             this.NroDocClitextBox.Size = new System.Drawing.Size(131, 20);
             this.NroDocClitextBox.TabIndex = 5;
             // 
-            // ApellidoNuevoClitextBox
+            // ApellidoClitextBox
             // 
-            this.ApellidoNuevoClitextBox.Location = new System.Drawing.Point(126, 58);
-            this.ApellidoNuevoClitextBox.Name = "ApellidoNuevoClitextBox";
-            this.ApellidoNuevoClitextBox.Size = new System.Drawing.Size(148, 20);
-            this.ApellidoNuevoClitextBox.TabIndex = 6;
+            this.ApellidoClitextBox.Location = new System.Drawing.Point(126, 58);
+            this.ApellidoClitextBox.Name = "ApellidoClitextBox";
+            this.ApellidoClitextBox.Size = new System.Drawing.Size(148, 20);
+            this.ApellidoClitextBox.TabIndex = 6;
             // 
             // NombreClitextBox
             // 
-            this.NombreClitextBox.Location = new System.Drawing.Point(126, 28);
+            this.NombreClitextBox.Location = new System.Drawing.Point(126, 32);
             this.NombreClitextBox.Name = "NombreClitextBox";
             this.NombreClitextBox.Size = new System.Drawing.Size(148, 20);
             this.NombreClitextBox.TabIndex = 7;
@@ -253,19 +257,19 @@
             this.FechaNaclabel.TabIndex = 25;
             this.FechaNaclabel.Text = "Fecha de Nacimiento:";
             // 
-            // Crearbutton
+            // Guardarbutton
             // 
-            this.Guardarbutton.Location = new System.Drawing.Point(19, 484);
-            this.Guardarbutton.Name = "Crearbutton";
+            this.Guardarbutton.Location = new System.Drawing.Point(19, 513);
+            this.Guardarbutton.Name = "Guardarbutton";
             this.Guardarbutton.Size = new System.Drawing.Size(167, 44);
             this.Guardarbutton.TabIndex = 30;
-            this.Guardarbutton.Text = "Crear";
+            this.Guardarbutton.Text = "Guardar";
             this.Guardarbutton.UseVisualStyleBackColor = true;
-            this.Guardarbutton.Click += new System.EventHandler(this.Crearbutton_Click);
+            this.Guardarbutton.Click += new System.EventHandler(this.Guardarbutton_Click_1);
             // 
             // VolverButton
             // 
-            this.VolverButton.Location = new System.Drawing.Point(284, 484);
+            this.VolverButton.Location = new System.Drawing.Point(297, 513);
             this.VolverButton.Name = "VolverButton";
             this.VolverButton.Size = new System.Drawing.Size(162, 44);
             this.VolverButton.TabIndex = 31;
@@ -288,11 +292,52 @@
             this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.NacionalidadtextBox.TabIndex = 33;
             // 
-            // AltaCliente
+            // habilitadocheckBox
+            // 
+            this.habilitadocheckBox.AutoSize = true;
+            this.habilitadocheckBox.Location = new System.Drawing.Point(19, 423);
+            this.habilitadocheckBox.Name = "habilitadocheckBox";
+            this.habilitadocheckBox.Size = new System.Drawing.Size(59, 17);
+            this.habilitadocheckBox.TabIndex = 34;
+            this.habilitadocheckBox.Text = "Estado";
+            this.habilitadocheckBox.UseVisualStyleBackColor = true;
+            // 
+            // IDClienteDesclabel
+            // 
+            this.IDClienteDesclabel.AutoSize = true;
+            this.IDClienteDesclabel.Location = new System.Drawing.Point(16, 9);
+            this.IDClienteDesclabel.Name = "IDClienteDesclabel";
+            this.IDClienteDesclabel.Size = new System.Drawing.Size(73, 13);
+            this.IDClienteDesclabel.TabIndex = 35;
+            this.IDClienteDesclabel.Text = "ID del Cliente:";
+            // 
+            // IDLabelValor
+            // 
+            this.IDLabelValor.AutoSize = true;
+            this.IDLabelValor.Location = new System.Drawing.Point(129, 8);
+            this.IDLabelValor.Name = "IDLabelValor";
+            this.IDLabelValor.Size = new System.Drawing.Size(40, 13);
+            this.IDLabelValor.TabIndex = 36;
+            this.IDLabelValor.Text = "ValorId";
+            // 
+            // modificarTarjetasbutton
+            // 
+            this.modificarTarjetasbutton.Location = new System.Drawing.Point(21, 459);
+            this.modificarTarjetasbutton.Name = "modificarTarjetasbutton";
+            this.modificarTarjetasbutton.Size = new System.Drawing.Size(165, 39);
+            this.modificarTarjetasbutton.TabIndex = 37;
+            this.modificarTarjetasbutton.Text = "Tarjetas";
+            this.modificarTarjetasbutton.UseVisualStyleBackColor = true;
+            // 
+            // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 580);
+            this.Controls.Add(this.modificarTarjetasbutton);
+            this.Controls.Add(this.IDLabelValor);
+            this.Controls.Add(this.IDClienteDesclabel);
+            this.Controls.Add(this.habilitadocheckBox);
             this.Controls.Add(this.NacionalidadtextBox);
             this.Controls.Add(this.PaiscomboBox);
             this.Controls.Add(this.VolverButton);
@@ -314,15 +359,15 @@
             this.Controls.Add(this.MailtextBox);
             this.Controls.Add(this.Maillabel);
             this.Controls.Add(this.NombreClitextBox);
-            this.Controls.Add(this.ApellidoNuevoClitextBox);
+            this.Controls.Add(this.ApellidoClitextBox);
             this.Controls.Add(this.NroDocClitextBox);
             this.Controls.Add(this.NroDocLabel);
             this.Controls.Add(this.TipoDcomboBox);
             this.Controls.Add(this.TipoLabel);
             this.Controls.Add(this.apellidoClilabel);
             this.Controls.Add(this.NombreLabel);
-            this.Name = "AltaCliente";
-            this.Text = "NuevoCliente";
+            this.Name = "ModificacionCliente";
+            this.Text = "Modificar Cliente";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -336,7 +381,7 @@
         private System.Windows.Forms.ComboBox TipoDcomboBox;
         private System.Windows.Forms.Label NroDocLabel;
         private System.Windows.Forms.TextBox NroDocClitextBox;
-        private System.Windows.Forms.TextBox ApellidoNuevoClitextBox;
+        private System.Windows.Forms.TextBox ApellidoClitextBox;
         private System.Windows.Forms.TextBox NombreClitextBox;
         private System.Windows.Forms.Label Maillabel;
         private System.Windows.Forms.TextBox MailtextBox;
@@ -354,9 +399,13 @@
         private System.Windows.Forms.Label NacionalidadLabel;
         private System.Windows.Forms.DateTimePicker fechaNacimientodateTimePicker;
         private System.Windows.Forms.Label FechaNaclabel;
-        private System.Windows.Forms.Button Crearbutton;
+        private System.Windows.Forms.Button Guardarbutton;
         private System.Windows.Forms.Button VolverButton;
         private System.Windows.Forms.ComboBox PaiscomboBox;
         private System.Windows.Forms.TextBox NacionalidadtextBox;
+        private System.Windows.Forms.CheckBox habilitadocheckBox;
+        private System.Windows.Forms.Label IDClienteDesclabel;
+        private System.Windows.Forms.Label IDLabelValor;
+        private System.Windows.Forms.Button modificarTarjetasbutton;
     }
 }

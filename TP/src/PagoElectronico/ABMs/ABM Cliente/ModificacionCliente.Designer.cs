@@ -52,7 +52,6 @@
             this.NacionalidadLabel = new System.Windows.Forms.Label();
             this.fechaNacimientodateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FechaNaclabel = new System.Windows.Forms.Label();
-            this.Guardarbutton = new System.Windows.Forms.Button();
             this.VolverButton = new System.Windows.Forms.Button();
             this.PaiscomboBox = new System.Windows.Forms.ComboBox();
             this.NacionalidadtextBox = new System.Windows.Forms.TextBox();
@@ -60,6 +59,7 @@
             this.IDClienteDesclabel = new System.Windows.Forms.Label();
             this.IDLabelValor = new System.Windows.Forms.Label();
             this.modificarTarjetasbutton = new System.Windows.Forms.Button();
+            this.guardarBoton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NombreLabel
@@ -257,16 +257,6 @@
             this.FechaNaclabel.TabIndex = 25;
             this.FechaNaclabel.Text = "Fecha de Nacimiento:";
             // 
-            // Guardarbutton
-            // 
-            this.Guardarbutton.Location = new System.Drawing.Point(19, 513);
-            this.Guardarbutton.Name = "Guardarbutton";
-            this.Guardarbutton.Size = new System.Drawing.Size(167, 44);
-            this.Guardarbutton.TabIndex = 30;
-            this.Guardarbutton.Text = "Guardar";
-            this.Guardarbutton.UseVisualStyleBackColor = true;
-            this.Guardarbutton.Click += new System.EventHandler(this.Guardarbutton_Click_1);
-            // 
             // VolverButton
             // 
             this.VolverButton.Location = new System.Drawing.Point(297, 513);
@@ -329,11 +319,22 @@
             this.modificarTarjetasbutton.Text = "Tarjetas";
             this.modificarTarjetasbutton.UseVisualStyleBackColor = true;
             // 
+            // guardarBoton
+            // 
+            this.guardarBoton.Location = new System.Drawing.Point(25, 513);
+            this.guardarBoton.Name = "guardarBoton";
+            this.guardarBoton.Size = new System.Drawing.Size(161, 44);
+            this.guardarBoton.TabIndex = 38;
+            this.guardarBoton.Text = "Guardar Cambios";
+            this.guardarBoton.UseVisualStyleBackColor = true;
+            this.guardarBoton.Click += new System.EventHandler(this.guardarBoton_Click);
+            // 
             // ModificacionCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 580);
+            this.Controls.Add(this.guardarBoton);
             this.Controls.Add(this.modificarTarjetasbutton);
             this.Controls.Add(this.IDLabelValor);
             this.Controls.Add(this.IDClienteDesclabel);
@@ -341,7 +342,6 @@
             this.Controls.Add(this.NacionalidadtextBox);
             this.Controls.Add(this.PaiscomboBox);
             this.Controls.Add(this.VolverButton);
-            this.Controls.Add(this.Guardarbutton);
             this.Controls.Add(this.FechaNaclabel);
             this.Controls.Add(this.fechaNacimientodateTimePicker);
             this.Controls.Add(this.NacionalidadLabel);
@@ -399,7 +399,6 @@
         private System.Windows.Forms.Label NacionalidadLabel;
         private System.Windows.Forms.DateTimePicker fechaNacimientodateTimePicker;
         private System.Windows.Forms.Label FechaNaclabel;
-        private System.Windows.Forms.Button Guardarbutton;
         private System.Windows.Forms.Button VolverButton;
         private System.Windows.Forms.ComboBox PaiscomboBox;
         private System.Windows.Forms.TextBox NacionalidadtextBox;
@@ -407,5 +406,6 @@
         private System.Windows.Forms.Label IDClienteDesclabel;
         private System.Windows.Forms.Label IDLabelValor;
         private System.Windows.Forms.Button modificarTarjetasbutton;
+        private System.Windows.Forms.Button guardarBoton;
     }
 }

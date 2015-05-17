@@ -27,6 +27,15 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             PaiscomboBox.ValueMember = "Pais_Cod";
             PaiscomboBox.DataSource = paises;
 
+            IDLabelValor.Text = id.ToString();
+            ApellidoClitextBox.Text = apellido;
+            NombreClitextBox.Text = nombre;
+            TipoDcomboBox.SelectedValue = tipoDoc;
+            NroDocClitextBox.Text = nroDoc.ToString();
+            PaiscomboBox.SelectedValue = pais;
+
+
+
 
         }
 
@@ -39,13 +48,15 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         }
 
-        private void Guardarbutton_Click_1(object sender, EventArgs e)
+        private void guardarBoton_Click(object sender, EventArgs e)
         {
-            GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text),NombreClitextBox.Text,ApellidoClitextBox.Text,Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
-                                         Convert.ToInt32(NroDocClitextBox.Text),MailtextBox.Text,Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()),DomicilioCalletextBox.Text,
-                                         Convert.ToDecimal(DomNumerotextBox.Text),Convert.ToInt32(DomicilioPisoTextBox.Text),DomicilioDeptotextBox.Text,
-                                         LocalidadtextBox.Text,NacionalidadtextBox.Text,fechaNacimientodateTimePicker.Value,habilitadocheckBox.Checked);
+            GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
+                                         Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
+                                         Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToInt32(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
+                                         LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value, habilitadocheckBox.Checked);
         }
+
+        
 
 
 

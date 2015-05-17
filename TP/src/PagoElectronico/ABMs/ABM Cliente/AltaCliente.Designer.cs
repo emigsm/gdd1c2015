@@ -52,7 +52,7 @@
             this.NacionalidadLabel = new System.Windows.Forms.Label();
             this.fechaNacimientodateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FechaNaclabel = new System.Windows.Forms.Label();
-            this.Guardarbutton = new System.Windows.Forms.Button();
+           
             this.VolverButton = new System.Windows.Forms.Button();
             this.PaiscomboBox = new System.Windows.Forms.ComboBox();
             this.NacionalidadtextBox = new System.Windows.Forms.TextBox();
@@ -255,13 +255,7 @@
             // 
             // Crearbutton
             // 
-            this.Guardarbutton.Location = new System.Drawing.Point(19, 484);
-            this.Guardarbutton.Name = "Crearbutton";
-            this.Guardarbutton.Size = new System.Drawing.Size(167, 44);
-            this.Guardarbutton.TabIndex = 30;
-            this.Guardarbutton.Text = "Crear";
-            this.Guardarbutton.UseVisualStyleBackColor = true;
-            this.Guardarbutton.Click += new System.EventHandler(this.Crearbutton_Click);
+
             // 
             // VolverButton
             // 
@@ -296,7 +290,7 @@
             this.Controls.Add(this.NacionalidadtextBox);
             this.Controls.Add(this.PaiscomboBox);
             this.Controls.Add(this.VolverButton);
-            this.Controls.Add(this.Guardarbutton);
+        
             this.Controls.Add(this.FechaNaclabel);
             this.Controls.Add(this.fechaNacimientodateTimePicker);
             this.Controls.Add(this.NacionalidadLabel);
@@ -354,7 +348,7 @@
         private System.Windows.Forms.Label NacionalidadLabel;
         private System.Windows.Forms.DateTimePicker fechaNacimientodateTimePicker;
         private System.Windows.Forms.Label FechaNaclabel;
-        private System.Windows.Forms.Button Crearbutton;
+        //private System.Windows.Forms.Button Crearbutton;
         private System.Windows.Forms.Button VolverButton;
         private System.Windows.Forms.ComboBox PaiscomboBox;
         private System.Windows.Forms.TextBox NacionalidadtextBox;

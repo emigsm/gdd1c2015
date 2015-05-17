@@ -137,11 +137,13 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 String nacionalidad = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nacionalidad"].Value.ToString();
                 DateTime fechaNac = Convert.ToDateTime(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Fecha_Nacimiento"].Value);
                 bool habilitado= Convert.ToBoolean(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Habilitado"].Value);
-
-
-
+                
                 ModificacionCliente cliente = new ModificacionCliente(id, nombre,apellido,tipoDoc,nroDoc,mail,pais,domCalle,
                                         domNumero,domPiso,domDepto,localidad,nacionalidad,fechaNac,habilitado);
+
+                cliente.Show(this);
+                this.Hide();
+
             }
             if (e.ColumnIndex == 16)
             {

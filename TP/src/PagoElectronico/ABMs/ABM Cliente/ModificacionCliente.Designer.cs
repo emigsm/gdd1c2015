@@ -291,6 +291,7 @@
             this.habilitadocheckBox.TabIndex = 34;
             this.habilitadocheckBox.Text = "Estado";
             this.habilitadocheckBox.UseVisualStyleBackColor = true;
+            this.habilitadocheckBox.CheckedChanged += new System.EventHandler(this.habilitadocheckBox_CheckedChanged);
             // 
             // IDClienteDesclabel
             // 

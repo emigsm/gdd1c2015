@@ -45,6 +45,18 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         }
 
+        private void CrearClienteBtn_Click(object sender, EventArgs e)
+        {
+
+            GestorDeSistema.crearCliente(NombreClitextBox.Text, ApellidoNuevoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
+                                         Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
+                                         Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToInt32(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
+                                         LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value);
+
+            Owner.Show();
+            this.Hide();
+        }
+
       /*  public void dehabilitarModificacion()
         {
             Guardarbutton.Enabled = false;

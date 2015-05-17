@@ -141,6 +141,13 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 ModificacionCliente cliente = new ModificacionCliente(id, nombre,apellido,tipoDoc,nroDoc,mail,pais,domCalle,
                                         domNumero,domPiso,domDepto,localidad,nacionalidad,fechaNac,habilitado);
 
+
+                dgvClientes.Rows.Clear();
+                nroDocTextBox.Text = "";
+                nombreClienteTextBox.Text = "";
+                ApellidoClienteTextBox.Text = "";
+                mailTextBox.Text = "";
+
                 cliente.Show(this);
                 this.Hide();
 
@@ -149,6 +156,13 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             {
               int id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
               GestorDeSistema.darBajaCliente(id);
+
+
+              dgvClientes.Rows.Clear();
+              nroDocTextBox.Text = "";
+              nombreClienteTextBox.Text = "";
+              ApellidoClienteTextBox.Text = "";
+              mailTextBox.Text = ""; 
             }
            
         }
@@ -156,6 +170,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         private void nuevoClienteButton_Click(object sender, EventArgs e)
         {
             AltaCliente nuevoCliente = new AltaCliente();
+
+            dgvClientes.Rows.Clear();
+            nroDocTextBox.Text = "";
+            nombreClienteTextBox.Text = "";
+            ApellidoClienteTextBox.Text = "";
+            mailTextBox.Text = "";
            
             nuevoCliente.Show(this);
             this.Hide();

@@ -8,5 +8,8 @@
 	las cuentas tambien?(trigger o procedure??)
 
 
-
+------------------------COSAS A CORREGIR TP---------------------
+-validaciones ABM cliente (restringir la longitud de las cadenas y que no acepten caracteres) 
+-validaciones cuenta (restringir la longitud de las cadenas y que no acepten caracteres) 
+-entre otras.
 

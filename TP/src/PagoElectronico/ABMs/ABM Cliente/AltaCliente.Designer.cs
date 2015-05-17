@@ -52,10 +52,10 @@
             this.NacionalidadLabel = new System.Windows.Forms.Label();
             this.fechaNacimientodateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.FechaNaclabel = new System.Windows.Forms.Label();
-           
             this.VolverButton = new System.Windows.Forms.Button();
             this.PaiscomboBox = new System.Windows.Forms.ComboBox();
             this.NacionalidadtextBox = new System.Windows.Forms.TextBox();
+            this.CrearClienteBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NombreLabel
@@ -253,10 +253,6 @@
             this.FechaNaclabel.TabIndex = 25;
             this.FechaNaclabel.Text = "Fecha de Nacimiento:";
             // 
-            // Crearbutton
-            // 
-
-            // 
             // VolverButton
             // 
             this.VolverButton.Location = new System.Drawing.Point(284, 484);
@@ -282,15 +278,25 @@
             this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.NacionalidadtextBox.TabIndex = 33;
             // 
+            // CrearClienteBtn
+            // 
+            this.CrearClienteBtn.Location = new System.Drawing.Point(38, 484);
+            this.CrearClienteBtn.Name = "CrearClienteBtn";
+            this.CrearClienteBtn.Size = new System.Drawing.Size(170, 44);
+            this.CrearClienteBtn.TabIndex = 34;
+            this.CrearClienteBtn.Text = "Crear Cliente";
+            this.CrearClienteBtn.UseVisualStyleBackColor = true;
+            this.CrearClienteBtn.Click += new System.EventHandler(this.CrearClienteBtn_Click);
+            // 
             // AltaCliente
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 580);
+            this.Controls.Add(this.CrearClienteBtn);
             this.Controls.Add(this.NacionalidadtextBox);
             this.Controls.Add(this.PaiscomboBox);
             this.Controls.Add(this.VolverButton);
-        
             this.Controls.Add(this.FechaNaclabel);
             this.Controls.Add(this.fechaNacimientodateTimePicker);
             this.Controls.Add(this.NacionalidadLabel);
@@ -348,9 +354,9 @@
         private System.Windows.Forms.Label NacionalidadLabel;
         private System.Windows.Forms.DateTimePicker fechaNacimientodateTimePicker;
         private System.Windows.Forms.Label FechaNaclabel;
-        //private System.Windows.Forms.Button Crearbutton;
         private System.Windows.Forms.Button VolverButton;
         private System.Windows.Forms.ComboBox PaiscomboBox;
         private System.Windows.Forms.TextBox NacionalidadtextBox;
+        private System.Windows.Forms.Button CrearClienteBtn;
     }
 }

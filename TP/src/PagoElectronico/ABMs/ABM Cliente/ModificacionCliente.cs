@@ -32,8 +32,16 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             NombreClitextBox.Text = nombre;
             TipoDcomboBox.SelectedValue = tipoDoc;
             NroDocClitextBox.Text = nroDoc.ToString();
+            MailtextBox.Text = mail;
             PaiscomboBox.SelectedValue = pais;
-
+            DomicilioCalletextBox.Text = domCalle;
+            DomNumerotextBox.Text = domNumero.ToString();
+            DomicilioPisoTextBox.Text = domPiso.ToString();
+            DomicilioDeptotextBox.Text = domDepto;
+            LocalidadtextBox.Text = localidad;
+            NacionalidadtextBox.Text = nacionalidad;
+            fechaNacimientodateTimePicker.Value = fechaNac;
+            
 
 
 
@@ -54,6 +62,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                                          Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToInt32(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value, habilitadocheckBox.Checked);
+            Owner.Show();
+            this.Hide();
         }
 
         

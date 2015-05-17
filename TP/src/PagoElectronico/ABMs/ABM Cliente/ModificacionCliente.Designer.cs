@@ -96,6 +96,8 @@
             this.TipoDcomboBox.Name = "TipoDcomboBox";
             this.TipoDcomboBox.Size = new System.Drawing.Size(121, 21);
             this.TipoDcomboBox.TabIndex = 3;
+            this.TipoDcomboBox.SelectedIndexChanged += new System.EventHandler(this.TipoDcomboBox_SelectedIndexChanged);
+            this.TipoDcomboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TipoDcomboBox_KeyDown);
             // 
             // NroDocLabel
             // 
@@ -112,6 +114,7 @@
             this.NroDocClitextBox.Name = "NroDocClitextBox";
             this.NroDocClitextBox.Size = new System.Drawing.Size(131, 20);
             this.NroDocClitextBox.TabIndex = 5;
+            this.NroDocClitextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NroDocClitextBox_KeyDown);
             this.NroDocClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroDocClitextBox_KeyPress);
             // 
             // ApellidoClitextBox
@@ -120,6 +123,7 @@
             this.ApellidoClitextBox.Name = "ApellidoClitextBox";
             this.ApellidoClitextBox.Size = new System.Drawing.Size(148, 20);
             this.ApellidoClitextBox.TabIndex = 6;
+            this.ApellidoClitextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ApellidoClitextBox_KeyDown);
             this.ApellidoClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ApellidoClitextBox_KeyPress);
             // 
             // NombreClitextBox
@@ -128,6 +132,7 @@
             this.NombreClitextBox.Name = "NombreClitextBox";
             this.NombreClitextBox.Size = new System.Drawing.Size(148, 20);
             this.NombreClitextBox.TabIndex = 7;
+            this.NombreClitextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NombreClitextBox_KeyDown);
             this.NombreClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NombreClitextBox_KeyPress);
             // 
             // Maillabel
@@ -145,6 +150,8 @@
             this.MailtextBox.Name = "MailtextBox";
             this.MailtextBox.Size = new System.Drawing.Size(121, 20);
             this.MailtextBox.TabIndex = 9;
+            this.MailtextBox.TextChanged += new System.EventHandler(this.MailtextBox_TextChanged);
+            this.MailtextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MailtextBox_KeyDown);
             // 
             // Paislabel
             // 
@@ -170,6 +177,7 @@
             this.DomicilioCalletextBox.Name = "DomicilioCalletextBox";
             this.DomicilioCalletextBox.Size = new System.Drawing.Size(121, 20);
             this.DomicilioCalletextBox.TabIndex = 13;
+            this.DomicilioCalletextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomicilioCalletextBox_KeyDown);
             // 
             // DomNrolabel
             // 
@@ -186,6 +194,7 @@
             this.DomNumerotextBox.Name = "DomNumerotextBox";
             this.DomNumerotextBox.Size = new System.Drawing.Size(118, 20);
             this.DomNumerotextBox.TabIndex = 15;
+            this.DomNumerotextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomNumerotextBox_KeyDown);
             this.DomNumerotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomNumerotextBox_KeyPress);
             // 
             // DomPisolabel
@@ -203,6 +212,7 @@
             this.DomicilioPisoTextBox.Name = "DomicilioPisoTextBox";
             this.DomicilioPisoTextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioPisoTextBox.TabIndex = 17;
+            this.DomicilioPisoTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomicilioPisoTextBox_KeyDown);
             this.DomicilioPisoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioPisoTextBox_KeyPress);
             // 
             // DomicilioDeptoNuevolabel
@@ -220,6 +230,7 @@
             this.DomicilioDeptotextBox.Name = "DomicilioDeptotextBox";
             this.DomicilioDeptotextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioDeptotextBox.TabIndex = 19;
+            this.DomicilioDeptotextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomicilioDeptotextBox_KeyDown);
             this.DomicilioDeptotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioDeptotextBox_KeyPress);
             // 
             // localLabel
@@ -237,6 +248,7 @@
             this.LocalidadtextBox.Name = "LocalidadtextBox";
             this.LocalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.LocalidadtextBox.TabIndex = 21;
+            this.LocalidadtextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LocalidadtextBox_KeyDown);
             // 
             // NacionalidadLabel
             // 
@@ -253,6 +265,7 @@
             this.fechaNacimientodateTimePicker.Name = "fechaNacimientodateTimePicker";
             this.fechaNacimientodateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.fechaNacimientodateTimePicker.TabIndex = 24;
+            this.fechaNacimientodateTimePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fechaNacimientodateTimePicker_KeyDown);
             // 
             // FechaNaclabel
             // 
@@ -280,6 +293,7 @@
             this.PaiscomboBox.Name = "PaiscomboBox";
             this.PaiscomboBox.Size = new System.Drawing.Size(121, 21);
             this.PaiscomboBox.TabIndex = 32;
+            this.PaiscomboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PaiscomboBox_KeyDown);
             // 
             // NacionalidadtextBox
             // 
@@ -287,6 +301,7 @@
             this.NacionalidadtextBox.Name = "NacionalidadtextBox";
             this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.NacionalidadtextBox.TabIndex = 33;
+            this.NacionalidadtextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NacionalidadtextBox_KeyDown);
             this.NacionalidadtextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NacionalidadtextBox_KeyPress);
             // 
             // habilitadocheckBox

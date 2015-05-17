@@ -112,6 +112,7 @@
             this.NroDocClitextBox.Name = "NroDocClitextBox";
             this.NroDocClitextBox.Size = new System.Drawing.Size(131, 20);
             this.NroDocClitextBox.TabIndex = 5;
+            this.NroDocClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroDocClitextBox_KeyPress);
             // 
             // ApellidoClitextBox
             // 
@@ -119,6 +120,7 @@
             this.ApellidoClitextBox.Name = "ApellidoClitextBox";
             this.ApellidoClitextBox.Size = new System.Drawing.Size(148, 20);
             this.ApellidoClitextBox.TabIndex = 6;
+            this.ApellidoClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ApellidoClitextBox_KeyPress);
             // 
             // NombreClitextBox
             // 
@@ -126,6 +128,7 @@
             this.NombreClitextBox.Name = "NombreClitextBox";
             this.NombreClitextBox.Size = new System.Drawing.Size(148, 20);
             this.NombreClitextBox.TabIndex = 7;
+            this.NombreClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NombreClitextBox_KeyPress);
             // 
             // Maillabel
             // 
@@ -183,6 +186,7 @@
             this.DomNumerotextBox.Name = "DomNumerotextBox";
             this.DomNumerotextBox.Size = new System.Drawing.Size(118, 20);
             this.DomNumerotextBox.TabIndex = 15;
+            this.DomNumerotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomNumerotextBox_KeyPress);
             // 
             // DomPisolabel
             // 
@@ -199,6 +203,7 @@
             this.DomicilioPisoTextBox.Name = "DomicilioPisoTextBox";
             this.DomicilioPisoTextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioPisoTextBox.TabIndex = 17;
+            this.DomicilioPisoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioPisoTextBox_KeyPress);
             // 
             // DomicilioDeptoNuevolabel
             // 
@@ -215,6 +220,7 @@
             this.DomicilioDeptotextBox.Name = "DomicilioDeptotextBox";
             this.DomicilioDeptotextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioDeptotextBox.TabIndex = 19;
+            this.DomicilioDeptotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioDeptotextBox_KeyPress);
             // 
             // localLabel
             // 
@@ -281,6 +287,7 @@
             this.NacionalidadtextBox.Name = "NacionalidadtextBox";
             this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.NacionalidadtextBox.TabIndex = 33;
+            this.NacionalidadtextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NacionalidadtextBox_KeyPress);
             // 
             // habilitadocheckBox
             // 

@@ -12,7 +12,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class ModificacionCliente : Form
     {
-        public ModificacionCliente(Int32 id, string nombre, string apellido, int tipoDoc, int nroDoc, string mail, int pais, string domCalle,
+        public ModificacionCliente(Int32 id, string nombre, string apellido, int tipoDoc, Decimal nroDoc, string mail, int pais, string domCalle,
                                         Decimal domNumero, Decimal domPiso, string domDepto,
                                         string localidad, string nacionalidad, DateTime fechaNac, bool habilitado)
         {
@@ -42,6 +42,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             NacionalidadtextBox.Text = nacionalidad;
             fechaNacimientodateTimePicker.Value = fechaNac;
             habilitadocheckBox.Checked = habilitado;
+            establecerLongMaximaCampos();
             if (habilitadocheckBox.Checked == true)
             {
                 habilitadocheckBox.Text = "Habilitado";
@@ -69,8 +70,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
 
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
-                                         Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
-                                         Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToInt32(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
+                                         Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
+                                         Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToDecimal(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value, habilitadocheckBox.Checked);
             Owner.Show();
             this.Hide();
@@ -88,9 +89,21 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             }
         }
 
+        private void establecerLongMaximaCampos()
+        {
+            ApellidoClitextBox.MaxLength = 255;
+            NombreClitextBox.MaxLength = 255;
+            NroDocClitextBox.MaxLength= sizeof(Decimal);
+            MailtextBox.MaxLength = 255;
+            DomicilioCalletextBox.MaxLength = 255;
+            DomNumerotextBox.MaxLength = sizeof(Decimal);
+            DomicilioPisoTextBox.MaxLength=sizeof(Decimal);
+            DomicilioDeptotextBox.MaxLength = 10;
+            LocalidadtextBox.MaxLength = 60;
+            NacionalidadtextBox.MaxLength = 60;
+        }
 
-
-        private void validarLongitudCampos(TextBox box,Int32 longitud)
+     /*  private void validarLongitudCampos(TextBox box,Int32 longitud)
         {
             if (box.Text.Length > longitud)
             {
@@ -98,13 +111,15 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             }
             
         }
+        */
 
+//--------------------------------------VALIDACIONES----TEXTBOX-------------------------------------------------------------------------------
         private void NombreClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
 
-                validarLongitudCampos(NombreClitextBox, 3);
+              
                 MessageBox.Show("el campo Nombre no puede tener numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;
                 return;

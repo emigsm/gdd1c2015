@@ -66,8 +66,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void guardarBoton_Click(object sender, EventArgs e)
         {
-            
-            
+
+
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToInt32(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
@@ -90,55 +90,91 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
 
 
-        private Boolean validarCampos()
+        private void validarLongitudCampos(TextBox box,Int32 longitud)
         {
-            if ((validarSoloTexto(NombreClitextBox, 255) |
-            validarSoloTexto(ApellidoClitextBox, 255) |
-            validarSoloTexto(MailtextBox, 250) |
-            validarSoloDigitos(NroDocClitextBox, sizeof(Decimal)) |
-            validarSoloTexto(DomicilioCalletextBox, 255) |
-            validarSoloDigitos(DomNumerotextBox, sizeof(Decimal)) |
-            validarSoloDigitos(DomicilioPisoTextBox, sizeof(Decimal)) |
-            validarSoloTexto(DomicilioPisoTextBox, 10) |
-            validarSoloTexto(LocalidadtextBox, 255) |
-            validarSoloTexto(NacionalidadtextBox, 255)) == false)
+            if (box.Text.Length > longitud)
             {
-                return false;
+                MessageBox.Show("hay un campo que no cumple con la longitud maxima", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else
-            {
-                return true;
-            }
-            /*validarSoloTexto(NombreClitextBox,255);
-            validarSoloTexto(ApellidoClitextBox,255);
-            validarSoloTexto(MailtextBox,250);
-            validarSoloDigitos(NroDocClitextBox,sizeof(Decimal));
-            validarSoloTexto(DomicilioCalletextBox, 255);
-            validarSoloDigitos(DomNumerotextBox, sizeof(Decimal));
-            validarSoloDigitos(DomicilioPisoTextBox,sizeof(Decimal));
-            validarSoloTexto(DomicilioPisoTextBox, 10);
-            validarSoloTexto(LocalidadtextBox, 255);
-            validarSoloTexto(NacionalidadtextBox, 255);*/
+            
         }
 
-        private Boolean validarSoloTexto(TextBox text,int longitud)
+        private void NombreClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            for (Int32 i = 0; i == text.Text.Length; i++)
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
             {
-                if((text.Text[i].ToString()))
-                {
 
-                }
+                validarLongitudCampos(NombreClitextBox, 3);
+                MessageBox.Show("el campo Nombre no puede tener numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
             }
-                return true;
         }
-        private Boolean validarSoloDigitos(TextBox text,int longitud)
+
+        private void ApellidoClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            return true;
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("el campo Apellido no puede tener numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
         }
-   
+
+        private void NroDocClitextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+
+
+
+
+        }
+
+        private void DomNumerotextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo Nro Documento Solo permite Numeros", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void DomicilioPisoTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo domicilio piso solo permite Numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void DomicilioDeptotextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void NacionalidadtextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("el campo Nacionalidad no puede tener numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+
+
+        
+
+
+
     }
-
-  
-
 }

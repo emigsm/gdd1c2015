@@ -61,8 +61,6 @@
             this.buscarButton = new System.Windows.Forms.Button();
             this.limpiarButton = new System.Windows.Forms.Button();
             this.volverButton = new System.Windows.Forms.Button();
-            this.TipoDocPrubelabel = new System.Windows.Forms.Label();
-            this.prubaDoc1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvClientes)).BeginInit();
             this.SuspendLayout();
             // 
@@ -328,30 +326,11 @@
             this.volverButton.UseVisualStyleBackColor = true;
             this.volverButton.Click += new System.EventHandler(this.volverButton_Click);
             // 
-            // TipoDocPrubelabel
-            // 
-            this.TipoDocPrubelabel.AutoSize = true;
-            this.TipoDocPrubelabel.Location = new System.Drawing.Point(329, 136);
-            this.TipoDocPrubelabel.Name = "TipoDocPrubelabel";
-            this.TipoDocPrubelabel.Size = new System.Drawing.Size(0, 13);
-            this.TipoDocPrubelabel.TabIndex = 16;
-            // 
-            // prubaDoc1
-            // 
-            this.prubaDoc1.AutoSize = true;
-            this.prubaDoc1.Location = new System.Drawing.Point(298, 136);
-            this.prubaDoc1.Name = "prubaDoc1";
-            this.prubaDoc1.Size = new System.Drawing.Size(75, 13);
-            this.prubaDoc1.TabIndex = 17;
-            this.prubaDoc1.Text = "prubaTipoDoc";
-            // 
             // ABMClientePrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(775, 479);
-            this.Controls.Add(this.prubaDoc1);
-            this.Controls.Add(this.TipoDocPrubelabel);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.limpiarButton);
             this.Controls.Add(this.buscarButton);
@@ -393,8 +372,6 @@
         private System.Windows.Forms.Button buscarButton;
         private System.Windows.Forms.Button limpiarButton;
         private System.Windows.Forms.Button volverButton;
-        private System.Windows.Forms.Label TipoDocPrubelabel;
-        private System.Windows.Forms.Label prubaDoc1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cliente_Apellido;

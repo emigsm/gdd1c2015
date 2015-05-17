@@ -41,10 +41,10 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         {
             dgvClientes.Rows.Clear();
 
-            prubaDoc1.Text = nroDocTextBox.Text.GetType().ToString();
+          
             string tipoDoc = tipoDocComboBox.SelectedValue.ToString();
             string nroDoc = nroDocTextBox.Text;
-            prubaDoc1.Text = nroDocTextBox.Text.Length.ToString();
+           
 
 
             DataTable clientesEncontrados = GestorDeSistema.buscarClientes(nombreClienteTextBox.Text,ApellidoClienteTextBox.Text,tipoDoc,nroDoc,mailTextBox.Text);

@@ -482,7 +482,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         }
 
 
-        public static void modificarCliente(Int32 id,string nombre, string apellido, int tipoDoc, int nroDoc, string mail, int pais, string domCalle,
+        public static void modificarCliente(Int32 id,string nombre, string apellido, int tipoDoc, Decimal nroDoc, string mail, int pais, string domCalle,
                                         Decimal domNumero, Decimal domPiso, string domDepto,
                                         string localidad, string nacionalidad, DateTime fechaNac,bool habilitado)
         {

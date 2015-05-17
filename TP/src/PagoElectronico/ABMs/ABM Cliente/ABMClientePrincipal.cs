@@ -126,7 +126,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 String nombre = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nombre"].Value.ToString();
                 String apellido = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Apellido"].Value.ToString();
                 Int32 tipoDoc=Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Tipo_Doc"].Value.ToString());
-                Int32 nroDoc= Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Numero_Documento"].Value.ToString());
+                Decimal nroDoc= Convert.ToDecimal(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Numero_Documento"].Value.ToString());
                 String mail = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Mail"].Value.ToString();
                 Int32 pais = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Pais"].Value.ToString());
                 String domCalle = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Calle"].Value.ToString();

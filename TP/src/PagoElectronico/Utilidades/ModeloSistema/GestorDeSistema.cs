@@ -447,7 +447,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         }
 
         public static void crearCliente(string nombre,string apellido,int tipoDoc,int nroDoc,string mail,int pais,string domCalle,
-                                        Decimal domNumero,Decimal domPiso,string domDepto,string localidad, string nacionalidad, DateTime fechaNac)
+                                        String domNumero,String domPiso,string domDepto,string localidad, string nacionalidad, DateTime fechaNac)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@nombre",nombre));

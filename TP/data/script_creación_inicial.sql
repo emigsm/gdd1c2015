@@ -1196,13 +1196,27 @@ CREATE PROCEDURE GEM4.spCrearCliente
 	@mail	  NVARCHAR(255),
 	@pais	  NUMERIC(18,0),
 	@domicilio NVARCHAR(255),
-	@domicilioNumero NUMERIC(18,0),
-	@domicilioPiso	 NUMERIC(18,0),
+	--@domicilioNumero NUMERIC(18,0),
+	--@domicilioPiso	 NUMERIC(18,0),
+	@domicilioNumero	NVARCHAR(255),
+	@domicilioPiso		NVARCHAR(255),
 	@domicilioDepto	 NVARCHAR(10),
 	@localidad		 NVARCHAR(60),
 	@nacionalidad	 NVARCHAR(60),
 	@fechaNac		 DATETIME
 AS
+	
+	IF(@domicilioNumero='')
+	BEGIN
+		SET @domicilioNumero=null;
+	END
+
+	
+	IF(@domicilioPiso='')
+	BEGIN
+		SET @domicilioPiso=null;
+	END
+	
 	INSERT INTO GEM4.Cliente(Cliente_Nombre,Cliente_Apellido,Cliente_Tipo_Doc,Cliente_Numero_Documento,Cliente_Mail,Cliente_Pais,
 				Cliente_Dom_Calle,Cliente_Dom_Numero,Cliente_Dom_Piso,Cliente_Dom_Depto,Cliente_Localidad,Cliente_Nacionalidad,Cliente_Fecha_Nacimiento,Cliente_Habilitado)
 	VALUES (@nombre,@apellido,@tipoDoc,@nroDoc,@mail,@pais,@domicilio,

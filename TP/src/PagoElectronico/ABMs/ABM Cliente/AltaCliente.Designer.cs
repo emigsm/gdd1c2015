@@ -134,7 +134,7 @@
             // 
             // MailtextBox
             // 
-            this.MailtextBox.Location = new System.Drawing.Point(126, 124);
+            this.MailtextBox.Location = new System.Drawing.Point(126, 123);
             this.MailtextBox.Name = "MailtextBox";
             this.MailtextBox.Size = new System.Drawing.Size(121, 20);
             this.MailtextBox.TabIndex = 9;

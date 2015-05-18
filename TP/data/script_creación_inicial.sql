@@ -260,7 +260,7 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Moneda							INT	DEFAULT 1,
 	Cuenta_Tipo								INT	DEFAULT 4,
 	Cuenta_Cliente_ID						INT,
-	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 10000,--LO HARDCODEO PARA AVANZAR DESPUES HAY Q HACER ALGUN ALGORITMO
+	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 0,-- LO INICIALIZO EN CERO A VER SI FUNCA LO QUE NOS DIJERON LOS AYUDANTES
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
 	FOREIGN KEY(Cuenta_Moneda) REFERENCES GEM4.Moneda(Moneda_Codigo),
@@ -503,7 +503,8 @@ BEGIN
 					Cuenta_Numero,Cheque_Numero,Cheque_Fecha,Cheque_Importe,Banco_Cogido,
 					Deposito_Codigo,Deposito_Fecha,Deposito_Importe,Tarjeta_Numero,
 					Transf_Fecha,Trans_Importe,Trans_Costo_Trans,Cuenta_Dest_Numero
-	FROM gd_esquema.Maestra ;
+	FROM gd_esquema.Maestra
+	ORDER BY Deposito_Fecha asc,Retiro_Fecha asc,Transf_Fecha asc ;
 
 	    OPEN Cursor1;
 	FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
@@ -592,7 +593,7 @@ BEGIN
 				VALUES(GEM4.fnValidarFecha(@transfFecha),@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion);
 				
 				UPDATE GEM4.Cuenta
-				SET Cuenta_Saldo=Cuenta_Saldo - @transfImporte -@transfCosto
+				SET Cuenta_Saldo=Cuenta_Saldo - @transfImporte -- -@transfCosto
 				WHERE Cuenta_Numero=@cuentaNumero;
 				
 				UPDATE GEM4.Cuenta

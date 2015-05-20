@@ -1,15 +1,12 @@
--fechas de sistema, 
--tipo de dato duracion cuentas,costo cuentas etc
--asignar tarjeta
--crear tarjeta
--desvincular tarjeta
--cual es el codigo tarjeta encriptado,como lo quieren?
--si se da de baja el cliente, se tienen que dar de baja 
-	las cuentas tambien?(trigger o procedure??)
 
 
 ------------------------COSAS A CORREGIR TP---------------------
 -validaciones ABM cliente (restringir la longitud de las cadenas y que no acepten caracteres) 
 -validaciones cuenta (restringir la longitud de las cadenas y que no acepten caracteres) 
+-checkear las inconsistencias cuando se migran los datos
+	(por ejemplo que no se nos pase por alto ninguna inconsistencia
+	 con los clientes).
+
+
 -entre otras.
 

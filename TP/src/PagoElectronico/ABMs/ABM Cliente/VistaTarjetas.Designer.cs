@@ -32,15 +32,16 @@
             this.tarjetaNombreCliLabel = new System.Windows.Forms.Label();
             this.tarjetaCliIdLabel = new System.Windows.Forms.Label();
             this.dgvTarjetas = new System.Windows.Forms.DataGridView();
+            this.TarjetaVolverBtn = new System.Windows.Forms.Button();
+            this.ClienteIDlabelDesc = new System.Windows.Forms.Label();
+            this.DesvincularTarjetabutton = new System.Windows.Forms.Button();
+            this.AsociarTarjetabutton = new System.Windows.Forms.Button();
             this.Tarjeta_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Codigo_Seg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Emisor_Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Fecha_Emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tarjeta_Fecha_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TarjetaVolverBtn = new System.Windows.Forms.Button();
-            this.ClienteIDlabelDesc = new System.Windows.Forms.Label();
-            this.DesvincularTarjetabutton = new System.Windows.Forms.Button();
-            this.AsociarTarjetabutton = new System.Windows.Forms.Button();
+            this.Tarjeta_Habilitada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -81,43 +82,14 @@
             this.Tarjeta_Codigo_Seg,
             this.Tarjeta_Emisor_Descripcion,
             this.Tarjeta_Fecha_Emision,
-            this.Tarjeta_Fecha_Vencimiento});
+            this.Tarjeta_Fecha_Vencimiento,
+            this.Tarjeta_Habilitada});
             this.dgvTarjetas.Location = new System.Drawing.Point(12, 95);
             this.dgvTarjetas.Name = "dgvTarjetas";
             this.dgvTarjetas.ReadOnly = true;
             this.dgvTarjetas.Size = new System.Drawing.Size(312, 150);
             this.dgvTarjetas.TabIndex = 3;
             this.dgvTarjetas.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTarjetas_CellContentClick);
-            // 
-            // Tarjeta_Numero
-            // 
-            this.Tarjeta_Numero.HeaderText = "Numero de Tarjeta";
-            this.Tarjeta_Numero.Name = "Tarjeta_Numero";
-            this.Tarjeta_Numero.ReadOnly = true;
-            // 
-            // Tarjeta_Codigo_Seg
-            // 
-            this.Tarjeta_Codigo_Seg.HeaderText = "Codigo de Seguridad";
-            this.Tarjeta_Codigo_Seg.Name = "Tarjeta_Codigo_Seg";
-            this.Tarjeta_Codigo_Seg.ReadOnly = true;
-            // 
-            // Tarjeta_Emisor_Descripcion
-            // 
-            this.Tarjeta_Emisor_Descripcion.HeaderText = "Emisora";
-            this.Tarjeta_Emisor_Descripcion.Name = "Tarjeta_Emisor_Descripcion";
-            this.Tarjeta_Emisor_Descripcion.ReadOnly = true;
-            // 
-            // Tarjeta_Fecha_Emision
-            // 
-            this.Tarjeta_Fecha_Emision.HeaderText = "Fecha de Emision";
-            this.Tarjeta_Fecha_Emision.Name = "Tarjeta_Fecha_Emision";
-            this.Tarjeta_Fecha_Emision.ReadOnly = true;
-            // 
-            // Tarjeta_Fecha_Vencimiento
-            // 
-            this.Tarjeta_Fecha_Vencimiento.HeaderText = "Fecha Vencimiento";
-            this.Tarjeta_Fecha_Vencimiento.Name = "Tarjeta_Fecha_Vencimiento";
-            this.Tarjeta_Fecha_Vencimiento.ReadOnly = true;
             // 
             // TarjetaVolverBtn
             // 
@@ -156,6 +128,42 @@
             this.AsociarTarjetabutton.Text = "AsociarTarjeta";
             this.AsociarTarjetabutton.UseVisualStyleBackColor = true;
             // 
+            // Tarjeta_Numero
+            // 
+            this.Tarjeta_Numero.HeaderText = "Numero de Tarjeta";
+            this.Tarjeta_Numero.Name = "Tarjeta_Numero";
+            this.Tarjeta_Numero.ReadOnly = true;
+            // 
+            // Tarjeta_Codigo_Seg
+            // 
+            this.Tarjeta_Codigo_Seg.HeaderText = "Codigo de Seguridad";
+            this.Tarjeta_Codigo_Seg.Name = "Tarjeta_Codigo_Seg";
+            this.Tarjeta_Codigo_Seg.ReadOnly = true;
+            // 
+            // Tarjeta_Emisor_Descripcion
+            // 
+            this.Tarjeta_Emisor_Descripcion.HeaderText = "Emisora";
+            this.Tarjeta_Emisor_Descripcion.Name = "Tarjeta_Emisor_Descripcion";
+            this.Tarjeta_Emisor_Descripcion.ReadOnly = true;
+            // 
+            // Tarjeta_Fecha_Emision
+            // 
+            this.Tarjeta_Fecha_Emision.HeaderText = "Fecha de Emision";
+            this.Tarjeta_Fecha_Emision.Name = "Tarjeta_Fecha_Emision";
+            this.Tarjeta_Fecha_Emision.ReadOnly = true;
+            // 
+            // Tarjeta_Fecha_Vencimiento
+            // 
+            this.Tarjeta_Fecha_Vencimiento.HeaderText = "Fecha Vencimiento";
+            this.Tarjeta_Fecha_Vencimiento.Name = "Tarjeta_Fecha_Vencimiento";
+            this.Tarjeta_Fecha_Vencimiento.ReadOnly = true;
+            // 
+            // Tarjeta_Habilitada
+            // 
+            this.Tarjeta_Habilitada.HeaderText = "Habilitada";
+            this.Tarjeta_Habilitada.Name = "Tarjeta_Habilitada";
+            this.Tarjeta_Habilitada.ReadOnly = true;
+            // 
             // VistaTarjetas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,11 +194,12 @@
         private System.Windows.Forms.Button TarjetaVolverBtn;
         private System.Windows.Forms.Label ClienteIDlabelDesc;
         private System.Windows.Forms.Button DesvincularTarjetabutton;
+        private System.Windows.Forms.Button AsociarTarjetabutton;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Numero;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Codigo_Seg;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Emisor_Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Fecha_Emision;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tarjeta_Fecha_Vencimiento;
-        private System.Windows.Forms.Button AsociarTarjetabutton;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn Tarjeta_Habilitada;
     }
 }

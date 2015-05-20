@@ -67,7 +67,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void guardarBoton_Click(object sender, EventArgs e)
         {
-
+            if (NroDocClitextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar el Nro de Documento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+               /* e.Handled = true;*/
+                return;
+            }
 
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
@@ -145,6 +150,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 e.Handled = true;
                 return;
             }
+            
 
        }
 

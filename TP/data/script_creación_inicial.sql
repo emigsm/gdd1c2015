@@ -195,8 +195,8 @@ CREATE TABLE GEM4.Cliente(
 	Cliente_Dom_Numero			NUMERIC(18,0),
 	Cliente_Dom_Piso			NUMERIC(18,0),
 	Cliente_Dom_Depto			NVARCHAR(10),
-	Cliente_Localidad			NVARCHAR(60),				--no esta en maestra
-	Cliente_Nacionalidad		NVARCHAR(60),				--no esta en maestra
+	Cliente_Localidad			NVARCHAR(60),				
+	Cliente_Nacionalidad		NVARCHAR(60),				
 	Cliente_Fecha_Nacimiento	DATETIME,
 	Cliente_Habilitado			BIT DEFAULT 1,
 	PRIMARY KEY(Cliente_ID),
@@ -275,16 +275,15 @@ CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
 	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
 	Tarjeta_Cliente_ID						INT,
-	--agregar un habilitado????????????
+	Tarjeta_Habilitado						BIT DEFAULT 1
 	PRIMARY KEY(Tarjeta_Numero),
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
 	)
 CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Fecha							DATETIME,
-	--Factura_Cuenta							NUMERIC(18,0),
 	PRIMARY KEY(Factura_Numero),
-	--FOREIGN KEY(Factura_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
+	
 	)
 
 
@@ -328,7 +327,7 @@ CREATE TABLE GEM4.Deposito(
 
 
 
-CREATE TABLE GEM4.Transferencia( --aca omiti todos los campos de Cuenta_Dest porque los podemos sacar de cuenta, a DISCUTIR si hice bien o no
+CREATE TABLE GEM4.Transferencia( 
 	Transferencia_Codigo					INT IDENTITY(1,1),
 	Transferencia_Fecha						DATETIME,
 	Transferencia_Importe					NUMERIC(18,2),
@@ -659,6 +658,8 @@ SELECT DISTINCT m.Tarjeta_Numero,GEM4.fnValidarFecha(m.Tarjeta_Fecha_Emision),m.
 	   m.Tarjeta_Emisor_Descripcion,c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL
+
+
 
 SET IDENTITY_INSERT GEM4.Banco ON;
 INSERT INTO GEM4.Banco(Banco_Codigo,Banco_Direccion,Banco_Nombre)
@@ -1153,7 +1154,7 @@ GO
 CREATE PROCEDURE GEM4.spObtenerTarjetasCliente
 	@clienteID	INT
 AS
-	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,t.Tarjeta_Emisor_Descripcion,t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento
+	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,t.Tarjeta_Emisor_Descripcion,t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
 	FROM GEM4.Tarjeta t
 	WHERE t.Tarjeta_Cliente_ID=@clienteID
 GO				
@@ -1190,21 +1191,19 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearCliente')
 GO
 
 CREATE PROCEDURE GEM4.spCrearCliente
-	@nombre NVARCHAR(255),
-	@apellido NVARCHAR(255),
-	@tipoDoc  NUMERIC(18,0),
-	@nroDoc	  NUMERIC(18,0),
-	@mail	  NVARCHAR(255),
-	@pais	  NUMERIC(18,0),
-	@domicilio NVARCHAR(255),
-	--@domicilioNumero NUMERIC(18,0),
-	--@domicilioPiso	 NUMERIC(18,0),
+	@nombre				NVARCHAR(255),
+	@apellido			NVARCHAR(255),
+	@tipoDoc			NUMERIC(18,0),
+	@nroDoc				NUMERIC(18,0),
+	@mail				NVARCHAR(255),
+	@pais				NUMERIC(18,0),
+	@domicilio			NVARCHAR(255),
 	@domicilioNumero	NVARCHAR(255),
 	@domicilioPiso		NVARCHAR(255),
-	@domicilioDepto	 NVARCHAR(10),
-	@localidad		 NVARCHAR(60),
-	@nacionalidad	 NVARCHAR(60),
-	@fechaNac		 DATETIME
+	@domicilioDepto		NVARCHAR(10),
+	@localidad			NVARCHAR(60),
+	@nacionalidad		NVARCHAR(60),
+	@fechaNac			DATETIME
 AS
 	
 	IF(@domicilioNumero='')
@@ -1268,3 +1267,4 @@ AS
 	
 	
 GO
+

@@ -27,15 +27,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
          }
 
         private void Crearbutton_Click(object sender, EventArgs e)
-        {
-        
-  
-
-
-    /*            GestorDeSistema.crearCliente(NombreClitextBox.Text,ApellidoNuevoClitextBox.Text,Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
-                                         Convert.ToInt32(NroDocClitextBox.Text),MailtextBox.Text,Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()),DomicilioCalletextBox.Text,
-                                         Convert.ToDecimal(DomNumerotextBox.Text),Convert.ToInt32(DomicilioPisoTextBox.Text),DomicilioDeptotextBox.Text,
-                                         LocalidadtextBox.Text,NacionalidadtextBox.Text,fechaNacimientodateTimePicker.Value);*/
+        {     
         }
 
         private void VolverButton_Click(object sender, EventArgs e)
@@ -48,16 +40,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         private void CrearClienteBtn_Click(object sender, EventArgs e)
         {
 
-            /*GestorDeSistema.crearCliente(NombreClitextBox.Text, ApellidoNuevoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
-                                         Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
-                                         Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToInt32(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
-                                         LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value);
-            */
+            
 
             if (NroDocClitextBox.Text == "")
             {
                 MessageBox.Show("Es obligatorio Insertar el Nro de Documento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                /* e.Handled = true;*/
+    
                 return;
             }
 
@@ -69,13 +57,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             this.Hide();
         }
 
-      /*  public void dehabilitarModificacion()
-        {
-            Guardarbutton.Enabled = false;
-            ClienteHabilitadoCheckBox.Checked = true;
-            ClienteHabilitadoCheckBox.Enabled = false;
-            ClienteHabilitadoCheckBox.Text="Habilitado";
-        }*/
+    
 
    
     }

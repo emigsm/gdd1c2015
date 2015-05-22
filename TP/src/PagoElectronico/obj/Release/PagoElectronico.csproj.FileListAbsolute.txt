@@ -15,3 +15,10 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Rol.CrearRol.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Principal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.SeleccionRol.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cliente.AltaCliente.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cliente.ModificacionCliente.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cliente.VistaTarjetas.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cuenta.AltaCuenta.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cuenta.ModificacionCuenta.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Rol.ModificarRol.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Depositos.DepositosPrincipal.resources

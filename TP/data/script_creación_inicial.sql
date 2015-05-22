@@ -1090,13 +1090,13 @@ AS
 	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo) VALUES
 		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0)
 	
-	SELECT CONVERT(BIGINT, 
-	(	
+	 
+		
 		SELECT TOP 1 Cuenta_Numero 
 		FROM GEM4.Cuenta 
 		WHERE Cuenta_Cliente_ID = @clienteID 
-		ORDER BY Cuenta_Fecha_Creacion DESC)
-	)
+		ORDER BY Cuenta_Fecha_Creacion DESC
+	
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarClientes')

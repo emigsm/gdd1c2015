@@ -356,16 +356,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return tipoCuentas;
         }
 
-        public static int altaCuenta(string clienteID, int codPais, int codMoneda, int tipoCuenta)
+        public static long altaCuenta(string clienteID, int codPais, int codMoneda, int tipoCuenta)
         {
-            int numeroCuenta;
+            long numeroCuenta;
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@clienteID", clienteID));
             parametros.Add(new SqlParameter("@codPais", codPais));
             parametros.Add(new SqlParameter("@codMoneda", codMoneda));
             parametros.Add(new SqlParameter("@tipoCuenta", tipoCuenta));
-            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTACUENTA, NONQUERY, parametros);
-            numeroCuenta = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTACUENTA, SCALAR, parametros);
+            numeroCuenta = ((resultadoStoreProcedure != null) ? Convert.ToInt64(resultadoStoreProcedure) : 0);
             return numeroCuenta;
         }
 

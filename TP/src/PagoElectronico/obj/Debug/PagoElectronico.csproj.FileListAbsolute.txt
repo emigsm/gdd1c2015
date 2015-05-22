@@ -78,3 +78,7 @@ Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.A
 Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Depositos.DepositosPrincipal.resources
 C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ModificacionCliente.resources
 C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Depositos.DepositosPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.AltaCliente.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ModificacionCliente.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.VistaTarjetas.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Depositos.DepositosPrincipal.resources

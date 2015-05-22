@@ -31,25 +31,25 @@
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnCambiarPais = new System.Windows.Forms.Button();
             this.groupBoxPais = new System.Windows.Forms.GroupBox();
+            this.cmbPaisNuevo = new System.Windows.Forms.ComboBox();
             this.lblPaisNuevo = new System.Windows.Forms.Label();
             this.lblPaisViejo = new System.Windows.Forms.Label();
             this.checkBoxPais = new System.Windows.Forms.CheckBox();
-            this.cmbPaisViejo = new System.Windows.Forms.ComboBox();
-            this.cmbPaisNuevo = new System.Windows.Forms.ComboBox();
             this.btnCambiarMoneda = new System.Windows.Forms.Button();
             this.groupBoxMoneda = new System.Windows.Forms.GroupBox();
             this.cmbMonedaNueva = new System.Windows.Forms.ComboBox();
-            this.cmbMonedaActual = new System.Windows.Forms.ComboBox();
             this.lblMonedaNueva = new System.Windows.Forms.Label();
             this.lblMonedaActual = new System.Windows.Forms.Label();
             this.checkBoxMoneda = new System.Windows.Forms.CheckBox();
             this.btnCambiarTipoCuenta = new System.Windows.Forms.Button();
             this.groupBoxTipoCuenta = new System.Windows.Forms.GroupBox();
             this.cmbTipoCuentaNuevo = new System.Windows.Forms.ComboBox();
-            this.cmbTipoCuentaActual = new System.Windows.Forms.ComboBox();
             this.lblTipoCuentaNuevo = new System.Windows.Forms.Label();
             this.lblTipoCuentaActual = new System.Windows.Forms.Label();
             this.checkBoxTipoCuenta = new System.Windows.Forms.CheckBox();
+            this.lblPaisActual = new System.Windows.Forms.Label();
+            this.lblVMonedaActual = new System.Windows.Forms.Label();
+            this.lblVTipoCuentaActual = new System.Windows.Forms.Label();
             this.groupBoxPais.SuspendLayout();
             this.groupBoxMoneda.SuspendLayout();
             this.groupBoxTipoCuenta.SuspendLayout();
@@ -75,11 +75,12 @@
             this.btnCambiarPais.TabIndex = 7;
             this.btnCambiarPais.Text = "Cambiar";
             this.btnCambiarPais.UseVisualStyleBackColor = true;
+            this.btnCambiarPais.Click += new System.EventHandler(this.btnCambiarPais_Click);
             // 
             // groupBoxPais
             // 
+            this.groupBoxPais.Controls.Add(this.lblPaisActual);
             this.groupBoxPais.Controls.Add(this.cmbPaisNuevo);
-            this.groupBoxPais.Controls.Add(this.cmbPaisViejo);
             this.groupBoxPais.Controls.Add(this.lblPaisNuevo);
             this.groupBoxPais.Controls.Add(this.lblPaisViejo);
             this.groupBoxPais.Controls.Add(this.checkBoxPais);
@@ -91,6 +92,16 @@
             this.groupBoxPais.TabIndex = 6;
             this.groupBoxPais.TabStop = false;
             this.groupBoxPais.Text = "Cambio de pais";
+            this.groupBoxPais.Enter += new System.EventHandler(this.groupBoxPais_Enter);
+            // 
+            // cmbPaisNuevo
+            // 
+            this.cmbPaisNuevo.Enabled = false;
+            this.cmbPaisNuevo.FormattingEnabled = true;
+            this.cmbPaisNuevo.Location = new System.Drawing.Point(236, 62);
+            this.cmbPaisNuevo.Name = "cmbPaisNuevo";
+            this.cmbPaisNuevo.Size = new System.Drawing.Size(234, 28);
+            this.cmbPaisNuevo.TabIndex = 6;
             // 
             // lblPaisNuevo
             // 
@@ -125,24 +136,6 @@
             this.checkBoxPais.UseVisualStyleBackColor = true;
             this.checkBoxPais.CheckedChanged += new System.EventHandler(this.checkBoxPais_CheckedChanged);
             // 
-            // cmbPaisViejo
-            // 
-            this.cmbPaisViejo.Enabled = false;
-            this.cmbPaisViejo.FormattingEnabled = true;
-            this.cmbPaisViejo.Location = new System.Drawing.Point(236, 28);
-            this.cmbPaisViejo.Name = "cmbPaisViejo";
-            this.cmbPaisViejo.Size = new System.Drawing.Size(234, 28);
-            this.cmbPaisViejo.TabIndex = 5;
-            // 
-            // cmbPaisNuevo
-            // 
-            this.cmbPaisNuevo.Enabled = false;
-            this.cmbPaisNuevo.FormattingEnabled = true;
-            this.cmbPaisNuevo.Location = new System.Drawing.Point(236, 62);
-            this.cmbPaisNuevo.Name = "cmbPaisNuevo";
-            this.cmbPaisNuevo.Size = new System.Drawing.Size(234, 28);
-            this.cmbPaisNuevo.TabIndex = 6;
-            // 
             // btnCambiarMoneda
             // 
             this.btnCambiarMoneda.Enabled = false;
@@ -156,8 +149,8 @@
             // 
             // groupBoxMoneda
             // 
+            this.groupBoxMoneda.Controls.Add(this.lblVMonedaActual);
             this.groupBoxMoneda.Controls.Add(this.cmbMonedaNueva);
-            this.groupBoxMoneda.Controls.Add(this.cmbMonedaActual);
             this.groupBoxMoneda.Controls.Add(this.lblMonedaNueva);
             this.groupBoxMoneda.Controls.Add(this.lblMonedaActual);
             this.groupBoxMoneda.Controls.Add(this.checkBoxMoneda);
@@ -178,15 +171,6 @@
             this.cmbMonedaNueva.Name = "cmbMonedaNueva";
             this.cmbMonedaNueva.Size = new System.Drawing.Size(234, 28);
             this.cmbMonedaNueva.TabIndex = 6;
-            // 
-            // cmbMonedaActual
-            // 
-            this.cmbMonedaActual.Enabled = false;
-            this.cmbMonedaActual.FormattingEnabled = true;
-            this.cmbMonedaActual.Location = new System.Drawing.Point(236, 28);
-            this.cmbMonedaActual.Name = "cmbMonedaActual";
-            this.cmbMonedaActual.Size = new System.Drawing.Size(234, 28);
-            this.cmbMonedaActual.TabIndex = 5;
             // 
             // lblMonedaNueva
             // 
@@ -231,11 +215,12 @@
             this.btnCambiarTipoCuenta.TabIndex = 11;
             this.btnCambiarTipoCuenta.Text = "Cambiar";
             this.btnCambiarTipoCuenta.UseVisualStyleBackColor = true;
+            this.btnCambiarTipoCuenta.Click += new System.EventHandler(this.btnCambiarTipoCuenta_Click);
             // 
             // groupBoxTipoCuenta
             // 
+            this.groupBoxTipoCuenta.Controls.Add(this.lblVTipoCuentaActual);
             this.groupBoxTipoCuenta.Controls.Add(this.cmbTipoCuentaNuevo);
-            this.groupBoxTipoCuenta.Controls.Add(this.cmbTipoCuentaActual);
             this.groupBoxTipoCuenta.Controls.Add(this.lblTipoCuentaNuevo);
             this.groupBoxTipoCuenta.Controls.Add(this.lblTipoCuentaActual);
             this.groupBoxTipoCuenta.Controls.Add(this.checkBoxTipoCuenta);
@@ -246,7 +231,7 @@
             this.groupBoxTipoCuenta.Size = new System.Drawing.Size(480, 125);
             this.groupBoxTipoCuenta.TabIndex = 10;
             this.groupBoxTipoCuenta.TabStop = false;
-            this.groupBoxTipoCuenta.Text = "Cambio de moneda";
+            this.groupBoxTipoCuenta.Text = "Cambio de Tipo";
             // 
             // cmbTipoCuentaNuevo
             // 
@@ -256,15 +241,6 @@
             this.cmbTipoCuentaNuevo.Name = "cmbTipoCuentaNuevo";
             this.cmbTipoCuentaNuevo.Size = new System.Drawing.Size(234, 28);
             this.cmbTipoCuentaNuevo.TabIndex = 6;
-            // 
-            // cmbTipoCuentaActual
-            // 
-            this.cmbTipoCuentaActual.Enabled = false;
-            this.cmbTipoCuentaActual.FormattingEnabled = true;
-            this.cmbTipoCuentaActual.Location = new System.Drawing.Point(236, 28);
-            this.cmbTipoCuentaActual.Name = "cmbTipoCuentaActual";
-            this.cmbTipoCuentaActual.Size = new System.Drawing.Size(234, 28);
-            this.cmbTipoCuentaActual.TabIndex = 5;
             // 
             // lblTipoCuentaNuevo
             // 
@@ -299,6 +275,36 @@
             this.checkBoxTipoCuenta.UseVisualStyleBackColor = true;
             this.checkBoxTipoCuenta.CheckedChanged += new System.EventHandler(this.checkBoxTipoCuenta_CheckedChanged);
             // 
+            // lblPaisActual
+            // 
+            this.lblPaisActual.AutoSize = true;
+            this.lblPaisActual.Enabled = false;
+            this.lblPaisActual.Location = new System.Drawing.Point(236, 28);
+            this.lblPaisActual.Name = "lblPaisActual";
+            this.lblPaisActual.Size = new System.Drawing.Size(59, 20);
+            this.lblPaisActual.TabIndex = 7;
+            this.lblPaisActual.Text = "(Vacío)";
+            // 
+            // lblVMonedaActual
+            // 
+            this.lblVMonedaActual.AutoSize = true;
+            this.lblVMonedaActual.Enabled = false;
+            this.lblVMonedaActual.Location = new System.Drawing.Point(232, 31);
+            this.lblVMonedaActual.Name = "lblVMonedaActual";
+            this.lblVMonedaActual.Size = new System.Drawing.Size(59, 20);
+            this.lblVMonedaActual.TabIndex = 8;
+            this.lblVMonedaActual.Text = "(Vacío)";
+            // 
+            // lblVTipoCuentaActual
+            // 
+            this.lblVTipoCuentaActual.AutoSize = true;
+            this.lblVTipoCuentaActual.Enabled = false;
+            this.lblVTipoCuentaActual.Location = new System.Drawing.Point(232, 31);
+            this.lblVTipoCuentaActual.Name = "lblVTipoCuentaActual";
+            this.lblVTipoCuentaActual.Size = new System.Drawing.Size(59, 20);
+            this.lblVTipoCuentaActual.TabIndex = 9;
+            this.lblVTipoCuentaActual.Text = "(Vacío)";
+            // 
             // ModificacionCuenta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -331,21 +337,21 @@
         private System.Windows.Forms.Label lblPaisNuevo;
         private System.Windows.Forms.Label lblPaisViejo;
         private System.Windows.Forms.CheckBox checkBoxPais;
-        private System.Windows.Forms.ComboBox cmbPaisViejo;
         private System.Windows.Forms.ComboBox cmbPaisNuevo;
         private System.Windows.Forms.Button btnCambiarMoneda;
         private System.Windows.Forms.GroupBox groupBoxMoneda;
         private System.Windows.Forms.ComboBox cmbMonedaNueva;
-        private System.Windows.Forms.ComboBox cmbMonedaActual;
         private System.Windows.Forms.Label lblMonedaNueva;
         private System.Windows.Forms.Label lblMonedaActual;
         private System.Windows.Forms.CheckBox checkBoxMoneda;
         private System.Windows.Forms.Button btnCambiarTipoCuenta;
         private System.Windows.Forms.GroupBox groupBoxTipoCuenta;
         private System.Windows.Forms.ComboBox cmbTipoCuentaNuevo;
-        private System.Windows.Forms.ComboBox cmbTipoCuentaActual;
         private System.Windows.Forms.Label lblTipoCuentaNuevo;
         private System.Windows.Forms.Label lblTipoCuentaActual;
         private System.Windows.Forms.CheckBox checkBoxTipoCuenta;
+        private System.Windows.Forms.Label lblPaisActual;
+        private System.Windows.Forms.Label lblVMonedaActual;
+        private System.Windows.Forms.Label lblVTipoCuentaActual;
     }
 }

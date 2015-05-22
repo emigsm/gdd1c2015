@@ -132,46 +132,46 @@
     <Compile Include="Login\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Asociacion TC\AsociacionTCPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Asociacion TC\AsociacionTCPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Asociacion TC\AsociacionTCPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Asociacion TC\AsociacionTCPrincipal.Designer.cs">
       <DependentUpon>AsociacionTCPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Consulta Saldos\ConsultaSaldosPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Consulta Saldos\ConsultaSaldosPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Consulta Saldos\ConsultaSaldosPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Consulta Saldos\ConsultaSaldosPrincipal.Designer.cs">
       <DependentUpon>ConsultaSaldosPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Depositos\DepositosPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Depositos\DepositosPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Depositos\DepositosPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Depositos\DepositosPrincipal.Designer.cs">
       <DependentUpon>DepositosPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Facturacion\FacturacionPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Facturacion\FacturacionPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Facturacion\FacturacionPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Facturacion\FacturacionPrincipal.Designer.cs">
       <DependentUpon>FacturacionPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Listados\ListadosPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Listados\ListadosPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Listados\ListadosPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Listados\ListadosPrincipal.Designer.cs">
       <DependentUpon>ListadosPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Retiros\RetirosPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Retiros\RetirosPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Retiros\RetirosPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Retiros\RetirosPrincipal.Designer.cs">
       <DependentUpon>RetirosPrincipal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Operaciones\Transferencias\TransferenciasPrincipal.cs">
+    <Compile Include="Utilidades\Operaciones\Transferencias\TransferenciasPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Operaciones\Transferencias\TransferenciasPrincipal.Designer.cs">
+    <Compile Include="Utilidades\Operaciones\Transferencias\TransferenciasPrincipal.Designer.cs">
       <DependentUpon>TransferenciasPrincipal.cs</DependentUpon>
     </Compile>
     <Compile Include="Principal.cs">
@@ -224,7 +224,7 @@
     <EmbeddedResource Include="Login\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Operaciones\Depositos\DepositosPrincipal.resx">
+    <EmbeddedResource Include="Utilidades\Operaciones\Depositos\DepositosPrincipal.resx">
       <DependentUpon>DepositosPrincipal.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Principal.resx">

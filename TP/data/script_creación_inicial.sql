@@ -1268,3 +1268,28 @@ AS
 	
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarPaisCuenta')
+	DROP PROCEDURE GEM4.spModificarPaisCuenta;
+GO
+CREATE PROCEDURE GEM4.spModificarPaisCuenta
+	@codPais		INT,
+	@clienteID		INT,
+	@numeroCuenta	NUMERIC(18,0)
+AS
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Pais = @codPais
+	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarTipoCuenta')
+	DROP PROCEDURE GEM4.spModificarTipoCuenta;
+GO
+CREATE PROCEDURE GEM4.spModificarTipoCuenta
+	@codTipo		INT,
+	@clienteID		INT,
+	@numeroCuenta	NUMERIC(18,0)
+AS
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Tipo = @codTipo
+	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+GO

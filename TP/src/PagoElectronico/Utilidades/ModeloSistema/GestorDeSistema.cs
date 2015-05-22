@@ -56,6 +56,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_CREARCLIENTE = "GEM4.spCrearCliente";
         private const string STORE_OBTENERCUENTASDEUSUARIO = "GEM4.spObtenerCuentasDeUsuario";
         private const string STORE_MODIFICARCLIENTE = "GEM4.spModificarCliente";
+        private const string STORE_MODIFICARPAISCUENTA = "GEM4.spModificarPaisCuenta";
+        private const string STORE_MODIFICARTIPOCUENTA = "GEM4.spModificarTipoCuenta";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -504,5 +506,26 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@habilitado", habilitado));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARCLIENTE, NONQUERY, parametros);
         }
+
+        public static void modificarPaisCuenta(int codPais, int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@codPais", codPais));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARPAISCUENTA, NONQUERY, parametros);
+        }
+
+        public static void modificarTipoCuenta(int tipoCuenta, int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@codTipo", tipoCuenta));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARTIPOCUENTA, NONQUERY, parametros);
+        }
+        
     }
 }

@@ -101,5 +101,21 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             }
         }
 
+        private void txtBuscarCuentaNumero_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                btnBuscarCuenta.PerformClick();
+            }
+        }
+
+        private void txtClienteID_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Convert.ToInt32(e.KeyChar) == 13)
+            {
+                btnBuscarCuenta.PerformClick();
+            }
+        }
+
     }
 }

@@ -192,6 +192,7 @@
             this.txtClienteID.Name = "txtClienteID";
             this.txtClienteID.Size = new System.Drawing.Size(313, 26);
             this.txtClienteID.TabIndex = 5;
+            this.txtClienteID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtClienteID_KeyPress);
             // 
             // lblClienteID
             // 

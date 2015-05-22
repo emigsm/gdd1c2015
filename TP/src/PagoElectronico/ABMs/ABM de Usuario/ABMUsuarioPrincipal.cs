@@ -87,13 +87,14 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             else if (e.ColumnIndex == 5)
             {
                 string usernameAEliminar = dgvUsuario.Rows[e.RowIndex].Cells["Usuario_Username"].Value.ToString();
-                DialogResult res = MessageBox.Show("Se eliminará el usuario: " + usernameAEliminar + "\n¿Está seguro?", "Atención", MessageBoxButtons.YesNo);
+                DialogResult res = MessageBox.Show("Se inhabilitará el usuario: " + usernameAEliminar + "\n¿Está seguro?", "Atención", MessageBoxButtons.YesNo);
                 if (res == DialogResult.Yes)
                 {
                     /*BORRADO LOGICO DE USUARIO*/
                     int usuarioIDAEliminar = Convert.ToInt32(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString());
                     GestorDeSistema.bajaLogicaUsuario(usuarioIDAEliminar);
-                    System.Windows.Forms.MessageBox.Show("Usuario eliminado correctamente");                    
+                    System.Windows.Forms.MessageBox.Show("Usuario inhabilitado correctamente");
+                    btnBuscarUsuario.PerformClick();
                 }
             }
 

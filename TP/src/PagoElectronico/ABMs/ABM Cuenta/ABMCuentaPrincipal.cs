@@ -64,7 +64,8 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
                                          usuarioEncontrado.ItemArray[7],
                                          usuarioEncontrado.ItemArray[8],
                                          "Modificar",
-                                         "Borrar");
+                                         "Inhabilitar",
+                                         "Cerrar");
                 }
                 dgvCuenta.Update();
             }
@@ -88,16 +89,28 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
 
         private void dgvCuenta_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int numeroClienteAModificar = Convert.ToInt32(dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Cliente_ID"].Value.ToString());
+            long numeroCuentaAModificar = Convert.ToInt64(dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Numero"].Value.ToString());
+            
             if (e.ColumnIndex == 9)
             {
-                int numeroClienteAModificar = Convert.ToInt32(dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Cliente_ID"].Value.ToString());
                 string paisAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Pais"].Value.ToString();
                 string monedaAModificar =  dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Moneda"].Value.ToString();
                 string tipoCuentaAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Tipo"].Value.ToString();
-                long numeroCuentaAModificar = Convert.ToInt64(dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Numero"].Value.ToString());
                 ModificacionCuenta frmModificacionCuenta = new ModificacionCuenta(numeroCuentaAModificar, numeroClienteAModificar, paisAModificar, monedaAModificar, tipoCuentaAModificar);
                 frmModificacionCuenta.Show(this);
                 this.Hide();
+            }
+            if (e.ColumnIndex == 10)
+            { 
+                GestorDeSistema.inhabilitarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
+                System.Windows.Forms.MessageBox.Show("La cuenta ha sido Inhabilitada correctamente");
+            }
+            if (e.ColumnIndex == 11)
+            {
+                GestorDeSistema.cerrarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
+                //verificar si esta todo facturado y pagado, ahi si se peude cerrar
+                System.Windows.Forms.MessageBox.Show("La cuenta ha sido Cerrada correctamente");
             }
         }
 

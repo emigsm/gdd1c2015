@@ -31,6 +31,13 @@
             this.btnNuevaCuenta = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvCuenta = new System.Windows.Forms.DataGridView();
+            this.panelBusqueda = new System.Windows.Forms.Panel();
+            this.txtClienteID = new System.Windows.Forms.TextBox();
+            this.lblClienteID = new System.Windows.Forms.Label();
+            this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
+            this.txtBuscarCuentaNumero = new System.Windows.Forms.TextBox();
+            this.btnBuscarCuenta = new System.Windows.Forms.Button();
+            this.lblCuentaNumero = new System.Windows.Forms.Label();
             this.Cuenta_Numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Cliente_ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Fecha_Creacion = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -41,14 +48,8 @@
             this.Cuenta_Moneda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Modificar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.Eliminar = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.panelBusqueda = new System.Windows.Forms.Panel();
-            this.txtClienteID = new System.Windows.Forms.TextBox();
-            this.lblClienteID = new System.Windows.Forms.Label();
-            this.btnLimpiarBusqueda = new System.Windows.Forms.Button();
-            this.txtBuscarCuentaNumero = new System.Windows.Forms.TextBox();
-            this.btnBuscarCuenta = new System.Windows.Forms.Button();
-            this.lblCuentaNumero = new System.Windows.Forms.Label();
+            this.Inhabilitar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.Cerrar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuenta)).BeginInit();
             this.panelBusqueda.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +91,8 @@
             this.Cuenta_Moneda,
             this.Cuenta_Pais,
             this.Modificar,
-            this.Eliminar});
+            this.Inhabilitar,
+            this.Cerrar});
             this.dgvCuenta.Location = new System.Drawing.Point(18, 222);
             this.dgvCuenta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvCuenta.Name = "dgvCuenta";
@@ -99,76 +101,6 @@
             this.dgvCuenta.Size = new System.Drawing.Size(1056, 231);
             this.dgvCuenta.TabIndex = 8;
             this.dgvCuenta.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuenta_CellContentClick);
-            // 
-            // Cuenta_Numero
-            // 
-            this.Cuenta_Numero.HeaderText = "Numero de Cuenta";
-            this.Cuenta_Numero.Name = "Cuenta_Numero";
-            this.Cuenta_Numero.ReadOnly = true;
-            // 
-            // Cuenta_Cliente_ID
-            // 
-            this.Cuenta_Cliente_ID.HeaderText = "Cliente";
-            this.Cuenta_Cliente_ID.Name = "Cuenta_Cliente_ID";
-            this.Cuenta_Cliente_ID.ReadOnly = true;
-            // 
-            // Cuenta_Fecha_Creacion
-            // 
-            this.Cuenta_Fecha_Creacion.HeaderText = "Fecha_Creacion";
-            this.Cuenta_Fecha_Creacion.Name = "Cuenta_Fecha_Creacion";
-            this.Cuenta_Fecha_Creacion.ReadOnly = true;
-            // 
-            // Cuenta_Fecha_Cierre
-            // 
-            this.Cuenta_Fecha_Cierre.HeaderText = "Fecha_Cierre";
-            this.Cuenta_Fecha_Cierre.Name = "Cuenta_Fecha_Cierre";
-            this.Cuenta_Fecha_Cierre.ReadOnly = true;
-            // 
-            // Cuenta_Saldo
-            // 
-            this.Cuenta_Saldo.HeaderText = "Saldo";
-            this.Cuenta_Saldo.Name = "Cuenta_Saldo";
-            this.Cuenta_Saldo.ReadOnly = true;
-            // 
-            // Cuenta_Tipo
-            // 
-            this.Cuenta_Tipo.HeaderText = "Tipo";
-            this.Cuenta_Tipo.Name = "Cuenta_Tipo";
-            this.Cuenta_Tipo.ReadOnly = true;
-            // 
-            // Cuenta_Estado
-            // 
-            this.Cuenta_Estado.HeaderText = "Estado";
-            this.Cuenta_Estado.Name = "Cuenta_Estado";
-            this.Cuenta_Estado.ReadOnly = true;
-            // 
-            // Cuenta_Moneda
-            // 
-            this.Cuenta_Moneda.HeaderText = "Moneda";
-            this.Cuenta_Moneda.Name = "Cuenta_Moneda";
-            this.Cuenta_Moneda.ReadOnly = true;
-            // 
-            // Cuenta_Pais
-            // 
-            this.Cuenta_Pais.HeaderText = "Pais";
-            this.Cuenta_Pais.Name = "Cuenta_Pais";
-            this.Cuenta_Pais.ReadOnly = true;
-            // 
-            // Modificar
-            // 
-            this.Modificar.HeaderText = "Modificar";
-            this.Modificar.Name = "Modificar";
-            this.Modificar.ReadOnly = true;
-            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // Eliminar
-            // 
-            this.Eliminar.HeaderText = "Eliminar";
-            this.Eliminar.Name = "Eliminar";
-            this.Eliminar.ReadOnly = true;
-            this.Eliminar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Eliminar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // panelBusqueda
             // 
@@ -247,6 +179,81 @@
             this.lblCuentaNumero.TabIndex = 0;
             this.lblCuentaNumero.Text = "Numero de Cuenta:";
             // 
+            // Cuenta_Numero
+            // 
+            this.Cuenta_Numero.HeaderText = "Numero de Cuenta";
+            this.Cuenta_Numero.Name = "Cuenta_Numero";
+            this.Cuenta_Numero.ReadOnly = true;
+            // 
+            // Cuenta_Cliente_ID
+            // 
+            this.Cuenta_Cliente_ID.HeaderText = "Cliente";
+            this.Cuenta_Cliente_ID.Name = "Cuenta_Cliente_ID";
+            this.Cuenta_Cliente_ID.ReadOnly = true;
+            // 
+            // Cuenta_Fecha_Creacion
+            // 
+            this.Cuenta_Fecha_Creacion.HeaderText = "Fecha_Creacion";
+            this.Cuenta_Fecha_Creacion.Name = "Cuenta_Fecha_Creacion";
+            this.Cuenta_Fecha_Creacion.ReadOnly = true;
+            // 
+            // Cuenta_Fecha_Cierre
+            // 
+            this.Cuenta_Fecha_Cierre.HeaderText = "Fecha_Cierre";
+            this.Cuenta_Fecha_Cierre.Name = "Cuenta_Fecha_Cierre";
+            this.Cuenta_Fecha_Cierre.ReadOnly = true;
+            // 
+            // Cuenta_Saldo
+            // 
+            this.Cuenta_Saldo.HeaderText = "Saldo";
+            this.Cuenta_Saldo.Name = "Cuenta_Saldo";
+            this.Cuenta_Saldo.ReadOnly = true;
+            // 
+            // Cuenta_Tipo
+            // 
+            this.Cuenta_Tipo.HeaderText = "Tipo";
+            this.Cuenta_Tipo.Name = "Cuenta_Tipo";
+            this.Cuenta_Tipo.ReadOnly = true;
+            // 
+            // Cuenta_Estado
+            // 
+            this.Cuenta_Estado.HeaderText = "Estado";
+            this.Cuenta_Estado.Name = "Cuenta_Estado";
+            this.Cuenta_Estado.ReadOnly = true;
+            // 
+            // Cuenta_Moneda
+            // 
+            this.Cuenta_Moneda.HeaderText = "Moneda";
+            this.Cuenta_Moneda.Name = "Cuenta_Moneda";
+            this.Cuenta_Moneda.ReadOnly = true;
+            // 
+            // Cuenta_Pais
+            // 
+            this.Cuenta_Pais.HeaderText = "Pais";
+            this.Cuenta_Pais.Name = "Cuenta_Pais";
+            this.Cuenta_Pais.ReadOnly = true;
+            // 
+            // Modificar
+            // 
+            this.Modificar.HeaderText = "Modificar";
+            this.Modificar.Name = "Modificar";
+            this.Modificar.ReadOnly = true;
+            this.Modificar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Modificar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Inhabilitar
+            // 
+            this.Inhabilitar.HeaderText = "Inhabilitar";
+            this.Inhabilitar.Name = "Inhabilitar";
+            this.Inhabilitar.ReadOnly = true;
+            this.Inhabilitar.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Inhabilitar.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            // 
+            // Cerrar
+            // 
+            this.Cerrar.HeaderText = "Cerrar";
+            this.Cerrar.Name = "Cerrar";
+            // 
             // ABMCuentaPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -288,7 +295,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Moneda;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Pais;
         private System.Windows.Forms.DataGridViewButtonColumn Modificar;
-        private System.Windows.Forms.DataGridViewButtonColumn Eliminar;
+        private System.Windows.Forms.DataGridViewButtonColumn Inhabilitar;
+        private System.Windows.Forms.DataGridViewButtonColumn Cerrar;
 
     }
 }

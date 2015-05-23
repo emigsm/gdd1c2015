@@ -58,6 +58,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_MODIFICARCLIENTE = "GEM4.spModificarCliente";
         private const string STORE_MODIFICARPAISCUENTA = "GEM4.spModificarPaisCuenta";
         private const string STORE_MODIFICARTIPOCUENTA = "GEM4.spModificarTipoCuenta";
+        private const string STORE_INHABILITARCUENTA = "GEM4.spInhabilitarCuenta";
+        private const string STORE_CERRARCUENTA = "GEM4.spCerrarCuenta";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -525,6 +527,24 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARTIPOCUENTA, NONQUERY, parametros);
+        }
+
+        public static void inhabilitarCuenta(int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_INHABILITARCUENTA, NONQUERY, parametros);
+        }
+
+        public static void cerrarCuenta(int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CERRARCUENTA, NONQUERY, parametros);
         }
         
     }

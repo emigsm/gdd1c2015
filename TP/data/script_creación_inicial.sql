@@ -1293,3 +1293,29 @@ AS
 	SET Cuenta_Tipo = @codTipo
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarCuenta')
+	DROP PROCEDURE GEM4.spInhabilitarCuenta;
+GO
+CREATE PROCEDURE GEM4.spInhabilitarCuenta
+	@clienteID		INT,
+	@numeroCuenta	NUMERIC(18,0)
+AS
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Estado = 2
+	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCerrarCuenta')
+	DROP PROCEDURE GEM4.spCerrarCuenta;
+GO
+CREATE PROCEDURE GEM4.spCerrarCuenta
+	@clienteID		INT,
+	@numeroCuenta	NUMERIC(18,0)
+AS
+
+--TIENE QUE HABER ALGUN PROCEDURE DE FATUCTURACION PARA VERIFICAR SI ESTA TDO PAGO ANTES DE CERRARLA
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Estado = 3, Cuenta_Fecha_Cierre = SYSDATETIME()
+	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+GO

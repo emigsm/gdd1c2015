@@ -1,6 +1,6 @@
-﻿namespace PagoElectronico.Operaciones.Consulta_Saldos
+﻿namespace PagoElectronico.Operaciones.Facturacion
 {
-    partial class ConsultaSaldosPrincipal
+    partial class FacturacionPrincipal
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "ConsultaSaldosPrincipal";
+            this.Text = "FacturacionPrincipal";
         }
 
         #endregion

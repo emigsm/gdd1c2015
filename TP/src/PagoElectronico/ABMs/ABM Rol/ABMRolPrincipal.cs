@@ -85,5 +85,31 @@ namespace PagoElectronico.ABMs.ABM_Rol
                     break;
             }
         }
+
+        //Validaciones
+
+        private void Rol_CodTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo 'Código del Rol' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+
+            }
+        }
+
+        private void Rol_NombreTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+
+
+                MessageBox.Show("El campo 'Nombre del Rol' no puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+
+            }
+        }
     }
 }

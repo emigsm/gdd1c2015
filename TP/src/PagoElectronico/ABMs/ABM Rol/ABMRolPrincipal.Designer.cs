@@ -106,6 +106,7 @@
             this.Rol_NombreTextBox.Name = "Rol_NombreTextBox";
             this.Rol_NombreTextBox.Size = new System.Drawing.Size(113, 20);
             this.Rol_NombreTextBox.TabIndex = 1;
+            this.Rol_NombreTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Rol_NombreTextBox_KeyPress);
             // 
             // Rol_CodTextBox
             // 
@@ -113,6 +114,7 @@
             this.Rol_CodTextBox.Name = "Rol_CodTextBox";
             this.Rol_CodTextBox.Size = new System.Drawing.Size(113, 20);
             this.Rol_CodTextBox.TabIndex = 0;
+            this.Rol_CodTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Rol_CodTextBox_KeyPress);
             // 
             // label1
             // 

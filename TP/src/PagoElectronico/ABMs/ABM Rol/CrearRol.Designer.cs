@@ -56,6 +56,7 @@
             this.Rol_NombreTextBox.Name = "Rol_NombreTextBox";
             this.Rol_NombreTextBox.Size = new System.Drawing.Size(180, 20);
             this.Rol_NombreTextBox.TabIndex = 1;
+            this.Rol_NombreTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Rol_NombreTextBox_KeyPress);
             // 
             // groupBox1
             // 

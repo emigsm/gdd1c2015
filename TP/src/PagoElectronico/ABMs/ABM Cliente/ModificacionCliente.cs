@@ -315,5 +315,10 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 SelectNextControl(ActiveControl, true, true, true, true);
             }
         }
+
+        private void ModificacionCliente_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

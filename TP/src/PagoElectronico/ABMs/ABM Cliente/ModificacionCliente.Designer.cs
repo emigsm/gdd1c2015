@@ -391,6 +391,7 @@
             this.Controls.Add(this.NombreLabel);
             this.Name = "ModificacionCliente";
             this.Text = "Modificar Cliente";
+            this.Load += new System.EventHandler(this.ModificacionCliente_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

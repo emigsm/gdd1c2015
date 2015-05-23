@@ -125,6 +125,7 @@
             this.RolNombreTextBox.Size = new System.Drawing.Size(129, 20);
             this.RolNombreTextBox.TabIndex = 7;
             this.RolNombreTextBox.Text = "\"NombreActual\"";
+            this.RolNombreTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.RolNombreTextBox_KeyPress);
             // 
             // ModificarRol
             // 
@@ -139,7 +140,6 @@
             this.Controls.Add(this.label1);
             this.Name = "ModificarRol";
             this.Text = "Modificar Rol";
-            this.Load += new System.EventHandler(this.ModificarRol_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

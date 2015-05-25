@@ -85,3 +85,6 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.ModificacionCuenta.resources
 Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ModificacionCliente.resources
 Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.ModificacionCuenta.resources
+C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.ModificacionCuenta.resources
+C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Asociacion_TC.AsociacionTCPrincipal.resources
+C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Consulta_Saldos.ConsultaSaldosPrincipal.resources

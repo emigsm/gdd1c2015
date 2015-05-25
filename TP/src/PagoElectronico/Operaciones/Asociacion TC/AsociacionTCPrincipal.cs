@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using PagoElectronico.Utilidades.ModeloSistema;
 
 namespace PagoElectronico.Operaciones.Asociacion_TC
 {
@@ -15,5 +16,32 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
         {
             InitializeComponent();
         }
+        
+      
+        //ESTO SEGURO SE VA A UTILIZAR UNA VEZ SELECCIONADO EL CLIENTE
+        /*  public AsociacionTCPrincipal(String nombre, String apellido, Int32 id)
+        {
+
+
+            InitializeComponent();
+            tarjetaApellidoCliLabel.Text = apellido;
+            tarjetaNombreCliLabel.Text = nombre;
+            tarjetaCliIdLabel.Text = id.ToString();
+
+            DataTable tarjetas = GestorDeSistema.obtenerTarjetasCliente(id);
+            foreach (DataRow tarjeta in tarjetas.Rows)
+            {
+                dgvTarjetas.Rows.Add(
+                tarjeta.ItemArray[0],
+                tarjeta.ItemArray[1],
+                tarjeta.ItemArray[2],
+                tarjeta.ItemArray[3],
+                tarjeta.ItemArray[4],
+                tarjeta.ItemArray[5]
+                );
+            }
+            dgvTarjetas.Update();
+        }
+     */  
     }
 }

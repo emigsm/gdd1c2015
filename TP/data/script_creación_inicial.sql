@@ -134,6 +134,8 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Usuario;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cliente')
 	DROP TABLE GEM4.Cliente;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Persona')
+	DROP TABLE GEM4.Persona;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Documento')
 	DROP TABLE GEM4.Documento;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
@@ -183,25 +185,25 @@ CREATE TABLE GEM4.Documento(
 	PRIMARY KEY(Documento_Tipo_Codigo)
 	)
 	
-CREATE TABLE GEM4.Cliente(
-	Cliente_ID					INT IDENTITY(1,1),					
-	Cliente_Nombre				NVARCHAR(255),
-	Cliente_Apellido			NVARCHAR(255),
-	Cliente_Tipo_Doc			NUMERIC(18,0),
-	Cliente_Numero_Documento	NUMERIC(18,0),					
-	Cliente_Mail				NVARCHAR(255) UNIQUE,
-	Cliente_Pais				NUMERIC(18,0),
-	Cliente_Dom_Calle			NVARCHAR(255),
-	Cliente_Dom_Numero			NUMERIC(18,0),
-	Cliente_Dom_Piso			NUMERIC(18,0),
-	Cliente_Dom_Depto			NVARCHAR(10),
-	Cliente_Localidad			NVARCHAR(60),				
-	Cliente_Nacionalidad		NVARCHAR(60),				
-	Cliente_Fecha_Nacimiento	DATETIME,
-	Cliente_Habilitado			BIT DEFAULT 1,
-	PRIMARY KEY(Cliente_ID),
-	FOREIGN KEY(Cliente_Tipo_Doc) REFERENCES GEM4.Documento(Documento_Tipo_Codigo),
-	FOREIGN KEY(Cliente_Pais) REFERENCES GEM4.Pais(Pais_Cod)
+CREATE TABLE GEM4.Persona(
+	Persona_ID					INT IDENTITY(1,1),					
+	Persona_Nombre				NVARCHAR(255),
+	Persona_Apellido			NVARCHAR(255),
+	Persona_Tipo_Doc			NUMERIC(18,0),
+	Persona_Numero_Documento	NUMERIC(18,0),					
+	Persona_Mail				NVARCHAR(255) UNIQUE,
+	Persona_Pais				NUMERIC(18,0),
+	Persona_Dom_Calle			NVARCHAR(255),
+	Persona_Dom_Numero			NUMERIC(18,0),
+	Persona_Dom_Piso			NUMERIC(18,0),
+	Persona_Dom_Depto			NVARCHAR(10),
+	Persona_Localidad			NVARCHAR(60),				
+	Persona_Nacionalidad		NVARCHAR(60),				
+	Persona_Fecha_Nacimiento	DATETIME,
+	Persona_Habilitado			BIT DEFAULT 1,
+	PRIMARY KEY(Persona_ID),
+	FOREIGN KEY(Persona_Tipo_Doc) REFERENCES GEM4.Documento(Documento_Tipo_Codigo),
+	FOREIGN KEY(Persona_Pais) REFERENCES GEM4.Pais(Pais_Cod)
 	)	
 	
 CREATE TABLE GEM4.Usuario(
@@ -212,10 +214,10 @@ CREATE TABLE GEM4.Usuario(
 	Usuario_Fecha_Ultima_Modificacion 		DATETIME,
 	Usuario_Pregunta_Secreta 				NVARCHAR(60),
 	Usuario_Respuesta_Secreta 				NVARCHAR(60),
-	Cliente_ID								INT,
+	Persona_ID								INT,
 	Usuario_Habilitado						BIT NOT NULL DEFAULT 1,
 	PRIMARY KEY(Usuario_ID),
-	FOREIGN KEY(Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID),
+	FOREIGN KEY(Persona_ID) REFERENCES GEM4.Persona(Persona_ID),
 	UNIQUE(Usuario_Username)
 	);
 	
@@ -259,13 +261,13 @@ CREATE TABLE GEM4.Cuenta(
 	Cuenta_Fecha_Cierre						DATETIME,
 	Cuenta_Moneda							INT	DEFAULT 1,
 	Cuenta_Tipo								INT	DEFAULT 4,
-	Cuenta_Cliente_ID						INT,
+	Cuenta_Persona_ID						INT,
 	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 0,-- LO INICIALIZO EN CERO A VER SI FUNCA LO QUE NOS DIJERON LOS AYUDANTES
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
 	FOREIGN KEY(Cuenta_Moneda) REFERENCES GEM4.Moneda(Moneda_Codigo),
 	FOREIGN KEY(Cuenta_Tipo) REFERENCES GEM4.Tipo_Cuenta(Tipo_Cuenta_ID),
-	FOREIGN KEY(Cuenta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID) 
+	FOREIGN KEY(Cuenta_Persona_ID) REFERENCES GEM4.Persona(Persona_ID) 
 	)
 
 CREATE TABLE GEM4.Tarjeta(
@@ -274,10 +276,10 @@ CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Fecha_Vencimiento				DATETIME,
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
 	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
-	Tarjeta_Cliente_ID						INT,
+	Tarjeta_Persona_ID						INT,
 	Tarjeta_Habilitado						BIT DEFAULT 1
 	PRIMARY KEY(Tarjeta_Numero),
-	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
+	FOREIGN KEY(Tarjeta_Persona_ID) REFERENCES GEM4.Persona(Persona_ID)		
 	)
 CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
@@ -312,13 +314,13 @@ CREATE TABLE GEM4.Deposito(
 	Deposito_Codigo							NUMERIC(18,0) IDENTITY(1,1),
 	Deposito_Fecha							DATETIME,
 	Deposito_Importe						NUMERIC(18,2),
-	Deposito_Cliente						INT,
+	Deposito_Persona						INT,
 	Deposito_Tarjeta						NVARCHAR(16),
 	Deposito_Moneda							INT DEFAULT 1,
 	Deposito_Cuenta							NUMERIC(18,0),
 	Deposito_Operacion_ID							INT,
 	PRIMARY KEY(Deposito_Codigo),
-	FOREIGN KEY(Deposito_Cliente) REFERENCES GEM4.Cliente(Cliente_ID),
+	FOREIGN KEY(Deposito_Persona) REFERENCES GEM4.Persona(Persona_ID),
 	FOREIGN KEY(Deposito_Tarjeta) REFERENCES GEM4.Tarjeta(Tarjeta_Numero),
 	FOREIGN KEY(Deposito_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
 	FOREIGN KEY(Deposito_Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
@@ -352,10 +354,10 @@ CREATE TABLE GEM4.Cheque(
 	Cheque_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Cheque_Fecha							DATETIME,
 	Cheque_Importe							NUMERIC(18,2),
-	Cheque_Cliente_ID						INT,
+	Cheque_Persona_ID						INT,
 	Cheque_Banco							NUMERIC(18,0),
 	PRIMARY KEY(Cheque_Numero),
-	FOREIGN KEY(Cheque_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID),
+	FOREIGN KEY(Cheque_Persona_ID) REFERENCES GEM4.Persona(Persona_ID),
 	FOREIGN KEY(Cheque_Banco) REFERENCES GEM4.Banco(Banco_Codigo)							
 	)
 
@@ -388,8 +390,8 @@ GO
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.VIEWS WHERE  TABLE_NAME  = 'Cuenta_ABM')
 	DROP VIEW GEM4.Cuenta_ABM;
 GO
-CREATE VIEW GEM4.Cuenta_ABM(Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais) AS
-SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Tipo_Cuenta_Descripcion, Estado_Descripcion, Moneda_Descripcion, Pais_Descripcion  		
+CREATE VIEW GEM4.Cuenta_ABM(Cuenta_Numero, Cuenta_Persona_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais) AS
+SELECT Cuenta_Numero, Cuenta_Persona_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Tipo_Cuenta_Descripcion, Estado_Descripcion, Moneda_Descripcion, Pais_Descripcion  		
 FROM GEM4.Cuenta JOIN GEM4.Tipo_Cuenta ON (Cuenta.Cuenta_Tipo = Tipo_Cuenta.Tipo_Cuenta_ID)
 					JOIN GEM4.Estado_Cuenta ON (Cuenta.Cuenta_Estado = Estado_Cuenta.Estado_Codigo)
 					JOIN GEM4.Moneda ON (Cuenta.Cuenta_Moneda = Moneda.Moneda_Codigo)
@@ -486,8 +488,8 @@ GO
 CREATE PROCEDURE GEM4.spInsertaOperaciones 
 AS
 BEGIN
-	DECLARE @nFactura NUMERIC(18,0), @nOperacion INT,@clienteID INT,
-			@clienteMail NVARCHAR(255),@depositoCodigo NUMERIC(18,0),
+	DECLARE @nFactura NUMERIC(18,0), @nOperacion INT,@personaID INT,
+			@personaMail NVARCHAR(255),@depositoCodigo NUMERIC(18,0),
 			@depositoFecha DATETIME,@depositoImporte NUMERIC(18,2),
 			@tarjeta NVARCHAR(16),@cuentaNumero NUMERIC(18,0),@usuarioID INT,
 			@retiroCodigo NUMERIC(18,0),@retiroFecha DATETIME,@retiroImporte NUMERIC(18,2),
@@ -506,7 +508,7 @@ BEGIN
 	ORDER BY Deposito_Fecha asc,Retiro_Fecha asc,Transf_Fecha asc ;
 
 	    OPEN Cursor1;
-	FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
+	FETCH NEXT FROM Cursor1 INTO @nFactura,@personaMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
 								@chequeNumero,@chequeFecha,@chequeImporte,@banco,@depositoCodigo,@depositoFecha,
 								 @depositoImporte,@tarjeta,@transfFecha,@transfImporte,@transfCosto,@cuentaDestino;
 	SET @nOperacion=1;
@@ -515,13 +517,13 @@ BEGIN
     WHILE @@FETCH_STATUS = 0
 		BEGIN
 		
-			SELECT @clienteID=c.Cliente_ID
-			FROM Cliente c
-			WHERE c.Cliente_Mail=@clienteMail;
+			SELECT @personaID=p.Persona_ID
+			FROM Persona p
+			WHERE p.Persona_Mail=@personaMail;
 		
 			SELECT @usuarioID=u.Usuario_ID
 			FROM GEM4.Usuario u
-			WHERE u.Cliente_ID=@clienteID;
+			WHERE Persona_ID=@personaID;  --si hay un error es aca...
 	
 		IF(@depositoCodigo IS NOT NULL)
 			BEGIN
@@ -533,9 +535,9 @@ BEGIN
 				
 				SET IDENTITY_INSERT GEM4.Deposito ON;
 				INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,
-									  Deposito_Cliente,Deposito_Tarjeta,
+									  Deposito_Persona,Deposito_Tarjeta,
 									  Deposito_Cuenta,Deposito_Operacion_ID)
-				VALUES(@depositoCodigo,GEM4.fnValidarFecha(@depositoFecha),@depositoImporte,@clienteID,@tarjeta,@cuentaNumero,@nOperacion);
+				VALUES(@depositoCodigo,GEM4.fnValidarFecha(@depositoFecha),@depositoImporte,@personaID,@tarjeta,@cuentaNumero,@nOperacion);
 				SET IDENTITY_INSERT GEM4.Deposito OFF;
 				
 				UPDATE GEM4.Cuenta
@@ -554,8 +556,8 @@ BEGIN
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				SET IDENTITY_INSERT GEM4.Cheque ON; 
-				INSERT INTO GEM4.Cheque(Cheque_Numero,Cheque_Fecha,Cheque_Importe,Cheque_Cliente_ID,Cheque_Banco)
-				VALUES(@chequeNumero,GEM4.fnValidarFecha(@chequeFecha),@chequeImporte,@clienteID,@banco);
+				INSERT INTO GEM4.Cheque(Cheque_Numero,Cheque_Fecha,Cheque_Importe,Cheque_Persona_ID,Cheque_Banco)
+				VALUES(@chequeNumero,GEM4.fnValidarFecha(@chequeFecha),@chequeImporte,@personaID,@banco);
 				SET IDENTITY_INSERT GEM4.Cheque OFF;
 				
 				SET IDENTITY_INSERT GEM4.Retiro ON;
@@ -601,7 +603,7 @@ BEGIN
 				
 			END;	
 		SET @nOperacion=@nOperacion+1;				
-		FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
+		FETCH NEXT FROM Cursor1 INTO @nFactura,@personaMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
 								@chequeNumero,@chequeFecha,@chequeImporte,@banco,@depositoCodigo,@depositoFecha,
 								 @depositoImporte,@tarjeta,@transfFecha,@transfImporte,@transfCosto,@cuentaDestino;
 	END;
@@ -639,13 +641,13 @@ SELECT DISTINCT Cli_Tipo_Doc_Cod, Cli_Tipo_Doc_Desc
 FROM gd_esquema.Maestra;
 SET IDENTITY_INSERT GEM4.Documento OFF;
 
-INSERT INTO GEM4.Cliente(Cliente_Pais, Cliente_Nombre, Cliente_Apellido, Cliente_Tipo_Doc,Cliente_Numero_Documento ,Cliente_Dom_Calle, Cliente_Dom_Numero, Cliente_Dom_Piso, Cliente_Dom_Depto, Cliente_Fecha_Nacimiento, Cliente_Mail)
+INSERT INTO GEM4.Persona(Persona_Pais, Persona_Nombre, Persona_Apellido, Persona_Tipo_Doc,Persona_Numero_Documento ,Persona_Dom_Calle, Persona_Dom_Numero, Persona_Dom_Piso, Persona_Dom_Depto, Persona_Fecha_Nacimiento, Persona_Mail)
 SELECT DISTINCT Cli_Pais_Codigo, Cli_Nombre, Cli_Apellido, Cli_Tipo_Doc_Cod,Cli_Nro_Doc ,Cli_Dom_Calle, Cli_Dom_Nro, Cli_Dom_Piso, Cli_Dom_Depto, Cli_Fecha_Nac, Cli_Mail
 FROM gd_esquema.Maestra
 
-INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Cliente_ID)
-SELECT Cliente_Nombre +'.'+ Cliente_Apellido, '5rhwUL/LgUP8uNsBcKTcntANkE3dPipK0bHo3A/cm+c=', GEM4.fnDevolverFechaSistema(), GEM4.fnDevolverFechaSistema(), Cliente_ID
-FROM GEM4.Cliente
+INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Persona_ID)
+SELECT Persona_Nombre +'.'+ Persona_Apellido, '5rhwUL/LgUP8uNsBcKTcntANkE3dPipK0bHo3A/cm+c=', GEM4.fnDevolverFechaSistema(), GEM4.fnDevolverFechaSistema(), Persona_ID
+FROM GEM4.Persona
 
 INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID,Rol_Cod)
 SELECT Usuario_ID, 2
@@ -653,10 +655,10 @@ FROM GEM4.Usuario
 WHERE Usuario_ID > 3
 
 INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Codigo_Seg,
-						 Tarjeta_Emisor_Descripcion,Tarjeta_Cliente_ID)
+						 Tarjeta_Emisor_Descripcion,Tarjeta_Persona_ID)
 SELECT DISTINCT m.Tarjeta_Numero,GEM4.fnValidarFecha(m.Tarjeta_Fecha_Emision),m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
-	   m.Tarjeta_Emisor_Descripcion,c.Cliente_ID
-FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
+	   m.Tarjeta_Emisor_Descripcion,p.Persona_ID
+FROM gd_esquema.Maestra m JOIN  GEM4.Persona p ON (m.Cli_Mail=p.Persona_Mail AND m.Cli_Apellido=p.Persona_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL
 
 
@@ -677,9 +679,9 @@ WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;
 
 SET IDENTITY_INSERT GEM4.Cuenta ON;
-INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Cliente_ID)
-SELECT	DISTINCT m.Cuenta_Numero,GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion),m.Cuenta_Fecha_Cierre,m.Cuenta_Pais_Codigo,c.Cliente_ID
-FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
+INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Persona_ID)
+SELECT	DISTINCT m.Cuenta_Numero,GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion),m.Cuenta_Fecha_Cierre,m.Cuenta_Pais_Codigo,p.Persona_ID
+FROM gd_esquema.Maestra m JOIN GEM4.Persona p ON (m.Cli_Mail=p.Persona_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
@@ -696,25 +698,25 @@ ON  GEM4.Usuario
 FOR UPDATE
 AS
 	BEGIN
-		DECLARE @usuarioID INT,@usuarioHab BIT,@cliente INT,
+		DECLARE @usuarioID INT,@usuarioHab BIT,@persona INT,
 				@username NVARCHAR(30),@pass CHAR(44),
 				@fechaCreacion	DATETIME,@pregSecreta NVARCHAR(60),
 				@respSecreta NVARCHAR(60),@habilitado BIT,@cuentaEstado TINYINT;
 		
 		SELECT @usuarioID=Usuario_ID,@usuarioHab=Usuario_Habilitado,
-				@cliente=Cliente_ID,@habilitado=Usuario_Habilitado
+				@persona=Persona_ID,@habilitado=Usuario_Habilitado
 		FROM inserted;
 		
-		UPDATE GEM4.Cliente
-		SET	Cliente_Habilitado=@habilitado
-		WHERE Cliente_ID=@cliente;
+		UPDATE GEM4.Persona
+		SET	Persona_Habilitado=@habilitado
+		WHERE Persona_ID=@persona;
 		
 		IF(@habilitado=0)
 		BEGIN
 			SET	@cuentaEstado=2;
 		UPDATE GEM4.Cuenta
 			SET	Cuenta_Estado=@cuentaEstado
-		WHERE Cuenta_Cliente_ID=@cliente;
+		WHERE Cuenta_Persona_ID=@persona;
 		
 		END;
 		
@@ -1021,11 +1023,11 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerDatosCuenta')
 GO
 CREATE PROCEDURE GEM4.spObtenerDatosCuenta
 	@numeroCuenta	BIGINT,
-	@clienteID		INT
+	@personaID		INT
 AS
-	SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais
+	SELECT Cuenta_Numero, Cuenta_Persona_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais
 	FROM GEM4.Cuenta_ABM
-	WHERE Cuenta_Cliente_ID = @clienteID OR Cuenta_Numero = @numeroCuenta
+	WHERE Cuenta_Persona_ID = @personaID OR Cuenta_Numero = @numeroCuenta
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'sphabilitarODeshabilitarRol')
@@ -1046,7 +1048,7 @@ GO
 CREATE PROCEDURE GEM4.spObtenerNumeroCliente
 	@username			NVARCHAR(30)
 AS
-	SELECT Cliente_ID
+	SELECT Persona_ID
 	FROM GEM4.Usuario
 	WHERE Usuario_Username = @username
 GO
@@ -1082,19 +1084,19 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAltaCuenta')
 	DROP PROCEDURE GEM4.spAltaCuenta;
 GO
 CREATE PROCEDURE GEM4.spAltaCuenta
-	@clienteID		INT,
+	@personaID		INT,
 	@codPais		INT,
 	@codMoneda		INT,
 	@tipoCuenta		INT
 AS
-	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo) VALUES
-		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0)
+	INSERT INTO GEM4.Cuenta(Cuenta_Persona_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo) VALUES
+		(@personaID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0)
 	
 	 
 		
 		SELECT TOP 1 Cuenta_Numero 
 		FROM GEM4.Cuenta 
-		WHERE Cuenta_Cliente_ID = @clienteID 
+		WHERE Cuenta_Persona_ID = @personaID 
 		ORDER BY Cuenta_Fecha_Creacion DESC
 	
 GO
@@ -1103,9 +1105,13 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarClientes')
 	DROP PROCEDURE GEM4.spBuscarClientes;
 GO
 
-CREATE PROCEDURE GEM4.spBuscarClientes
-	@nombreCliente		NVARCHAR(255),
-	@apellidoCliente	NVARCHAR(255),
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarPersonas')
+	DROP PROCEDURE GEM4.spBuscarPersonas;
+GO
+
+CREATE PROCEDURE GEM4.spBuscarPersonas
+	@nombrePersona		NVARCHAR(255),
+	@apellidoPersona	NVARCHAR(255),
 	@tipoDoc			NVARCHAR(255),
 	@nroDoc				VARCHAR(255),
 	@mail				NVARCHAR(255)
@@ -1114,12 +1120,12 @@ AS
 
 	
 	SELECT *
-	FROM GEM4.Cliente c
-	WHERE (@nombreCliente='' OR c.Cliente_Nombre LIKE @nombreCliente+'%')
-		   AND(@apellidoCliente='' OR c.Cliente_Apellido LIKE @apellidoCliente+'%')
-		   AND (@tipoDoc='' OR CONVERT(numeric(18, 2),@tipoDoc)=c.Cliente_Tipo_Doc)
-		   AND (@nroDoc=''OR /*(CONVERT(numeric(18, 2),@nroDoc)=c.Cliente_Numero_Documento)OR*/ c.Cliente_Numero_Documento LIKE @nroDoc+'%')
-		   AND (@mail='' OR c.Cliente_Mail LIKE @mail+'%');
+	FROM GEM4.Persona p
+	WHERE (@nombrePersona='' OR p.Persona_Nombre LIKE @nombrePersona+'%')
+		   AND(@apellidoPersona='' OR p.Persona_Apellido LIKE @apellidoPersona+'%')
+		   AND (@tipoDoc='' OR CONVERT(numeric(18, 2),@tipoDoc)=p.Persona_Tipo_Doc)
+		   AND (@nroDoc=''OR p.Persona_Numero_Documento LIKE @nroDoc+'%')
+		   AND (@mail='' OR p.Persona_Mail LIKE @mail+'%');
 			
 
 GO
@@ -1151,12 +1157,17 @@ GO
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasCliente')
 	DROP PROCEDURE GEM4.spObtenerTarjetasCliente;
 GO
-CREATE PROCEDURE GEM4.spObtenerTarjetasCliente
-	@clienteID	INT
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasPersona')
+	DROP PROCEDURE GEM4.spObtenerTarjetasPersona;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerTarjetasPersona
+	@personaID	INT
 AS
 	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,t.Tarjeta_Emisor_Descripcion,t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
 	FROM GEM4.Tarjeta t
-	WHERE t.Tarjeta_Cliente_ID=@clienteID
+	WHERE t.Tarjeta_Persona_ID=@personaID
 GO				
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarNombreRol')
@@ -1178,19 +1189,29 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDarBajaCliente')
 	DROP PROCEDURE GEM4.spDarBajaCliente;
 GO
 
-CREATE PROCEDURE GEM4.spDarBajaCliente
-	@clienteID INT
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDarBajaPersona')
+	DROP PROCEDURE GEM4.spDarBajaPersona;
+GO
+
+
+CREATE PROCEDURE GEM4.spDarBajaPersona
+	@personaID INT
 AS
-	UPDATE GEM4.Cliente
-	SET Cliente_Habilitado=0
-	WHERE Cliente_ID=@clienteID;
+	UPDATE GEM4.Persona
+	SET Persona_Habilitado=0
+	WHERE Persona_ID=@personaID;
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearCliente')
 	DROP PROCEDURE GEM4.spCrearCliente;
 GO
 
-CREATE PROCEDURE GEM4.spCrearCliente
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearPersona')
+	DROP PROCEDURE GEM4.spCrearPersona;
+GO
+
+
+CREATE PROCEDURE GEM4.spCrearPersona
 	@nombre				NVARCHAR(255),
 	@apellido			NVARCHAR(255),
 	@tipoDoc			NUMERIC(18,0),
@@ -1217,8 +1238,8 @@ AS
 		SET @domicilioPiso=null;
 	END
 	
-	INSERT INTO GEM4.Cliente(Cliente_Nombre,Cliente_Apellido,Cliente_Tipo_Doc,Cliente_Numero_Documento,Cliente_Mail,Cliente_Pais,
-				Cliente_Dom_Calle,Cliente_Dom_Numero,Cliente_Dom_Piso,Cliente_Dom_Depto,Cliente_Localidad,Cliente_Nacionalidad,Cliente_Fecha_Nacimiento,Cliente_Habilitado)
+	INSERT INTO GEM4.Persona(Persona_Nombre,Persona_Apellido,Persona_Tipo_Doc,Persona_Numero_Documento,Persona_Mail,Persona_Pais,
+				Persona_Dom_Calle,Persona_Dom_Numero,Persona_Dom_Piso,Persona_Dom_Depto,Persona_Localidad,Persona_Nacionalidad,Persona_Fecha_Nacimiento,Persona_Habilitado)
 	VALUES (@nombre,@apellido,@tipoDoc,@nroDoc,@mail,@pais,@domicilio,
 			@domicilioNumero,@domicilioPiso,@domicilioDepto,@localidad,@nacionalidad,@fechaNac,1)
 			
@@ -1232,7 +1253,7 @@ CREATE PROCEDURE GEM4.spObtenerCuentasDeUsuario
 AS
 	SELECT C.Cuenta_Numero
 	FROM GEM4.Cuenta C, GEM4.Usuario U
-	WHERE U.Usuario_Username = @Username and U.Cliente_ID = C.Cuenta_Cliente_ID
+	WHERE U.Usuario_Username = @Username and U.Persona_ID = C.Cuenta_Persona_ID
 GO
 
 
@@ -1240,8 +1261,14 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarCliente')
 	DROP PROCEDURE GEM4.spModificarCliente
 GO
 
-CREATE PROCEDURE GEM4.spModificarCliente
-	@clienteID	INT,
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarPersona')
+	DROP PROCEDURE GEM4.spModificarPersona
+GO
+
+
+
+CREATE PROCEDURE GEM4.spModificarPersona
+	@personaID	INT,
 	@nombre NVARCHAR(255),
 	@apellido NVARCHAR(255),
 	@tipoDoc  NUMERIC(18,0),
@@ -1257,13 +1284,13 @@ CREATE PROCEDURE GEM4.spModificarCliente
 	@fechaNac		 DATETIME,
 	@habilitado		BIT
 AS
-	UPDATE GEM4.Cliente
-	SET  Cliente_Nombre=@nombre,Cliente_Apellido=@apellido,Cliente_Tipo_Doc=@tipoDoc,
-		 Cliente_Numero_Documento=@nroDoc,Cliente_Mail=@mail,Cliente_Pais=@pais,
-		 Cliente_Dom_Calle=@domicilio,Cliente_Dom_Numero=@domicilioNumero,Cliente_Dom_Piso=@domicilioPiso,
-		 Cliente_Dom_Depto=@domicilioDepto,Cliente_Localidad=@localidad,Cliente_Nacionalidad=@nacionalidad,
-		 Cliente_Fecha_Nacimiento=@fechaNac,Cliente_Habilitado=@habilitado
-	WHERE Cliente_ID=@clienteID
+	UPDATE GEM4.Persona
+	SET  Persona_Nombre=@nombre,Persona_Apellido=@apellido,Persona_Tipo_Doc=@tipoDoc,
+		 Persona_Numero_Documento=@nroDoc,Persona_Mail=@mail,Persona_Pais=@pais,
+		 Persona_Dom_Calle=@domicilio,Persona_Dom_Numero=@domicilioNumero,Persona_Dom_Piso=@domicilioPiso,
+		 Persona_Dom_Depto=@domicilioDepto,Persona_Localidad=@localidad,Persona_Nacionalidad=@nacionalidad,
+		 Persona_Fecha_Nacimiento=@fechaNac,Persona_Habilitado=@habilitado
+	WHERE Persona_ID=@personaID
 	
 	
 GO
@@ -1273,12 +1300,12 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarPaisCuenta')
 GO
 CREATE PROCEDURE GEM4.spModificarPaisCuenta
 	@codPais		INT,
-	@clienteID		INT,
+	@personaID		INT,
 	@numeroCuenta	NUMERIC(18,0)
 AS
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Pais = @codPais
-	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	WHERE Cuenta_Persona_ID = @personaID AND Cuenta_Numero = @numeroCuenta
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarTipoCuenta')
@@ -1286,38 +1313,38 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarTipoCuenta')
 GO
 CREATE PROCEDURE GEM4.spModificarTipoCuenta
 	@codTipo		INT,
-	@clienteID		INT,
+	@personaID		INT,
 	@numeroCuenta	NUMERIC(18,0)
 AS
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Tipo = @codTipo
-	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	WHERE Cuenta_Persona_ID = @personaID AND Cuenta_Numero = @numeroCuenta
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarCuenta')
 	DROP PROCEDURE GEM4.spInhabilitarCuenta;
 GO
 CREATE PROCEDURE GEM4.spInhabilitarCuenta
-	@clienteID		INT,
+	@personaID		INT,
 	@numeroCuenta	NUMERIC(18,0)
 AS
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Estado = 2
-	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	WHERE Cuenta_Persona_ID = @personaID AND Cuenta_Numero = @numeroCuenta
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCerrarCuenta')
 	DROP PROCEDURE GEM4.spCerrarCuenta;
 GO
 CREATE PROCEDURE GEM4.spCerrarCuenta
-	@clienteID		INT,
+	@personaID		INT,
 	@numeroCuenta	NUMERIC(18,0)
 AS
 
 --TIENE QUE HABER ALGUN PROCEDURE DE FATUCTURACION PARA VERIFICAR SI ESTA TDO PAGO ANTES DE CERRARLA
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Estado = 3, Cuenta_Fecha_Cierre = SYSDATETIME()
-	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	WHERE Cuenta_Persona_ID = @personaID AND Cuenta_Numero = @numeroCuenta
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasUsuario')
@@ -1326,7 +1353,7 @@ GO
 CREATE PROCEDURE GEM4.spObtenerTarjetasUsuario
 	@usuarioNombre	NVARCHAR(30)
 AS
-	DECLARE @Cliente INT;
-	SET @Cliente = (SELECT u.Cliente_ID	FROM Usuario u WHERE u.Usuario_Username= @usuarioNombre);
-	EXEC GEM4.spObtenerTarjetasCliente @Cliente;
+	DECLARE @Persona INT;
+	SET @Persona = (SELECT u.Persona_ID	FROM Usuario u WHERE u.Usuario_Username= @usuarioNombre);
+	EXEC GEM4.spObtenerTarjetasPersona @Persona;
 GO	

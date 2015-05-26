@@ -59,19 +59,5 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             Owner.Show();
             this.Hide();
         }
-
-        private void desvincularTarjetabutton_Click(object sender, EventArgs e)
-        {
-            if (dgvTarjetas.SelectedRows.Count == 1)
-            {
-                dgvTarjetas.SelectedRows[0].Cells["Numero_Tarjeta"].Value.ToString();
-            }
-            else
-            {
-                MessageBox.Show("Seleccione la Tarjeta que quiere Desvincular", "Advertencia!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-              
-                return;
-            }
-        }
     }
 }

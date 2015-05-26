@@ -30,7 +30,7 @@
         {
             this.btnVolver = new System.Windows.Forms.Button();
             this.lblClienteNumero = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtClienteNumero = new System.Windows.Forms.TextBox();
             this.lblCuentaNumero = new System.Windows.Forms.Label();
             this.cmbCuentas = new System.Windows.Forms.ComboBox();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -65,18 +65,20 @@
             // lblClienteNumero
             // 
             this.lblClienteNumero.AutoSize = true;
+            this.lblClienteNumero.Enabled = false;
             this.lblClienteNumero.Location = new System.Drawing.Point(3, 16);
             this.lblClienteNumero.Name = "lblClienteNumero";
             this.lblClienteNumero.Size = new System.Drawing.Size(120, 20);
             this.lblClienteNumero.TabIndex = 1;
             this.lblClienteNumero.Text = "Cliente numero:";
             // 
-            // textBox1
+            // txtClienteNumero
             // 
-            this.textBox1.Location = new System.Drawing.Point(141, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(196, 26);
-            this.textBox1.TabIndex = 2;
+            this.txtClienteNumero.Enabled = false;
+            this.txtClienteNumero.Location = new System.Drawing.Point(141, 13);
+            this.txtClienteNumero.Name = "txtClienteNumero";
+            this.txtClienteNumero.Size = new System.Drawing.Size(196, 26);
+            this.txtClienteNumero.TabIndex = 2;
             // 
             // lblCuentaNumero
             // 
@@ -101,7 +103,7 @@
             this.panel1.Controls.Add(this.lblCuentaNumero);
             this.panel1.Controls.Add(this.cmbCuentas);
             this.panel1.Controls.Add(this.lblClienteNumero);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtClienteNumero);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(350, 97);
@@ -225,7 +227,7 @@
 
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Label lblClienteNumero;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtClienteNumero;
         private System.Windows.Forms.Label lblCuentaNumero;
         private System.Windows.Forms.ComboBox cmbCuentas;
         private System.Windows.Forms.Panel panel1;

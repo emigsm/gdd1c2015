@@ -105,7 +105,7 @@ namespace PagoElectronico
                     break;
 
                 case "Consulta Saldos":
-                    ConsultaSaldosPrincipal frmConsultaSaldosPrincipal = new ConsultaSaldosPrincipal();
+                    ConsultaSaldosPrincipal frmConsultaSaldosPrincipal = new ConsultaSaldosPrincipal(rolCod, username);
                     frmConsultaSaldosPrincipal.Show(this);
                     this.Hide();
                     break;

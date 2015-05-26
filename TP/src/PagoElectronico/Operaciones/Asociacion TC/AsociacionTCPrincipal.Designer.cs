@@ -36,8 +36,9 @@
             this.VincularTarjetabutton = new System.Windows.Forms.Button();
             this.desvincularTarjetabutton = new System.Windows.Forms.Button();
             this.volverButton = new System.Windows.Forms.Button();
-            this.seleccionarClientebutton = new System.Windows.Forms.Button();
-            this.Numero_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NuevaTarjetabutton = new System.Windows.Forms.Button();
+            this.Primeros_Numeros_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ultimos_Cuatro_Numeros = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Codigo_Seguridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Emisora = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Fecha_Emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,22 +53,23 @@
             this.dgvTarjetas.AllowUserToDeleteRows = false;
             this.dgvTarjetas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTarjetas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Numero_Tarjeta,
+            this.Primeros_Numeros_Tarjeta,
+            this.Ultimos_Cuatro_Numeros,
             this.Codigo_Seguridad,
             this.Emisora,
             this.Fecha_Emision,
             this.Fecha_Vencimiento,
             this.Habilitada});
-            this.dgvTarjetas.Location = new System.Drawing.Point(24, 129);
+            this.dgvTarjetas.Location = new System.Drawing.Point(24, 117);
             this.dgvTarjetas.Name = "dgvTarjetas";
             this.dgvTarjetas.ReadOnly = true;
-            this.dgvTarjetas.Size = new System.Drawing.Size(358, 214);
+            this.dgvTarjetas.Size = new System.Drawing.Size(414, 255);
             this.dgvTarjetas.TabIndex = 0;
             // 
             // tarjetaCliIdLabel
             // 
             this.tarjetaCliIdLabel.AutoSize = true;
-            this.tarjetaCliIdLabel.Location = new System.Drawing.Point(477, 76);
+            this.tarjetaCliIdLabel.Location = new System.Drawing.Point(126, 76);
             this.tarjetaCliIdLabel.Name = "tarjetaCliIdLabel";
             this.tarjetaCliIdLabel.Size = new System.Drawing.Size(50, 13);
             this.tarjetaCliIdLabel.TabIndex = 1;
@@ -76,7 +78,7 @@
             // leyendaCliId
             // 
             this.leyendaCliId.AutoSize = true;
-            this.leyendaCliId.Location = new System.Drawing.Point(338, 76);
+            this.leyendaCliId.Location = new System.Drawing.Point(21, 76);
             this.leyendaCliId.Name = "leyendaCliId";
             this.leyendaCliId.Size = new System.Drawing.Size(56, 13);
             this.leyendaCliId.TabIndex = 2;
@@ -85,7 +87,7 @@
             // tarjetaApellidoCliLabel
             // 
             this.tarjetaApellidoCliLabel.AutoSize = true;
-            this.tarjetaApellidoCliLabel.Location = new System.Drawing.Point(338, 43);
+            this.tarjetaApellidoCliLabel.Location = new System.Drawing.Point(21, 29);
             this.tarjetaApellidoCliLabel.Name = "tarjetaApellidoCliLabel";
             this.tarjetaApellidoCliLabel.Size = new System.Drawing.Size(44, 13);
             this.tarjetaApellidoCliLabel.TabIndex = 3;
@@ -94,7 +96,7 @@
             // tarjetaNombreCliLabel
             // 
             this.tarjetaNombreCliLabel.AutoSize = true;
-            this.tarjetaNombreCliLabel.Location = new System.Drawing.Point(477, 43);
+            this.tarjetaNombreCliLabel.Location = new System.Drawing.Point(132, 29);
             this.tarjetaNombreCliLabel.Name = "tarjetaNombreCliLabel";
             this.tarjetaNombreCliLabel.Size = new System.Drawing.Size(44, 13);
             this.tarjetaNombreCliLabel.TabIndex = 4;
@@ -127,51 +129,63 @@
             this.volverButton.Text = "Volver";
             this.volverButton.UseVisualStyleBackColor = true;
             // 
-            // seleccionarClientebutton
+            // NuevaTarjetabutton
             // 
-            this.seleccionarClientebutton.Location = new System.Drawing.Point(24, 43);
-            this.seleccionarClientebutton.Name = "seleccionarClientebutton";
-            this.seleccionarClientebutton.Size = new System.Drawing.Size(232, 46);
-            this.seleccionarClientebutton.TabIndex = 8;
-            this.seleccionarClientebutton.Text = "Seleccionar un Cliente";
-            this.seleccionarClientebutton.UseVisualStyleBackColor = true;
+            this.NuevaTarjetabutton.Location = new System.Drawing.Point(457, 76);
+            this.NuevaTarjetabutton.Name = "NuevaTarjetabutton";
+            this.NuevaTarjetabutton.Size = new System.Drawing.Size(115, 53);
+            this.NuevaTarjetabutton.TabIndex = 8;
+            this.NuevaTarjetabutton.Text = "Nueva Tarjeta";
+            this.NuevaTarjetabutton.UseVisualStyleBackColor = true;
             // 
-            // Numero_Tarjeta
+            // Primeros_Numeros_Tarjeta
             // 
-            this.Numero_Tarjeta.HeaderText = "Numero Tarjeta";
-            this.Numero_Tarjeta.Name = "Numero_Tarjeta";
+            this.Primeros_Numeros_Tarjeta.HeaderText = "Tarjeta Numero";
+            this.Primeros_Numeros_Tarjeta.Name = "Primeros_Numeros_Tarjeta";
+            this.Primeros_Numeros_Tarjeta.ReadOnly = true;
+            // 
+            // Ultimos_Cuatro_Numeros
+            // 
+            this.Ultimos_Cuatro_Numeros.HeaderText = "";
+            this.Ultimos_Cuatro_Numeros.Name = "Ultimos_Cuatro_Numeros";
+            this.Ultimos_Cuatro_Numeros.ReadOnly = true;
             // 
             // Codigo_Seguridad
             // 
             this.Codigo_Seguridad.HeaderText = "Codigo Seguridad";
             this.Codigo_Seguridad.Name = "Codigo_Seguridad";
+            this.Codigo_Seguridad.ReadOnly = true;
             // 
             // Emisora
             // 
             this.Emisora.HeaderText = "Emisora";
             this.Emisora.Name = "Emisora";
+            this.Emisora.ReadOnly = true;
             // 
             // Fecha_Emision
             // 
             this.Fecha_Emision.HeaderText = "Fecha Emision";
             this.Fecha_Emision.Name = "Fecha_Emision";
+            this.Fecha_Emision.ReadOnly = true;
             // 
             // Fecha_Vencimiento
             // 
             this.Fecha_Vencimiento.HeaderText = "Fecha Vencimiento";
             this.Fecha_Vencimiento.Name = "Fecha_Vencimiento";
+            this.Fecha_Vencimiento.ReadOnly = true;
             // 
             // Habilitada
             // 
             this.Habilitada.HeaderText = "Habilitada";
             this.Habilitada.Name = "Habilitada";
+            this.Habilitada.ReadOnly = true;
             // 
             // AsociacionTCPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 384);
-            this.Controls.Add(this.seleccionarClientebutton);
+            this.Controls.Add(this.NuevaTarjetabutton);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.desvincularTarjetabutton);
             this.Controls.Add(this.VincularTarjetabutton);
@@ -198,8 +212,9 @@
         private System.Windows.Forms.Button VincularTarjetabutton;
         private System.Windows.Forms.Button desvincularTarjetabutton;
         private System.Windows.Forms.Button volverButton;
-        private System.Windows.Forms.Button seleccionarClientebutton;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Numero_Tarjeta;
+        private System.Windows.Forms.Button NuevaTarjetabutton;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Primeros_Numeros_Tarjeta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ultimos_Cuatro_Numeros;
         private System.Windows.Forms.DataGridViewTextBoxColumn Codigo_Seguridad;
         private System.Windows.Forms.DataGridViewTextBoxColumn Emisora;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Emision;

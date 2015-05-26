@@ -152,6 +152,7 @@
             this.desvincularTarjetabutton.TabIndex = 6;
             this.desvincularTarjetabutton.Text = "Desvincular Tarjeta";
             this.desvincularTarjetabutton.UseVisualStyleBackColor = true;
+            this.desvincularTarjetabutton.Click += new System.EventHandler(this.desvincularTarjetabutton_Click);
             // 
             // volverButton
             // 

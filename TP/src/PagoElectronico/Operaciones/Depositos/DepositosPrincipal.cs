@@ -36,6 +36,26 @@ namespace PagoElectronico.Operaciones.Depositos
         {
 
         }
-                
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
+        }
+
+
+
+        //Validaciones
+
+        private void ImporteTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo 'Importe' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+
+            }
+        }
     }
 }

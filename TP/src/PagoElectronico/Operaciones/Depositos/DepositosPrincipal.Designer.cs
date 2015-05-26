@@ -38,7 +38,7 @@
             this.cmbMoneda = new System.Windows.Forms.ComboBox();
             this.cmbTarjeta = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
@@ -103,6 +103,7 @@
             this.ImporteTextBox.Name = "ImporteTextBox";
             this.ImporteTextBox.Size = new System.Drawing.Size(235, 20);
             this.ImporteTextBox.TabIndex = 6;
+            this.ImporteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImporteTextBox_KeyPress);
             // 
             // cmbMoneda
             // 
@@ -129,14 +130,15 @@
             this.label6.TabIndex = 9;
             this.label6.Text = "FECHA";
             // 
-            // button1
+            // btnVolver
             // 
-            this.button1.Location = new System.Drawing.Point(100, 209);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(127, 30);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "Volver";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnVolver.Location = new System.Drawing.Point(100, 209);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(127, 30);
+            this.btnVolver.TabIndex = 10;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // button2
             // 
@@ -173,7 +175,7 @@
             this.ClientSize = new System.Drawing.Size(498, 256);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVolver);
             this.Name = "DepositosPrincipal";
             this.Text = "DepositosPrincipal";
             this.Load += new System.EventHandler(this.DepositosPrincipal_Load);
@@ -195,7 +197,7 @@
         private System.Windows.Forms.ComboBox cmbMoneda;
         private System.Windows.Forms.ComboBox cmbTarjeta;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;
     }

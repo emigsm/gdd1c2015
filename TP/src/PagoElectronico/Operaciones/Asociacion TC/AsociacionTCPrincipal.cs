@@ -53,11 +53,29 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               this.Hide();
           }
 
+          private void desvincularTarjetabutton_Click(object sender, EventArgs e)
+          {
+              string numeroTarjeta;
+            if (dgvTarjetas.SelectedRows.Count == 1)
+            {
+                numeroTarjeta=dgvTarjetas.SelectedRows[0].Cells["Primeros_Numeros_Tarjeta"].Value.ToString(); //aca iria la union de los primeros numeros y los ultimos 4 o 3 encriptados..
+                GestorDeSistema.desvincularTarjeta(numeroTarjeta);                         
+             }
+            else
+            {
+                MessageBox.Show("Seleccione la Tarjeta que quiere Desvincular", "Advertencia!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              
+                return;
+            }
         }
+    }
+
+          }
+
         
 
      
 
         
-    }
+    
 

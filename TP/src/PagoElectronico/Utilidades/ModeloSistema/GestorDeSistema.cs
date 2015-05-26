@@ -61,6 +61,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_INHABILITARCUENTA = "GEM4.spInhabilitarCuenta";
         private const string STORE_CERRARCUENTA = "GEM4.spCerrarCuenta";
         private const string STORE_OBTENERTARJETASUSUARIO = "GEM4.spObtenerTarjetasUsuario";
+        private const string STORE_DESVINCULARTARJETA = "GEM4.spDesvincularTarjeta";
+        private const string STORE_VINCULARTARJETA = "GEM4.spVincularTarjeta";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -551,7 +553,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static DataTable obtenerTarjetasUsuario(string usuarioNombre)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("usuarioNombre", usuarioNombre));
+            parametros.Add(new SqlParameter("@usuarioNombre", usuarioNombre)); //aguegue un @ en teoria tendria que ser asi, lo dejo escrito por las dudas..
             SqlDataReader readerTarjetas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTARJETASUSUARIO, READER, parametros);
             DataTable tarjetas = new DataTable();
             if (readerTarjetas.HasRows)
@@ -560,6 +562,13 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerTarjetas.Dispose();
             return tarjetas;
+        }
+
+        public static void desvincularTarjeta(string numeroTarjeta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@tarjetaNumero",numeroTarjeta ));
+            SqlDataReader readerTarjetas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DESVINCULARTARJETA, READER, parametros);
         }
         
     }

@@ -1045,7 +1045,12 @@ GO
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerNumeroCliente')
 	DROP PROCEDURE GEM4.spObtenerNumeroCliente;
 GO
-CREATE PROCEDURE GEM4.spObtenerNumeroCliente
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerNumeroPersona')
+	DROP PROCEDURE GEM4.spObtenerNumeroPersona;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerNumeroPersona
 	@username			NVARCHAR(30)
 AS
 	SELECT Persona_ID

@@ -1319,3 +1319,14 @@ AS
 	SET Cuenta_Estado = 3, Cuenta_Fecha_Cierre = SYSDATETIME()
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasUsuario')
+	DROP PROCEDURE GEM4.spObtenerTarjetasUsuario;
+GO
+CREATE PROCEDURE GEM4.spObtenerTarjetasUsuario
+	@usuarioNombre	NVARCHAR(30)
+AS
+	DECLARE @Cliente INT;
+	SET @Cliente = (SELECT u.Cliente_ID	FROM Usuario u WHERE u.Usuario_Username= @usuarioNombre);
+	EXEC GEM4.spObtenerTarjetasCliente @Cliente;
+GO	

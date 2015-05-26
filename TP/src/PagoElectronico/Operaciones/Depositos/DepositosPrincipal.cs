@@ -20,6 +20,16 @@ namespace PagoElectronico.Operaciones.Depositos
             cmbCuenta.DisplayMember = "Cuenta_Numero";
             cmbCuenta.ValueMember = "Cuenta_Numero";
             cmbCuenta.DataSource = cuenta;
+
+            DataTable moneda = GestorDeSistema.obtenerMonedas();
+            cmbMoneda.DisplayMember = "Moneda_Descripcion";
+            cmbMoneda.ValueMember = "Moneda_Descripcion";
+            cmbMoneda.DataSource = moneda;
+        }
+
+        private void DepositosPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
                 
     }

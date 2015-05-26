@@ -176,6 +176,7 @@
             this.Controls.Add(this.button1);
             this.Name = "DepositosPrincipal";
             this.Text = "DepositosPrincipal";
+            this.Load += new System.EventHandler(this.DepositosPrincipal_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

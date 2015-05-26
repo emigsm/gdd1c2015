@@ -440,7 +440,7 @@ INSERT INTO GEM4.Rol_Por_Funcionalidad (Rol_Cod, Funcionalidad_Cod) VALUES
 	(1,11);
 	
 --Completa las funcionalidades deshabilitadas--
- 	
+
 INSERT INTO GEM4.Rol_Por_Funcionalidad (Funcionalidad_Cod,Rol_Cod,Rol_Por_Funcionalidad_Habilitado)
 		SELECT F.Funcionalidad_Cod,R.Rol_Cod,0
 			FROM GEM4.Funcionalidad F,GEM4.Rol R
@@ -790,7 +790,7 @@ CREATE PROCEDURE GEM4.spObtenerFuncionalidades
 AS
 	SELECT Funcionalidad_Descripcion
 	FROM GEM4.Funcionalidad JOIN GEM4.Rol_Por_Funcionalidad ON (Funcionalidad.Funcionalidad_Cod = Rol_Por_Funcionalidad.Funcionalidad_Cod)
-	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod
+	WHERE Rol_Por_Funcionalidad.Rol_Cod = @rol_cod AND Rol_Por_Funcionalidad_Habilitado=1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarUsuario')

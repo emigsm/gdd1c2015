@@ -1363,13 +1363,13 @@ AS
 	EXEC GEM4.spObtenerTarjetasPersona @Persona;
 GO
 
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDesvincularTarjeta')
-	DROP PROCEDURE GEM4.spDesvincularTarjeta;
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDarBajaTarjeta')
+	DROP PROCEDURE GEM4.spDarBajaTarjeta;
 
 GO
 
 	
-CREATE PROCEDURE GEM4.spDesvincularTarjeta
+CREATE PROCEDURE GEM4.spDarBajaTarjeta
 	@tarjetaNumero NVARCHAR(16)
 AS
 
@@ -1377,37 +1377,4 @@ UPDATE GEM4.Tarjeta
 SET Tarjeta_Habilitado=0
 WHERE Tarjeta_Numero=@tarjetaNumero;
 
-GO
-
-
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spVincularTarjeta')
-	DROP PROCEDURE GEM4.spVincularTarjeta;
-
-GO
-
-CREATE PROCEDURE GEM4.spVincularTarjeta
-	@tarjetaNumero NVARCHAR(16)
-AS
-
-UPDATE GEM4.Tarjeta
-SET Tarjeta_Habilitado=1
-WHERE Tarjeta_Numero=@tarjetaNumero;
-
-GO
-
-
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spNuevaTarjeta')
-	DROP PROCEDURE GEM4.spNuevaTarjeta;
-
-GO
-
-
-CREATE PROCEDURE GEM4.spNuevaTarjeta
-	@tarjetaNumero		NVARCHAR(16),
-	@emisorDescripcion	NVARCHAR(255),
-	@personaID			INT
-AS
-
---	INSERT INTO GEM4.Tarjeta()
-
-GO
+GO	

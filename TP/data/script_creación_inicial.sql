@@ -1361,4 +1361,20 @@ AS
 	DECLARE @Persona INT;
 	SET @Persona = (SELECT u.Persona_ID	FROM Usuario u WHERE u.Usuario_Username= @usuarioNombre);
 	EXEC GEM4.spObtenerTarjetasPersona @Persona;
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDarBajaTarjeta')
+	DROP PROCEDURE GEM4.spDarBajaTarjeta;
+
+GO
+
+	
+CREATE PROCEDURE GEM4.spDarBajaTarjeta
+	@tarjetaNumero NVARCHAR(16)
+AS
+
+UPDATE GEM4.Tarjeta
+SET Tarjeta_Habilitado=0
+WHERE Tarjeta_Numero=@tarjetaNumero;
+
 GO	

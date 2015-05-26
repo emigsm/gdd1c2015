@@ -1331,6 +1331,16 @@ AS
 	EXEC GEM4.spObtenerTarjetasCliente @Cliente;
 GO	
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerCuentasCliente')
+	DROP PROCEDURE GEM4.spObtenerCuentasCliente;
+GO
+CREATE PROCEDURE GEM4.spObtenerCuentasCliente
+	@clienteID	INT
+AS
+	SELECT Cuenta_Numero 
+	FROM GEM4.Cuenta
+	WHERE Cuenta_Cliente_ID = @clienteID
+GO	
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDesvincularTarjeta')
 	DROP PROCEDURE GEM4.spDesvincularTarjeta;
 

@@ -61,6 +61,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_INHABILITARCUENTA = "GEM4.spInhabilitarCuenta";
         private const string STORE_CERRARCUENTA = "GEM4.spCerrarCuenta";
         private const string STORE_OBTENERTARJETASUSUARIO = "GEM4.spObtenerTarjetasUsuario";
+        private const string STORE_OBTENERCUENTASCLIENTE = "GEM4.spObtenerCuentasCliente";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -560,6 +561,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerTarjetas.Dispose();
             return tarjetas;
+        }
+
+        public static DataTable obtenerCuentasCliente(int clienteID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            SqlDataReader readerCuentas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERCUENTASCLIENTE, READER, parametros);
+            DataTable cuentas = new DataTable();
+            if (readerCuentas.HasRows)
+            {
+                cuentas.Load(readerCuentas);
+            }
+            readerCuentas.Dispose();
+            return cuentas;
         }
         
     }

@@ -7,13 +7,37 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using PagoElectronico.Utilidades.ModeloSistema;
+
 namespace PagoElectronico.Operaciones.Consulta_Saldos
 {
     public partial class ConsultaSaldosPrincipal : Form
     {
-        public ConsultaSaldosPrincipal()
+
+        int rolCod, numeroCliente;
+
+        public ConsultaSaldosPrincipal(int rolCodP, string usernameP)
         {
             InitializeComponent();
+            rolCod = rolCodP;
+
+            if (rolCod == 1)
+            {
+                lblClienteNumero.Enabled = true;
+                txtClienteNumero.Enabled = true;
+            }
+            else
+            {
+                numeroCliente = GestorDeSistema.obtenerNumeroCliente(usernameP);
+                txtClienteNumero.Text = numeroCliente.ToString();
+
+                DataTable cuentas = GestorDeSistema.obtenerCuentasCliente(Convert.ToInt32(txtClienteNumero.Text));
+                cmbCuentas.DisplayMember = "Cuenta_Numero";
+                cmbCuentas.ValueMember = "Cuenta_Numero";
+                cmbCuentas.DataSource = cuentas;
+            }
+
+
         }
 
         private void btnVolver_Click(object sender, EventArgs e)

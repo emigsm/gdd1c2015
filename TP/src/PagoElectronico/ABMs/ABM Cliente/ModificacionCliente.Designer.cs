@@ -341,6 +341,7 @@
             this.modificarTarjetasbutton.TabIndex = 37;
             this.modificarTarjetasbutton.Text = "Tarjetas";
             this.modificarTarjetasbutton.UseVisualStyleBackColor = true;
+            this.modificarTarjetasbutton.Click += new System.EventHandler(this.modificarTarjetasbutton_Click);
             // 
             // guardarBoton
             // 

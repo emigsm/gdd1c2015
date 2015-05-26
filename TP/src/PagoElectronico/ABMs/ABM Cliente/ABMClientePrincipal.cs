@@ -70,7 +70,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                     clienteEncontrado.ItemArray[11],
                     clienteEncontrado.ItemArray[12],
                     clienteEncontrado.ItemArray[13],
-                    "Ver",
+                    "Ver Tarjetas",
                     "Modificar",
                     "Borrar",
                     clienteEncontrado.ItemArray[14]
@@ -118,8 +118,6 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 String nombre = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nombre"].Value.ToString();
                 String apellido = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Apellido"].Value.ToString();
                 AsociacionTCPrincipal tarjetas = new AsociacionTCPrincipal(nombre, apellido, id);
-                
-                tarjetas.deshabilitarModificaciones();
                 tarjetas.Show(this);
                 this.Hide();
             }

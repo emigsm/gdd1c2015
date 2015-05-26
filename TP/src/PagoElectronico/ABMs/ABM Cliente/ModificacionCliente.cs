@@ -7,16 +7,24 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using PagoElectronico.Utilidades.ModeloSistema;
+using PagoElectronico.Operaciones.Asociacion_TC;
 
 namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class ModificacionCliente : Form
     {
+        private Int32 idCliente { get; set; }
+        private string apellidoCliente { get; set;}
+        private string nombreCliente { get; set; }
+        
         public ModificacionCliente(Int32 id, string nombre, string apellido, int tipoDoc, Decimal nroDoc, string mail, int pais, string domCalle,
                                         Decimal domNumero, Decimal domPiso, string domDepto,
                                         string localidad, string nacionalidad, DateTime fechaNac, bool habilitado)
         {
             InitializeComponent();
+            idCliente = id;
+            apellidoCliente = apellido;
+            nombreCliente = nombre;
             DataTable tiposDoc = GestorDeSistema.obtenerTiposDoc();
             TipoDcomboBox.DisplayMember = "Documento_Tipo_Descripcion";
             TipoDcomboBox.ValueMember = "Documento_Tipo_Codigo";
@@ -319,6 +327,13 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         private void ModificacionCliente_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void modificarTarjetasbutton_Click(object sender, EventArgs e)
+        {
+            AsociacionTCPrincipal tarjetas = new AsociacionTCPrincipal(nombreCliente, apellidoCliente, idCliente);
+            tarjetas.Show(this);
+            this.Hide();
         }
     }
 }

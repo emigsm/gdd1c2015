@@ -339,9 +339,8 @@
             this.modificarTarjetasbutton.Name = "modificarTarjetasbutton";
             this.modificarTarjetasbutton.Size = new System.Drawing.Size(165, 39);
             this.modificarTarjetasbutton.TabIndex = 37;
-            this.modificarTarjetasbutton.Text = "Modificar Tarjetas";
+            this.modificarTarjetasbutton.Text = "Tarjetas";
             this.modificarTarjetasbutton.UseVisualStyleBackColor = true;
-            this.modificarTarjetasbutton.Click += new System.EventHandler(this.modificarTarjetasbutton_Click);
             // 
             // guardarBoton
             // 

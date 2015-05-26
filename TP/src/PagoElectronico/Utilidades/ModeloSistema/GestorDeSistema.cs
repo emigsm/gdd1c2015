@@ -42,20 +42,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_USUARIOEXISTE = "GEM4.spUsuarioExiste";
         private const string STORE_OBTENERDATOSCUENTA = "GEM4.spObtenerDatosCuenta";
         private const string STORE_HABILITARODESHABILITARROL = "GEM4.sphabilitarODeshabilitarRol";
-        private const string STORE_OBTENERNUMEROCLIENTE = "GEM4.spObtenerNumeroPersona";
+        private const string STORE_OBTENERNUMEROCLIENTE = "GEM4.spObtenerNumeroCliente";
         private const string STORE_OBTENERPAISES = "GEM4.spObtenerPaises";
         private const string STORE_OBTENERMONEDAS = "GEM4.spObtenerMonedas";
         private const string STORE_OBTENERTIPOCUENTAS = "GEM4.spObtenerTipoCuentas";
         private const string STORE_ALTACUENTA = "GEM4.spAltaCuenta";
-        private const string STORE_BUSCARCLIENTES = "GEM4.spBuscarPersonas";
+        private const string STORE_BUSCARCLIENTES = "GEM4.spBuscarClientes";
         private const string STORE_OBTENERTIPODOCS = "GEM4.spObtenerTiposDoc";
         private const string STORE_OBTENERFUNCIONESHABILITADASPORROL = "GEM4.spObtenerFuncionesHabilitadasPorRol";
-        private const string STORE_OBTENERTARJETASCLIENTE = "GEM4.spObtenerTarjetasPersona";
+        private const string STORE_OBTENERTARJETASCLIENTE = "GEM4.spObtenerTarjetasCliente";
         private const string STORE_MODIFICARNOMBREROL = "GEM4.spModificarNombreRol";
-        private const string STORE_DARBAJACLIENTE = "GEM4.spDarBajaPersona";
-        private const string STORE_CREARCLIENTE = "GEM4.spCrearPersona";
+        private const string STORE_DARBAJACLIENTE = "GEM4.spDarBajaCliente";
+        private const string STORE_CREARCLIENTE = "GEM4.spCrearCliente";
         private const string STORE_OBTENERCUENTASDEUSUARIO = "GEM4.spObtenerCuentasDeUsuario";
-        private const string STORE_MODIFICARCLIENTE = "GEM4.spModificarPersona";
+        private const string STORE_MODIFICARCLIENTE = "GEM4.spModificarCliente";
         private const string STORE_MODIFICARPAISCUENTA = "GEM4.spModificarPaisCuenta";
         private const string STORE_MODIFICARTIPOCUENTA = "GEM4.spModificarTipoCuenta";
         private const string STORE_INHABILITARCUENTA = "GEM4.spInhabilitarCuenta";
@@ -290,7 +290,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
-            parametros.Add(new SqlParameter("@personaID", clienteID));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             SqlDataReader readerDatosCuenta = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERDATOSCUENTA, READER, parametros);
             DataTable datosCuenta = new DataTable();
             if (readerDatosCuenta.HasRows)
@@ -365,7 +365,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         {
             long numeroCuenta;
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@personaID", clienteID));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             parametros.Add(new SqlParameter("@codPais", codPais));
             parametros.Add(new SqlParameter("@codMoneda", codMoneda));
             parametros.Add(new SqlParameter("@tipoCuenta", tipoCuenta));
@@ -380,8 +380,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             
 
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@nombrePersona", nombre));
-            parametros.Add(new SqlParameter("@apellidoPersona",apellido));
+            parametros.Add(new SqlParameter("@nombreCliente", nombre));
+            parametros.Add(new SqlParameter("@apellidoCliente",apellido));
             parametros.Add(new SqlParameter("@tipoDoc",tipoDoc));
             parametros.Add(new SqlParameter("@nroDoc", nroDoc));
             parametros.Add(new SqlParameter("@mail", mail));
@@ -399,7 +399,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static DataTable obtenerTarjetasCliente(Int32 clienteID)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("PersonaID",clienteID));
+            parametros.Add(new SqlParameter("ClienteID",clienteID));
             SqlDataReader readerTarjetas= (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTARJETASCLIENTE,READER,parametros);
             DataTable tarjetas=new DataTable();
             if(readerTarjetas.HasRows)
@@ -447,7 +447,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static void darBajaCliente(int id)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@personaID", id));
+            parametros.Add(new SqlParameter("@clienteID", id));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DARBAJACLIENTE, NONQUERY, parametros);
         }
 
@@ -492,7 +492,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
                                         string localidad, string nacionalidad, DateTime fechaNac,bool habilitado)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@personaID", id));
+            parametros.Add(new SqlParameter("@clienteID", id));
             parametros.Add(new SqlParameter("@nombre", nombre));
             parametros.Add(new SqlParameter("@apellido", apellido));
             parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
@@ -514,7 +514,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@codPais", codPais));
-            parametros.Add(new SqlParameter("@personaID", clienteID));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARPAISCUENTA, NONQUERY, parametros);
@@ -524,7 +524,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@codTipo", tipoCuenta));
-            parametros.Add(new SqlParameter("@personaID", clienteID));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARTIPOCUENTA, NONQUERY, parametros);
@@ -533,7 +533,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static void inhabilitarCuenta(int clienteID, long numeroCuenta)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@personaID", clienteID));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_INHABILITARCUENTA, NONQUERY, parametros);
@@ -542,7 +542,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static void cerrarCuenta(int clienteID, long numeroCuenta)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@personaID", clienteID));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             parametros.Add(new SqlParameter("@numeroCuenta", numeroCuenta));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CERRARCUENTA, NONQUERY, parametros);

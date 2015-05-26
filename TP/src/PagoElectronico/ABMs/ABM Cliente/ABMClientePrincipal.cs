@@ -8,7 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using PagoElectronico.Utilidades.ModeloSistema;
 using PagoElectronico.ABMs.ABM_Cliente;
-using PagoElectronico.Operaciones.Asociacion_TC;
 
 
 namespace PagoElectronico.ABMs.ABM_Cliente
@@ -116,8 +115,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 int id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
                 String nombre = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nombre"].Value.ToString();
                 String apellido = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Apellido"].Value.ToString();
-               
-                AsociacionTCPrincipal tarjetas = new AsociacionTCPrincipal(nombre, apellido, id);
+                VistaTarjetas tarjetas = new VistaTarjetas(nombre, apellido, id);
                 tarjetas.deshabilitarModificaciones();
                 tarjetas.Show(this);
                 this.Hide();

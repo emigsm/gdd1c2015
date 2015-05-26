@@ -128,6 +128,7 @@
             this.volverButton.TabIndex = 7;
             this.volverButton.Text = "Volver";
             this.volverButton.UseVisualStyleBackColor = true;
+            this.volverButton.Click += new System.EventHandler(this.volverButton_Click);
             // 
             // NuevaTarjetabutton
             // 

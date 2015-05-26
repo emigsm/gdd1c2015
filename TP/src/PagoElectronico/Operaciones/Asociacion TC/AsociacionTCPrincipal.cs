@@ -24,7 +24,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             {
                 dgvTarjetas.Rows.Add(
                 tarjeta.ItemArray[0],
-                tarjeta.ItemArray[1],
+                tarjeta.ItemArray[0],
                 tarjeta.ItemArray[1],
                 tarjeta.ItemArray[2],
                 tarjeta.ItemArray[3],
@@ -46,6 +46,12 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             desvincularTarjetabutton.Enabled = false;
             NuevaTarjetabutton.Enabled = false;
         }
+
+          private void volverButton_Click(object sender, EventArgs e)
+          {
+              Owner.Show();
+              this.Hide();
+          }
 
         }
         

@@ -1330,3 +1330,53 @@ AS
 	SET @Cliente = (SELECT u.Cliente_ID	FROM Usuario u WHERE u.Usuario_Username= @usuarioNombre);
 	EXEC GEM4.spObtenerTarjetasCliente @Cliente;
 GO	
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDesvincularTarjeta')
+	DROP PROCEDURE GEM4.spDesvincularTarjeta;
+
+GO
+
+CREATE PROCEDURE GEM4.spDesvincularTarjeta
+	@tarjetaNumero NVARCHAR(16)
+AS
+
+UPDATE GEM4.Tarjeta
+SET Tarjeta_Habilitado=0
+WHERE Tarjeta_Numero=@tarjetaNumero;
+
+GO
+
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spVincularTarjeta')
+	DROP PROCEDURE GEM4.spVincularTarjeta;
+
+GO
+
+CREATE PROCEDURE GEM4.spVincularTarjeta
+	@tarjetaNumero NVARCHAR(16)
+AS
+
+UPDATE GEM4.Tarjeta
+SET Tarjeta_Habilitado=1
+WHERE Tarjeta_Numero=@tarjetaNumero;
+
+GO
+
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spNuevaTarjeta')
+	DROP PROCEDURE GEM4.spNuevaTarjeta;
+
+GO
+
+
+CREATE PROCEDURE GEM4.spNuevaTarjeta
+	@tarjetaNumero		NVARCHAR(16),
+	@emisorDescripcion	NVARCHAR(255),
+	@clienteID			INT
+AS
+
+--	INSERT INTO GEM4.Tarjeta()
+
+
+
+GO

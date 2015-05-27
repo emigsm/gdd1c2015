@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvTarjetas = new System.Windows.Forms.DataGridView();
+            this.Primeros_Numeros_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ultimos_Cuatro_Numeros = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Codigo_Seguridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Emisora = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha_Emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Fecha_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Habilitada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.tarjetaCliIdLabel = new System.Windows.Forms.Label();
             this.leyendaCliId = new System.Windows.Forms.Label();
             this.tarjetaApellidoCliLabel = new System.Windows.Forms.Label();
@@ -37,13 +44,7 @@
             this.desvincularTarjetabutton = new System.Windows.Forms.Button();
             this.volverButton = new System.Windows.Forms.Button();
             this.NuevaTarjetabutton = new System.Windows.Forms.Button();
-            this.Primeros_Numeros_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ultimos_Cuatro_Numeros = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Codigo_Seguridad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Emisora = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha_Emision = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha_Vencimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Habilitada = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.ActualizarBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,8 +64,51 @@
             this.dgvTarjetas.Location = new System.Drawing.Point(24, 117);
             this.dgvTarjetas.Name = "dgvTarjetas";
             this.dgvTarjetas.ReadOnly = true;
+            this.dgvTarjetas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTarjetas.Size = new System.Drawing.Size(414, 255);
             this.dgvTarjetas.TabIndex = 0;
+            // 
+            // Primeros_Numeros_Tarjeta
+            // 
+            this.Primeros_Numeros_Tarjeta.HeaderText = "Tarjeta Numero";
+            this.Primeros_Numeros_Tarjeta.Name = "Primeros_Numeros_Tarjeta";
+            this.Primeros_Numeros_Tarjeta.ReadOnly = true;
+            // 
+            // Ultimos_Cuatro_Numeros
+            // 
+            this.Ultimos_Cuatro_Numeros.HeaderText = "";
+            this.Ultimos_Cuatro_Numeros.Name = "Ultimos_Cuatro_Numeros";
+            this.Ultimos_Cuatro_Numeros.ReadOnly = true;
+            // 
+            // Codigo_Seguridad
+            // 
+            this.Codigo_Seguridad.HeaderText = "Codigo Seguridad";
+            this.Codigo_Seguridad.Name = "Codigo_Seguridad";
+            this.Codigo_Seguridad.ReadOnly = true;
+            // 
+            // Emisora
+            // 
+            this.Emisora.HeaderText = "Emisora";
+            this.Emisora.Name = "Emisora";
+            this.Emisora.ReadOnly = true;
+            // 
+            // Fecha_Emision
+            // 
+            this.Fecha_Emision.HeaderText = "Fecha Emision";
+            this.Fecha_Emision.Name = "Fecha_Emision";
+            this.Fecha_Emision.ReadOnly = true;
+            // 
+            // Fecha_Vencimiento
+            // 
+            this.Fecha_Vencimiento.HeaderText = "Fecha Vencimiento";
+            this.Fecha_Vencimiento.Name = "Fecha_Vencimiento";
+            this.Fecha_Vencimiento.ReadOnly = true;
+            // 
+            // Habilitada
+            // 
+            this.Habilitada.HeaderText = "Habilitada";
+            this.Habilitada.Name = "Habilitada";
+            this.Habilitada.ReadOnly = true;
             // 
             // tarjetaCliIdLabel
             // 
@@ -110,6 +154,7 @@
             this.VincularTarjetabutton.TabIndex = 5;
             this.VincularTarjetabutton.Text = "Vincular Tarjeta";
             this.VincularTarjetabutton.UseVisualStyleBackColor = true;
+            this.VincularTarjetabutton.Click += new System.EventHandler(this.VincularTarjetabutton_Click);
             // 
             // desvincularTarjetabutton
             // 
@@ -140,53 +185,22 @@
             this.NuevaTarjetabutton.Text = "Nueva Tarjeta";
             this.NuevaTarjetabutton.UseVisualStyleBackColor = true;
             // 
-            // Primeros_Numeros_Tarjeta
+            // ActualizarBtn
             // 
-            this.Primeros_Numeros_Tarjeta.HeaderText = "Tarjeta Numero";
-            this.Primeros_Numeros_Tarjeta.Name = "Primeros_Numeros_Tarjeta";
-            this.Primeros_Numeros_Tarjeta.ReadOnly = true;
-            // 
-            // Ultimos_Cuatro_Numeros
-            // 
-            this.Ultimos_Cuatro_Numeros.HeaderText = "";
-            this.Ultimos_Cuatro_Numeros.Name = "Ultimos_Cuatro_Numeros";
-            this.Ultimos_Cuatro_Numeros.ReadOnly = true;
-            // 
-            // Codigo_Seguridad
-            // 
-            this.Codigo_Seguridad.HeaderText = "Codigo Seguridad";
-            this.Codigo_Seguridad.Name = "Codigo_Seguridad";
-            this.Codigo_Seguridad.ReadOnly = true;
-            // 
-            // Emisora
-            // 
-            this.Emisora.HeaderText = "Emisora";
-            this.Emisora.Name = "Emisora";
-            this.Emisora.ReadOnly = true;
-            // 
-            // Fecha_Emision
-            // 
-            this.Fecha_Emision.HeaderText = "Fecha Emision";
-            this.Fecha_Emision.Name = "Fecha_Emision";
-            this.Fecha_Emision.ReadOnly = true;
-            // 
-            // Fecha_Vencimiento
-            // 
-            this.Fecha_Vencimiento.HeaderText = "Fecha Vencimiento";
-            this.Fecha_Vencimiento.Name = "Fecha_Vencimiento";
-            this.Fecha_Vencimiento.ReadOnly = true;
-            // 
-            // Habilitada
-            // 
-            this.Habilitada.HeaderText = "Habilitada";
-            this.Habilitada.Name = "Habilitada";
-            this.Habilitada.ReadOnly = true;
+            this.ActualizarBtn.Location = new System.Drawing.Point(245, 65);
+            this.ActualizarBtn.Name = "ActualizarBtn";
+            this.ActualizarBtn.Size = new System.Drawing.Size(155, 35);
+            this.ActualizarBtn.TabIndex = 9;
+            this.ActualizarBtn.Text = "Actualizar";
+            this.ActualizarBtn.UseVisualStyleBackColor = true;
+            this.ActualizarBtn.Click += new System.EventHandler(this.ActualizarBtn_Click);
             // 
             // AsociacionTCPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 384);
+            this.Controls.Add(this.ActualizarBtn);
             this.Controls.Add(this.NuevaTarjetabutton);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.desvincularTarjetabutton);
@@ -222,5 +236,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Emision;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Vencimiento;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Habilitada;
+        private System.Windows.Forms.Button ActualizarBtn;
     }
 }

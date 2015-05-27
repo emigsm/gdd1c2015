@@ -64,6 +64,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_DESVINCULARTARJETA = "GEM4.spDesvincularTarjeta";
         private const string STORE_VINCULARTARJETA = "GEM4.spVincularTarjeta";
         private const string STORE_OBTENERCUENTASCLIENTE = "GEM4.spObtenerCuentasCliente";
+       
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -403,7 +404,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static DataTable obtenerTarjetasCliente(Int32 clienteID)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("ClienteID",clienteID));
+            parametros.Add(new SqlParameter("@clienteID",clienteID));
             SqlDataReader readerTarjetas= (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERTARJETASCLIENTE,READER,parametros);
             DataTable tarjetas=new DataTable();
             if(readerTarjetas.HasRows)
@@ -587,6 +588,13 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return cuentas;
 
         }
-        
+        public static void vincularTarjeta(string numeroTarjeta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@tarjetaNumero", numeroTarjeta));
+            SqlDataReader readerTarjetas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_VINCULARTARJETA, READER, parametros);
+
+        }
+
     }
 }

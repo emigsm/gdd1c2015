@@ -43,6 +43,10 @@
             this.dgvRetiros = new System.Windows.Forms.DataGridView();
             this.gbT = new System.Windows.Forms.GroupBox();
             this.dgvTransferencias = new System.Windows.Forms.DataGridView();
+            this.Deposito_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposito_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposito_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposito_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepositos)).BeginInit();
             this.gbDepositos.SuspendLayout();
@@ -79,6 +83,7 @@
             this.txtClienteNumero.Name = "txtClienteNumero";
             this.txtClienteNumero.Size = new System.Drawing.Size(196, 26);
             this.txtClienteNumero.TabIndex = 2;
+            this.txtClienteNumero.TextChanged += new System.EventHandler(this.txtClienteNumero_TextChanged);
             // 
             // lblCuentaNumero
             // 
@@ -117,14 +122,22 @@
             this.btnConsultar.TabIndex = 6;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // dgvDepositos
             // 
+            this.dgvDepositos.AllowUserToAddRows = false;
             this.dgvDepositos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDepositos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Deposito_Codigo,
+            this.Deposito_Fecha,
+            this.Deposito_Importe,
+            this.Deposito_Tarjeta});
             this.dgvDepositos.Location = new System.Drawing.Point(7, 37);
             this.dgvDepositos.Name = "dgvDepositos";
+            this.dgvDepositos.RowHeadersVisible = false;
             this.dgvDepositos.RowTemplate.Height = 28;
-            this.dgvDepositos.Size = new System.Drawing.Size(765, 150);
+            this.dgvDepositos.Size = new System.Drawing.Size(653, 150);
             this.dgvDepositos.TabIndex = 7;
             // 
             // lblSaldo
@@ -150,7 +163,7 @@
             this.gbDepositos.Controls.Add(this.dgvDepositos);
             this.gbDepositos.Location = new System.Drawing.Point(12, 159);
             this.gbDepositos.Name = "gbDepositos";
-            this.gbDepositos.Size = new System.Drawing.Size(784, 200);
+            this.gbDepositos.Size = new System.Drawing.Size(673, 200);
             this.gbDepositos.TabIndex = 11;
             this.gbDepositos.TabStop = false;
             this.gbDepositos.Text = "Últimos 5 depósitos";
@@ -193,6 +206,30 @@
             this.dgvTransferencias.RowTemplate.Height = 28;
             this.dgvTransferencias.Size = new System.Drawing.Size(765, 150);
             this.dgvTransferencias.TabIndex = 7;
+            // 
+            // Deposito_Codigo
+            // 
+            this.Deposito_Codigo.HeaderText = "Codigo";
+            this.Deposito_Codigo.Name = "Deposito_Codigo";
+            this.Deposito_Codigo.Width = 150;
+            // 
+            // Deposito_Fecha
+            // 
+            this.Deposito_Fecha.HeaderText = "Fecha";
+            this.Deposito_Fecha.Name = "Deposito_Fecha";
+            this.Deposito_Fecha.Width = 150;
+            // 
+            // Deposito_Importe
+            // 
+            this.Deposito_Importe.HeaderText = "Importe";
+            this.Deposito_Importe.Name = "Deposito_Importe";
+            this.Deposito_Importe.Width = 150;
+            // 
+            // Deposito_Tarjeta
+            // 
+            this.Deposito_Tarjeta.HeaderText = "Tarjeta";
+            this.Deposito_Tarjeta.Name = "Deposito_Tarjeta";
+            this.Deposito_Tarjeta.Width = 200;
             // 
             // ConsultaSaldosPrincipal
             // 
@@ -240,5 +277,9 @@
         private System.Windows.Forms.DataGridView dgvRetiros;
         private System.Windows.Forms.GroupBox gbT;
         private System.Windows.Forms.DataGridView dgvTransferencias;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Tarjeta;
     }
 }

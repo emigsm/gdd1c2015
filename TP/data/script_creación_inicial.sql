@@ -1356,7 +1356,6 @@ WHERE Tarjeta_Numero=@tarjetaNumero;
 
 GO
 
-
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spVincularTarjeta')
 	DROP PROCEDURE GEM4.spVincularTarjeta;
 
@@ -1372,21 +1371,63 @@ WHERE Tarjeta_Numero=@tarjetaNumero;
 
 GO
 
-
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spNuevaTarjeta')
 	DROP PROCEDURE GEM4.spNuevaTarjeta;
 
 GO
-
 
 CREATE PROCEDURE GEM4.spNuevaTarjeta
 	@tarjetaNumero		NVARCHAR(16),
 	@emisorDescripcion	NVARCHAR(255),
 	@clienteID			INT
 AS
-
 --	INSERT INTO GEM4.Tarjeta()
+GO
 
-
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosDepositos')
+	DROP PROCEDURE GEM4.spConsultaSaldosDepositos;
 
 GO
+
+CREATE PROCEDURE GEM4.spConsultaSaldosDepositos
+	@clienteID			INT,
+	@cuentaNro			NUMERIC(18,0)
+AS
+	SELECT TOP 5 Deposito_Codigo, Deposito_Fecha, Deposito_Importe, Deposito_Tarjeta 
+	FROM GEM4.Deposito	JOIN GEM4.Cuenta ON (Deposito.Deposito_Cuenta = Cuenta.Cuenta_Numero)
+	WHERE Cuenta_Cliente_ID = @clienteID AND Deposito_Cuenta = @cuentaNro
+	ORDER BY Deposito_Fecha DESC
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosRetiros')
+	DROP PROCEDURE GEM4.spConsultaSaldosRetiros;
+
+GO
+
+CREATE PROCEDURE GEM4.spConsultaSaldosRetiros
+	@clienteID			INT,
+	@cuentaNro			NUMERIC(18,0)
+AS
+	SELECT TOP 5 Retiro_Codigo, Retiro_Fecha, Retiro_Importe, Retiro_Cheque
+	FROM GEM4.Retiro	JOIN GEM4.Cuenta ON (Retiro.Retiro_Cuenta = Cuenta.Cuenta_Numero)
+	WHERE Cuenta_Cliente_ID = @clienteID AND Retiro_Cuenta = @cuentaNro
+	ORDER BY Retiro_Fecha DESC
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosTransferencias')
+	DROP PROCEDURE GEM4.spConsultaSaldosTransferencias;
+
+GO
+
+CREATE PROCEDURE GEM4.spConsultaSaldosTransferencias
+	@clienteID			INT,
+	@cuentaNro			NUMERIC(18,0)
+AS
+	SELECT TOP 10 Transferencia_Codigo, Transferencia_Fecha, Transferencia_Importe, Transferencia_Costo_Trans, Transferencia_Cuenta_Destino
+	FROM GEM4.Transferencia	JOIN GEM4.Cuenta ON (Transferencia.Transferencia_Cuenta_Origen = Cuenta.Cuenta_Numero)
+	WHERE Cuenta_Cliente_ID = @clienteID AND Transferencia_Cuenta_Origen = @cuentaNro
+	ORDER BY Transferencia_Fecha DESC
+GO
+
+
+

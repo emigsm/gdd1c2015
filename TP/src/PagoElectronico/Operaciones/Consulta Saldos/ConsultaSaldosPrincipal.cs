@@ -82,18 +82,53 @@ namespace PagoElectronico.Operaciones.Consulta_Saldos
             DataTable saldosDepositos = GestorDeSistema.saldosDepositos(clienteABuscar, cuentaABuscar);
             if (saldosDepositos.Rows.Count > 0)
             {
-                foreach (DataRow saldoEncontrado in saldosDepositos.Rows)
+                foreach (DataRow saldoDEncontrado in saldosDepositos.Rows)
                 {
-                    dgvDepositos.Rows.Add(saldoEncontrado.ItemArray[0],
-                                         saldoEncontrado.ItemArray[1],
-                                         saldoEncontrado.ItemArray[2].ToString(),
-                                         saldoEncontrado.ItemArray[3].ToString());
+                    dgvDepositos.Rows.Add(saldoDEncontrado.ItemArray[0],
+                                         saldoDEncontrado.ItemArray[1],
+                                         saldoDEncontrado.ItemArray[2].ToString(),
+                                         saldoDEncontrado.ItemArray[3].ToString());
                 }
                 dgvDepositos.Update();
             }
             else
             {
                 System.Windows.Forms.MessageBox.Show("No se encontraron depósitos realizados con los datos proporcionados");
+            }
+            
+            DataTable saldosRetiros = GestorDeSistema.saldosRetiros(clienteABuscar, cuentaABuscar);
+            if (saldosRetiros.Rows.Count > 0)
+            {
+                foreach (DataRow saldoREncontrado in saldosRetiros.Rows)
+                {
+                    dgvRetiros.Rows.Add(saldoREncontrado.ItemArray[0],
+                                         saldoREncontrado.ItemArray[1],
+                                         saldoREncontrado.ItemArray[2].ToString(),
+                                         saldoREncontrado.ItemArray[3].ToString());
+                }
+                dgvRetiros.Update();
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("No se encontraron retiros realizados con los datos proporcionados");
+            }
+
+            DataTable saldosTransferencias = GestorDeSistema.saldosTransferencias(clienteABuscar, cuentaABuscar);
+            if (saldosTransferencias.Rows.Count > 0)
+            {
+                foreach (DataRow saldoTEncontrado in saldosTransferencias.Rows)
+                {
+                    dgvTransferencias.Rows.Add(saldoTEncontrado.ItemArray[0],
+                                         saldoTEncontrado.ItemArray[1],
+                                         saldoTEncontrado.ItemArray[2].ToString(),
+                                         saldoTEncontrado.ItemArray[3].ToString(),
+                                         saldoTEncontrado.ItemArray[4].ToString());
+                }
+                dgvTransferencias.Update();
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("No se encontraron transferencias realizadas con los datos proporcionados");
             }
         }
     }

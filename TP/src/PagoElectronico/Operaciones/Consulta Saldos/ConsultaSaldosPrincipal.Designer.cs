@@ -36,6 +36,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.btnConsultar = new System.Windows.Forms.Button();
             this.dgvDepositos = new System.Windows.Forms.DataGridView();
+            this.Deposito_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposito_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposito_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Deposito_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lblSaldo = new System.Windows.Forms.Label();
             this.lblVSaldo = new System.Windows.Forms.Label();
             this.gbDepositos = new System.Windows.Forms.GroupBox();
@@ -43,10 +47,15 @@
             this.dgvRetiros = new System.Windows.Forms.DataGridView();
             this.gbT = new System.Windows.Forms.GroupBox();
             this.dgvTransferencias = new System.Windows.Forms.DataGridView();
-            this.Deposito_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deposito_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deposito_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Deposito_Tarjeta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Retiro_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Retiro_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Retiro_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Retiro_Cheque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transferencia_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transferencia_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transferencia_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transferencia_Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Transferencia_Cuenta_Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepositos)).BeginInit();
             this.gbDepositos.SuspendLayout();
@@ -140,6 +149,30 @@
             this.dgvDepositos.Size = new System.Drawing.Size(653, 150);
             this.dgvDepositos.TabIndex = 7;
             // 
+            // Deposito_Codigo
+            // 
+            this.Deposito_Codigo.HeaderText = "Codigo";
+            this.Deposito_Codigo.Name = "Deposito_Codigo";
+            this.Deposito_Codigo.Width = 150;
+            // 
+            // Deposito_Fecha
+            // 
+            this.Deposito_Fecha.HeaderText = "Fecha";
+            this.Deposito_Fecha.Name = "Deposito_Fecha";
+            this.Deposito_Fecha.Width = 150;
+            // 
+            // Deposito_Importe
+            // 
+            this.Deposito_Importe.HeaderText = "Importe";
+            this.Deposito_Importe.Name = "Deposito_Importe";
+            this.Deposito_Importe.Width = 150;
+            // 
+            // Deposito_Tarjeta
+            // 
+            this.Deposito_Tarjeta.HeaderText = "Tarjeta";
+            this.Deposito_Tarjeta.Name = "Deposito_Tarjeta";
+            this.Deposito_Tarjeta.Width = 200;
+            // 
             // lblSaldo
             // 
             this.lblSaldo.AutoSize = true;
@@ -174,18 +207,25 @@
             this.gbRetiros.Controls.Add(this.dgvRetiros);
             this.gbRetiros.Location = new System.Drawing.Point(12, 377);
             this.gbRetiros.Name = "gbRetiros";
-            this.gbRetiros.Size = new System.Drawing.Size(784, 200);
+            this.gbRetiros.Size = new System.Drawing.Size(673, 200);
             this.gbRetiros.TabIndex = 12;
             this.gbRetiros.TabStop = false;
             this.gbRetiros.Text = "Últimos 5 retiros";
             // 
             // dgvRetiros
             // 
+            this.dgvRetiros.AllowUserToAddRows = false;
             this.dgvRetiros.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvRetiros.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Retiro_Codigo,
+            this.Retiro_Fecha,
+            this.Retiro_Importe,
+            this.Retiro_Cheque});
             this.dgvRetiros.Location = new System.Drawing.Point(7, 37);
             this.dgvRetiros.Name = "dgvRetiros";
+            this.dgvRetiros.RowHeadersVisible = false;
             this.dgvRetiros.RowTemplate.Height = 28;
-            this.dgvRetiros.Size = new System.Drawing.Size(765, 150);
+            this.dgvRetiros.Size = new System.Drawing.Size(653, 150);
             this.dgvRetiros.TabIndex = 7;
             // 
             // gbT
@@ -193,43 +233,80 @@
             this.gbT.Controls.Add(this.dgvTransferencias);
             this.gbT.Location = new System.Drawing.Point(12, 602);
             this.gbT.Name = "gbT";
-            this.gbT.Size = new System.Drawing.Size(784, 200);
+            this.gbT.Size = new System.Drawing.Size(774, 200);
             this.gbT.TabIndex = 12;
             this.gbT.TabStop = false;
             this.gbT.Text = "Últimas 10 transferencias";
             // 
             // dgvTransferencias
             // 
+            this.dgvTransferencias.AllowUserToAddRows = false;
             this.dgvTransferencias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTransferencias.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Transferencia_Codigo,
+            this.Transferencia_Fecha,
+            this.Transferencia_Importe,
+            this.Transferencia_Costo,
+            this.Transferencia_Cuenta_Destino});
             this.dgvTransferencias.Location = new System.Drawing.Point(7, 37);
             this.dgvTransferencias.Name = "dgvTransferencias";
+            this.dgvTransferencias.RowHeadersVisible = false;
             this.dgvTransferencias.RowTemplate.Height = 28;
-            this.dgvTransferencias.Size = new System.Drawing.Size(765, 150);
+            this.dgvTransferencias.Size = new System.Drawing.Size(755, 150);
             this.dgvTransferencias.TabIndex = 7;
             // 
-            // Deposito_Codigo
+            // Retiro_Codigo
             // 
-            this.Deposito_Codigo.HeaderText = "Codigo";
-            this.Deposito_Codigo.Name = "Deposito_Codigo";
-            this.Deposito_Codigo.Width = 150;
+            this.Retiro_Codigo.HeaderText = "Codigo";
+            this.Retiro_Codigo.Name = "Retiro_Codigo";
+            this.Retiro_Codigo.Width = 150;
             // 
-            // Deposito_Fecha
+            // Retiro_Fecha
             // 
-            this.Deposito_Fecha.HeaderText = "Fecha";
-            this.Deposito_Fecha.Name = "Deposito_Fecha";
-            this.Deposito_Fecha.Width = 150;
+            this.Retiro_Fecha.HeaderText = "Fecha";
+            this.Retiro_Fecha.Name = "Retiro_Fecha";
+            this.Retiro_Fecha.Width = 150;
             // 
-            // Deposito_Importe
+            // Retiro_Importe
             // 
-            this.Deposito_Importe.HeaderText = "Importe";
-            this.Deposito_Importe.Name = "Deposito_Importe";
-            this.Deposito_Importe.Width = 150;
+            this.Retiro_Importe.HeaderText = "Importe";
+            this.Retiro_Importe.Name = "Retiro_Importe";
+            this.Retiro_Importe.Width = 150;
             // 
-            // Deposito_Tarjeta
+            // Retiro_Cheque
             // 
-            this.Deposito_Tarjeta.HeaderText = "Tarjeta";
-            this.Deposito_Tarjeta.Name = "Deposito_Tarjeta";
-            this.Deposito_Tarjeta.Width = 200;
+            this.Retiro_Cheque.HeaderText = "Cheque";
+            this.Retiro_Cheque.Name = "Retiro_Cheque";
+            this.Retiro_Cheque.Width = 200;
+            // 
+            // Transferencia_Codigo
+            // 
+            this.Transferencia_Codigo.HeaderText = "Codigo";
+            this.Transferencia_Codigo.Name = "Transferencia_Codigo";
+            this.Transferencia_Codigo.Width = 150;
+            // 
+            // Transferencia_Fecha
+            // 
+            this.Transferencia_Fecha.HeaderText = "Fecha";
+            this.Transferencia_Fecha.Name = "Transferencia_Fecha";
+            this.Transferencia_Fecha.Width = 150;
+            // 
+            // Transferencia_Importe
+            // 
+            this.Transferencia_Importe.HeaderText = "Importe";
+            this.Transferencia_Importe.Name = "Transferencia_Importe";
+            // 
+            // Transferencia_Costo
+            // 
+            this.Transferencia_Costo.HeaderText = "Costo de Transaccion";
+            this.Transferencia_Costo.Name = "Transferencia_Costo";
+            this.Transferencia_Costo.Width = 150;
+            // 
+            // Transferencia_Cuenta_Destino
+            // 
+            this.Transferencia_Cuenta_Destino.HeaderText = "Cuenta Destino";
+            this.Transferencia_Cuenta_Destino.Name = "Transferencia_Cuenta_Destino";
+            this.Transferencia_Cuenta_Destino.Width = 200;
             // 
             // ConsultaSaldosPrincipal
             // 
@@ -281,5 +358,14 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn Deposito_Tarjeta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Retiro_Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Retiro_Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Retiro_Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Retiro_Cheque;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Fecha;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Importe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Costo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Cuenta_Destino;
     }
 }

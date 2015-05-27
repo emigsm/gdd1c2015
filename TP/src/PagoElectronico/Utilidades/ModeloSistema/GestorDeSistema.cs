@@ -64,6 +64,9 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_DESVINCULARTARJETA = "GEM4.spDesvincularTarjeta";
         private const string STORE_VINCULARTARJETA = "GEM4.spVincularTarjeta";
         private const string STORE_OBTENERCUENTASCLIENTE = "GEM4.spObtenerCuentasCliente";
+        private const string STORE_SALDOSDEPOSITOS = "GEM4.spConsultaSaldosDepositos";
+        private const string STORE_SALDOSRETIROS = "GEM4.spConsultaSaldosRetiros";
+        private const string STORE_SALDOSTRANSFERENCIAS = "GEM4.spConsultaSaldosTransferencias";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -585,7 +588,51 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerCuentas.Dispose();
             return cuentas;
+        }
 
+        public static DataTable saldosDepositos(int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@cuentaNro", numeroCuenta));
+            SqlDataReader readerSaldos = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_SALDOSDEPOSITOS, READER, parametros);
+            DataTable saldos = new DataTable();
+            if (readerSaldos.HasRows)
+            {
+                saldos.Load(readerSaldos);
+            }
+            readerSaldos.Dispose();
+            return saldos;
+        }
+
+        public static DataTable saldosRetiros(int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@cuentaNro", numeroCuenta));
+            SqlDataReader readerSaldos = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_SALDOSRETIROS, READER, parametros);
+            DataTable saldos = new DataTable();
+            if (readerSaldos.HasRows)
+            {
+                saldos.Load(readerSaldos);
+            }
+            readerSaldos.Dispose();
+            return saldos;
+        }
+
+        public static DataTable saldosTransferencias(int clienteID, long numeroCuenta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@cuentaNro", numeroCuenta));
+            SqlDataReader readerSaldos = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_SALDOSTRANSFERENCIAS, READER, parametros);
+            DataTable saldos = new DataTable();
+            if (readerSaldos.HasRows)
+            {
+                saldos.Load(readerSaldos);
+            }
+            readerSaldos.Dispose();
+            return saldos;
         }
         
     }

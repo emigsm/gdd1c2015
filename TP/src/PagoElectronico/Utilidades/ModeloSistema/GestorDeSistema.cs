@@ -64,13 +64,10 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_DESVINCULARTARJETA = "GEM4.spDesvincularTarjeta";
         private const string STORE_VINCULARTARJETA = "GEM4.spVincularTarjeta";
         private const string STORE_OBTENERCUENTASCLIENTE = "GEM4.spObtenerCuentasCliente";
-<<<<<<< HEAD
-       
-=======
         private const string STORE_SALDOSDEPOSITOS = "GEM4.spConsultaSaldosDepositos";
         private const string STORE_SALDOSRETIROS = "GEM4.spConsultaSaldosRetiros";
         private const string STORE_SALDOSTRANSFERENCIAS = "GEM4.spConsultaSaldosTransferencias";
->>>>>>> origin/master
+
 
 
         public static int loginUsuario(string usuario, string contrasena)

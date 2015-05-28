@@ -39,7 +39,7 @@
             this.cmbTarjeta = new System.Windows.Forms.ComboBox();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnDepositar = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -140,14 +140,15 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // button2
+            // btnDepositar
             // 
-            this.button2.Location = new System.Drawing.Point(301, 209);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(134, 30);
-            this.button2.TabIndex = 11;
-            this.button2.Text = "Depositar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnDepositar.Location = new System.Drawing.Point(301, 209);
+            this.btnDepositar.Name = "btnDepositar";
+            this.btnDepositar.Size = new System.Drawing.Size(134, 30);
+            this.btnDepositar.TabIndex = 11;
+            this.btnDepositar.Text = "Depositar";
+            this.btnDepositar.UseVisualStyleBackColor = true;
+            this.btnDepositar.Click += new System.EventHandler(this.btnDepositar_Click);
             // 
             // groupBox1
             // 
@@ -174,7 +175,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(498, 256);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnDepositar);
             this.Controls.Add(this.btnVolver);
             this.Name = "DepositosPrincipal";
             this.Text = "DepositosPrincipal";
@@ -198,7 +199,7 @@
         private System.Windows.Forms.ComboBox cmbTarjeta;
         private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnDepositar;
         private System.Windows.Forms.GroupBox groupBox1;
     }
 }

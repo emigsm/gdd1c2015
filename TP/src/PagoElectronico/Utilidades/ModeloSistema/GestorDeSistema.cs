@@ -69,7 +69,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_SALDOSTRANSFERENCIAS = "GEM4.spConsultaSaldosTransferencias";
         private const string STORE_OBTENERCLIENTERECIENCREADO = "GEM4.spObtenerClienteRecienCreado";
         private const string STORE_SOLICITARFECHA = "GEM4.spSolicitarFecha";
-
+        private const string STORE_DEPOSITAR = "GEM4.spDepositar";
 
         public static int loginUsuario(string usuario, string contrasena)
         {
@@ -662,6 +662,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             DateTime.TryParse(Convert.ToString(resultadoStoreProcedure),out Fecha);
             return Fecha;
         }
-        
+
+        public static void depositar(string cuenta, int importe, string moneda,string tarjeta)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Cuenta", cuenta));
+            parametros.Add(new SqlParameter("@Importe", importe));
+            parametros.Add(new SqlParameter("@Moneda", moneda));
+            parametros.Add(new SqlParameter("@Tarjeta", tarjeta));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DEPOSITAR, NONQUERY, parametros);
+        }
     }
 }

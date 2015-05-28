@@ -59,5 +59,27 @@ namespace PagoElectronico.Operaciones.Depositos
 
             }
         }
+
+        private void btnDepositar_Click(object sender, EventArgs e)
+        {
+            if ((Convert.ToInt32(ImporteTextBox.Text) <= 1) || (ImporteTextBox.Text == "") )
+            {
+                MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+            else
+            {
+                string cuenta =cmbCuenta.SelectedValue.ToString();
+                int importe=Convert.ToInt32(ImporteTextBox.Text);
+                string moneda= cmbMoneda.SelectedValue.ToString();
+                string tarjeta=cmbTarjeta.SelectedValue.ToString();
+
+                GestorDeSistema.depositar(cuenta, importe, moneda, tarjeta);
+            }
+        }
+
+
+       
     }
 }

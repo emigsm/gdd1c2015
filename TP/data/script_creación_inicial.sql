@@ -997,10 +997,15 @@ CREATE PROCEDURE GEM4.spAltaUsuario
 	@contraseña		CHAR(44),
 	@rolCod			INT,
 	@pregSec		NVARCHAR(60),
-	@respSec		NVARCHAR(60)
+	@respSec		NVARCHAR(60),
+	@clienteID		INT
 AS
-	INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion) VALUES
-		(@username, @contraseña, @pregSec, @respSec, SYSDATETIME(), SYSDATETIME());
+	IF @clienteID = -1
+	BEGIN
+		SET @clienteID = NULL
+	END
+	INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Cliente_ID) VALUES
+		(@username, @contraseña, @pregSec, @respSec, SYSDATETIME(), SYSDATETIME(), @clienteID);
 	DECLARE @usuarioID INT
 	SET @usuarioID = (SELECT Usuario_ID FROM GEM4.Usuario WHERE Usuario_Username = @username)
 	INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
@@ -1427,6 +1432,19 @@ AS
 	FROM GEM4.Transferencia	JOIN GEM4.Cuenta ON (Transferencia.Transferencia_Cuenta_Origen = Cuenta.Cuenta_Numero)
 	WHERE Cuenta_Cliente_ID = @clienteID AND Transferencia_Cuenta_Origen = @cuentaNro
 	ORDER BY Transferencia_Fecha DESC
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerClienteRecienCreado')
+	DROP PROCEDURE GEM4.spObtenerClienteRecienCreado;
+
+GO
+
+CREATE PROCEDURE GEM4.spObtenerClienteRecienCreado
+
+AS
+	SELECT TOP 1 Cliente_ID
+	FROM GEM4.Cliente
+	ORDER BY Cliente_ID DESC
 GO
 
 

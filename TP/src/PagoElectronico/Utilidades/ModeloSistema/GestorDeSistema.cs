@@ -67,6 +67,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_SALDOSDEPOSITOS = "GEM4.spConsultaSaldosDepositos";
         private const string STORE_SALDOSRETIROS = "GEM4.spConsultaSaldosRetiros";
         private const string STORE_SALDOSTRANSFERENCIAS = "GEM4.spConsultaSaldosTransferencias";
+        private const string STORE_OBTENERCLIENTERECIENCREADO = "GEM4.spObtenerClienteRecienCreado";
 
 
 
@@ -271,7 +272,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ELIMINARROLAUSUARIO, NONQUERY, parametros);
         }
 
-        public static void altaUsuario(string username, string contraseña, int rolCod, string pregSec, string respSec)
+        public static void altaUsuario(string username, string contraseña, int rolCod, string pregSec, string respSec, int clienteID)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@username", username));
@@ -279,6 +280,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@rolCod", rolCod));
             parametros.Add(new SqlParameter("@pregSec", pregSec));
             parametros.Add(new SqlParameter("@respSec", respSec));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTAUSUARIO, NONQUERY, parametros);
         }
 
@@ -643,5 +645,14 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
         }
 
+        public static int obtenerClienteRecienCreado()
+        {
+            int clienteID;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERCLIENTERECIENCREADO, SCALAR, parametros);
+            clienteID = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return clienteID;
+        }
+        
     }
 }

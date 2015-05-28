@@ -61,7 +61,11 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
         private void btnRegistrarCliente_Click(object sender, EventArgs e)
         {
-           /*ABMClientePrincipal nuevoCliente = new ABMClientePrincipal(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);*/
+            AltaCliente nuevoCliente = new AltaCliente(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);
+            System.Windows.Forms.MessageBox.Show("El usuario sera dado de alta una vez que se registre como Nuevo Cliente.");
+
+            nuevoCliente.Show(this);
+            this.Hide();
         }
 
         private void btnAltaUsuario_Click(object sender, EventArgs e)
@@ -70,7 +74,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             {
                 if (txtContraseña.Text == txtVerificarContraseña.Text)
                 {
-                    GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);
+                    GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, -1);
                     System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
                 }
                 else

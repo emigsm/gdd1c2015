@@ -89,6 +89,14 @@ AS
 	END
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spSolicitarFecha')
+	DROP PROCEDURE GEM4.spSolicitarFecha
+GO
+CREATE PROCEDURE GEM4.spSolicitarFecha
+AS
+	SELECT TOP 1 fechaSistema FROM GEM4.fechaSistema
+GO
+
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')

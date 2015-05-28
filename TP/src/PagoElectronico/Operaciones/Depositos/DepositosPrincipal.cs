@@ -30,6 +30,8 @@ namespace PagoElectronico.Operaciones.Depositos
             cmbTarjeta.DisplayMember = "Tarjeta_Numero";
             cmbTarjeta.ValueMember = "Tarjeta_Numero";
             cmbTarjeta.DataSource = tarjeta;
+
+            lblFecha.Text = Convert.ToString(GestorDeSistema.solicitarFecha());
         }
 
         private void DepositosPrincipal_Load(object sender, EventArgs e)

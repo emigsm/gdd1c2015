@@ -37,7 +37,7 @@
             this.ImporteTextBox = new System.Windows.Forms.TextBox();
             this.cmbMoneda = new System.Windows.Forms.ComboBox();
             this.cmbTarjeta = new System.Windows.Forms.ComboBox();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -121,14 +121,14 @@
             this.cmbTarjeta.Size = new System.Drawing.Size(235, 21);
             this.cmbTarjeta.TabIndex = 8;
             // 
-            // label6
+            // lblFecha
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(217, 163);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(42, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "FECHA";
+            this.lblFecha.AutoSize = true;
+            this.lblFecha.Location = new System.Drawing.Point(217, 163);
+            this.lblFecha.Name = "lblFecha";
+            this.lblFecha.Size = new System.Drawing.Size(42, 13);
+            this.lblFecha.TabIndex = 9;
+            this.lblFecha.Text = "FECHA";
             // 
             // btnVolver
             // 
@@ -151,7 +151,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.lblFecha);
             this.groupBox1.Controls.Add(this.cmbTarjeta);
             this.groupBox1.Controls.Add(this.cmbMoneda);
             this.groupBox1.Controls.Add(this.ImporteTextBox);
@@ -196,7 +196,7 @@
         private System.Windows.Forms.TextBox ImporteTextBox;
         private System.Windows.Forms.ComboBox cmbMoneda;
         private System.Windows.Forms.ComboBox cmbTarjeta;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblFecha;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox1;

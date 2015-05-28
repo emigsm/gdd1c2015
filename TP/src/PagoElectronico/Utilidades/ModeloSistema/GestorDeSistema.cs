@@ -68,7 +68,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_SALDOSRETIROS = "GEM4.spConsultaSaldosRetiros";
         private const string STORE_SALDOSTRANSFERENCIAS = "GEM4.spConsultaSaldosTransferencias";
         private const string STORE_OBTENERCLIENTERECIENCREADO = "GEM4.spObtenerClienteRecienCreado";
-
+        private const string STORE_SOLICITARFECHA = "GEM4.spSolicitarFecha";
 
 
         public static int loginUsuario(string usuario, string contrasena)
@@ -652,6 +652,15 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERCLIENTERECIENCREADO, SCALAR, parametros);
             clienteID = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return clienteID;
+        }
+
+        public static DateTime solicitarFecha()
+        {
+            DateTime Fecha;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_SOLICITARFECHA, SCALAR, parametros);
+            DateTime.TryParse(Convert.ToString(resultadoStoreProcedure),out Fecha);
+            return Fecha;
         }
         
     }

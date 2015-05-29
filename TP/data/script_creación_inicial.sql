@@ -97,54 +97,6 @@ AS
 	SELECT TOP 1 fechaSistema FROM GEM4.fechaSistema
 GO
 
-IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
-	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
-GO
-CREATE FUNCTION GEM4.fnObtenerNumTarjetaCredito()
-RETURNS  NVARCHAR(16)
-AS
-	BEGIN
-		DECLARE @numeroTarjeta NUMERIC(18,0);
-		
-		SELECT TOP 1 @numeroTarjeta=CONVERT(NUMERIC(18,0),t.Tarjeta_Numero)+1
-		FROM GEM4.Tarjeta t
-		ORDER BY Tarjeta_Numero DESC;
-		
-		RETURN CONVERT(NVARCHAR(16),@numeroTarjeta);
-		
-	END;
-	
-GO
-
-/*IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnGenerarCodigoSeguridadTarjetaCredito')
-	DROP FUNCTION GEM4.fnGenerarCodigoSeguridadTarjetaCredito
-GO
-
-IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spGenerarCodigoSeguridadTarjetaCredito')
-	DROP PROCEDURE GEM4.spGenerarCodigoSeguridadTarjetaCredito
-GO
-CREATE FUNCTION GEM4.fnGenerarCodigoSeguridadTarjetaCredito()
-RETURNS NVARCHAR(3) 
-AS
-	BEGIN
-		--DECLARE @Random INT;
-		--DECLARE @Upper INT;
-		--DECLARE @Lower INT
-		DECLARE @codigo INT;
-		
-		
-		--SET @Lower = 1 
-		--SET @Upper = 999 
-		
-		--SELECT @codigo = ROUND(((@Upper - @Lower -1)+ @Lower), 0)
-		SET @codigo=(ABS(CAST(NEWID() as INT/*binary(6)*/) % 3) + 1)
-			
-		RETURN CONVERT(NVARCHAR(3),@codigo);
-	END
-GO
- 
-SELECT GEM4.fnGenerarCodigoSeguridadTarjetaCredito()
-FROM GEM4.Tarjeta*/
 
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
@@ -175,7 +127,8 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Cheque;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Banco')
 	DROP TABLE GEM4.Banco;
-
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Emisor')
+	DROP TABLE GEM4.Emisor;
 
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tarjeta')
 	DROP TABLE GEM4.Tarjeta;
@@ -325,15 +278,24 @@ CREATE TABLE GEM4.Cuenta(
 	FOREIGN KEY(Cuenta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID) 
 	)
 
+/*CREATE TABLE GEM4.Emisor(
+	Emisor_Cod								INT IDENTITY(1,1),
+	Emisor_Descripcion						NVARCHAR(255),
+	PRIMARY KEY(Emisor_Cod)
+	)
+*/
+
 CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Numero							NVARCHAR(16),
 	Tarjeta_Fecha_Emision					DATETIME,
 	Tarjeta_Fecha_Vencimiento				DATETIME,
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
 	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
+--	Tarjeta_Emisor							INT,
 	Tarjeta_Cliente_ID						INT,
 	Tarjeta_Habilitado						BIT DEFAULT 1
 	PRIMARY KEY(Tarjeta_Numero),
+--	FOREIGN KEY(Tarjeta_Emisor) REFERENCES	GEM4.Emisor,	
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
 	)
 CREATE TABLE GEM4.Factura(
@@ -456,6 +418,30 @@ GO
 /* *****************************************     CREACION DE TRIGGERS    ********************************************** */
 /* *****************************************	PROCEDIMIENTOS DE MIGRACION *******************************************/
 
+
+/*******************************************	FUNCIONES AUXILIARES		*******************************************/
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
+	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
+GO
+CREATE FUNCTION GEM4.fnObtenerNumTarjetaCredito()
+RETURNS  NVARCHAR(16)
+AS
+	BEGIN
+		DECLARE @numeroTarjeta NUMERIC(18,0);
+		
+		SELECT TOP 1 @numeroTarjeta=CONVERT(NUMERIC(18,0),t.Tarjeta_Numero)+1
+		FROM GEM4.Tarjeta t
+		ORDER BY Tarjeta_Numero DESC;
+		
+		RETURN CONVERT(NVARCHAR(16),@numeroTarjeta);
+		
+	END;
+	
+GO
+
+
+
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertaOperaciones')
 	DROP PROCEDURE GEM4.spInsertaOperaciones
@@ -532,7 +518,11 @@ VALUES(1,'Oro',500,500,20,360),(2,'Plata',400,400,10,160),
 		(3,'BRONCE',300,300,5,80),(4,'Gratuita',0,0,0,80);
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
-
+/*
+INSERT INTO GEM4.Emisor(Emisor_Descripcion)
+SELECT DISTINCT Tarjeta_Emisor_Descripcion
+FROM gd_esquema.Maestra;
+*/
 
 SET IDENTITY_INSERT GEM4.Estado_Cuenta ON;
 INSERT INTO GEM4.Estado_Cuenta(Estado_Codigo,Estado_Descripcion)
@@ -1516,8 +1506,15 @@ AS
 GO
 
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerEmisoresTarjetas')
+	DROP PROCEDURE GEM4.spObtenerEmisoresTarjetas;
+GO
 
-
+CREATE PROCEDURE GEM4.spObtenerEmisoresTarjetas
+AS
+	SELECT Tarjeta.Tarjeta_Emisor_Descripcion
+	FROM GEM4.Tarjeta
+GO
 
 /* 
 PREGUNTAR

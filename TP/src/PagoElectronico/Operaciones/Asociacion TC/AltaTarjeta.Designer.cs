@@ -34,6 +34,7 @@
             this.emisorTarjetaLabel = new System.Windows.Forms.Label();
             this.DarAltaBtn = new System.Windows.Forms.Button();
             this.volverBtn = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // EmisorTarjetaCombobox
@@ -91,11 +92,21 @@
             this.volverBtn.UseVisualStyleBackColor = true;
             this.volverBtn.Click += new System.EventHandler(this.volverBtn_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(338, 38);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
             // AltaTarjeta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(438, 187);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.volverBtn);
             this.Controls.Add(this.DarAltaBtn);
             this.Controls.Add(this.emisorTarjetaLabel);
@@ -117,5 +128,6 @@
         private System.Windows.Forms.Label emisorTarjetaLabel;
         private System.Windows.Forms.Button DarAltaBtn;
         private System.Windows.Forms.Button volverBtn;
+        private System.Windows.Forms.Label label1;
     }
 }

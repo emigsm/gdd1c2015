@@ -201,6 +201,7 @@
             this.Controls.Add(this.dgvTarjetas);
             this.Name = "AsociacionTCPrincipal";
             this.Text = "AsociacionTCPrincipal";
+            this.Load += new System.EventHandler(this.AsociacionTCPrincipal_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

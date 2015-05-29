@@ -73,7 +73,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENEREMISORESTARJETAS = "GEM4.spObtenerEmisoresTarjetas";
         private const string STORE_ALTATARJETA = "GEM4.spAltaTarjeta";
       
-        public static int loginUsuario(string usuario, string contrasena)
+  public static int loginUsuario(string usuario, string contrasena)
         {
             int Rol_Cod;
             List<SqlParameter> parametros = new List<SqlParameter>();
@@ -678,7 +678,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
         public static DataTable obtenerEmisoresTarjetas()
         {
-           SqlDataReader readerEmisores = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENEREMISORESTARJETAS, NONQUERY, null);
+           SqlDataReader readerEmisores = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENEREMISORESTARJETAS, READER, null);
            DataTable emisores = new DataTable();
            if (readerEmisores.HasRows)
            {
@@ -689,10 +689,10 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
                    
         }
-        public static void altaTarjeta(string emisorDescripcion, Int32 clienteID)
+        public static void altaTarjeta(string emisor, Int32 clienteID)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@emisorDescripcion", emisorDescripcion));
+            parametros.Add(new SqlParameter("@emisorDescripcion", emisor));
             parametros.Add(new SqlParameter("@clienteID", clienteID));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTATARJETA, NONQUERY, parametros);

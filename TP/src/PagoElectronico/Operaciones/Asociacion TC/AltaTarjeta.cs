@@ -16,8 +16,8 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
         {
             InitializeComponent();
             DataTable emisores = GestorDeSistema.obtenerEmisoresTarjetas();
-            EmisorTarjetaCombobox.DisplayMember = "Tarjeta_Emisor_Descripcion";
-            EmisorTarjetaCombobox.ValueMember = "Row";
+            EmisorTarjetaCombobox.DisplayMember = "Emisor_Descripcion";
+            EmisorTarjetaCombobox.ValueMember = "Emisor_Cod";
             EmisorTarjetaCombobox.DataSource = emisores;
             clienteIDValorLabel.Text = clienteId.ToString();
         }
@@ -30,7 +30,13 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
 
         private void DarAltaBtn_Click(object sender, EventArgs e)
         {
-            GestorDeSistema.altaTarjeta(EmisorTarjetaCombobox.SelectedValue.ToString(), Convert.ToInt32(clienteIDValorLabel.Text));
+            GestorDeSistema.altaTarjeta(EmisorTarjetaCombobox.Text, Convert.ToInt32(clienteIDValorLabel.Text));
+            label1.Text = EmisorTarjetaCombobox.DisplayMember.ToString();
+            
+          //  Owner.Show();
+          
+           // this.Hide();
+            
         }
     }
 }

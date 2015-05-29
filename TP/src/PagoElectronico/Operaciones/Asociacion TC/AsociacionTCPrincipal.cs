@@ -110,6 +110,19 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
 
           }
 
+          public void actualizarLista()
+          {
+              dgvTarjetas.Update();
+          }
+
+          private void AsociacionTCPrincipal_Load(object sender, EventArgs e)
+          {
+              dgvTarjetas.Rows.Clear();
+              obtenerTarjetasCliente(idCliente);
+          }
+
+          
+          
         
     }
 

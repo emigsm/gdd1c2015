@@ -1291,7 +1291,7 @@ GO
 CREATE PROCEDURE GEM4.spObtenerTarjetasCliente
 	@clienteID	INT
 AS
-	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,GEM4.fnObternerEmisorTarjeta(t.Tarjeta_Emisor),t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
+	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,GEM4.fnObtenerEmisorTarjeta(t.Tarjeta_Emisor),t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
 	FROM GEM4.Tarjeta t
 	WHERE t.Tarjeta_Cliente_ID=@clienteID
 GO				

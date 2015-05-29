@@ -101,20 +101,51 @@ IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito'
 	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
 GO
 CREATE FUNCTION GEM4.fnObtenerNumTarjetaCredito()
-RETURNS INT 
+RETURNS  NVARCHAR(16)
 AS
 	BEGIN
-		DECLARE @numeroTarjeta INT;
-		SELECT TOP 1 @numeroTarjeta=CONVERT(INT,t.Tarjeta_Numero)
-		FROM GEM4.Tarjeta t;
+		DECLARE @numeroTarjeta NUMERIC(18,0);
 		
-		RETURN @numeroTarjeta;
+		SELECT TOP 1 @numeroTarjeta=CONVERT(NUMERIC(18,0),t.Tarjeta_Numero)+1
+		FROM GEM4.Tarjeta t
+		ORDER BY Tarjeta_Numero DESC;
+		
+		RETURN CONVERT(NVARCHAR(16),@numeroTarjeta);
 		
 	END;
 	
 GO
 
+/*IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnGenerarCodigoSeguridadTarjetaCredito')
+	DROP FUNCTION GEM4.fnGenerarCodigoSeguridadTarjetaCredito
+GO
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spGenerarCodigoSeguridadTarjetaCredito')
+	DROP PROCEDURE GEM4.spGenerarCodigoSeguridadTarjetaCredito
+GO
+CREATE FUNCTION GEM4.fnGenerarCodigoSeguridadTarjetaCredito()
+RETURNS NVARCHAR(3) 
+AS
+	BEGIN
+		--DECLARE @Random INT;
+		--DECLARE @Upper INT;
+		--DECLARE @Lower INT
+		DECLARE @codigo INT;
+		
+		
+		--SET @Lower = 1 
+		--SET @Upper = 999 
+		
+		--SELECT @codigo = ROUND(((@Upper - @Lower -1)+ @Lower), 0)
+		SET @codigo=(ABS(CAST(NEWID() as INT/*binary(6)*/) % 3) + 1)
+			
+		RETURN CONVERT(NVARCHAR(3),@codigo);
+	END
+GO
  
+SELECT GEM4.fnGenerarCodigoSeguridadTarjetaCredito()
+FROM GEM4.Tarjeta*/
+
 
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
@@ -1402,18 +1433,29 @@ WHERE Tarjeta_Numero=@tarjetaNumero;
 
 GO
 
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spNuevaTarjeta')
-	DROP PROCEDURE GEM4.spNuevaTarjeta;
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAltaTarjeta')
+	DROP PROCEDURE GEM4.spAltaTarjeta;
 
 GO
 
-CREATE PROCEDURE GEM4.spNuevaTarjeta
-	@tarjetaNumero		NVARCHAR(16),
+CREATE PROCEDURE GEM4.spAltaTarjeta
+	
 	@emisorDescripcion	NVARCHAR(255),
 	@clienteID			INT
 AS
---	INSERT INTO GEM4.Tarjeta()
+	
+	DECLARE @codigo INT;
+		
+	SET @codigo=(ABS(CAST(NEWID() as binary(6)) % 999) + 1)
+	
+	INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Codigo_Seg,Tarjeta_Emisor_Descripcion,Tarjeta_Fecha_Emision,
+							Tarjeta_Fecha_Vencimiento,Tarjeta_Cliente_ID)
+	VALUES(GEM4.fnObtenerNumTarjetaCredito(),CONVERT(NVARCHAR(3),@codigo),@emisorDescripcion,GEM4.fnDevolverFechaSistema(),
+			DATEADD(YEAR,1,GEM4.fnDevolverFechaSistema()),@clienteID);
 GO
+
+
+
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosDepositos')
 	DROP PROCEDURE GEM4.spConsultaSaldosDepositos;

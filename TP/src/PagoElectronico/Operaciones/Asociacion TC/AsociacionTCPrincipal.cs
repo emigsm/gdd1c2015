@@ -102,6 +102,11 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               }
           }
 
+          private void NuevaTarjetabutton_Click(object sender, EventArgs e)
+          {
+
+          }
+
         
     }
 

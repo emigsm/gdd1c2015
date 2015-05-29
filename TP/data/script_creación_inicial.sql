@@ -98,6 +98,8 @@ AS
 GO
 
 
+ 
+
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
 	DROP TABLE GEM4.Deposito;
@@ -1454,6 +1456,26 @@ AS
 	FROM GEM4.Cliente
 	ORDER BY Cliente_ID DESC
 GO
+
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
+	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
+GO
+CREATE FUNCTION GEM4.fnObtenerNumTarjetaCredito()
+RETURNS INT 
+AS
+	BEGIN
+		DECLARE @numeroTarjeta INT;
+		SELECT TOP 1 @numeroTarjeta=CONVERT(INT,t.Tarjeta_Numero)
+		FROM GEM4.Tarjeta t;
+		
+		RETURN @numeroTarjeta;
+		
+	END;
+	
+GO
+
+
 
 /* 
 PREGUNTAR

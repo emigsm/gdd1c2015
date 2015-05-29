@@ -183,6 +183,7 @@
             this.NuevaTarjetabutton.TabIndex = 8;
             this.NuevaTarjetabutton.Text = "Nueva Tarjeta";
             this.NuevaTarjetabutton.UseVisualStyleBackColor = true;
+            this.NuevaTarjetabutton.Click += new System.EventHandler(this.NuevaTarjetabutton_Click);
             // 
             // AsociacionTCPrincipal
             // 

@@ -1455,5 +1455,38 @@ AS
 	ORDER BY Cliente_ID DESC
 GO
 
+/* 
+PREGUNTAR
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDepositar')
+	DROP PROCEDURE GEM4.spDepositar;
 
+GO
+
+CREATE PROCEDURE GEM4.spDepositar
+@Cuenta		NVARCHAR (18),
+@Importe	NUMERIC(18,2),
+@Moneda		NVARCHAR (60),
+@Tarjeta	NVARCHAR(16)
+
+AS
+
+DECLARE @FECHA DATETIME;
+DECLARE @CLIENTE INT;
+DECLARE @MONEDA_COD INT;
+DECLARE @CUENTA_NRO NUMERIC (18,0);
+DECLARE @OPERACION INT;
+
+SET @FECHA= (SELECT TOP 1 a.fechaSistema FROM GEM4.fechaSistema a );
+SET @CLIENTE =(SELECT T.Tarjeta_Cliente_ID FROM GEM4.Tarjeta T WHERE T.Tarjeta_Numero=@Tarjeta);
+SET @MONEDA_COD = (SELECT M.Moneda_Codigo FROM GEM4.Moneda M WHERE M.Moneda_Descripcion = @Moneda);
+SET @CUENTA_NRO = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
+SET @OPERACION =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHERE O.Tipo_Operacion_Descripcion LIKE 'Deposito');
+
+	INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
+	,Deposito_Cuenta)
+	VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
+
+GO
+
+*/

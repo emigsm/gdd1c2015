@@ -70,7 +70,9 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERCLIENTERECIENCREADO = "GEM4.spObtenerClienteRecienCreado";
         private const string STORE_SOLICITARFECHA = "GEM4.spSolicitarFecha";
         private const string STORE_DEPOSITAR = "GEM4.spDepositar";
-
+        private const string STORE_OBTENEREMISORESTARJETAS = "GEM4.spObtenerEmisoresTarjetas";
+        private const string STORE_ALTATARJETA = "GEM4.spAltaTarjeta";
+      
         public static int loginUsuario(string usuario, string contrasena)
         {
             int Rol_Cod;
@@ -672,6 +674,28 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@Tarjeta", tarjeta));
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DEPOSITAR, NONQUERY, parametros);
+        }
+
+        public static DataTable obtenerEmisoresTarjetas()
+        {
+           SqlDataReader readerEmisores = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENEREMISORESTARJETAS, NONQUERY, null);
+           DataTable emisores = new DataTable();
+           if (readerEmisores.HasRows)
+           {
+               emisores.Load(readerEmisores);
+           }
+           readerEmisores.Dispose();
+           return emisores;
+
+                   
+        }
+        public static void altaTarjeta(string emisorDescripcion, Int32 clienteID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@emisorDescripcion", emisorDescripcion));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTATARJETA, NONQUERY, parametros);
         }
     }
 }

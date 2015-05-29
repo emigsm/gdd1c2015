@@ -104,6 +104,9 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
 
           private void NuevaTarjetabutton_Click(object sender, EventArgs e)
           {
+              AltaTarjeta altaTarjeta = new AltaTarjeta(idCliente);
+              altaTarjeta.Show(this);
+              this.Hide();
 
           }
 

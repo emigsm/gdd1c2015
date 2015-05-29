@@ -278,24 +278,24 @@ CREATE TABLE GEM4.Cuenta(
 	FOREIGN KEY(Cuenta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID) 
 	)
 
-/*CREATE TABLE GEM4.Emisor(
+	CREATE TABLE GEM4.Emisor(
 	Emisor_Cod								INT IDENTITY(1,1),
 	Emisor_Descripcion						NVARCHAR(255),
 	PRIMARY KEY(Emisor_Cod)
 	)
-*/
+
 
 CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Numero							NVARCHAR(16),
 	Tarjeta_Fecha_Emision					DATETIME,
 	Tarjeta_Fecha_Vencimiento				DATETIME,
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
-	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
---	Tarjeta_Emisor							INT,
+--	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
+	Tarjeta_Emisor							INT,
 	Tarjeta_Cliente_ID						INT,
 	Tarjeta_Habilitado						BIT DEFAULT 1
 	PRIMARY KEY(Tarjeta_Numero),
---	FOREIGN KEY(Tarjeta_Emisor) REFERENCES	GEM4.Emisor,	
+	FOREIGN KEY(Tarjeta_Emisor) REFERENCES	GEM4.Emisor,	
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
 	)
 CREATE TABLE GEM4.Factura(
@@ -440,6 +440,45 @@ AS
 	
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnInsertarCodigoDeEmisor')
+	DROP FUNCTION GEM4.fnInsertarCodigoDeEmisor
+GO
+CREATE FUNCTION GEM4.fnInsertarCodigoDeEmisor(@emisorDescripcion NVARCHAR(255))
+RETURNS  INT
+AS
+	BEGIN
+	
+		DECLARE @codigoEmisor INT;
+		
+		SELECT @codigoEmisor=Emisor_Cod
+		FROM GEM4.Emisor
+		WHERE Emisor_Descripcion=@emisorDescripcion
+		
+		RETURN @codigoEmisor;
+		
+	END;
+	
+GO
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerEmisorTarjeta')
+	DROP FUNCTION GEM4.fnObtenerEmisorTarjeta
+GO
+CREATE FUNCTION GEM4.fnObtenerEmisorTarjeta(@emisorCodigo INT)
+RETURNS  NVARCHAR(255)
+AS
+	BEGIN
+	
+		DECLARE @emisorDescripcion NVARCHAR(255);
+		
+		SELECT @emisorDescripcion=Emisor_Descripcion
+		FROM GEM4.Emisor
+		WHERE Emisor_Cod=@emisorCodigo;
+		
+		RETURN @emisorDescripcion;
+		
+	END;
+	
+GO
 
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
@@ -518,11 +557,12 @@ VALUES(1,'Oro',500,500,20,360),(2,'Plata',400,400,10,160),
 		(3,'BRONCE',300,300,5,80),(4,'Gratuita',0,0,0,80);
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
-/*
+
 INSERT INTO GEM4.Emisor(Emisor_Descripcion)
 SELECT DISTINCT Tarjeta_Emisor_Descripcion
-FROM gd_esquema.Maestra;
-*/
+FROM gd_esquema.Maestra
+WHERE Tarjeta_Emisor_Descripcion IS NOT NULL;
+
 
 SET IDENTITY_INSERT GEM4.Estado_Cuenta ON;
 INSERT INTO GEM4.Estado_Cuenta(Estado_Codigo,Estado_Descripcion)
@@ -700,9 +740,9 @@ FROM GEM4.Usuario
 WHERE Usuario_ID > 3
 
 INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Codigo_Seg,
-						 Tarjeta_Emisor_Descripcion,Tarjeta_Cliente_ID)
+						 Tarjeta_Emisor,Tarjeta_Cliente_ID)
 SELECT DISTINCT m.Tarjeta_Numero,GEM4.fnValidarFecha(m.Tarjeta_Fecha_Emision),m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
-	   m.Tarjeta_Emisor_Descripcion,c.Cliente_ID
+	   GEM4.fnInsertarCodigoDeEmisor(m.Tarjeta_Emisor_Descripcion),c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL
 
@@ -1206,7 +1246,7 @@ GO
 CREATE PROCEDURE GEM4.spObtenerTarjetasCliente
 	@clienteID	INT
 AS
-	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,t.Tarjeta_Emisor_Descripcion,t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
+	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,GEM4.fnObternerEmisorTarjeta(t.Tarjeta_Emisor),t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
 	FROM GEM4.Tarjeta t
 	WHERE t.Tarjeta_Cliente_ID=@clienteID
 GO				
@@ -1438,9 +1478,9 @@ AS
 		
 	SET @codigo=(ABS(CAST(NEWID() as binary(6)) % 999) + 1)
 	
-	INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Codigo_Seg,Tarjeta_Emisor_Descripcion,Tarjeta_Fecha_Emision,
+	INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Codigo_Seg,Tarjeta_Emisor,Tarjeta_Fecha_Emision,
 							Tarjeta_Fecha_Vencimiento,Tarjeta_Cliente_ID)
-	VALUES(GEM4.fnObtenerNumTarjetaCredito(),CONVERT(NVARCHAR(3),@codigo),@emisorDescripcion,GEM4.fnDevolverFechaSistema(),
+	VALUES(GEM4.fnObtenerNumTarjetaCredito(),CONVERT(NVARCHAR(3),@codigo),GEM4.fnInsertarCodigoDeEmisor(@emisorDescripcion) ,GEM4.fnDevolverFechaSistema(),
 			DATEADD(YEAR,1,GEM4.fnDevolverFechaSistema()),@clienteID);
 GO
 
@@ -1512,8 +1552,9 @@ GO
 
 CREATE PROCEDURE GEM4.spObtenerEmisoresTarjetas
 AS
-	SELECT Tarjeta.Tarjeta_Emisor_Descripcion
-	FROM GEM4.Tarjeta
+	SELECT Emisor_Cod,Emisor_Descripcion
+	FROM GEM4.Emisor
+	
 GO
 
 /* 

@@ -97,6 +97,22 @@ AS
 	SELECT TOP 1 fechaSistema FROM GEM4.fechaSistema
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
+	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
+GO
+CREATE FUNCTION GEM4.fnObtenerNumTarjetaCredito()
+RETURNS INT 
+AS
+	BEGIN
+		DECLARE @numeroTarjeta INT;
+		SELECT TOP 1 @numeroTarjeta=CONVERT(INT,t.Tarjeta_Numero)
+		FROM GEM4.Tarjeta t;
+		
+		RETURN @numeroTarjeta;
+		
+	END;
+	
+GO
 
  
 
@@ -1458,22 +1474,6 @@ AS
 GO
 
 
-IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
-	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
-GO
-CREATE FUNCTION GEM4.fnObtenerNumTarjetaCredito()
-RETURNS INT 
-AS
-	BEGIN
-		DECLARE @numeroTarjeta INT;
-		SELECT TOP 1 @numeroTarjeta=CONVERT(INT,t.Tarjeta_Numero)
-		FROM GEM4.Tarjeta t;
-		
-		RETURN @numeroTarjeta;
-		
-	END;
-	
-GO
 
 
 

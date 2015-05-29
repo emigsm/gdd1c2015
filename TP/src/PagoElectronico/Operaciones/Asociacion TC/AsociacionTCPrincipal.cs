@@ -72,14 +72,6 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
                 GestorDeSistema.desvincularTarjeta(numeroTarjeta);
                 obtenerTarjetasCliente(idCliente);
                     dgvTarjetas.Update();
-                /*    Owner.Show();
-                    this.Hide();
-                
-
-                AsociacionTCPrincipal tarjetas = new AsociacionTCPrincipal(tarjetaNombreCliLabel.Text, tarjetaApellidoCliLabel.Text, idCliente);
-                tarjetas.Show(Owner);
-                Owner.Hide();
-                */
              }
             else
             {
@@ -87,7 +79,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               
                 return;
             }
-            GestorDeSistema.obtenerTarjetasCliente(Convert.ToInt32(tarjetaCliIdLabel.Text));
+          
        
         }
 
@@ -98,7 +90,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               {
                   numeroTarjeta = dgvTarjetas.SelectedRows[0].Cells["Primeros_Numeros_Tarjeta"].Value.ToString(); //aca iria la union de los primeros numeros y los ultimos 4 o 3 encriptados..
                   dgvTarjetas.Rows.Clear();
-                  GestorDeSistema.desvincularTarjeta(numeroTarjeta);
+                  GestorDeSistema.vincularTarjeta(numeroTarjeta);
                   obtenerTarjetasCliente(idCliente);
                   dgvTarjetas.Update();
               }
@@ -110,10 +102,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               }
           }
 
-          private void ActualizarBtn_Click(object sender, EventArgs e)
-          {
-              GestorDeSistema.obtenerTarjetasCliente(Convert.ToInt32(tarjetaCliIdLabel.Text));
-          }
+        
     }
 
           }

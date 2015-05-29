@@ -120,6 +120,13 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Item_Por_Factura;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Factura')
 	DROP TABLE GEM4.Factura;
+
+--TABLA NUEVA NO IMPLEMENTADA	
+/*
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operaciones_Facturables')	
+	DROP TABLE GEM4.Operaciones_Facturables; 
+*/
+	
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Item')
 	DROP TABLE GEM4.Item;
 
@@ -314,6 +321,18 @@ CREATE TABLE GEM4.Tipo_Operacion(
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
 
+/* NUEVA TABLA (A IMPLEMENTAR)
+
+CREATE TABLE GEM4.Tipo_Operacion(
+	Tipo_Operacion_ID						INT IDENTITY(1,1),
+	Tipo_Operacion_Descripcion				NVARCHAR(255),
+	Tipo_Operacion_Descripcion_Costeo		NVARCHAR(255),
+	Tipo_Operacion_Importe					NUMERIC(18,2)
+	PRIMARY KEY(Tipo_Operacion_ID)
+	)
+	
+	*/
+	
 CREATE TABLE GEM4.Operacion(
 	Operacion_ID						INT IDENTITY(1,1),
 	Operacion_Tipo						INT,
@@ -327,7 +346,32 @@ CREATE TABLE GEM4.Operacion(
 	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero)
 	)
 	
+/* NUEVA TABLA (A IMPLEMENTAR)
 
+CREATE TABLE GEM4.Operacion(
+	Operacion_ID						INT IDENTITY(1,1),
+	Operacion_Tipo						INT,
+	Operacion_Fecha						DATETIME,
+	Operacion_Usuario_ID				INT,
+	PRIMARY KEY(Operacion_ID),
+	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
+	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	)
+	*/
+
+/* NUEVA TABLA  (TABLA INTERMEDIA)
+
+CREATE TABLE GEM4.Operaciones_Facturables(
+	Operacion_Facturable_Cod				INT IDENTITY(1,1),
+	Operacion_Facturable_Operacion_ID		INT,
+	Operacion_Facturable_Factura_Numero		NUMERIC(18,0),
+	Operacion_Facturable_Costo				NUMERIC(18,2)
+	PRIMARY KEY(Operacion_Facturable_Cod),
+	FOREIGN KEY(Operacion_Facturable_Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
+	FOREIGN KEY(Operacion_Facturable_Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
+	)
+	*/
+	
 CREATE TABLE GEM4.Deposito(
 	Deposito_Codigo							NUMERIC(18,0) IDENTITY(1,1),
 	Deposito_Fecha							DATETIME,

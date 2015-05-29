@@ -20,6 +20,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             tarjetaApellidoCliLabel.Text = apellido;
             tarjetaNombreCliLabel.Text = nombre;
             tarjetaCliIdLabel.Text = id.ToString();
+            idCliente = id;
 
             obtenerTarjetasCliente(id);
         }
@@ -69,9 +70,16 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
                 numeroTarjeta=dgvTarjetas.SelectedRows[0].Cells["Primeros_Numeros_Tarjeta"].Value.ToString(); //aca iria la union de los primeros numeros y los ultimos 4 o 3 encriptados..
                 dgvTarjetas.Rows.Clear();
                 GestorDeSistema.desvincularTarjeta(numeroTarjeta);
-                GestorDeSistema.obtenerTarjetasCliente(idCliente);
-                dgvTarjetas.Update();
-               
+                obtenerTarjetasCliente(idCliente);
+                    dgvTarjetas.Update();
+                /*    Owner.Show();
+                    this.Hide();
+                
+
+                AsociacionTCPrincipal tarjetas = new AsociacionTCPrincipal(tarjetaNombreCliLabel.Text, tarjetaApellidoCliLabel.Text, idCliente);
+                tarjetas.Show(Owner);
+                Owner.Hide();
+                */
              }
             else
             {
@@ -80,7 +88,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
                 return;
             }
             GestorDeSistema.obtenerTarjetasCliente(Convert.ToInt32(tarjetaCliIdLabel.Text));
-        //    dgvTarjetas.Update();
+       
         }
 
           private void VincularTarjetabutton_Click(object sender, EventArgs e)
@@ -91,7 +99,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
                   numeroTarjeta = dgvTarjetas.SelectedRows[0].Cells["Primeros_Numeros_Tarjeta"].Value.ToString(); //aca iria la union de los primeros numeros y los ultimos 4 o 3 encriptados..
                   dgvTarjetas.Rows.Clear();
                   GestorDeSistema.desvincularTarjeta(numeroTarjeta);
-                  GestorDeSistema.obtenerTarjetasCliente(Convert.ToInt32(tarjetaCliIdLabel.Text));
+                  obtenerTarjetasCliente(idCliente);
                   dgvTarjetas.Update();
               }
               else

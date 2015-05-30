@@ -298,7 +298,6 @@ CREATE TABLE GEM4.Tarjeta(
 	Tarjeta_Fecha_Emision					DATETIME,
 	Tarjeta_Fecha_Vencimiento				DATETIME,
 	Tarjeta_Codigo_Seg						NVARCHAR(3),
---	Tarjeta_Emisor_Descripcion				NVARCHAR(255),
 	Tarjeta_Emisor							INT,
 	Tarjeta_Cliente_ID						INT,
 	Tarjeta_Habilitado						BIT DEFAULT 1
@@ -503,6 +502,27 @@ AS
 		
 	END;
 	
+GO
+
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarRetiro')
+	DROP FUNCTION GEM4.fnValidarRetiro
+GO
+
+CREATE FUNCTION GEM4.fnValidarRetiro(@nroDoc INT,@tipoDoc INT,@clienteID INT,@cuentaID NUMERIC(18,0),@importe NUMERIC(18,0))
+RETURNS  INT
+AS 
+	BEGIN
+		
+		IF NOT EXISTS (SELECT 1 FROM GEM4.Cliente WHERE @nroDoc=Cliente_Numero_Documento 
+					AND @tipoDoc=Cliente_Tipo_Doc AND Cliente_ID=@clienteID)
+		BEGIN
+			RETURN 0;
+		END;
+
+
+		RETURN 1;
+	END;
 GO
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerEmisorTarjeta')
@@ -1601,6 +1621,11 @@ AS
 	FROM GEM4.Emisor
 	
 GO
+
+
+
+
+
 
 /* 
 PREGUNTAR

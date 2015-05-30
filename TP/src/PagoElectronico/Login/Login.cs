@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using PagoElectronico.Utilidades.ConexionDB;
 using PagoElectronico.Utilidades.Cifrado;
 using PagoElectronico.Utilidades.ModeloSistema;
+using PagoElectronico.ABMs.ABM_de_Usuario;
 
 namespace PagoElectronico
 {
@@ -109,6 +110,14 @@ namespace PagoElectronico
             {
                 btnIngresar.PerformClick();
             }
+        }
+
+        private void btnRegistrarse_Click(object sender, EventArgs e)
+        {
+            AltaUsuario nuevoUsuario = new AltaUsuario();
+            nuevoUsuario.altaDeLogin();
+            nuevoUsuario.Show(this);
+            this.Hide();
         }
 
     }

@@ -24,6 +24,12 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             cmbRol.DataSource = roles;
         }
 
+        public void altaDeLogin()
+        {
+            cmbRol.Enabled = false;
+            cmbRol.SelectedValue = 2;
+        }
+
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
@@ -61,9 +67,10 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
         private void btnRegistrarCliente_Click(object sender, EventArgs e)
         {
-            AltaCliente nuevoCliente = new AltaCliente(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);
+            AltaCliente nuevoCliente = new AltaCliente();
             System.Windows.Forms.MessageBox.Show("El usuario sera dado de alta una vez que se registre como Nuevo Cliente.");
 
+            nuevoCliente.altaProvenienteDeUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);
             nuevoCliente.Show(this);
             this.Hide();
         }

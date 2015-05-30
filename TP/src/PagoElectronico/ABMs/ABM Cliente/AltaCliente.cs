@@ -34,19 +34,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             
          }
 
-        public AltaCliente(string usernameP, string passwordP, int rolP, string preguntaSecretaP, string respuestaSecretaP)
+        public void altaProvenienteDeUsuario(string usernameP, string passwordP, int rolP, string preguntaSecretaP, string respuestaSecretaP)
         {
-            InitializeComponent();
-            DataTable tiposDoc = GestorDeSistema.obtenerTiposDoc();
-            TipoDcomboBox.DisplayMember = "Documento_Tipo_Descripcion";
-            TipoDcomboBox.ValueMember = "Documento_Tipo_Codigo";
-            TipoDcomboBox.DataSource = tiposDoc;
-
-            DataTable paises = GestorDeSistema.obtenerPaises();
-            PaiscomboBox.DisplayMember = "Pais_Descripcion";
-            PaiscomboBox.ValueMember = "Pais_Cod";
-            PaiscomboBox.DataSource = paises;
-
             provenienteDeUsuario = true;
             username = usernameP;
             password = passwordP;

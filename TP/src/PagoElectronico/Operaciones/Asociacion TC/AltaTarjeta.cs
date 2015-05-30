@@ -18,7 +18,9 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             DataTable emisores = GestorDeSistema.obtenerEmisoresTarjetas();
             EmisorTarjetaCombobox.DisplayMember = "Emisor_Descripcion";
             EmisorTarjetaCombobox.ValueMember = "Emisor_Cod";
+            EmisorTarjetaCombobox.SelectedValue = 1;//valor por defecto
             EmisorTarjetaCombobox.DataSource = emisores;
+           
             clienteIDValorLabel.Text = clienteId.ToString();
         }
 
@@ -33,9 +35,9 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             GestorDeSistema.altaTarjeta(EmisorTarjetaCombobox.Text, Convert.ToInt32(clienteIDValorLabel.Text));
             label1.Text = EmisorTarjetaCombobox.DisplayMember.ToString();
             
-          //  Owner.Show();
-          
-           // this.Hide();
+            Owner.Show();
+            Owner.Refresh();
+            this.Hide();
             
         }
     }

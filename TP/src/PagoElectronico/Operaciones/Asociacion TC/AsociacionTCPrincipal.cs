@@ -121,6 +121,12 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               obtenerTarjetasCliente(idCliente);
           }
 
+          private void actualizarBoton_Click(object sender, EventArgs e)
+          {
+              dgvTarjetas.Rows.Clear();
+              obtenerTarjetasCliente(idCliente);
+          }
+
           
           
         

@@ -44,6 +44,7 @@
             this.desvincularTarjetabutton = new System.Windows.Forms.Button();
             this.volverButton = new System.Windows.Forms.Button();
             this.NuevaTarjetabutton = new System.Windows.Forms.Button();
+            this.actualizarBoton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTarjetas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -185,11 +186,22 @@
             this.NuevaTarjetabutton.UseVisualStyleBackColor = true;
             this.NuevaTarjetabutton.Click += new System.EventHandler(this.NuevaTarjetabutton_Click);
             // 
+            // actualizarBoton
+            // 
+            this.actualizarBoton.Location = new System.Drawing.Point(284, 59);
+            this.actualizarBoton.Name = "actualizarBoton";
+            this.actualizarBoton.Size = new System.Drawing.Size(122, 46);
+            this.actualizarBoton.TabIndex = 9;
+            this.actualizarBoton.Text = "Actualizar";
+            this.actualizarBoton.UseVisualStyleBackColor = true;
+            this.actualizarBoton.Click += new System.EventHandler(this.actualizarBoton_Click);
+            // 
             // AsociacionTCPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 384);
+            this.Controls.Add(this.actualizarBoton);
             this.Controls.Add(this.NuevaTarjetabutton);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.desvincularTarjetabutton);
@@ -226,5 +238,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Emision;
         private System.Windows.Forms.DataGridViewTextBoxColumn Fecha_Vencimiento;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Habilitada;
+        private System.Windows.Forms.Button actualizarBoton;
     }
 }

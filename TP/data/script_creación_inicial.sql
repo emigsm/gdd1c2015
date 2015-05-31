@@ -588,7 +588,7 @@ GO
 
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarCuentaHabilitada')
-	DROP FUNCTION GEM4.fnValidarCuentaHabilida
+	DROP FUNCTION GEM4.fnValidarCuentaHabilitada
 GO
 
 CREATE FUNCTION GEM4.fnValidarCuentaHabilitada(@cuentaNum NUMERIC(18,0))
@@ -607,6 +607,8 @@ AS
 		RETURN 1;
 	END;
 GO
+
+
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertaOperaciones')
@@ -1687,6 +1689,39 @@ GO
 
 
 
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spEfectuarRetiro')
+	DROP PROCEDURE GEM4.spEfectuarRetiro;
+GO
+
+CREATE PROCEDURE GEM4.spEfectuarRetiro
+	@cuentaNro	NUMERIC(18,0),
+	@importe	NUMERIC(18,2),
+	@tipoDoc	INT,
+	@nroDoc		INT,
+	@nroCheque	NUMERIC(18,0),
+	@fecha		DATETIME,
+	@usuarioID	NUMERIC(18,0)
+
+AS
+	BEGIN
+	
+		IF(@nroDoc=1)
+			BEGIN
+				
+				SELECT 'RETIRO EFECTUADO CORRECTAMENTE!';
+			
+			END;
+		ELSE
+			BEGIN
+				SELECT 'HUBO UN PROBLEMA CON EL RETIRO, LO SENTIMOS!'
+			END;
+		
+		
+		
+	END;
+
+GO
 
 
 /* 

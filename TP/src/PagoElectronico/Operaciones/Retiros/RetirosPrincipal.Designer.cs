@@ -166,7 +166,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(480, 335);
+            this.ClientSize = new System.Drawing.Size(496, 344);
             this.Controls.Add(this.fechaValorLabel);
             this.Controls.Add(this.FechaLeyendalabel);
             this.Controls.Add(this.VOLVERbutton);

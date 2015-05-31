@@ -560,6 +560,54 @@ AS
 GO
 
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarSaldoSuficiente')
+	DROP FUNCTION GEM4.fnValidarSaldoSuficiente
+GO
+
+CREATE FUNCTION GEM4.fnValidarSaldoSuficiente(@importe NUMERIC(18,2),@cuentaNum NUMERIC(18,0))
+RETURNS  INT
+AS
+	BEGIN
+		DECLARE @saldo NUMERIC(18,2);
+		
+		SELECT @saldo=Cuenta_Numero
+		FROM GEM4.Cuenta;
+		
+		IF(@importe>@saldo)
+			BEGIN 
+				RETURN 0;
+			END;
+	
+	
+		RETURN 1;
+	
+		
+	END;
+
+GO
+
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarCuentaHabilitada')
+	DROP FUNCTION GEM4.fnValidarCuentaHabilida
+GO
+
+CREATE FUNCTION GEM4.fnValidarCuentaHabilitada(@cuentaNum NUMERIC(18,0))
+RETURNS  INT
+AS
+	BEGIN
+		DECLARE @estadoCuenta INT;
+		
+		SELECT @estadoCuenta=Cuenta_Estado
+		FROM GEM4.Cuenta;
+		
+		IF(@estadoCuenta<>1)
+			BEGIN
+				RETURN 0; 
+			END;
+		RETURN 1;
+	END;
+GO
+
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertaOperaciones')
 	DROP PROCEDURE GEM4.spInsertaOperaciones

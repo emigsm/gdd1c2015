@@ -325,7 +325,7 @@ CREATE TABLE GEM4.Tipo_Operacion(
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
-	Tipo_Operacion_Descripcion_Costeo		NVARCHAR(255),
+	Tipo_Operacion_Descripcion_Costeo		NVARCHAR(255), --Que sería este item?
 	Tipo_Operacion_Importe					NUMERIC(18,2)
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
@@ -363,13 +363,27 @@ CREATE TABLE GEM4.Operacion(
 CREATE TABLE GEM4.Operaciones_Facturables(
 	Operacion_Facturable_Cod				INT IDENTITY(1,1),
 	Operacion_Facturable_Operacion_ID		INT,
-	Operacion_Facturable_Factura_Numero		NUMERIC(18,0),
+	Operacion_Facturable_Factura_Numero		NUMERIC(18,0), -- aca le agregaría un item 'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
 	Operacion_Facturable_Costo				NUMERIC(18,2)
 	PRIMARY KEY(Operacion_Facturable_Cod),
 	FOREIGN KEY(Operacion_Facturable_Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
 	FOREIGN KEY(Operacion_Facturable_Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
 	)
-	*/
+	
+Agrego una lista de cosas facturables que encontre (creo que son todas, vayan aggregando si encuentran mas), son las cosas que irian en operaciones facturables
+
+COMISION POR TRANSFERENCIA DESDE GRATUITA (entre cuentas de usuarios distintos)	COSTO FIJO -----> Inventar?
+COMISION POR TRANSFERENCIA DESDE BRONCE(entre cuentas de usuarios distintos)	COSTO FIJO -----> Inventar?
+COMISION POR TRANSFERENCIA DESDE PLATA(entre cuentas de usuarios distintos)		COSTO FIJO -----> Inventar?
+COMISION POR TRANSFERENCIA DESDE ORO(entre cuentas de usuarios distintos)		COSTO FIJO -----> Inventar?
+Apertura Cuenta ORO																COSTO FIJO -----> Inventar?
+Apertura Cuenta PLATA															COSTO FIJO -----> Inventar?
+Apertura Cuenta BRONCE															COSTO FIJO -----> Inventar?
+Apertura Cuenta GRATUITA														COSTO 0
+Modificacion de tipo de cuenta													COSTO CUENTA MAYOR - COSTO CUENTA MENOR
+Costo de Apertura de cuenta														COSTO FIJO + costo tipo de cuenta? -----> Inventar?
+
+*/
 	
 CREATE TABLE GEM4.Deposito(
 	Deposito_Codigo							NUMERIC(18,0) IDENTITY(1,1),

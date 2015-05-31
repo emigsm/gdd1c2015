@@ -309,7 +309,7 @@ CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Fecha							DATETIME,
 	PRIMARY KEY(Factura_Numero),
-	
+	-----> 	Le agregaría una FK de Cliente_ID y Cuenta_Nro, de ahi tengo acceso a todos los datos del Cliente y sus Cuentas.
 	)
 
 

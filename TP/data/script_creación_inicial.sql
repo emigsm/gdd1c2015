@@ -269,7 +269,7 @@ CREATE TABLE GEM4.Tipo_Cuenta(
 	PRIMARY KEY (Tipo_Cuenta_ID)
 	)	
 	
-CREATE TABLE GEM4.Cuenta(
+CREATE TABLE GEM4.Cuenta( --agregar 2 cosos
 	Cuenta_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Cuenta_Fecha_Creacion					DATETIME,
 	Cuenta_Estado							INT	DEFAULT 1,

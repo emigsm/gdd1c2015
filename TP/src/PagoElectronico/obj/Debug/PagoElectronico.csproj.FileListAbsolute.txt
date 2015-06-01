@@ -91,3 +91,30 @@ Z:\ConexiónVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operac
 C:\Users\Gestion de Datos\Desktop\REVERT\gdd1c2015-fea88b3b9a9eb06e0ca8ced33dd97d8be50f3a82\TP\src\PagoElectronico\obj\Debug\PagoElectronico.exe
 C:\Users\Gestion de Datos\Desktop\REVERT\gdd1c2015-fea88b3b9a9eb06e0ca8ced33dd97d8be50f3a82\TP\src\PagoElectronico\obj\Debug\PagoElectronico.pdb
 C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Asociacion_TC.AltaTarjeta.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.exe
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.pdb
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\ResolveAssemblyReference.cache
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ABMClientePrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.AltaCliente.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cliente.ModificacionCliente.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.ABMCuentaPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.AltaCuenta.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Cuenta.ModificacionCuenta.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ABMUsuarioPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.AltaUsuario.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_de_Usuario.ModificacionUsuario.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.ABMRolPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.CrearRol.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.ABMs.ABM_Rol.ModificarRol.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Login.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Asociacion_TC.AltaTarjeta.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Asociacion_TC.AsociacionTCPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Consulta_Saldos.ConsultaSaldosPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Depositos.DepositosPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Retiros.RetirosPrincipal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Principal.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Properties.Resources.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.SeleccionRol.resources
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.csproj.GenerateResource.Cache
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\bin\Debug\PagoElectronico.exe
+Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\bin\Debug\PagoElectronico.pdb

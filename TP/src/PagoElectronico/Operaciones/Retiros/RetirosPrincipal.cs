@@ -33,5 +33,10 @@ namespace PagoElectronico.Operaciones.Retiros
 
 
         }
+
+        private void RetirosPrincipal_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

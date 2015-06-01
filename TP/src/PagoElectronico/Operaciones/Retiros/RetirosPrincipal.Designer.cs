@@ -183,6 +183,7 @@
             this.Controls.Add(this.cuentacomboBox);
             this.Name = "RetirosPrincipal";
             this.Text = "RetirosPrincipal";
+            this.Load += new System.EventHandler(this.RetirosPrincipal_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

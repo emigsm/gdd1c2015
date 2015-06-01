@@ -87,7 +87,7 @@ namespace PagoElectronico
                     break;
 
                 case "Retiros":
-                    RetirosPrincipal frmRetirosPrincipal = new RetirosPrincipal();
+                    RetirosPrincipal frmRetirosPrincipal = new RetirosPrincipal(username);
                     frmRetirosPrincipal.Show(this);
                     this.Hide();
                     break;

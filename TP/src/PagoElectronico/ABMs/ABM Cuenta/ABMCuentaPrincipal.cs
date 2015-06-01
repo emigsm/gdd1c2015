@@ -63,6 +63,8 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
                                          usuarioEncontrado.ItemArray[6],
                                          usuarioEncontrado.ItemArray[7],
                                          usuarioEncontrado.ItemArray[8],
+                                         usuarioEncontrado.ItemArray[9],
+                                         usuarioEncontrado.ItemArray[10],
                                          "Modificar",
                                          "Inhabilitar",
                                          "Cerrar");

@@ -44,6 +44,8 @@
             this.Cuenta_Fecha_Cierre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Saldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cuenta_Suscripciones_Compradas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Cuenta_Suscripciones_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Estado = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Moneda = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cuenta_Pais = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -87,6 +89,8 @@
             this.Cuenta_Fecha_Cierre,
             this.Cuenta_Saldo,
             this.Cuenta_Tipo,
+            this.Cuenta_Suscripciones_Compradas,
+            this.Cuenta_Suscripciones_Fecha,
             this.Cuenta_Estado,
             this.Cuenta_Moneda,
             this.Cuenta_Pais,
@@ -215,6 +219,16 @@
             this.Cuenta_Tipo.Name = "Cuenta_Tipo";
             this.Cuenta_Tipo.ReadOnly = true;
             // 
+            // Cuenta_Suscripciones_Compradas
+            // 
+            this.Cuenta_Suscripciones_Compradas.HeaderText = "Suscripciones_Compradas";
+            this.Cuenta_Suscripciones_Compradas.Name = "Cuenta_Suscripciones_Compradas";
+            // 
+            // Cuenta_Suscripciones_Fecha
+            // 
+            this.Cuenta_Suscripciones_Fecha.HeaderText = "Fecha Suscripciones";
+            this.Cuenta_Suscripciones_Fecha.Name = "Cuenta_Suscripciones_Fecha";
+            // 
             // Cuenta_Estado
             // 
             this.Cuenta_Estado.HeaderText = "Estado";
@@ -291,6 +305,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Fecha_Cierre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Saldo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Suscripciones_Compradas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Suscripciones_Fecha;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Estado;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Moneda;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cuenta_Pais;

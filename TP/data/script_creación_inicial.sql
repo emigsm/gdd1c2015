@@ -279,6 +279,8 @@ CREATE TABLE GEM4.Cuenta( --agregar 2 cosos
 	Cuenta_Tipo								INT	DEFAULT 4,
 	Cuenta_Cliente_ID						INT,
 	Cuenta_Saldo							NUMERIC(18,2) DEFAULT 0,-- LO INICIALIZO EN CERO A VER SI FUNCA LO QUE NOS DIJERON LOS AYUDANTES
+	Cuenta_Suscripciones_Compradas			TINYINT DEFAULT 1, --AL MIGRAR, TODOS TIENEN UNA SOLA SUSCRIPCION COMPRADA POR DEFAULT
+	Cuenta_Suscripciones_Fecha				DATETIME --Fecha de compra de las suscripciones, para poder calcular si esta inhabilitado o no. --> Por defauult cuando migra que tenga la fecha de migracion
 	PRIMARY KEY(Cuenta_Numero),
 	FOREIGN KEY(Cuenta_Estado) REFERENCES GEM4.Estado_Cuenta(Estado_Codigo),
 	FOREIGN KEY(Cuenta_Moneda) REFERENCES GEM4.Moneda(Moneda_Codigo),
@@ -465,8 +467,8 @@ GO
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.VIEWS WHERE  TABLE_NAME  = 'Cuenta_ABM')
 	DROP VIEW GEM4.Cuenta_ABM;
 GO
-CREATE VIEW GEM4.Cuenta_ABM(Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais) AS
-SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Tipo_Cuenta_Descripcion, Estado_Descripcion, Moneda_Descripcion, Pais_Descripcion  		
+CREATE VIEW GEM4.Cuenta_ABM(Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha) AS
+SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Tipo_Cuenta_Descripcion, Estado_Descripcion, Moneda_Descripcion, Pais_Descripcion, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha  		
 FROM GEM4.Cuenta JOIN GEM4.Tipo_Cuenta ON (Cuenta.Cuenta_Tipo = Tipo_Cuenta.Tipo_Cuenta_ID)
 					JOIN GEM4.Estado_Cuenta ON (Cuenta.Cuenta_Estado = Estado_Cuenta.Estado_Codigo)
 					JOIN GEM4.Moneda ON (Cuenta.Cuenta_Moneda = Moneda.Moneda_Codigo)
@@ -899,6 +901,9 @@ FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
+/*AGREGO FECHAS DE COMPRA DE SUSCRIPCION*/
+UPDATE GEM4.Cuenta
+SET Cuenta_Suscripciones_Fecha = SYSDATETIME(); --tiene esta fecha por ahora, despues vemos la fecha de que ponerle
 
 EXEC GEM4.spInsertaOperaciones
 GO
@@ -1244,7 +1249,7 @@ CREATE PROCEDURE GEM4.spObtenerDatosCuenta
 	@numeroCuenta	BIGINT,
 	@clienteID		INT
 AS
-	SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais
+	SELECT Cuenta_Numero, Cuenta_Cliente_ID, Cuenta_Fecha_Creacion, Cuenta_Fecha_Cierre, Cuenta_Saldo, Cuenta_Tipo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha, Cuenta_Estado, Cuenta_Moneda, Cuenta_Pais
 	FROM GEM4.Cuenta_ABM
 	WHERE Cuenta_Cliente_ID = @clienteID OR Cuenta_Numero = @numeroCuenta
 GO
@@ -1308,8 +1313,8 @@ CREATE PROCEDURE GEM4.spAltaCuenta
 	@codMoneda		INT,
 	@tipoCuenta		INT
 AS
-	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo) VALUES
-		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0)
+	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha) VALUES
+		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0, 0, NULL)
 	
 	 
 		

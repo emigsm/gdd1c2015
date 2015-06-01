@@ -1711,7 +1711,7 @@ CREATE PROCEDURE GEM4.spEfectuarRetiro
 AS
 	BEGIN
 	
-		IF(@nroDoc=1)
+		IF(@nroDoc=1)   --ESTA INCOMPLETO, LO DEJE ASI MOCKEADO PARA VER COMO FUNCA
 			BEGIN
 				
 				SELECT 'RETIRO EFECTUADO CORRECTAMENTE!';
@@ -1727,6 +1727,22 @@ AS
 	END;
 
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarCliente')
+	DROP PROCEDURE GEM4.spBuscarCliente;
+GO
+
+CREATE PROCEDURE GEM4.spBuscarCliente
+@username	VARCHAR(255)
+AS
+
+	SELECT Cliente_Apellido,Cliente_Nombre,GEM4.Cliente.Cliente_ID
+	FROM GEM4.Cliente JOIN GEM4.Usuario ON (GEM4.Cliente.Cliente_ID=GEM4.Usuario.Cliente_ID)
+	
+	
+
+GO
+
 
 
 /* 

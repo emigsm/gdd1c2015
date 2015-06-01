@@ -75,7 +75,7 @@ namespace PagoElectronico
                     break;
 
                 case "Asociar/Desasociar Tarjetas de Credito":
-                    AsociacionTCPrincipal frmAsociacionTCPrincipal = new AsociacionTCPrincipal();
+                    AsociacionTCPrincipal frmAsociacionTCPrincipal = new AsociacionTCPrincipal(username);
                     frmAsociacionTCPrincipal.Show(this);
                     this.Hide();
                     break;

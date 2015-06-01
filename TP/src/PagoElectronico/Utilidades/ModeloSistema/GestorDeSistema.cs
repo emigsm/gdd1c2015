@@ -72,7 +72,10 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_DEPOSITAR = "GEM4.spDepositar";
         private const string STORE_OBTENEREMISORESTARJETAS = "GEM4.spObtenerEmisoresTarjetas";
         private const string STORE_ALTATARJETA = "GEM4.spAltaTarjeta";
-      
+        private const string STORE_BUSCARCLIENTE = "GEM4.spBuscarCliente";
+
+
+
   public static int loginUsuario(string usuario, string contrasena)
         {
             int Rol_Cod;
@@ -697,5 +700,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ALTATARJETA, NONQUERY, parametros);
         }
+
+        public static DataTable buscarCliente(string username)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@username", username));
+            SqlDataReader readerCliente = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BUSCARCLIENTE, READER, parametros);
+            DataTable clientes = new DataTable();
+            if (readerCliente.HasRows)
+            {
+                clientes.Load(readerCliente);
+            }
+            readerCliente.Dispose();
+            return clientes;
+        }
+
     }
 }

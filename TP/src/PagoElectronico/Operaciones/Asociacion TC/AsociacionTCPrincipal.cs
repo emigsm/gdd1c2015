@@ -29,6 +29,26 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             InitializeComponent();
         }
 
+
+        public AsociacionTCPrincipal(string username)
+        {
+            InitializeComponent();
+            DataTable clientesEncontrados = GestorDeSistema.buscarCliente(username);
+
+            if (clientesEncontrados.Rows.Count > 0)
+            {
+
+                tarjetaApellidoCliLabel.Text = clientesEncontrados.Rows[0].ItemArray[0].ToString();
+                tarjetaNombreCliLabel.Text = clientesEncontrados.Rows[0].ItemArray[1].ToString();
+                tarjetaCliIdLabel.Text = clientesEncontrados.Rows[0].ItemArray[2].ToString();
+                idCliente = Convert.ToInt32(tarjetaCliIdLabel.Text);
+
+
+            }
+            obtenerTarjetasCliente(idCliente);
+        }
+
+
         public void obtenerTarjetasCliente(Int32 id)
         {
             DataTable tarjetas = new DataTable();

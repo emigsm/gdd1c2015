@@ -122,10 +122,9 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Factura;
 
 --TABLA NUEVA NO IMPLEMENTADA	
-/*
+
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operaciones_Facturables')	
 	DROP TABLE GEM4.Operaciones_Facturables; 
-*/
 	
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Item')
 	DROP TABLE GEM4.Item;
@@ -310,20 +309,22 @@ CREATE TABLE GEM4.Tarjeta(
 CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Fecha							DATETIME,
+	Factura_Cliente_ID						INT
 	PRIMARY KEY(Factura_Numero),
+	FOREIGN KEY(Factura_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID) 
 	-----> 	Le agregaría una FK de Cliente_ID y Cuenta_Nro, de ahi tengo acceso a todos los datos del Cliente y sus Cuentas.
 	)
 
-
+/* TABLA VIEJA
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
 	
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
+	*/
 
-/* NUEVA TABLA (A IMPLEMENTAR)
-
+ 
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
@@ -332,8 +333,8 @@ CREATE TABLE GEM4.Tipo_Operacion(
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
 	
-	*/
 	
+/* TABLA VIEJA	
 CREATE TABLE GEM4.Operacion(
 	Operacion_ID						INT IDENTITY(1,1),
 	Operacion_Tipo						INT,
@@ -346,8 +347,8 @@ CREATE TABLE GEM4.Operacion(
 	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
 	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero)
 	)
-	
-/* NUEVA TABLA (A IMPLEMENTAR)
+	*/
+
 
 CREATE TABLE GEM4.Operacion(
 	Operacion_ID						INT IDENTITY(1,1),
@@ -358,9 +359,8 @@ CREATE TABLE GEM4.Operacion(
 	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
 	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
 	)
-	*/
+	
 
-/* NUEVA TABLA  (TABLA INTERMEDIA)
 
 CREATE TABLE GEM4.Operaciones_Facturables(
 	Operacion_Facturable_Cod				INT IDENTITY(1,1),
@@ -371,7 +371,7 @@ CREATE TABLE GEM4.Operaciones_Facturables(
 	FOREIGN KEY(Operacion_Facturable_Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
 	FOREIGN KEY(Operacion_Facturable_Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
 	)
-	
+/*	
 Agrego una lista de cosas facturables que encontre (creo que son todas, vayan aggregando si encuentran mas), son las cosas que irian en operaciones facturables
 
 COMISION POR TRANSFERENCIA DESDE GRATUITA (entre cuentas de usuarios distintos)	COSTO FIJO -----> Inventar?

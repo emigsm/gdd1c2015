@@ -100,6 +100,8 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 {
                     GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, clienteID);
                     System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
+                    Owner.Show();
+                    this.Hide();
                 }
                 else
                 {

@@ -86,9 +86,9 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             { 
                     AltaUsuario nuevoUsuario = new AltaUsuario();
                     nuevoUsuario.altaDesdeCliente(clienteID);
-
-                    nuevoUsuario.Show(this);
                     this.Hide();
+                    nuevoUsuario.ShowDialog(this);
+                    
            
             }
             Owner.Show();

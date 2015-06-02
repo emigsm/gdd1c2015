@@ -50,54 +50,60 @@
             // lblUsuario
             // 
             this.lblUsuario.AutoSize = true;
-            this.lblUsuario.Location = new System.Drawing.Point(6, 33);
+            this.lblUsuario.Location = new System.Drawing.Point(9, 51);
+            this.lblUsuario.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblUsuario.Name = "lblUsuario";
-            this.lblUsuario.Size = new System.Drawing.Size(46, 13);
+            this.lblUsuario.Size = new System.Drawing.Size(68, 20);
             this.lblUsuario.TabIndex = 0;
             this.lblUsuario.Text = "Usuario:";
             // 
             // lblContraseña
             // 
             this.lblContraseña.AutoSize = true;
-            this.lblContraseña.Location = new System.Drawing.Point(6, 59);
+            this.lblContraseña.Location = new System.Drawing.Point(9, 91);
+            this.lblContraseña.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblContraseña.Name = "lblContraseña";
-            this.lblContraseña.Size = new System.Drawing.Size(64, 13);
+            this.lblContraseña.Size = new System.Drawing.Size(96, 20);
             this.lblContraseña.TabIndex = 1;
             this.lblContraseña.Text = "Contraseña:";
             // 
             // lblVerificarContraseña
             // 
             this.lblVerificarContraseña.AutoSize = true;
-            this.lblVerificarContraseña.Location = new System.Drawing.Point(6, 85);
+            this.lblVerificarContraseña.Location = new System.Drawing.Point(9, 131);
+            this.lblVerificarContraseña.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVerificarContraseña.Name = "lblVerificarContraseña";
-            this.lblVerificarContraseña.Size = new System.Drawing.Size(104, 13);
+            this.lblVerificarContraseña.Size = new System.Drawing.Size(155, 20);
             this.lblVerificarContraseña.TabIndex = 2;
             this.lblVerificarContraseña.Text = "Verificar contraseña:";
             // 
             // lblRol
             // 
             this.lblRol.AutoSize = true;
-            this.lblRol.Location = new System.Drawing.Point(6, 129);
+            this.lblRol.Location = new System.Drawing.Point(9, 198);
+            this.lblRol.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRol.Name = "lblRol";
-            this.lblRol.Size = new System.Drawing.Size(26, 13);
+            this.lblRol.Size = new System.Drawing.Size(37, 20);
             this.lblRol.TabIndex = 3;
             this.lblRol.Text = "Rol:";
             // 
             // lblPreguntaSecreta
             // 
             this.lblPreguntaSecreta.AutoSize = true;
-            this.lblPreguntaSecreta.Location = new System.Drawing.Point(6, 161);
+            this.lblPreguntaSecreta.Location = new System.Drawing.Point(9, 248);
+            this.lblPreguntaSecreta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPreguntaSecreta.Name = "lblPreguntaSecreta";
-            this.lblPreguntaSecreta.Size = new System.Drawing.Size(91, 13);
+            this.lblPreguntaSecreta.Size = new System.Drawing.Size(135, 20);
             this.lblPreguntaSecreta.TabIndex = 4;
             this.lblPreguntaSecreta.Text = "Pregunta secreta:";
             // 
             // lblRespuestaSecreta
             // 
             this.lblRespuestaSecreta.AutoSize = true;
-            this.lblRespuestaSecreta.Location = new System.Drawing.Point(6, 197);
+            this.lblRespuestaSecreta.Location = new System.Drawing.Point(9, 303);
+            this.lblRespuestaSecreta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRespuestaSecreta.Name = "lblRespuestaSecreta";
-            this.lblRespuestaSecreta.Size = new System.Drawing.Size(99, 13);
+            this.lblRespuestaSecreta.Size = new System.Drawing.Size(148, 20);
             this.lblRespuestaSecreta.TabIndex = 5;
             this.lblRespuestaSecreta.Text = "Respuesta secreta:";
             // 
@@ -115,9 +121,11 @@
             this.groupBox1.Controls.Add(this.lblUsuario);
             this.groupBox1.Controls.Add(this.lblVerificarContraseña);
             this.groupBox1.Controls.Add(this.lblContraseña);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(18, 18);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(254, 224);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(381, 345);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ingrese los siguientes datos:";
@@ -125,57 +133,64 @@
             // 
             // txtRespuestaSecreta
             // 
-            this.txtRespuestaSecreta.Location = new System.Drawing.Point(111, 194);
+            this.txtRespuestaSecreta.Location = new System.Drawing.Point(166, 298);
+            this.txtRespuestaSecreta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtRespuestaSecreta.Name = "txtRespuestaSecreta";
-            this.txtRespuestaSecreta.Size = new System.Drawing.Size(128, 20);
+            this.txtRespuestaSecreta.Size = new System.Drawing.Size(190, 26);
             this.txtRespuestaSecreta.TabIndex = 9;
             this.txtRespuestaSecreta.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
             // 
             // txtPreguntaSecreta
             // 
-            this.txtPreguntaSecreta.Location = new System.Drawing.Point(112, 158);
+            this.txtPreguntaSecreta.Location = new System.Drawing.Point(168, 243);
+            this.txtPreguntaSecreta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPreguntaSecreta.Name = "txtPreguntaSecreta";
-            this.txtPreguntaSecreta.Size = new System.Drawing.Size(128, 20);
+            this.txtPreguntaSecreta.Size = new System.Drawing.Size(190, 26);
             this.txtPreguntaSecreta.TabIndex = 8;
             this.txtPreguntaSecreta.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // cmbRol
             // 
             this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(112, 120);
+            this.cmbRol.Location = new System.Drawing.Point(168, 185);
+            this.cmbRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(130, 21);
+            this.cmbRol.Size = new System.Drawing.Size(193, 28);
             this.cmbRol.TabIndex = 7;
             this.cmbRol.SelectedIndexChanged += new System.EventHandler(this.cmbRol_SelectedIndexChanged);
             // 
             // txtVerificarContraseña
             // 
-            this.txtVerificarContraseña.Location = new System.Drawing.Point(112, 82);
+            this.txtVerificarContraseña.Location = new System.Drawing.Point(168, 126);
+            this.txtVerificarContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtVerificarContraseña.Name = "txtVerificarContraseña";
             this.txtVerificarContraseña.PasswordChar = '*';
-            this.txtVerificarContraseña.Size = new System.Drawing.Size(128, 20);
+            this.txtVerificarContraseña.Size = new System.Drawing.Size(190, 26);
             this.txtVerificarContraseña.TabIndex = 6;
             // 
             // txtContraseña
             // 
-            this.txtContraseña.Location = new System.Drawing.Point(112, 56);
+            this.txtContraseña.Location = new System.Drawing.Point(168, 86);
+            this.txtContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
-            this.txtContraseña.Size = new System.Drawing.Size(128, 20);
+            this.txtContraseña.Size = new System.Drawing.Size(190, 26);
             this.txtContraseña.TabIndex = 3;
             // 
             // txtUsuario
             // 
-            this.txtUsuario.Location = new System.Drawing.Point(112, 30);
+            this.txtUsuario.Location = new System.Drawing.Point(168, 46);
+            this.txtUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtUsuario.Name = "txtUsuario";
-            this.txtUsuario.Size = new System.Drawing.Size(128, 20);
+            this.txtUsuario.Size = new System.Drawing.Size(190, 26);
             this.txtUsuario.TabIndex = 2;
             // 
             // btnAltaUsuario
             // 
-            this.btnAltaUsuario.Location = new System.Drawing.Point(12, 242);
+            this.btnAltaUsuario.Location = new System.Drawing.Point(18, 372);
+            this.btnAltaUsuario.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAltaUsuario.Name = "btnAltaUsuario";
-            this.btnAltaUsuario.Size = new System.Drawing.Size(132, 31);
+            this.btnAltaUsuario.Size = new System.Drawing.Size(198, 48);
             this.btnAltaUsuario.TabIndex = 8;
             this.btnAltaUsuario.Text = "Alta de Usuario";
             this.btnAltaUsuario.UseVisualStyleBackColor = true;
@@ -183,9 +198,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(272, 209);
+            this.btnVolver.Location = new System.Drawing.Point(408, 322);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(112, 35);
             this.btnVolver.TabIndex = 9;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -194,9 +210,10 @@
             // btnRegistrarCliente
             // 
             this.btnRegistrarCliente.Enabled = false;
-            this.btnRegistrarCliente.Location = new System.Drawing.Point(167, 242);
+            this.btnRegistrarCliente.Location = new System.Drawing.Point(250, 372);
+            this.btnRegistrarCliente.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnRegistrarCliente.Name = "btnRegistrarCliente";
-            this.btnRegistrarCliente.Size = new System.Drawing.Size(132, 31);
+            this.btnRegistrarCliente.Size = new System.Drawing.Size(198, 48);
             this.btnRegistrarCliente.TabIndex = 10;
             this.btnRegistrarCliente.Text = "Registrarse como Cliente";
             this.btnRegistrarCliente.UseVisualStyleBackColor = true;
@@ -204,13 +221,14 @@
             // 
             // AltaUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(356, 291);
+            this.ClientSize = new System.Drawing.Size(534, 448);
             this.Controls.Add(this.btnRegistrarCliente);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAltaUsuario);
             this.Controls.Add(this.groupBox1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "AltaUsuario";
             this.Text = "Alta de Usuario";
             this.groupBox1.ResumeLayout(false);

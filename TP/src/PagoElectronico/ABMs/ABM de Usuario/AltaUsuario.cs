@@ -15,6 +15,9 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 {
     public partial class AltaUsuario : Form
     {
+
+        int clienteID;
+        
         public AltaUsuario()
         {
             InitializeComponent();
@@ -22,12 +25,26 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             cmbRol.DisplayMember = "Rol_Nombre";
             cmbRol.ValueMember = "Rol_Cod";
             cmbRol.DataSource = roles;
+
+            clienteID = -1;
         }
 
         public void altaDeLogin()
         {
             cmbRol.Enabled = false;
             cmbRol.SelectedValue = 2;
+        }
+
+        public void altaDesdeCliente(int clienteIDP)
+        {
+            cmbRol.Enabled = false;
+            cmbRol.SelectedValue = 2;
+
+            btnAltaUsuario.Enabled = true;
+            btnRegistrarCliente.Enabled = false;
+
+            clienteID = clienteIDP;
+
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -81,7 +98,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             {
                 if (txtContraseña.Text == txtVerificarContraseña.Text)
                 {
-                    GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, -1);
+                    GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, clienteID);
                     System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
                 }
                 else

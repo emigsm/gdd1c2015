@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using PagoElectronico.Utilidades.ModeloSistema;
 
+using PagoElectronico.ABMs.ABM_de_Usuario;
+
 namespace PagoElectronico.ABMs.ABM_Cliente
 {
     public partial class AltaCliente : Form
@@ -71,12 +73,23 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                                          Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          DomNumerotextBox.Text, DomicilioPisoTextBox.Text, DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value);
+            int clienteID = GestorDeSistema.obtenerClienteRecienCreado();
+
             if (provenienteDeUsuario == true) //esto es si el cliente viene a partir de la creacion de un usuario nuevo
             {
-                int clienteID = GestorDeSistema.obtenerClienteRecienCreado();
+
                 GestorDeSistema.altaUsuario(username, password, rol, preguntaSecreta, respuestaSecreta, clienteID);
                 System.Windows.Forms.MessageBox.Show("El Cliente ha sdo dado de alta. También se registro como Usuario");
 
+            }
+            else
+            { 
+                    AltaUsuario nuevoUsuario = new AltaUsuario();
+                    nuevoUsuario.altaDesdeCliente(clienteID);
+
+                    nuevoUsuario.Show(this);
+                    this.Hide();
+           
             }
             Owner.Show();
             this.Hide();

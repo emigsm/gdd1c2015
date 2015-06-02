@@ -121,7 +121,7 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Factura')
 	DROP TABLE GEM4.Factura;
 
---TABLA NUEVA NO IMPLEMENTADA	
+--TABLA NUEVA IMPLEMENTADA	
 
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operaciones_Facturables')	
 	DROP TABLE GEM4.Operaciones_Facturables; 
@@ -745,9 +745,9 @@ BEGIN
 		IF(@depositoCodigo IS NOT NULL)
 			BEGIN
 				SET IDENTITY_INSERT GEM4.Operacion ON;
-				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
-											Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,1,GEM4.fnValidarFecha(@depositoFecha),@usuarioID,0,@nFactura);
+				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID)
+											--Operacion_Costo,--Factura_Numero)
+				VALUES(@nOperacion,1,GEM4.fnValidarFecha(@depositoFecha),@usuarioID);--,0,@nFactura);
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				SET IDENTITY_INSERT GEM4.Deposito ON;
@@ -767,9 +767,9 @@ BEGIN
 			BEGIN
 				
 				SET IDENTITY_INSERT GEM4.Operacion ON;
-				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
-											Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,2,GEM4.fnValidarFecha(@retiroFecha),@usuarioID,0,@nFactura);
+				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID)
+											--Operacion_Costo,Factura_Numero)
+				VALUES(@nOperacion,2,GEM4.fnValidarFecha(@retiroFecha),@usuarioID);--0,@nFactura)
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				SET IDENTITY_INSERT GEM4.Cheque ON; 
@@ -801,9 +801,9 @@ BEGIN
 					END;
 				
 				SET IDENTITY_INSERT GEM4.Operacion ON;
-				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID,
-											Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,3,GEM4.fnValidarFecha(@retiroFecha),@usuarioID,0,@nFactura);
+				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID)
+											--Operacion_Costo,Factura_Numero)
+				VALUES(@nOperacion,3,GEM4.fnValidarFecha(@retiroFecha),@usuarioID)--,0,@nFactura);
 				SET IDENTITY_INSERT GEM4.Operacion OFF;
 				
 				INSERT INTO GEM4.Transferencia(Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans
@@ -836,6 +836,20 @@ DEALLOCATE Cursor1;
 		END;
 END;
 GO
+
+/* No pude inicializar la tabla Operaciones_Facturables debido a que con la información que contamos 
+	tanto en la tabla maestra como luego en la migración es imposible identificar a que operación le corresponde que factura.
+	La única forma de identificar esto sería usando el mismo cursor ue queremos sacar, porque no nos alcanza con saber
+	el cliente que realizó la op, la fecha y el importe, porque en muchos casos estos datos son idénticos para cada
+	registro.
+
+Una opción sería incluir en a factura el campo calculado TOTAL, y acotar el error lo más posible ya ue conoceríamos
+Cliente que realizó la operación y el importe total para relacionar.
+
+INSERT INTO GEM4.Operaciones_Facturables(Operacion_Facturable_Operacion_ID,Operacion_Facturable_Factura_Numero,Operacion_Facturable_Costo)
+SELECT DISTINCT o.Operacion_ID,f.Factura_Numero,t.Tipo_Operacion_Importe 
+FROM GEM4.Operacion o join GEM4.Tipo_Operacion t on(o.Operacion_Tipo =t.Tipo_Operacion_ID) Right join GEM4.Factura f on (o.Operacion_Usuario_ID = (select top 1 u.Usuario_ID FROM GEM4.Usuario u WHERE u.Cliente_ID = f.Factura_Cliente_ID))
+*/
 
 
 /*	****************************************	MIGRACION 	******************************************* */
@@ -887,10 +901,11 @@ FROM gd_esquema.Maestra m
 WHERE m.Banco_Cogido IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Banco OFF;
 
-
+--AGREGADO SELECT PARA OBTENER EL CLIENTE_ID CORRESPONDIENTE A LA FACTURA
 SET IDENTITY_INSERT GEM4.Factura ON;
-INSERT INTO GEM4.Factura(Factura_Numero,Factura_Fecha)
-SELECT DISTINCT m.Factura_Numero,GEM4.fnValidarFecha(m.Factura_Fecha)
+INSERT INTO GEM4.Factura(Factura_Numero,Factura_Fecha,Factura_Cliente_ID)
+SELECT DISTINCT m.Factura_Numero,GEM4.fnValidarFecha(m.Factura_Fecha),
+				(SELECT C.Cliente_ID FROM GEM4.Cliente C WHERE m.Cli_Nro_Doc = C.Cliente_Numero_Documento and m.Cli_Tipo_Doc_Cod=C.Cliente_Tipo_Doc)
 FROM gd_esquema.Maestra m
 WHERE M.Factura_Numero IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Factura OFF;

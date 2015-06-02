@@ -721,7 +721,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             string mensajeResultado;
 
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@cuentanumero", cuentaNro));
+            parametros.Add(new SqlParameter("@cuentaNro", cuentaNro));
             parametros.Add(new SqlParameter("@importe", importe));
             parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
             parametros.Add(new SqlParameter("@nroDoc", nroDoc));

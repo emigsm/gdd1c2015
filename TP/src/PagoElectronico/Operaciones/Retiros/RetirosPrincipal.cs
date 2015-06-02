@@ -12,12 +12,14 @@ namespace PagoElectronico.Operaciones.Retiros
 {
     public partial class RetirosPrincipal : Form
     {
+        string usuario { get; set; }
+
         public RetirosPrincipal(string username)
         {
-            
+
 
             InitializeComponent();
-            string usuario = username;
+            usuario = username;
             DataTable cuenta = GestorDeSistema.obtenerCuentasDeUsuario(usuario);
             cuentacomboBox.DisplayMember = "Cuenta_Numero";
             cuentacomboBox.ValueMember = "Cuenta_Numero";
@@ -28,10 +30,10 @@ namespace PagoElectronico.Operaciones.Retiros
             tipoDocComboBox.ValueMember = "Documento_Tipo_Codigo";
             tipoDocComboBox.DataSource = tiposDoc;
 
-       
+
             fechaValorLabel.Text = Convert.ToString(GestorDeSistema.solicitarFecha());
 
-            
+
 
         }
 
@@ -42,7 +44,16 @@ namespace PagoElectronico.Operaciones.Retiros
 
         private void GenerarRetirobutton_Click(object sender, EventArgs e)
         {
+            string mensaje = GestorDeSistema.efectuarRetiro(Convert.ToDecimal(cuentacomboBox.SelectedValue.ToString()),
+                                                            Convert.ToDecimal(ImportetextBox.Text),
+                                                            Convert.ToInt32(tipoDocComboBox.SelectedValue.ToString()),
+                                                            Convert.ToInt32(nroDoctextBox.Text), Convert.ToDecimal(NumeroChequetextBox.Text),
+                                                            Convert.ToDateTime(fechaValorLabel.Text), usuario);
 
+
+            MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            return;
         }
 
         private void VOLVERbutton_Click(object sender, EventArgs e)

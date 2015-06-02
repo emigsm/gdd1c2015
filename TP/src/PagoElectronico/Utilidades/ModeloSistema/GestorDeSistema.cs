@@ -716,16 +716,23 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return clientes;
         }
 
-      /*  public static string efectuarRetiro(Decimal cuentaNro,Int32 tipoDoc, Int32 nroDoc,Decimal nroCheque, DateTime fecha, string username)
+        public static string efectuarRetiro(Decimal cuentaNro, Decimal importe, Int32 tipoDoc, Int32 nroDoc, Decimal nroCheque, DateTime fecha, string username)
         {
             string mensajeResultado;
+
             List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@cuentanumero", cuentaNro));
+            parametros.Add(new SqlParameter("@importe", importe));
+            parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
+            parametros.Add(new SqlParameter("@nroDoc", nroDoc));
+            parametros.Add(new SqlParameter("@nroCheque", nroCheque));
+            parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@username", username));
 
-
-            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARCLIENTE, NONQUERY, parametros);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_EFECTUARRETIRO, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
-        }*/
+        }
       
     }
 }

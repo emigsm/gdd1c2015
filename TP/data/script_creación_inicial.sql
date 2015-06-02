@@ -521,11 +521,11 @@ AS
 GO
 
 
-IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarRetiro')
-	DROP FUNCTION GEM4.fnValidarRetiro
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarClienteParaRetiro')
+	DROP FUNCTION GEM4.fnValidarClienteParaRetiro
 GO
 
-CREATE FUNCTION GEM4.fnValidarRetiro(@nroDoc INT,@tipoDoc INT,@clienteID INT,@cuentaID NUMERIC(18,0),@importe NUMERIC(18,0))
+CREATE FUNCTION GEM4.fnValidarClienteParaRetiro(@nroDoc INT,@tipoDoc INT,@clienteID INT)
 RETURNS  INT
 AS 
 	BEGIN
@@ -611,26 +611,6 @@ AS
 GO
 
 
-IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarNroCheque')
-	DROP FUNCTION GEM4.fnValidarNroCheque
-GO
-
-CREATE FUNCTION GEM4.fnValidarNroCheque(@nroCheque NUMERIC(18,0))
-RETURNS  INT
-
-AS
-	BEGIN
-	
-		IF NOT EXISTS (SELECT 1 FROM GEM4.Cheque WHERE @nroCheque=GEM4.Cheque.Cheque_Numero)
-		BEGIN
-			RETURN 1; 
-		END
-		
-		RETURN 0;
-	
-	END
-
-GO
 
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
@@ -1723,9 +1703,8 @@ GO
 CREATE PROCEDURE GEM4.spEfectuarRetiro
 	@cuentaNro	NUMERIC(18,0),
 	@importe	NUMERIC(18,2),
-	@tipoDoc	INT,
-	@nroDoc		INT,
-	@nroCheque	NUMERIC(18,0),
+	@tipoDoc	NUMERIC(18,0),
+	@nroDoc		NUMERIC(18,0),
 	@fecha		DATETIME,
 	@username	VARCHAR(30)
 	
@@ -1733,33 +1712,36 @@ CREATE PROCEDURE GEM4.spEfectuarRetiro
 AS
 	BEGIN
 		
-		DECLARE @nroDocCorrecto INT;
-		
-		
-		
-		
-		
-		SELECT  @nroDocCorrecto=c.Cliente_Numero_Documento
-		FROM  GEM4.Usuario u JOIN GEM4.Cliente c ON (u.Cliente_ID=c.Cliente_ID)
-		WHERE u.Usuario_Username=@username AND c.Cliente_Numero_Documento=@nroDoc;
-		
-		
+		DECLARE @clienteID INT;
 	
-		IF(@nroDoc=1)   --ESTA INCOMPLETO, LO DEJE ASI MOCKEADO PARA VER COMO FUNCA
+		IF(GEM4.fnValidarCuentaHabilitada(@cuentaNro)=0)   --ESTA INCOMPLETO, LO DEJE ASI MOCKEADO PARA VER COMO FUNCA
 			BEGIN
-				
-				SELECT 'RETIRO EFECTUADO CORRECTAMENTE!';
-			
-			END;
+				SELECT ' EL RETIRO NO SE PUDO REALIZAR DADO A QUE LA CUENTA NO SE ENCUENTRA HABILITADA';
+			END	
 		ELSE
 			BEGIN
-				SELECT 'HUBO UN PROBLEMA CON EL RETIRO, LO SENTIMOS!'
+				SELECT  @clienteID=c.Cliente_ID
+				FROM    GEM4.Usuario u JOIN GEM4.Cliente c ON (u.Cliente_ID=c.Cliente_ID)
+				WHERE   u.Usuario_Username=@username AND c.Cliente_Numero_Documento=@nroDoc;
+				IF(GEM4.fnValidarClienteParaRetiro(@nroDoc,@tipoDoc,@clienteID)=0)
+					BEGIN
+						SELECT 'NO SE PUDO REALIZAR EL RETIRO YA QUE EL NRO DE DOCUMENTO NO CORRESPONDO AL CLIENTE';
+					END;
+				ELSE
+					BEGIN
+						IF(GEM4.fnValidarSaldoSuficiente(@importe,@cuentaNro)=0)
+							BEGIN
+								SELECT 'NO SE PUDO REALIZAR EL RETIRO DEBIDO A QUE NO HAY SALDO SUFICIENTE EN LA CUENTA';
+							END;
+						ELSE
+						BEGIN
+							--TODO: GENERAR RETIRO, UNA VEZ QUE ESTE LISTA LA TABLA DE LAS OPERACIONES
+							
+							SELECT 'EL RETIRO FUE EFECTUADO EXITOSAMENTE.'	
+						END;			
+					END;
 			END;
-		
-		
-		
 	END;
-
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarCliente')

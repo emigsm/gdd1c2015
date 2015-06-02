@@ -36,8 +36,6 @@
             this.tipoDocLabel = new System.Windows.Forms.Label();
             this.tipoDocComboBox = new System.Windows.Forms.ComboBox();
             this.nroDoctextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.NumeroChequetextBox = new System.Windows.Forms.TextBox();
             this.GenerarRetirobutton = new System.Windows.Forms.Button();
             this.VOLVERbutton = new System.Windows.Forms.Button();
             this.FechaLeyendalabel = new System.Windows.Forms.Label();
@@ -110,22 +108,6 @@
             this.nroDoctextBox.Size = new System.Drawing.Size(136, 20);
             this.nroDoctextBox.TabIndex = 7;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 199);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(140, 13);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Numero de Cheque Librado:";
-            // 
-            // NumeroChequetextBox
-            // 
-            this.NumeroChequetextBox.Location = new System.Drawing.Point(164, 196);
-            this.NumeroChequetextBox.Name = "NumeroChequetextBox";
-            this.NumeroChequetextBox.Size = new System.Drawing.Size(170, 20);
-            this.NumeroChequetextBox.TabIndex = 9;
-            // 
             // GenerarRetirobutton
             // 
             this.GenerarRetirobutton.Location = new System.Drawing.Point(31, 280);
@@ -149,7 +131,7 @@
             // FechaLeyendalabel
             // 
             this.FechaLeyendalabel.AutoSize = true;
-            this.FechaLeyendalabel.Location = new System.Drawing.Point(21, 248);
+            this.FechaLeyendalabel.Location = new System.Drawing.Point(13, 212);
             this.FechaLeyendalabel.Name = "FechaLeyendalabel";
             this.FechaLeyendalabel.Size = new System.Drawing.Size(43, 13);
             this.FechaLeyendalabel.TabIndex = 12;
@@ -158,7 +140,7 @@
             // fechaValorLabel
             // 
             this.fechaValorLabel.AutoSize = true;
-            this.fechaValorLabel.Location = new System.Drawing.Point(167, 248);
+            this.fechaValorLabel.Location = new System.Drawing.Point(165, 212);
             this.fechaValorLabel.Name = "fechaValorLabel";
             this.fechaValorLabel.Size = new System.Drawing.Size(64, 13);
             this.fechaValorLabel.TabIndex = 13;
@@ -173,8 +155,6 @@
             this.Controls.Add(this.FechaLeyendalabel);
             this.Controls.Add(this.VOLVERbutton);
             this.Controls.Add(this.GenerarRetirobutton);
-            this.Controls.Add(this.NumeroChequetextBox);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.nroDoctextBox);
             this.Controls.Add(this.tipoDocComboBox);
             this.Controls.Add(this.tipoDocLabel);
@@ -201,8 +181,6 @@
         private System.Windows.Forms.Label tipoDocLabel;
         private System.Windows.Forms.ComboBox tipoDocComboBox;
         private System.Windows.Forms.TextBox nroDoctextBox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox NumeroChequetextBox;
         private System.Windows.Forms.Button GenerarRetirobutton;
         private System.Windows.Forms.Button VOLVERbutton;
         private System.Windows.Forms.Label FechaLeyendalabel;

@@ -30,6 +30,8 @@ namespace PagoElectronico.Operaciones.Retiros
             tipoDocComboBox.ValueMember = "Documento_Tipo_Codigo";
             tipoDocComboBox.DataSource = tiposDoc;
 
+            nroDoctextBox.MaxLength = 16;
+            ImportetextBox.MaxLength = 16;
 
             fechaValorLabel.Text = Convert.ToString(GestorDeSistema.solicitarFecha());
 
@@ -46,9 +48,8 @@ namespace PagoElectronico.Operaciones.Retiros
         {
             string mensaje = GestorDeSistema.efectuarRetiro(Convert.ToDecimal(cuentacomboBox.SelectedValue.ToString()),
                                                             Convert.ToDecimal(ImportetextBox.Text),
-                                                            Convert.ToInt32(tipoDocComboBox.SelectedValue.ToString()),
-                                                            Convert.ToInt32(nroDoctextBox.Text), Convert.ToDecimal(NumeroChequetextBox.Text),
-                                                            Convert.ToDateTime(fechaValorLabel.Text), usuario);
+                                                            Convert.ToDecimal(tipoDocComboBox.SelectedValue.ToString()),
+                                                            Convert.ToDecimal(nroDoctextBox.Text),Convert.ToDateTime(fechaValorLabel.Text), usuario);
 
 
             MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

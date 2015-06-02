@@ -716,7 +716,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return clientes;
         }
 
-        public static string efectuarRetiro(Decimal cuentaNro, Decimal importe, Int32 tipoDoc, Int32 nroDoc, Decimal nroCheque, DateTime fecha, string username)
+        public static string efectuarRetiro(Decimal cuentaNro, Decimal importe, Decimal tipoDoc, Decimal nroDoc, DateTime fecha, string username)
         {
             string mensajeResultado;
 
@@ -725,7 +725,6 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@importe", importe));
             parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
             parametros.Add(new SqlParameter("@nroDoc", nroDoc));
-            parametros.Add(new SqlParameter("@nroCheque", nroCheque));
             parametros.Add(new SqlParameter("@fecha", fecha));
             parametros.Add(new SqlParameter("@username", username));
 

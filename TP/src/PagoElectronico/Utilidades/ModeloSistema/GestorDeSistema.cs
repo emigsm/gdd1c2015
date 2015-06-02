@@ -73,6 +73,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENEREMISORESTARJETAS = "GEM4.spObtenerEmisoresTarjetas";
         private const string STORE_ALTATARJETA = "GEM4.spAltaTarjeta";
         private const string STORE_BUSCARCLIENTE = "GEM4.spBuscarCliente";
+        private const string STORE_EFECTUARRETIRO = "GEM4.spEfectuarRetiro";
 
 
 
@@ -715,5 +716,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return clientes;
         }
 
+      /*  public static string efectuarRetiro(Decimal cuentaNro,Int32 tipoDoc, Int32 nroDoc,Decimal nroCheque, DateTime fecha, string username)
+        {
+            string mensajeResultado;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@username", username));
+
+
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_MODIFICARCLIENTE, NONQUERY, parametros);
+            return mensajeResultado;
+        }*/
+      
     }
 }

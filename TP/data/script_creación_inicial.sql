@@ -1706,7 +1706,8 @@ CREATE PROCEDURE GEM4.spEfectuarRetiro
 	@nroDoc		INT,
 	@nroCheque	NUMERIC(18,0),
 	@fecha		DATETIME,
-	@usuarioID	NUMERIC(18,0)
+	@username	VARCHAR(30)
+	--@usuarioID	NUMERIC(18,0)
 
 AS
 	BEGIN
@@ -1733,11 +1734,12 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarCliente')
 GO
 
 CREATE PROCEDURE GEM4.spBuscarCliente
-@username	VARCHAR(255)
+@username	VARCHAR(30)
 AS
 
 	SELECT Cliente_Apellido,Cliente_Nombre,GEM4.Cliente.Cliente_ID
 	FROM GEM4.Cliente JOIN GEM4.Usuario ON (GEM4.Cliente.Cliente_ID=GEM4.Usuario.Cliente_ID)
+	WHERE @username=Usuario_Username
 	
 	
 

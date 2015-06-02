@@ -134,6 +134,7 @@
             this.GenerarRetirobutton.TabIndex = 10;
             this.GenerarRetirobutton.Text = "Generar Retiro";
             this.GenerarRetirobutton.UseVisualStyleBackColor = true;
+            this.GenerarRetirobutton.Click += new System.EventHandler(this.GenerarRetirobutton_Click);
             // 
             // VOLVERbutton
             // 
@@ -143,6 +144,7 @@
             this.VOLVERbutton.TabIndex = 11;
             this.VOLVERbutton.Text = "Volver";
             this.VOLVERbutton.UseVisualStyleBackColor = true;
+            this.VOLVERbutton.Click += new System.EventHandler(this.VOLVERbutton_Click);
             // 
             // FechaLeyendalabel
             // 

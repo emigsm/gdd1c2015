@@ -14,7 +14,7 @@ namespace PagoElectronico.Operaciones.Retiros
     {
         public RetirosPrincipal(string username)
         {
-            InitializeComponent();
+            
 
             InitializeComponent();
             string usuario = username;
@@ -31,12 +31,24 @@ namespace PagoElectronico.Operaciones.Retiros
        
             fechaValorLabel.Text = Convert.ToString(GestorDeSistema.solicitarFecha());
 
+            
 
         }
 
         private void RetirosPrincipal_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void GenerarRetirobutton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void VOLVERbutton_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
         }
     }
 }

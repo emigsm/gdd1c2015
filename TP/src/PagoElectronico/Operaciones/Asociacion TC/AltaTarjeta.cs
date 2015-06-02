@@ -34,9 +34,8 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
         {
             GestorDeSistema.altaTarjeta(EmisorTarjetaCombobox.Text, Convert.ToInt32(clienteIDValorLabel.Text));
             label1.Text = EmisorTarjetaCombobox.DisplayMember.ToString();
-            
+
             Owner.Show();
-            Owner.Refresh();
             this.Hide();
             
         }

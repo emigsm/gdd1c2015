@@ -611,6 +611,27 @@ AS
 GO
 
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarNroCheque')
+	DROP FUNCTION GEM4.fnValidarNroCheque
+GO
+
+CREATE FUNCTION GEM4.fnValidarNroCheque(@nroCheque NUMERIC(18,0))
+RETURNS  INT
+
+AS
+	BEGIN
+	
+		IF NOT EXISTS (SELECT 1 FROM GEM4.Cheque WHERE @nroCheque=GEM4.Cheque.Cheque_Numero)
+		BEGIN
+			RETURN 1; 
+		END
+		
+		RETURN 0;
+	
+	END
+
+GO
+
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertaOperaciones')
@@ -1707,10 +1728,22 @@ CREATE PROCEDURE GEM4.spEfectuarRetiro
 	@nroCheque	NUMERIC(18,0),
 	@fecha		DATETIME,
 	@username	VARCHAR(30)
-	--@usuarioID	NUMERIC(18,0)
+	
 
 AS
 	BEGIN
+		
+		DECLARE @nroDocCorrecto INT;
+		
+		
+		
+		
+		
+		SELECT  @nroDocCorrecto=c.Cliente_Numero_Documento
+		FROM  GEM4.Usuario u JOIN GEM4.Cliente c ON (u.Cliente_ID=c.Cliente_ID)
+		WHERE u.Usuario_Username=@username AND c.Cliente_Numero_Documento=@nroDoc;
+		
+		
 	
 		IF(@nroDoc=1)   --ESTA INCOMPLETO, LO DEJE ASI MOCKEADO PARA VER COMO FUNCA
 			BEGIN

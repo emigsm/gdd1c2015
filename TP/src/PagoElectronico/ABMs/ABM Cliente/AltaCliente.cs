@@ -68,6 +68,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
     
                 return;
             }
+            if (MailtextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar un mail", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
 
             GestorDeSistema.crearCliente(NombreClitextBox.Text, ApellidoNuevoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
@@ -94,7 +100,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             Owner.Show();
             this.Hide();
         }
-
+//------------------------------------------------------VALIDACIONES------------------------------------------------------------------------------
         private void NombreClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
@@ -148,8 +154,138 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             }
         }
 
-    
+        private void DomNumerotextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo domicilio numero solo permite Numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
 
+        private void NombreClitextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData== Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void ApellidoNuevoClitextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void TipoDcomboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void NroDocClitextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void MailtextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void PaiscomboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void DomicilioCalletextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void DomNumerotextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void DomicilioPisoTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void DomicilioDeptotextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void LocalidadtextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void NacionalidadtextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void fechaNacimientodateTimePicker_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+
+        private void establecerLongitudesMaximas()
+        {
+
+        }
    
     }
 

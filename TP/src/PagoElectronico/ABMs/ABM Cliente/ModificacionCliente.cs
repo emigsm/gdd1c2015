@@ -81,6 +81,13 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                
                 return;
             }
+            if (MailtextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar un mail", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
 
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
@@ -191,7 +198,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void NombreClitextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -200,7 +207,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void ApellidoClitextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -209,7 +216,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void NroDocClitextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -223,7 +230,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void DomNumerotextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -232,7 +239,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void DomicilioPisoTextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -241,7 +248,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void LocalidadtextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -250,7 +257,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void DomicilioDeptotextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -259,7 +266,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void DomicilioCalletextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -268,7 +275,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void PaiscomboBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -282,7 +289,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void TipoDcomboBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -291,7 +298,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void MailtextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -300,7 +307,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void NacionalidadtextBox_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);
@@ -309,7 +316,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void fechaNacimientodateTimePicker_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
             {
                 e.SuppressKeyPress = true;
                 SelectNextControl(ActiveControl, true, true, true, true);

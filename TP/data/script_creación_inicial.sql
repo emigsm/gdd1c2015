@@ -525,7 +525,7 @@ IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarClienteParaRetiro'
 	DROP FUNCTION GEM4.fnValidarClienteParaRetiro
 GO
 
-CREATE FUNCTION GEM4.fnValidarClienteParaRetiro(@nroDoc INT,@tipoDoc INT,@clienteID INT)
+CREATE FUNCTION GEM4.fnValidarClienteParaRetiro(@nroDoc NUMERIC(18,0),@tipoDoc NUMERIC(18,0),@clienteID INT)
 RETURNS  INT
 AS 
 	BEGIN
@@ -1729,7 +1729,7 @@ AS
 		
 		DECLARE @clienteID INT;
 	
-		IF(GEM4.fnValidarCuentaHabilitada(@cuentaNro)=0)   --ESTA INCOMPLETO, LO DEJE ASI MOCKEADO PARA VER COMO FUNCA
+		IF(GEM4.fnValidarCuentaHabilitada(@cuentaNro)=0)   
 			BEGIN
 				SELECT ' EL RETIRO NO SE PUDO REALIZAR DADO A QUE LA CUENTA NO SE ENCUENTRA HABILITADA';
 			END	

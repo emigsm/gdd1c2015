@@ -35,8 +35,15 @@ namespace PagoElectronico.Operaciones.Retiros
 
             fechaValorLabel.Text = Convert.ToString(GestorDeSistema.solicitarFecha());
 
+            establecerLongitudesMaximas();
 
 
+        }
+
+        private void establecerLongitudesMaximas()
+        {
+            ImportetextBox.MaxLength = sizeof(Decimal);
+            nroDoctextBox.MaxLength = sizeof(Decimal);
         }
 
         private void RetirosPrincipal_Load(object sender, EventArgs e)
@@ -61,6 +68,64 @@ namespace PagoElectronico.Operaciones.Retiros
         {
             Owner.Show();
             this.Hide();
+        }
+
+
+//-----------------------------------------------------VALIDACIONES------------------------------------------------------------------------------//
+        private void cuentacomboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void ImportetextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void tipoDocComboBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void nroDoctextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Tab)
+            {
+                e.SuppressKeyPress = true;
+                SelectNextControl(ActiveControl, true, true, true, true);
+            }
+        }
+
+        private void ImportetextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros en el campo Importe", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void nroDoctextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("Solo se permiten numeros en el campo Numero de Documento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
         }
     }
 }

@@ -33,7 +33,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             PaiscomboBox.DataSource = paises;
 
             provenienteDeUsuario = false;
-            
+
+            establecerLongitudesMaximas();
          }
 
         public void altaProvenienteDeUsuario(string usernameP, string passwordP, int rolP, string preguntaSecretaP, string respuestaSecretaP)
@@ -44,6 +45,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             rol = rolP;
             preguntaSecreta = preguntaSecretaP;
             respuestaSecreta = respuestaSecretaP;
+            establecerLongitudesMaximas();
         }
 
         private void Crearbutton_Click(object sender, EventArgs e)
@@ -284,7 +286,16 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void establecerLongitudesMaximas()
         {
-
+            NombreClitextBox.MaxLength = 255;
+            ApellidoNuevoClitextBox.MaxLength = 255;
+            NroDocClitextBox.MaxLength = sizeof(Decimal);
+            MailtextBox.MaxLength = 255;
+            DomicilioCalletextBox.MaxLength = 255;
+            DomNumerotextBox.MaxLength = sizeof(Decimal);
+            DomicilioPisoTextBox.MaxLength = sizeof(Decimal);
+            DomicilioDeptotextBox.MaxLength = 10;
+            LocalidadtextBox.MaxLength = 60;
+            NacionalidadtextBox.MaxLength = 60;
         }
    
     }

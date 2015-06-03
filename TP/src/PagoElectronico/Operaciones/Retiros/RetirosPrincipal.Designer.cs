@@ -49,6 +49,7 @@
             this.cuentacomboBox.Name = "cuentacomboBox";
             this.cuentacomboBox.Size = new System.Drawing.Size(201, 21);
             this.cuentacomboBox.TabIndex = 0;
+            this.cuentacomboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cuentacomboBox_KeyDown);
             // 
             // cuentalabel
             // 
@@ -74,6 +75,8 @@
             this.ImportetextBox.Name = "ImportetextBox";
             this.ImportetextBox.Size = new System.Drawing.Size(201, 20);
             this.ImportetextBox.TabIndex = 3;
+            this.ImportetextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ImportetextBox_KeyDown);
+            this.ImportetextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImportetextBox_KeyPress);
             // 
             // nroDoclabel
             // 
@@ -100,6 +103,7 @@
             this.tipoDocComboBox.Name = "tipoDocComboBox";
             this.tipoDocComboBox.Size = new System.Drawing.Size(121, 21);
             this.tipoDocComboBox.TabIndex = 6;
+            this.tipoDocComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tipoDocComboBox_KeyDown);
             // 
             // nroDoctextBox
             // 
@@ -107,6 +111,8 @@
             this.nroDoctextBox.Name = "nroDoctextBox";
             this.nroDoctextBox.Size = new System.Drawing.Size(136, 20);
             this.nroDoctextBox.TabIndex = 7;
+            this.nroDoctextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.nroDoctextBox_KeyDown);
+            this.nroDoctextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.nroDoctextBox_KeyPress);
             // 
             // GenerarRetirobutton
             // 

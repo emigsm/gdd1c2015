@@ -108,6 +108,7 @@
             this.NroDocClitextBox.Name = "NroDocClitextBox";
             this.NroDocClitextBox.Size = new System.Drawing.Size(131, 20);
             this.NroDocClitextBox.TabIndex = 5;
+            this.NroDocClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroDocClitextBox_KeyPress);
             // 
             // ApellidoNuevoClitextBox
             // 
@@ -115,6 +116,7 @@
             this.ApellidoNuevoClitextBox.Name = "ApellidoNuevoClitextBox";
             this.ApellidoNuevoClitextBox.Size = new System.Drawing.Size(148, 20);
             this.ApellidoNuevoClitextBox.TabIndex = 6;
+            this.ApellidoNuevoClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ApellidoNuevoClitextBox_KeyPress);
             // 
             // NombreClitextBox
             // 
@@ -122,6 +124,7 @@
             this.NombreClitextBox.Name = "NombreClitextBox";
             this.NombreClitextBox.Size = new System.Drawing.Size(148, 20);
             this.NombreClitextBox.TabIndex = 7;
+            this.NombreClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NombreClitextBox_KeyPress);
             // 
             // Maillabel
             // 
@@ -195,6 +198,7 @@
             this.DomicilioPisoTextBox.Name = "DomicilioPisoTextBox";
             this.DomicilioPisoTextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioPisoTextBox.TabIndex = 17;
+            this.DomicilioPisoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioPisoTextBox_KeyPress);
             // 
             // DomicilioDeptoNuevolabel
             // 
@@ -277,6 +281,7 @@
             this.NacionalidadtextBox.Name = "NacionalidadtextBox";
             this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.NacionalidadtextBox.TabIndex = 33;
+            this.NacionalidadtextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NacionalidadtextBox_KeyPress);
             // 
             // CrearClienteBtn
             // 

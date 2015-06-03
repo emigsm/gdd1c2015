@@ -78,7 +78,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             if (NroDocClitextBox.Text == "")
             {
                 MessageBox.Show("Es obligatorio Insertar el Nro de Documento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-               /* e.Handled = true;*/
+               
                 return;
             }
 
@@ -116,15 +116,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             NacionalidadtextBox.MaxLength = 60;
         }
 
-     /*  private void validarLongitudCampos(TextBox box,Int32 longitud)
-        {
-            if (box.Text.Length > longitud)
-            {
-                MessageBox.Show("hay un campo que no cumple con la longitud maxima", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            
-        }
-        */
+
 
 //--------------------------------------VALIDACIONES----TEXTBOX-------------------------------------------------------------------------------
         private void NombreClitextBox_KeyPress(object sender, KeyPressEventArgs e)

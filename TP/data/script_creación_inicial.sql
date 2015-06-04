@@ -97,44 +97,28 @@ AS
 	SELECT TOP 1 fechaSistema FROM GEM4.fechaSistema
 GO
 
-
-
 /*	****************************************	BORRADO DE OBJETOS	*************************************************** */
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
-	DROP TABLE GEM4.Deposito;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Transferencia')
-	DROP TABLE GEM4.Transferencia;	
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Retiro')
-	DROP TABLE GEM4.Retiro;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operacion_Por_Factura')
-	DROP TABLE GEM4.Operacion_Por_Factura;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Operacion')
-	DROP TABLE GEM4.Operacion
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Operacion')
-	DROP TABLE GEM4.Log_Operacion;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Operacion')
-	DROP TABLE GEM4.Tipo_Operacion;
+--TABLA NUEVA IMPLEMENTADA	
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Login')
 	DROP TABLE GEM4.Log_Login;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Item_Por_Factura')
-	DROP TABLE GEM4.Item_Por_Factura;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Factura')
-	DROP TABLE GEM4.Factura;
-
---TABLA NUEVA IMPLEMENTADA	
-
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operaciones_Facturables')	
-	DROP TABLE GEM4.Operaciones_Facturables; 
-	
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Item')
-	DROP TABLE GEM4.Item;
-
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Retiro')
+	DROP TABLE GEM4.Retiro;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Cheque')
 	DROP TABLE GEM4.Cheque;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Banco')
 	DROP TABLE GEM4.Banco;
-
-
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Transferencia')
+	DROP TABLE GEM4.Transferencia;	
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
+	DROP TABLE GEM4.Deposito;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operacion_Facturable')	
+	DROP TABLE GEM4.Operacion_Facturable; 
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Operacion')
+	DROP TABLE GEM4.Operacion
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Operacion')
+	DROP TABLE GEM4.Tipo_Operacion;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Factura')
+	DROP TABLE GEM4.Factura;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tarjeta')
 	DROP TABLE GEM4.Tarjeta;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Emisor')
@@ -145,6 +129,8 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Tipo_Cuenta;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Estado_Cuenta')
 	DROP TABLE GEM4.Estado_Cuenta;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Moneda')
+	DROP TABLE GEM4.Moneda;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario_Por_Rol')
 	DROP TABLE GEM4.Usuario_Por_Rol;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Usuario')
@@ -153,16 +139,14 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 	DROP TABLE GEM4.Cliente;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Documento')
 	DROP TABLE GEM4.Documento;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
-	DROP TABLE GEM4.Pais;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Rol_Por_Funcionalidad')
 	DROP TABLE GEM4.Rol_Por_Funcionalidad;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Rol')
-	DROP TABLE GEM4.Rol;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Funcionalidad')
 	DROP TABLE GEM4.Funcionalidad;
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Moneda')
-	DROP TABLE GEM4.Moneda;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Rol')
+	DROP TABLE GEM4.Rol;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Pais')
+	DROP TABLE GEM4.Pais;
 /*	****************************************	CREACION DE LAS TABLAS	*********************************************** */
 
 CREATE TABLE GEM4.Pais(
@@ -306,70 +290,46 @@ CREATE TABLE GEM4.Tarjeta(
 	FOREIGN KEY(Tarjeta_Emisor) REFERENCES	GEM4.Emisor,	
 	FOREIGN KEY(Tarjeta_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)		
 	)
+	
 CREATE TABLE GEM4.Factura(
 	Factura_Numero							NUMERIC(18,0) IDENTITY(1,1),
 	Factura_Fecha							DATETIME,
 	Factura_Cliente_ID						INT
 	PRIMARY KEY(Factura_Numero),
 	FOREIGN KEY(Factura_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID) 
-	-----> 	Le agregaría una FK de Cliente_ID y Cuenta_Nro, de ahi tengo acceso a todos los datos del Cliente y sus Cuentas.
 	)
 
-/* TABLA VIEJA
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
-	
-	PRIMARY KEY(Tipo_Operacion_ID)
-	)
-	*/
-
- 
-CREATE TABLE GEM4.Tipo_Operacion(
-	Tipo_Operacion_ID						INT IDENTITY(1,1),
-	Tipo_Operacion_Descripcion				NVARCHAR(255),
-	Tipo_Operacion_Descripcion_Costeo		NVARCHAR(255), --Que sería este item?
 	Tipo_Operacion_Importe					NUMERIC(18,2)
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
-	
-	
-/* TABLA VIEJA	
-CREATE TABLE GEM4.Operacion(
-	Operacion_ID						INT IDENTITY(1,1),
-	Operacion_Tipo						INT,
-	Operacion_Fecha						DATETIME,
-	Operacion_Usuario_ID				INT,
-	Operacion_Costo						NUMERIC(18,2),
-	Factura_Numero						NUMERIC(18,0),
-	PRIMARY KEY(Operacion_ID),
-	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
-	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
-	FOREIGN KEY (Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero)
-	)
-	*/
-
 
 CREATE TABLE GEM4.Operacion(
-	Operacion_ID						INT IDENTITY(1,1),
+	Operacion_ID						NUMERIC(18,0), --IDENTITY(1,1),Ya no hace falta que sea identity, el identity lo hereda de las operaciones en si, TUVE QUE CAMBIAR EL TIPO DE DATOS PARA QUE COINCIDA CON LOS DEMAS
 	Operacion_Tipo						INT,
 	Operacion_Fecha						DATETIME,
-	Operacion_Usuario_ID				INT,
-	PRIMARY KEY(Operacion_ID),
+	Operacion_Cliente_ID				INT, --NO HACA FALTA EL SUARIO, SI EL CLIENTE
+--	Operacion_Detalle					NVARCHAR(255),			--GUARDA CON ESTO, AVISAR -------> en el caso de las operaciones comunes no lo veo necesario
+	PRIMARY KEY(Operacion_ID, Operacion_Tipo),
 	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
-	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
+	FOREIGN KEY(Operacion_Cliente_ID) REFERENCES GEM4.Cliente(Cliente_ID)
 	)
 	
 
 
-CREATE TABLE GEM4.Operaciones_Facturables(
-	Operacion_Facturable_Cod				INT IDENTITY(1,1),
-	Operacion_Facturable_Operacion_ID		INT,
-	Operacion_Facturable_Factura_Numero		NUMERIC(18,0), -- aca le agregaría un item 'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
-	Operacion_Facturable_Costo				NUMERIC(18,2)
-	PRIMARY KEY(Operacion_Facturable_Cod),
+CREATE TABLE GEM4.Operacion_Facturable(
+	Operacion_Facturable_ID					INT IDENTITY(1,1),
+	Operacion_Facturable_Tipo				INT,
+	Operacion_Facturable_Fecha				DATETIME,
+	Operacion_Facturable_Cliente_ID			INT, --ME PARECE QUE ES MEJOR QUE APUNTE A UN CLIENTE EN VEZ DE UN USUARIO, ES MAS DESCRIPTIVO
+	Operacion_Facturable_Detalle			NVARCHAR(255), --'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
+	Operacion_Facturable_Costo				NUMERIC(18,2),
+	Operacion_Facturable_Factura_Numero		NUMERIC(18,0) 
+	PRIMARY KEY(Operacion_Facturable_ID),
 	FOREIGN KEY(Operacion_Facturable_Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
-	FOREIGN KEY(Operacion_Facturable_Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
+	FOREIGN KEY(Operacion_Facturable_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID)
 	)
 /*	
 Agrego una lista de cosas facturables que encontre (creo que son todas, vayan aggregando si encuentran mas), son las cosas que irian en operaciones facturables
@@ -395,12 +355,12 @@ CREATE TABLE GEM4.Deposito(
 	Deposito_Tarjeta						NVARCHAR(16),
 	Deposito_Moneda							INT DEFAULT 1,
 	Deposito_Cuenta							NUMERIC(18,0),
-	Deposito_Operacion_ID							INT,
+--	Deposito_Operacion_ID							INT, -- NO HACE FALTA, ACCEDO DESDE OPERACIONES
 	PRIMARY KEY(Deposito_Codigo),
 	FOREIGN KEY(Deposito_Cliente) REFERENCES GEM4.Cliente(Cliente_ID),
 	FOREIGN KEY(Deposito_Tarjeta) REFERENCES GEM4.Tarjeta(Tarjeta_Numero),
 	FOREIGN KEY(Deposito_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
-	FOREIGN KEY(Deposito_Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
+--	FOREIGN KEY(Deposito_Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
 	)
 
 
@@ -413,11 +373,11 @@ CREATE TABLE GEM4.Transferencia(
 	Transferencia_Costo_Trans				NUMERIC(18,2),
 	Transferencia_Cuenta_Origen				NUMERIC(18,0),
 	Transferencia_Cuenta_Destino			NUMERIC(18,0),
-	Transferencia_Operacion_ID				INT,
+--	Transferencia_Operacion_ID				INT,		-- NO HACE FALTA, ACCEDO DESDE OPERACIONES
 	PRIMARY KEY(Transferencia_Codigo),
 	FOREIGN KEY(Transferencia_Cuenta_Origen) REFERENCES GEM4.Cuenta(Cuenta_Numero),
 	FOREIGN KEY(Transferencia_Cuenta_Destino) REFERENCES GEM4.Cuenta(Cuenta_Numero),
-	FOREIGN KEY(Transferencia_Operacion_ID)	REFERENCES	GEM4.Operacion(Operacion_ID)
+--	FOREIGN KEY(Transferencia_Operacion_ID)	REFERENCES	GEM4.Operacion_Facturable(Operacion_Facturable_ID)
 	)
 
 CREATE TABLE GEM4.Banco(
@@ -444,11 +404,11 @@ CREATE TABLE GEM4.Retiro(
 	Retiro_Fecha							DATETIME,
 	Retiro_Cuenta							NUMERIC(18,0),
 	Retiro_Cheque							NUMERIC(18,0),
-	Operacion_ID							INT,
+--	Operacion_ID							INT,	-- NO HACE FALTA, ACCEDO DESDE OPERACIONES
 	PRIMARY KEY(Retiro_Codigo),
 	FOREIGN KEY(Retiro_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero),
 	FOREIGN KEY(Retiro_Cheque) REFERENCES GEM4.Cheque(Cheque_Numero),
-	FOREIGN KEY(Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
+--	FOREIGN KEY(Operacion_ID)	REFERENCES GEM4.Operacion(Operacion_ID)
 	)
 
 CREATE TABLE GEM4.Log_Login(
@@ -479,7 +439,7 @@ GO
 /* *****************************************	PROCEDIMIENTOS DE MIGRACION *******************************************/
 
 
-/*******************************************	FUNCIONES AUXILIARES		*******************************************/
+/********************************************	FUNCIONES AUXILIARES		*******************************************/
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
 	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
@@ -610,13 +570,35 @@ AS
 	END;
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerClienteID_Documento')
+	DROP FUNCTION GEM4.fnObtenerClienteID_Documento
+GO
 
+CREATE FUNCTION GEM4.fnObtenerClienteID_Documento(@nDoc NUMERIC (18,0))
+RETURNS  INT
+AS
+	BEGIN
+		RETURN (SELECT Cliente_ID
+		FROM GEM4.Cliente
+		WHERE Cliente_Numero_Documento = @nDoc)	
+	END	
+GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerClienteID_Cuenta')
+	DROP FUNCTION GEM4.fnObtenerClienteID_Cuenta
+GO
+
+CREATE FUNCTION GEM4.fnObtenerClienteID_Cuenta(@nCta NUMERIC (18,0))
+RETURNS  INT
+AS
+	BEGIN
+		RETURN (SELECT Cuenta_Cliente_ID
+		FROM GEM4.Cuenta
+		WHERE Cuenta_Numero = @nCta)	
+	END	
+GO
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertaOperaciones')
-	DROP PROCEDURE GEM4.spInsertaOperaciones
-GO
 
 SET IDENTITY_INSERT GEM4.Rol ON;
 INSERT INTO GEM4.Rol (Rol_Cod,Rol_Nombre) VALUES 
@@ -681,13 +663,25 @@ SET IDENTITY_INSERT GEM4.Moneda OFF;
 
 
 INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_Descripcion)
-VALUES('Deposito'),('Retiro'),('Transferencia'),('Apertura Cuenta'),('Cierre Cuenta');
+VALUES('Deposito'),('Retiro'),('Transferencia');
+
+SET IDENTITY_INSERT GEM4.Tipo_Operacion ON
+INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_ID, Tipo_Operacion_Descripcion, Tipo_Operacion_Importe) VALUES
+		(4, 'Comisión  por transferencia desde Cuenta GRATUITA', 0.12),
+		(5, 'Comisión  por transferencia desde Cuenta BRONCE', 0.10),
+		(6, 'Comisión  por transferencia desde Cuenta PLATA', 0.08),
+		(7, 'Comisión  por transferencia desde Cuenta ORO', 0.04),
+		(8, 'Apertura de Cuenta Tipo ORO', 200),
+		(9, 'Apertura de Cuenta Tipo PLATA', 150),
+		(10, 'Apertura de Cuenta Tipo BRONCE', 100),
+		(11, 'Apertura de Cuenta Tipo GRATUITA', 0),
+		(12, 'Modificación del Tipo de CUENTA', 200) --creo que es mejor dejarlo con un valor fijo independiente del tipo de cuenta que era antes, y que sea caro para que e cliente se joda por boludo si queire cambiar el tipo 
+SET IDENTITY_INSERT GEM4.Tipo_Operacion OFF
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta ON;
 INSERT INTO GEM4.Tipo_Cuenta(Tipo_Cuenta_ID,Tipo_Cuenta_Descripcion,Tipo_Cuenta_Costo_Creacion,Tipo_Cuenta_Costo_Modificacion,Tipo_Cuenta_Costo_Transf,Tipo_Cuenta_Duracion)
 VALUES(1,'Oro',500,500,20,360),(2,'Plata',400,400,10,160),
-		(3,'BRONCE',300,300,5,80),(4,'Gratuita',0,0,0,80);
-
+		(3,'Bronce',300,300,5,80),(4,'Gratuita',0,0,0,80);
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta OFF;
 
 INSERT INTO GEM4.Emisor(Emisor_Descripcion)
@@ -695,147 +689,10 @@ SELECT DISTINCT Tarjeta_Emisor_Descripcion
 FROM gd_esquema.Maestra
 WHERE Tarjeta_Emisor_Descripcion IS NOT NULL;
 
-
 SET IDENTITY_INSERT GEM4.Estado_Cuenta ON;
 INSERT INTO GEM4.Estado_Cuenta(Estado_Codigo,Estado_Descripcion)
 VALUES(1,'HABILITADA'),(2,'INHABILITADA'),(3,'CERRADA'),(4,'PENDIENTE ACTIVACION');
 SET IDENTITY_INSERT GEM4.Estado_Cuenta OFF;
-
-GO
-CREATE PROCEDURE GEM4.spInsertaOperaciones 
-AS
-BEGIN
-	DECLARE @nFactura NUMERIC(18,0), @nOperacion INT,@clienteID INT,
-			@clienteMail NVARCHAR(255),@depositoCodigo NUMERIC(18,0),
-			@depositoFecha DATETIME,@depositoImporte NUMERIC(18,2),
-			@tarjeta NVARCHAR(16),@cuentaNumero NUMERIC(18,0),@usuarioID INT,
-			@retiroCodigo NUMERIC(18,0),@retiroFecha DATETIME,@retiroImporte NUMERIC(18,2),
-			@chequeNumero NUMERIC(18,0),@chequeFecha DATETIME,@chequeImporte NUMERIC(18,2),@banco NUMERIC(18,0),
-			@transfFecha DATETIME,@transfImporte NUMERIC(18,2),@transfCosto NUMERIC(18,2),
-			@cuentaDestino NUMERIC(18,0);
-	
-	
-
-	DECLARE Cursor1 CURSOR FOR
-	SELECT DISTINCT Factura_Numero,Cli_Mail,Retiro_Codigo,Retiro_Fecha,Retiro_Importe,
-					Cuenta_Numero,Cheque_Numero,Cheque_Fecha,Cheque_Importe,Banco_Cogido,
-					Deposito_Codigo,Deposito_Fecha,Deposito_Importe,Tarjeta_Numero,
-					Transf_Fecha,Trans_Importe,Trans_Costo_Trans,Cuenta_Dest_Numero
-	FROM gd_esquema.Maestra
-	ORDER BY Deposito_Fecha asc,Retiro_Fecha asc,Transf_Fecha asc ;
-
-	    OPEN Cursor1;
-	FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
-								@chequeNumero,@chequeFecha,@chequeImporte,@banco,@depositoCodigo,@depositoFecha,
-								 @depositoImporte,@tarjeta,@transfFecha,@transfImporte,@transfCosto,@cuentaDestino;
-	SET @nOperacion=1;
-    
-    BEGIN TRANSACTION;
-    WHILE @@FETCH_STATUS = 0
-		BEGIN
-		
-			SELECT @clienteID=c.Cliente_ID
-			FROM Cliente c
-			WHERE c.Cliente_Mail=@clienteMail;
-		
-			SELECT @usuarioID=u.Usuario_ID
-			FROM GEM4.Usuario u
-			WHERE u.Cliente_ID=@clienteID;
-	
-		IF(@depositoCodigo IS NOT NULL)
-			BEGIN
-				SET IDENTITY_INSERT GEM4.Operacion ON;
-				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID)
-											--Operacion_Costo,--Factura_Numero)
-				VALUES(@nOperacion,1,GEM4.fnValidarFecha(@depositoFecha),@usuarioID);--,0,@nFactura);
-				SET IDENTITY_INSERT GEM4.Operacion OFF;
-				
-				SET IDENTITY_INSERT GEM4.Deposito ON;
-				INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha,Deposito_Importe,
-									  Deposito_Cliente,Deposito_Tarjeta,
-									  Deposito_Cuenta,Deposito_Operacion_ID)
-				VALUES(@depositoCodigo,GEM4.fnValidarFecha(@depositoFecha),@depositoImporte,@clienteID,@tarjeta,@cuentaNumero,@nOperacion);
-				SET IDENTITY_INSERT GEM4.Deposito OFF;
-				
-				UPDATE GEM4.Cuenta
-				SET Cuenta_Saldo=Cuenta_Saldo + @depositoImporte
-				WHERE Cuenta_Numero=@cuentaNumero
-				
-				
-			END;	
-		IF(@retiroCodigo IS NOT NULL)
-			BEGIN
-				
-				SET IDENTITY_INSERT GEM4.Operacion ON;
-				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID)
-											--Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,2,GEM4.fnValidarFecha(@retiroFecha),@usuarioID);--0,@nFactura)
-				SET IDENTITY_INSERT GEM4.Operacion OFF;
-				
-				SET IDENTITY_INSERT GEM4.Cheque ON; 
-				INSERT INTO GEM4.Cheque(Cheque_Numero,Cheque_Fecha,Cheque_Importe,Cheque_Cliente_ID,Cheque_Banco)
-				VALUES(@chequeNumero,GEM4.fnValidarFecha(@chequeFecha),@chequeImporte,@clienteID,@banco);
-				SET IDENTITY_INSERT GEM4.Cheque OFF;
-				
-				SET IDENTITY_INSERT GEM4.Retiro ON;
-				INSERT INTO GEM4.Retiro(Retiro_Codigo,Retiro_Importe,Retiro_Fecha,Retiro_Cheque,Operacion_ID,Retiro_Cuenta)
-				VALUES(@retiroCodigo,@retiroImporte,GEM4.fnValidarFecha(@retiroFecha),@chequeNumero,@nOperacion,@cuentaNumero);
-				SET IDENTITY_INSERT GEM4.Retiro OFF;
-				
-				UPDATE GEM4.Cuenta
-				SET Cuenta_Saldo=Cuenta_Saldo - @retiroImporte
-				WHERE Cuenta_Numero=@cuentaNumero
-				 
-			END;
-		IF(@cuentaDestino IS NOT NULL)
-			BEGIN
-				IF(@cuentaDestino=@cuentaNumero)
-					BEGIN
-							SET @transfCosto=0
-					END
-				ELSE
-					BEGIN
-						SELECT @transfCosto=c.Tipo_Cuenta_Costo_Transf
-						FROM GEM4.Tipo_Cuenta c
-						WHERE c.Tipo_Cuenta_ID=1;
-					END;
-				
-				SET IDENTITY_INSERT GEM4.Operacion ON;
-				INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Usuario_ID)
-											--Operacion_Costo,Factura_Numero)
-				VALUES(@nOperacion,3,GEM4.fnValidarFecha(@retiroFecha),@usuarioID)--,0,@nFactura);
-				SET IDENTITY_INSERT GEM4.Operacion OFF;
-				
-				INSERT INTO GEM4.Transferencia(Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans
-											,Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino,Transferencia_Operacion_ID)
-				VALUES(GEM4.fnValidarFecha(@transfFecha),@transfImporte,@transfCosto,@cuentaNumero,@cuentaDestino,@nOperacion);
-				
-				UPDATE GEM4.Cuenta
-				SET Cuenta_Saldo=Cuenta_Saldo - @transfImporte -- -@transfCosto
-				WHERE Cuenta_Numero=@cuentaNumero;
-				
-				UPDATE GEM4.Cuenta
-				SET Cuenta_Saldo=Cuenta_Saldo + @transfImporte 
-				WHERE Cuenta_Numero=@cuentaDestino;
-				
-			END;	
-		SET @nOperacion=@nOperacion+1;				
-		FETCH NEXT FROM Cursor1 INTO @nFactura,@clienteMail,@retiroCodigo,@retiroFecha,@retiroImporte,@cuentaNumero,
-								@chequeNumero,@chequeFecha,@chequeImporte,@banco,@depositoCodigo,@depositoFecha,
-								 @depositoImporte,@tarjeta,@transfFecha,@transfImporte,@transfCosto,@cuentaDestino;
-	END;
-	CLOSE Cursor1;
-DEALLOCATE Cursor1;
-	IF @@ERROR=0
-		BEGIN
-			COMMIT TRANSACTION;
-		END
-	ELSE
-		BEGIN
-			ROLLBACK TRANSACTION;
-		END;
-END;
-GO
 
 /* No pude inicializar la tabla Operaciones_Facturables debido a que con la información que contamos 
 	tanto en la tabla maestra como luego en la migración es imposible identificar a que operación le corresponde que factura.
@@ -885,30 +742,18 @@ SELECT Usuario_ID, 2
 FROM GEM4.Usuario
 WHERE Usuario_ID > 3
 
-INSERT INTO GEM4.Tarjeta(Tarjeta_Numero,Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Codigo_Seg,
-						 Tarjeta_Emisor,Tarjeta_Cliente_ID)
+INSERT INTO GEM4.Tarjeta(Tarjeta_Numero, Tarjeta_Fecha_Emision, Tarjeta_Fecha_Vencimiento, Tarjeta_Codigo_Seg, Tarjeta_Emisor, Tarjeta_Cliente_ID)
 SELECT DISTINCT m.Tarjeta_Numero,GEM4.fnValidarFecha(m.Tarjeta_Fecha_Emision),m.Tarjeta_Fecha_Vencimiento,m.Tarjeta_Codigo_Seg,
 	   GEM4.fnInsertarCodigoDeEmisor(m.Tarjeta_Emisor_Descripcion),c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN  GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail AND m.Cli_Apellido=c.Cliente_Apellido)
 WHERE m.Tarjeta_Numero IS NOT NULL
-
-
-
+ 
 SET IDENTITY_INSERT GEM4.Banco ON;
 INSERT INTO GEM4.Banco(Banco_Codigo,Banco_Direccion,Banco_Nombre)
 SELECT DISTINCT m.Banco_Cogido,m.Banco_Direccion,m.Banco_Nombre
 FROM gd_esquema.Maestra m
 WHERE m.Banco_Cogido IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Banco OFF;
-
---AGREGADO SELECT PARA OBTENER EL CLIENTE_ID CORRESPONDIENTE A LA FACTURA
-SET IDENTITY_INSERT GEM4.Factura ON;
-INSERT INTO GEM4.Factura(Factura_Numero,Factura_Fecha,Factura_Cliente_ID)
-SELECT DISTINCT m.Factura_Numero,GEM4.fnValidarFecha(m.Factura_Fecha),
-				(SELECT C.Cliente_ID FROM GEM4.Cliente C WHERE m.Cli_Nro_Doc = C.Cliente_Numero_Documento and m.Cli_Tipo_Doc_Cod=C.Cliente_Tipo_Doc)
-FROM gd_esquema.Maestra m
-WHERE M.Factura_Numero IS NOT NULL;
-SET IDENTITY_INSERT GEM4.Factura OFF;
 
 SET IDENTITY_INSERT GEM4.Cuenta ON;
 INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Cliente_ID)
@@ -921,8 +766,86 @@ SET IDENTITY_INSERT GEM4.Cuenta OFF;
 UPDATE GEM4.Cuenta
 SET Cuenta_Suscripciones_Fecha = SYSDATETIME(); --tiene esta fecha por ahora, despues vemos la fecha de que ponerle
 
-EXEC GEM4.spInsertaOperaciones
-GO
+--NUEVA MIGRACIÓN
+--DEPOSITO
+SET IDENTITY_INSERT GEM4.Deposito ON
+INSERT INTO GEM4.Deposito(Deposito_Codigo, Deposito_Fecha, Deposito_Importe, Deposito_Cliente, Deposito_Tarjeta, Deposito_Moneda, Deposito_Cuenta)
+SELECT Deposito_Codigo, Deposito_Fecha, Deposito_Importe, Cliente_ID , Tarjeta_Numero, 1, Cuenta_Numero
+FROM gd_esquema.Maestra JOIN GEM4.Cliente ON (Maestra.Cli_Nro_Doc = Cliente.Cliente_Numero_Documento)
+WHERE Deposito_Codigo IS NOT NULL
+SET IDENTITY_INSERT GEM4.Deposito OFF
+--ACTUALIZO LA TABLA OPERACIONES
+INSERT INTO GEM4.Operacion(Operacion_ID, Operacion_Tipo, Operacion_Fecha, Operacion_Cliente_ID)
+SELECT Deposito_Codigo, 1, Deposito_Fecha, Deposito_Cliente
+FROM GEM4.Deposito
+--ACTUALIZO LOS SALDOS DE CUENTA 
+UPDATE GEM4.Cuenta 
+SET Cuenta_Saldo += Total_Importe
+FROM GEM4.Cuenta JOIN (SELECT SUM(Deposito_Importe) Total_Importe, Deposito_Cuenta FROM GEM4.Deposito 
+						GROUP BY Deposito_Cuenta) AS Saldos_Totales ON (Cuenta.Cuenta_Numero = Saldos_Totales.Deposito_Cuenta)
+
+
+--MIGRACION DE CHEQUES, PARA PODER MIGRAR LOS RETIROS LUEGO
+SET IDENTITY_INSERT GEM4.Cheque ON
+INSERT INTO GEM4.Cheque(Cheque_Numero, Cheque_Fecha, Cheque_Importe, Cheque_Cliente_ID, Cheque_Banco)
+SELECT Cheque_Numero, Cheque_Fecha, Cheque_Importe, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Banco_Cogido
+FROM gd_esquema.Maestra
+WHERE Retiro_Codigo IS NOT NULL
+SET IDENTITY_INSERT GEM4.Cheque OFF
+--MIGRO LOS RETIROS
+SET IDENTITY_INSERT GEM4.Retiro ON
+INSERT INTO GEM4.Retiro(Retiro_Codigo, Retiro_Importe, Retiro_Fecha, Retiro_Cuenta, Retiro_Cheque)
+SELECT Retiro_Codigo, Retiro_Importe, Retiro_Fecha, Cuenta_Numero, Cheque_Numero
+FROM gd_esquema.Maestra					
+WHERE Retiro_Codigo IS NOT NULL
+SET IDENTITY_INSERT GEM4.Retiro OFF
+--INSERTO OPERACIONES
+INSERT INTO GEM4.Operacion(Operacion_ID, Operacion_Tipo, Operacion_Fecha, Operacion_Cliente_ID)
+SELECT Retiro_Codigo, 2, Retiro_Fecha, GEM4.fnObtenerClienteID_Cuenta(Retiro_Cuenta) 
+FROM GEM4.Retiro
+--ACTUALIZO SALDOS
+UPDATE GEM4.Cuenta 
+SET Cuenta_Saldo -= Total_Importe
+FROM GEM4.Cuenta JOIN (SELECT SUM(Retiro_Importe) Total_Importe, Retiro_Cuenta FROM GEM4.Retiro 
+						GROUP BY Retiro_Cuenta) AS Saldos_Totales ON (Cuenta.Cuenta_Numero = Saldos_Totales.Retiro_Cuenta)
+
+--MIGRACION DE TRANSFERENCIAS
+--MIGRO LAS TRANSFERENCIAS
+INSERT INTO GEM4.Transferencia( Transferencia_Fecha, Transferencia_Importe, Transferencia_Costo_Trans, Transferencia_Cuenta_Origen, Transferencia_Cuenta_Destino)
+SELECT Transf_Fecha, Trans_Importe, Trans_Costo_Trans, Cuenta_Numero, Cuenta_Dest_Numero
+FROM gd_esquema.Maestra
+WHERE Transf_Fecha IS NOT NULL
+--ACTUALIZO OPERACIONES
+INSERT INTO GEM4.Operacion(Operacion_ID, Operacion_Tipo, Operacion_Fecha, Operacion_Cliente_ID)
+SELECT Transferencia_Codigo, 3, Transferencia_Fecha, GEM4.fnObtenerClienteID_Cuenta(Transferencia_Cuenta_Origen)
+FROM GEM4.Transferencia
+--ACTUALIZO LOS SALDOS
+UPDATE GEM4.Cuenta 
+SET Cuenta_Saldo -= Total_Importe
+FROM GEM4.Cuenta JOIN (SELECT SUM(Transferencia_Importe) Total_Importe,Transferencia_Cuenta_Origen FROM GEM4.Transferencia
+						GROUP BY Transferencia_Cuenta_Origen) AS Saldos_Totales ON (Cuenta.Cuenta_Numero = Saldos_Totales.Transferencia_Cuenta_Origen)
+
+UPDATE GEM4.Cuenta 
+SET Cuenta_Saldo += Total_Importe
+FROM GEM4.Cuenta JOIN (SELECT SUM(Transferencia_Importe) Total_Importe,Transferencia_Cuenta_Destino FROM GEM4.Transferencia
+						GROUP BY Transferencia_Cuenta_Destino) AS Saldos_Totales ON (Cuenta.Cuenta_Numero = Saldos_Totales.Transferencia_Cuenta_Destino)
+
+--FACTURAS
+SET IDENTITY_INSERT GEM4.Factura ON
+INSERT INTO GEM4.Factura(Factura_Numero, Factura_Fecha, Factura_Cliente_ID)
+SELECT Factura_Numero, Factura_Fecha, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc)
+FROM gd_esquema.Maestra
+WHERE Factura_Numero IS NOT NULL
+SET IDENTITY_INSERT GEM4.Factura OFF
+
+-- MIGRACION DE OPERACIONES FACTURABLES VIEJAS, 
+--ACLARACION 1: el detalle es generico para este caso, que son cosas viejas, despues habria que hacerlo personalizado por cada operacion nueva que se genere para que el detalle de la factura sea mas copado
+--ACLARACION 2: tome las comisiones por transferencias hitoricas como si fuesen de cuenta gratuita, total no tenemos informacion al respecto, habia que inventarlas
+INSERT INTO GEM4.Operacion_Facturable(Operacion_Facturable_Tipo, Operacion_Facturable_Fecha, Operacion_Facturable_Cliente_ID, Operacion_Facturable_Detalle, Operacion_Facturable_Costo, Operacion_Facturable_Factura_Numero)
+SELECT  4, Factura_Fecha, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Item_Factura_Descr, Item_Factura_Importe, Factura_Numero
+FROM gd_esquema.Maestra
+WHERE Factura_Numero IS NOT NULL		
+		
 /* ******************************************TRIGGERS************************************************************ */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgModificacionUsuario')
 	DROP PROCEDURE GEM4.tgModificacionUsuario;

@@ -121,12 +121,10 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Factura')
 	DROP TABLE GEM4.Factura;
 
- --BORRAR ES DE LA TABLA ANTERIOR
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operaciones_Facturables')	
-	DROP TABLE GEM4.Operaciones_Facturables;
 --TABLA NUEVA IMPLEMENTADA	
-IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operacion_Facturable')	
-	DROP TABLE GEM4.Operacion_Facturable; 
+
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operaciones_Facturables')	
+	DROP TABLE GEM4.Operaciones_Facturables; 
 	
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Item')
 	DROP TABLE GEM4.Item;
@@ -330,6 +328,7 @@ CREATE TABLE GEM4.Tipo_Operacion(
 CREATE TABLE GEM4.Tipo_Operacion(
 	Tipo_Operacion_ID						INT IDENTITY(1,1),
 	Tipo_Operacion_Descripcion				NVARCHAR(255),
+	Tipo_Operacion_Descripcion_Costeo		NVARCHAR(255), --Que sería este item?
 	Tipo_Operacion_Importe					NUMERIC(18,2)
 	PRIMARY KEY(Tipo_Operacion_ID)
 	)
@@ -356,25 +355,21 @@ CREATE TABLE GEM4.Operacion(
 	Operacion_Tipo						INT,
 	Operacion_Fecha						DATETIME,
 	Operacion_Usuario_ID				INT,
-	Operacion_Detalle					NVARCHAR(255),			--GUARDA CON ESTO, AVISAR
 	PRIMARY KEY(Operacion_ID),
 	FOREIGN KEY(Operacion_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
-	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)
+	FOREIGN KEY(Operacion_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID),
 	)
 	
 
 
-CREATE TABLE GEM4.Operacion_Facturable(
-	Operacion_Facturable_ID					INT IDENTITY(1,1),
-	Operacion_Facturable_Tipo				INT,
-	Operacion_Facturable_Fecha				DATETIME,
-	Operacion_Facturable_Usuario_ID			INT,
-	Operacion_Facturable_Detalle			NVARCHAR(255), --'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
-	Operacion_Facturable_Costo				NUMERIC(18,2),
-	Operacion_Facturable_Factura_Numero		NUMERIC(18,0) 
-	PRIMARY KEY(Operacion_Facturable_ID),
+CREATE TABLE GEM4.Operaciones_Facturables(
+	Operacion_Facturable_Cod				INT IDENTITY(1,1),
+	Operacion_Facturable_Operacion_ID		INT,
+	Operacion_Facturable_Factura_Numero		NUMERIC(18,0), -- aca le agregaría un item 'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
+	Operacion_Facturable_Costo				NUMERIC(18,2)
+	PRIMARY KEY(Operacion_Facturable_Cod),
 	FOREIGN KEY(Operacion_Facturable_Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
-	FOREIGN KEY(Operacion_Facturable_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID)
+	FOREIGN KEY(Operacion_Facturable_Operacion_ID) REFERENCES GEM4.Operacion(Operacion_ID),
 	)
 /*	
 Agrego una lista de cosas facturables que encontre (creo que son todas, vayan aggregando si encuentran mas), son las cosas que irian en operaciones facturables
@@ -422,7 +417,7 @@ CREATE TABLE GEM4.Transferencia(
 	PRIMARY KEY(Transferencia_Codigo),
 	FOREIGN KEY(Transferencia_Cuenta_Origen) REFERENCES GEM4.Cuenta(Cuenta_Numero),
 	FOREIGN KEY(Transferencia_Cuenta_Destino) REFERENCES GEM4.Cuenta(Cuenta_Numero),
-	FOREIGN KEY(Transferencia_Operacion_ID)	REFERENCES	GEM4.Operacion_Facturable(Operacion_Facturable_ID)
+	FOREIGN KEY(Transferencia_Operacion_ID)	REFERENCES	GEM4.Operacion(Operacion_ID)
 	)
 
 CREATE TABLE GEM4.Banco(

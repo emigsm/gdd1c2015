@@ -665,6 +665,19 @@ SET IDENTITY_INSERT GEM4.Moneda OFF;
 INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_Descripcion)
 VALUES('Deposito'),('Retiro'),('Transferencia');
 
+SET IDENTITY_INSERT GEM4.Tipo_Operacion ON
+INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_ID, Tipo_Operacion_Descripcion, Tipo_Operacion_Importe) VALUES
+		(4, 'Comisión  por transferencia desde Cuenta GRATUITA', 0.12),
+		(5, 'Comisión  por transferencia desde Cuenta BRONCE', 0.10),
+		(6, 'Comisión  por transferencia desde Cuenta PLATA', 0.08),
+		(7, 'Comisión  por transferencia desde Cuenta ORO', 0.04),
+		(8, 'Apertura de Cuenta Tipo ORO', 200),
+		(9, 'Apertura de Cuenta Tipo PLATA', 150),
+		(10, 'Apertura de Cuenta Tipo BRONCE', 100),
+		(11, 'Apertura de Cuenta Tipo GRATUITA', 0),
+		(12, 'Modificación del Tipo de CUENTA', 200) --creo que es mejor dejarlo con un valor fijo independiente del tipo de cuenta que era antes, y que sea caro para que e cliente se joda por boludo si queire cambiar el tipo 
+SET IDENTITY_INSERT GEM4.Tipo_Operacion OFF
+
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta ON;
 INSERT INTO GEM4.Tipo_Cuenta(Tipo_Cuenta_ID,Tipo_Cuenta_Descripcion,Tipo_Cuenta_Costo_Creacion,Tipo_Cuenta_Costo_Modificacion,Tipo_Cuenta_Costo_Transf,Tipo_Cuenta_Duracion)
 VALUES(1,'Oro',500,500,20,360),(2,'Plata',400,400,10,160),

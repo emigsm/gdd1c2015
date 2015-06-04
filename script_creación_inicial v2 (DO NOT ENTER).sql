@@ -323,7 +323,7 @@ CREATE TABLE GEM4.Operacion_Facturable(
 	Operacion_Facturable_ID					INT IDENTITY(1,1),
 	Operacion_Facturable_Tipo				INT,
 	Operacion_Facturable_Fecha				DATETIME,
-	Operacion_Facturable_Usuario_ID			INT,
+	Operacion_Facturable_Cliente_ID			INT, --ME PARECE QUE ES MEJOR QUE APUNTE A UN CLIENTE EN VEZ DE UN USUARIO, ES MAS DESCRIPTIVO
 	Operacion_Facturable_Detalle			NVARCHAR(255), --'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
 	Operacion_Facturable_Costo				NUMERIC(18,2),
 	Operacion_Facturable_Factura_Numero		NUMERIC(18,0) 
@@ -838,10 +838,13 @@ FROM gd_esquema.Maestra
 WHERE Factura_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Factura OFF
 
-/*TABLAS QUE FALTA MIGRAR HASTA ESTE PUNTO
-GEM4.Operacion_Facturable
-*/
-						
+-- MIGRACION DE OPERACIONES FACTURABLES VIEJAS, 
+--ACLARACION 1: el detalle es generico para este caso, que son cosas viejas, despues habria que hacerlo personalizado por cada operacion nueva que se genere para que el detalle de la factura sea mas copado
+--ACLARACION 2: tome las comisiones por transferencias hitoricas como si fuesen de cuenta gratuita, total no tenemos informacion al respecto, habia que inventarlas
+INSERT INTO GEM4.Operacion_Facturable(Operacion_Facturable_Tipo, Operacion_Facturable_Fecha, Operacion_Facturable_Cliente_ID, Operacion_Facturable_Detalle, Operacion_Facturable_Costo, Operacion_Facturable_Factura_Numero)
+SELECT  4, Factura_Fecha, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Item_Factura_Descr, Item_Factura_Importe, Factura_Numero
+FROM gd_esquema.Maestra
+WHERE Factura_Numero IS NOT NULL		
 		
 /* ******************************************TRIGGERS************************************************************ */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgModificacionUsuario')

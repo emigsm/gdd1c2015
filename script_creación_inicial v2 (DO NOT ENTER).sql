@@ -817,8 +817,15 @@ SET Cuenta_Saldo += Total_Importe
 FROM GEM4.Cuenta JOIN (SELECT SUM(Transferencia_Importe) Total_Importe,Transferencia_Cuenta_Destino FROM GEM4.Transferencia
 						GROUP BY Transferencia_Cuenta_Destino) AS Saldos_Totales ON (Cuenta.Cuenta_Numero = Saldos_Totales.Transferencia_Cuenta_Destino)
 
+--FACTURAS
+SET IDENTITY_INSERT GEM4.Factura ON
+INSERT INTO GEM4.Factura(Factura_Numero, Factura_Fecha, Factura_Cliente_ID)
+SELECT Factura_Numero, Factura_Fecha, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc)
+FROM gd_esquema.Maestra
+WHERE Factura_Numero IS NOT NULL
+SET IDENTITY_INSERT GEM4.Factura OFF
+
 /*TABLAS QUE FALTA MIGRAR HASTA ESTE PUNTO
-GEM4.Factura
 GEM4.Operacion_Facturable
 */
 						

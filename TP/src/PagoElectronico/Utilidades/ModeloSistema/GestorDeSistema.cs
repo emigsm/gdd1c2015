@@ -74,7 +74,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_ALTATARJETA = "GEM4.spAltaTarjeta";
         private const string STORE_BUSCARCLIENTE = "GEM4.spBuscarCliente";
         private const string STORE_EFECTUARRETIRO = "GEM4.spEfectuarRetiro";
-
+        private const string STORE_OBTENERBANCOS = "GEM4.spObtenerBancos";
 
 
   public static int loginUsuario(string usuario, string contrasena)
@@ -716,7 +716,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return clientes;
         }
 
-        public static string efectuarRetiro(Decimal cuentaNro, Decimal importe, Decimal tipoDoc, Decimal nroDoc, DateTime fecha, string username)
+        public static string efectuarRetiro(Decimal cuentaNro, Decimal importe, Decimal tipoDoc, Decimal nroDoc, DateTime fecha,Decimal banco, string username)
         {
             string mensajeResultado;
 
@@ -726,11 +726,24 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
             parametros.Add(new SqlParameter("@nroDoc", nroDoc));
             parametros.Add(new SqlParameter("@fecha", fecha));
+            parametros.Add(new SqlParameter("@banco", banco));
             parametros.Add(new SqlParameter("@username", username));
 
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_EFECTUARRETIRO, SCALAR, parametros);
             mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
+        }
+
+        public static DataTable obtenerBancos()
+        {
+            SqlDataReader readerBancos = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERBANCOS, READER, null);
+            DataTable bancos = new DataTable();
+            if (readerBancos.HasRows)
+            {
+                bancos.Load(readerBancos);
+            }
+            readerBancos.Dispose();
+            return bancos;
         }
       
     }

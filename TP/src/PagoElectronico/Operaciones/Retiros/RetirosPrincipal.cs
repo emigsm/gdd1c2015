@@ -13,6 +13,7 @@ namespace PagoElectronico.Operaciones.Retiros
     public partial class RetirosPrincipal : Form
     {
         string usuario { get; set; }
+        Decimal bancoCod { get; set; }
 
         public RetirosPrincipal(string username)
         {
@@ -30,6 +31,21 @@ namespace PagoElectronico.Operaciones.Retiros
             tipoDocComboBox.ValueMember = "Documento_Tipo_Codigo";
             tipoDocComboBox.DataSource = tiposDoc;
 
+            DataTable bancos = GestorDeSistema.obtenerBancos();
+
+            if (bancos.Rows.Count > 0)
+            {
+                foreach (DataRow banco in bancos.Rows)
+                {
+                    dgvBancos.Rows.Add(
+                    banco.ItemArray[0],
+                    banco.ItemArray[1],
+                    banco.ItemArray[2]
+                    );
+                }
+                dgvBancos.Update();
+            }            
+           
             nroDoctextBox.MaxLength = 16;
             ImportetextBox.MaxLength = 16;
 
@@ -39,6 +55,7 @@ namespace PagoElectronico.Operaciones.Retiros
 
 
         }
+
 
         private void establecerLongitudesMaximas()
         {
@@ -53,15 +70,44 @@ namespace PagoElectronico.Operaciones.Retiros
 
         private void GenerarRetirobutton_Click(object sender, EventArgs e)
         {
+            if (ImportetextBox.Text == "")
+            {
+                MessageBox.Show("Por favor,ingrese un Importe", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            if (nroDoctextBox.Text == "")
+            {
+                MessageBox.Show("Por favor,imgrese el numero de Documento correspondiente", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+            if(dgvBancos.SelectedRows.Count==1)
+            {
+            
+            
+
+            
             string mensaje = GestorDeSistema.efectuarRetiro(Convert.ToDecimal(cuentacomboBox.SelectedValue.ToString()),
                                                             Convert.ToDecimal(ImportetextBox.Text),
                                                             Convert.ToDecimal(tipoDocComboBox.SelectedValue.ToString()),
-                                                            Convert.ToDecimal(nroDoctextBox.Text),Convert.ToDateTime(fechaValorLabel.Text), usuario);
+                                                            Convert.ToDecimal(nroDoctextBox.Text),Convert.ToDateTime(fechaValorLabel.Text),
+                /*bancoCod*/Convert.ToDecimal(dgvBancos.CurrentRow.Cells["Banco_Codigo"].Value.ToString()), usuario);
 
 
-            MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-            return;
+                return;
+        }
+            else
+            {
+                MessageBox.Show("Por favor,Seleccione un Banco", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+
+
         }
 
         private void VOLVERbutton_Click(object sender, EventArgs e)
@@ -126,6 +172,13 @@ namespace PagoElectronico.Operaciones.Retiros
                 e.Handled = true;
                 return;
             }
+        }
+
+   
+
+        private void dgvBancos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+           
         }
     }
 }

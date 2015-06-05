@@ -40,6 +40,13 @@
             this.VOLVERbutton = new System.Windows.Forms.Button();
             this.FechaLeyendalabel = new System.Windows.Forms.Label();
             this.fechaValorLabel = new System.Windows.Forms.Label();
+            this.bancoLabel = new System.Windows.Forms.Label();
+            this.dgvBancos = new System.Windows.Forms.DataGridView();
+            this.Banco_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Banco_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Banco_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBancos)).BeginInit();
             this.SuspendLayout();
             // 
             // cuentacomboBox
@@ -116,7 +123,7 @@
             // 
             // GenerarRetirobutton
             // 
-            this.GenerarRetirobutton.Location = new System.Drawing.Point(31, 280);
+            this.GenerarRetirobutton.Location = new System.Drawing.Point(45, 367);
             this.GenerarRetirobutton.Name = "GenerarRetirobutton";
             this.GenerarRetirobutton.Size = new System.Drawing.Size(184, 43);
             this.GenerarRetirobutton.TabIndex = 10;
@@ -126,7 +133,7 @@
             // 
             // VOLVERbutton
             // 
-            this.VOLVERbutton.Location = new System.Drawing.Point(238, 280);
+            this.VOLVERbutton.Location = new System.Drawing.Point(285, 367);
             this.VOLVERbutton.Name = "VOLVERbutton";
             this.VOLVERbutton.Size = new System.Drawing.Size(193, 43);
             this.VOLVERbutton.TabIndex = 11;
@@ -137,7 +144,7 @@
             // FechaLeyendalabel
             // 
             this.FechaLeyendalabel.AutoSize = true;
-            this.FechaLeyendalabel.Location = new System.Drawing.Point(13, 212);
+            this.FechaLeyendalabel.Location = new System.Drawing.Point(13, 338);
             this.FechaLeyendalabel.Name = "FechaLeyendalabel";
             this.FechaLeyendalabel.Size = new System.Drawing.Size(43, 13);
             this.FechaLeyendalabel.TabIndex = 12;
@@ -146,17 +153,73 @@
             // fechaValorLabel
             // 
             this.fechaValorLabel.AutoSize = true;
-            this.fechaValorLabel.Location = new System.Drawing.Point(165, 212);
+            this.fechaValorLabel.Location = new System.Drawing.Point(165, 338);
             this.fechaValorLabel.Name = "fechaValorLabel";
             this.fechaValorLabel.Size = new System.Drawing.Size(64, 13);
             this.fechaValorLabel.TabIndex = 13;
             this.fechaValorLabel.Text = "Valor Fecha";
             // 
+            // bancoLabel
+            // 
+            this.bancoLabel.AutoSize = true;
+            this.bancoLabel.Location = new System.Drawing.Point(13, 188);
+            this.bancoLabel.Name = "bancoLabel";
+            this.bancoLabel.Size = new System.Drawing.Size(115, 13);
+            this.bancoLabel.TabIndex = 14;
+            this.bancoLabel.Text = "Seleccione un Banco :";
+            // 
+            // dgvBancos
+            // 
+            this.dgvBancos.AllowUserToAddRows = false;
+            this.dgvBancos.AllowUserToDeleteRows = false;
+            this.dgvBancos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBancos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Banco_Codigo,
+            this.Banco_Nombre,
+            this.Banco_Direccion});
+            this.dgvBancos.Location = new System.Drawing.Point(16, 216);
+            this.dgvBancos.Name = "dgvBancos";
+            this.dgvBancos.ReadOnly = true;
+            this.dgvBancos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvBancos.Size = new System.Drawing.Size(335, 135);
+            this.dgvBancos.TabIndex = 15;
+            this.dgvBancos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBancos_CellContentClick);
+            // 
+            // Banco_Codigo
+            // 
+            this.Banco_Codigo.HeaderText = "Numero de Banco";
+            this.Banco_Codigo.Name = "Banco_Codigo";
+            this.Banco_Codigo.ReadOnly = true;
+            // 
+            // Banco_Nombre
+            // 
+            this.Banco_Nombre.HeaderText = "Nombre Banco";
+            this.Banco_Nombre.Name = "Banco_Nombre";
+            this.Banco_Nombre.ReadOnly = true;
+            // 
+            // Banco_Direccion
+            // 
+            this.Banco_Direccion.HeaderText = "Direccion Banco";
+            this.Banco_Direccion.Name = "Banco_Direccion";
+            this.Banco_Direccion.ReadOnly = true;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(533, 188);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(35, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "label1";
+            // 
             // RetirosPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(496, 344);
+            this.ClientSize = new System.Drawing.Size(718, 439);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.dgvBancos);
+            this.Controls.Add(this.bancoLabel);
             this.Controls.Add(this.fechaValorLabel);
             this.Controls.Add(this.FechaLeyendalabel);
             this.Controls.Add(this.VOLVERbutton);
@@ -172,6 +235,7 @@
             this.Name = "RetirosPrincipal";
             this.Text = "RetirosPrincipal";
             this.Load += new System.EventHandler(this.RetirosPrincipal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBancos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,5 +255,11 @@
         private System.Windows.Forms.Button VOLVERbutton;
         private System.Windows.Forms.Label FechaLeyendalabel;
         private System.Windows.Forms.Label fechaValorLabel;
+        private System.Windows.Forms.Label bancoLabel;
+        private System.Windows.Forms.DataGridView dgvBancos;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Banco_Codigo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Banco_Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Banco_Direccion;
+        private System.Windows.Forms.Label label1;
     }
 }

@@ -1630,7 +1630,15 @@ AS
 	
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerBancos')
+	DROP PROCEDURE GEM4.spObtenerBancos;
+GO
 
+CREATE PROCEDURE GEM4.spObtenerBancos
+AS
+	SELECT Banco_Codigo,Banco_Nombre,Banco_Direccion
+	FROM GEM4.Banco;
+GO
 
 
 
@@ -1644,6 +1652,7 @@ CREATE PROCEDURE GEM4.spEfectuarRetiro
 	@tipoDoc	NUMERIC(18,0),
 	@nroDoc		NUMERIC(18,0),
 	@fecha		DATETIME,
+	@banco		NUMERIC(18,0),
 	@username	VARCHAR(30)
 	
 
@@ -1674,6 +1683,10 @@ AS
 						ELSE
 						BEGIN
 							--TODO: GENERAR RETIRO, UNA VEZ QUE ESTE LISTA LA TABLA DE LAS OPERACIONES
+							DECLARE @retiro NUMERIC(18,0);
+							
+							
+							
 							
 							SELECT 'EL RETIRO FUE EFECTUADO EXITOSAMENTE.'	
 						END;			

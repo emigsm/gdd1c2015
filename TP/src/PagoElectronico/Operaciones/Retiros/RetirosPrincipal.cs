@@ -72,13 +72,15 @@ namespace PagoElectronico.Operaciones.Retiros
         {
             if (ImportetextBox.Text == "")
             {
-                MessageBox.Show("Por favor,ingrese un Importe", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Por favor,ingrese un Importe", "Resultado Operacion",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return;
             }
             if (nroDoctextBox.Text == "")
             {
-                MessageBox.Show("Por favor,imgrese el numero de Documento correspondiente", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Por favor,imgrese el numero de Documento correspondiente", "Resultado Operacion",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return;
             }
@@ -93,7 +95,8 @@ namespace PagoElectronico.Operaciones.Retiros
                                                             Convert.ToDecimal(ImportetextBox.Text),
                                                             Convert.ToDecimal(tipoDocComboBox.SelectedValue.ToString()),
                                                             Convert.ToDecimal(nroDoctextBox.Text),Convert.ToDateTime(fechaValorLabel.Text),
-                /*bancoCod*/Convert.ToDecimal(dgvBancos.CurrentRow.Cells["Banco_Codigo"].Value.ToString()), usuario);
+                                                            Convert.ToDecimal(dgvBancos.CurrentRow.Cells["Banco_Codigo"].Value.ToString()),
+                                                            usuario);
 
 
                 MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -102,7 +105,8 @@ namespace PagoElectronico.Operaciones.Retiros
         }
             else
             {
-                MessageBox.Show("Por favor,Seleccione un Banco", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Por favor,Seleccione un Banco", "Resultado Operacion",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                 return;
             }

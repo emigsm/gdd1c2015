@@ -532,8 +532,9 @@ AS
 	BEGIN
 		DECLARE @saldo NUMERIC(18,2);
 		
-		SELECT @saldo=Cuenta_Numero
-		FROM GEM4.Cuenta;
+		SELECT @saldo=Cuenta_Saldo
+		FROM GEM4.Cuenta
+		WHERE Cuenta_Numero=@cuentaNum;
 		
 		IF(@importe>@saldo)
 			BEGIN 
@@ -598,6 +599,16 @@ AS
 	END	
 GO
 
+
+/*
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerDuracionCuenta')
+	DROP FUNCTION GEM4.fnObtenerClienteID_Documento
+GO
+
+CREATE FUNCTION GEM4.fnObtenerDuracionCuenta(@nDoc NUMERIC (18,0))
+RETURNS  INT
+*/
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
 SET IDENTITY_INSERT GEM4.Rol ON;
@@ -1682,10 +1693,20 @@ AS
 							END;
 						ELSE
 						BEGIN
-							--TODO: GENERAR RETIRO, UNA VEZ QUE ESTE LISTA LA TABLA DE LAS OPERACIONES
+							--TODO:VERIFICAR COMO VAMOS A MANEJAR EL TEMA DE LAS FECHAS, EN 2016 O 2015
 							DECLARE @retiro NUMERIC(18,0);
+							INSERT INTO GEM4.Cheque(Cheque_Fecha,Cheque_Importe,Cheque_Cliente_ID,Cheque_Banco)
+							VALUES(@fecha,@importe,@clienteID,@banco);
 							
+							INSERT INTO GEM4.Retiro(Retiro_Importe,Retiro_Fecha,Retiro_Cuenta,Retiro_Cheque)
+							VALUES(@importe,@fecha,@cuentaNro,IDENT_CURRENT('GEM4.Cheque'));
 							
+							INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Cliente_ID)
+							VALUES(IDENT_CURRENT('GEM4.Retiro'),2,@fecha,@clienteID)
+							
+							UPDATE GEM4.Cuenta
+							SET Cuenta_Saldo=Cuenta_Saldo-@importe
+							WHERE Cuenta_Numero=@cuentaNro;
 							
 							
 							SELECT 'EL RETIRO FUE EFECTUADO EXITOSAMENTE.'	

@@ -233,6 +233,9 @@
     <EmbeddedResource Include="Operaciones\Depositos\DepositosPrincipal.resx">
       <DependentUpon>DepositosPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Operaciones\Listados\ListadosPrincipal.resx">
+      <DependentUpon>ListadosPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Operaciones\Retiros\RetirosPrincipal.resx">
       <DependentUpon>RetirosPrincipal.cs</DependentUpon>
     </EmbeddedResource>

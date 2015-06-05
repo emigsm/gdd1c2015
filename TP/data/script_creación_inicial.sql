@@ -561,7 +561,8 @@ AS
 		DECLARE @estadoCuenta INT;
 		
 		SELECT @estadoCuenta=Cuenta_Estado
-		FROM GEM4.Cuenta;
+		FROM GEM4.Cuenta C
+		WHERE C.Cuenta_Numero = @cuentaNum;
 		
 		IF(@estadoCuenta<>1)
 			BEGIN
@@ -1738,21 +1739,34 @@ AS
 	FROM GEM4.Cliente JOIN GEM4.Usuario ON (GEM4.Cliente.Cliente_ID=GEM4.Usuario.Cliente_ID)
 	WHERE @username=Usuario_Username
 	
-	
 
 GO
 
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertarOperacion')
+	DROP PROCEDURE GEM4.spInsertarOperacion;
+GO
 
-/* 
-PREGUNTAR
+CREATE PROCEDURE GEM4.spInsertarOperacion
+@Operacion_ID						NUMERIC(18,0),
+@Operacion_Tipo						INT,
+@Operacion_Fecha					DATETIME,
+@Operacion_Cliente_ID				INT 
 
+AS
+
+	INSERT INTO GEM4.Operacion (Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Cliente_ID)	
+	VALUES (@Operacion_ID,@Operacion_Tipo,@Operacion_Fecha,@Operacion_Cliente_ID);
+	
+GO	
+ 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spDepositar')
 	DROP PROCEDURE GEM4.spDepositar;
 
 GO
 
 CREATE PROCEDURE GEM4.spDepositar
+
 @Cuenta		NVARCHAR (18),
 @Importe	NUMERIC(18,2),
 @Moneda		NVARCHAR (60),
@@ -1760,22 +1774,43 @@ CREATE PROCEDURE GEM4.spDepositar
 
 AS
 
-DECLARE @FECHA DATETIME;
-DECLARE @CLIENTE INT;
-DECLARE @MONEDA_COD INT;
-DECLARE @CUENTA_NRO NUMERIC (18,0);
-DECLARE @OPERACION INT;
+BEGIN
+
+DECLARE @FECHA				DATETIME;
+DECLARE @CLIENTE			INT;
+DECLARE @MONEDA_COD			INT;
+DECLARE @CUENTA_NRO			NUMERIC (18,0);
+DECLARE @OPERACION_TIPO		INT;
+DECLARE @OPERACION_ID		NUMERIC(18,0);
 
 SET @FECHA= (SELECT TOP 1 a.fechaSistema FROM GEM4.fechaSistema a );
 SET @CLIENTE =(SELECT T.Tarjeta_Cliente_ID FROM GEM4.Tarjeta T WHERE T.Tarjeta_Numero=@Tarjeta);
 SET @MONEDA_COD = (SELECT M.Moneda_Codigo FROM GEM4.Moneda M WHERE M.Moneda_Descripcion = @Moneda);
-SET @CUENTA_NRO = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
-SET @OPERACION =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHERE O.Tipo_Operacion_Descripcion LIKE 'Deposito');
+SET @CUENTA_NRO = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta AND C.Cuenta_Cliente_ID
+=@CLIENTE);
+SET @OPERACION_TIPO =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHERE O.Tipo_Operacion_Descripcion LIKE 'Deposito');
 
-	INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
-	,Deposito_Cuenta)
-	VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
 
+
+	IF(GEM4.fnValidarCuentaHabilitada(@CUENTA_NRO)=0)   
+		
+			SELECT ' El depósito no se pudo realizar ya que la cuenta no se encuentra habilitada ';
+		
+	ELSE
+		
+			INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
+			,Deposito_Cuenta)
+			VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
+			
+			SET @OPERACION_ID= IDENT_CURRENT('GEM4.Deposito');
+			
+			EXEC GEM4.spInsertarOperacion @OPERACION_ID,@OPERACION_TIPO,@FECHA,@CLIENTE;
+			
+			SELECT ' El depósito se ha realizado satisfactoriamente';
+			
+		
+END;
+		
+		
 GO
 
-*/

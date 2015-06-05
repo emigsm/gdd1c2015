@@ -74,8 +74,9 @@ namespace PagoElectronico.Operaciones.Depositos
                 int importe=Convert.ToInt32(ImporteTextBox.Text);
                 string moneda= cmbMoneda.SelectedValue.ToString();
                 string tarjeta=cmbTarjeta.SelectedValue.ToString();
-
-                GestorDeSistema.depositar(cuenta, importe, moneda, tarjeta);
+                String mensaje = GestorDeSistema.depositar(cuenta, importe, moneda, tarjeta);
+                MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                
             }
         }
 

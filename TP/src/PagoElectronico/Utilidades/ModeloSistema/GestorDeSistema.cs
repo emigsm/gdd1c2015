@@ -669,15 +669,18 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return Fecha;
         }
 
-        public static void depositar(string cuenta, int importe, string moneda,string tarjeta)
+        public static string depositar(string cuenta, int importe, string moneda,string tarjeta)
         {
+            String mensaje;
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@Cuenta", cuenta));
             parametros.Add(new SqlParameter("@Importe", importe));
             parametros.Add(new SqlParameter("@Moneda", moneda));
             parametros.Add(new SqlParameter("@Tarjeta", tarjeta));
 
-            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DEPOSITAR, NONQUERY, parametros);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DEPOSITAR, SCALAR, parametros);
+            mensaje = resultadoStoreProcedure.ToString();
+            return mensaje;
         }
 
         public static DataTable obtenerEmisoresTarjetas()

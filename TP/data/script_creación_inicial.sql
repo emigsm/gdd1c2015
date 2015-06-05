@@ -600,15 +600,25 @@ AS
 GO
 
 
-/*
+
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerDuracionCuenta')
-	DROP FUNCTION GEM4.fnObtenerClienteID_Documento
+	DROP FUNCTION GEM4.fnObtenerDuracionCuenta;
 GO
 
-CREATE FUNCTION GEM4.fnObtenerDuracionCuenta(@nDoc NUMERIC (18,0))
+CREATE FUNCTION GEM4.fnObtenerDuracionCuenta(@cuentaTipo NUMERIC (18,0))
 RETURNS  INT
-*/
+
+BEGIN
+	DECLARE @duracion INT;
+	SELECT @duracion=Tipo_Cuenta_Duracion
+	FROM GEM4.Tipo_Cuenta
+	WHERE Tipo_Cuenta_ID=@cuentaTipo;
+	
+	RETURN @duracion;
+END;
+
+GO
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
 SET IDENTITY_INSERT GEM4.Rol ON;
@@ -768,7 +778,7 @@ SET IDENTITY_INSERT GEM4.Banco OFF;
 
 SET IDENTITY_INSERT GEM4.Cuenta ON;
 INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Cliente_ID)
-SELECT	DISTINCT m.Cuenta_Numero,GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion),m.Cuenta_Fecha_Cierre,m.Cuenta_Pais_Codigo,c.Cliente_ID
+SELECT	DISTINCT m.Cuenta_Numero,GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion),DATEADD(DAY,GEM4.fnObtenerDuracionCuenta(1),GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion)),m.Cuenta_Pais_Codigo,c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;

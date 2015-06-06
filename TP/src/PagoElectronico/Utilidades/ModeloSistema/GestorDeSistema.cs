@@ -756,7 +756,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         public static DataTable buscarCuentas(string filtro)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@Filtro",filtro));
+            parametros.Add(new SqlParameter("@Filtro", filtro));
             SqlDataReader readerCuentas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BUSCARCUENTAS, READER, parametros);
             DataTable cuentas = new DataTable();
             if (readerCuentas.HasRows)
@@ -765,6 +765,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerCuentas.Dispose();
             return cuentas;
+        }
 
         public static DataTable listado2(int anio, int trimestre)
         {
@@ -782,7 +783,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
 
         }
       
-                public static DataTable listado3(int anio, int trimestre)
+        public static DataTable listado3(int anio, int trimestre)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@anio", anio));

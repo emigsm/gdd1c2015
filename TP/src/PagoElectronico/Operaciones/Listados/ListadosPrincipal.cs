@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using PagoElectronico.Utilidades.ModeloSistema;
+
 namespace PagoElectronico.Operaciones.Listados
 {
     public partial class ListadosPrincipal : Form
@@ -28,12 +30,14 @@ namespace PagoElectronico.Operaciones.Listados
 
             DataTable dtcmbAnio = new DataTable();
             dtcmbAnio.Columns.Add("DisplayMember");
-            dtcmbAnio.Rows.Add("2013");
-            dtcmbAnio.Rows.Add("2014");
-            dtcmbAnio.Rows.Add("2015");
-            dtcmbAnio.Rows.Add("2016");
+            dtcmbAnio.Columns.Add("ValueMember");
+            dtcmbAnio.Rows.Add("2013", "2013");
+            dtcmbAnio.Rows.Add("2014", "2014");
+            dtcmbAnio.Rows.Add("2015", "2015");
+            dtcmbAnio.Rows.Add("2016", "2016");
             cmbAnio.DataSource = dtcmbAnio;
             cmbAnio.DisplayMember = "DisplayMember";
+            cmbAnio.ValueMember = "ValueMember";
 
             DataTable dtcmbListados = new DataTable();
             dtcmbListados.Columns.Add("DisplayMember");
@@ -53,6 +57,53 @@ namespace PagoElectronico.Operaciones.Listados
         {
             Owner.Show();
             this.Hide();
+        }
+
+        private void btnListar_Click(object sender, EventArgs e)
+        {
+            int anioSeleccionado = Convert.ToInt32(cmbAnio.SelectedValue);
+            int trimestreSeleccionado = Convert.ToInt32(cmbTrimestre.SelectedValue);
+            
+            switch (Convert.ToInt32(cmbListados.SelectedValue))
+            { 
+                case 1:
+                    break;
+                case 2:
+                    DataTable listado2 = GestorDeSistema.listado2(anioSeleccionado, trimestreSeleccionado);
+                    if (listado2.Rows.Count > 0)
+                    {
+                       dgvResultados.DataSource = listado2;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("No se encontraron operaciones con los datos proporcionados");
+                    } 
+                    break;
+
+                case 3:
+                    DataTable listado3 = GestorDeSistema.listado3(anioSeleccionado, trimestreSeleccionado);
+                    if (listado3.Rows.Count > 0)
+                    {
+                        dgvResultados.DataSource = listado3;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("No se encontraron operaciones con los datos proporcionados");
+                    } 
+
+
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            dgvResultados.DataSource = null;
+            dgvResultados.Update();
         }
     }
 }

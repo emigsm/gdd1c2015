@@ -618,8 +618,36 @@ BEGIN
 	
 	RETURN @duracion;
 END;
-
 GO
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnDevolverTrimestre')
+	DROP FUNCTION GEM4.fnDevolverTrimestre
+GO
+CREATE FUNCTION GEM4.fnDevolverTrimestre(@unaFecha DATETIME)
+RETURNS INT
+AS
+BEGIN
+DECLARE @valorTrimestre INT
+IF(MONTH(@unaFecha) BETWEEN 1 AND 3)
+	BEGIN 
+		SET @valorTrimestre = 1;
+	END
+IF(MONTH(@unaFecha) BETWEEN 4 AND 6)
+	BEGIN 
+		SET @valorTrimestre = 2;
+	END
+IF(MONTH(@unaFecha) BETWEEN 7 AND 9)
+	BEGIN 
+		SET @valorTrimestre = 3;
+	END
+IF(MONTH(@unaFecha) BETWEEN 10 AND 12)
+	BEGIN 
+		SET @valorTrimestre = 4;
+	END
+RETURN @valorTrimestre;
+END
+GO
+
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
 SET IDENTITY_INSERT GEM4.Rol ON;
@@ -1806,11 +1834,41 @@ SET @OPERACION_TIPO =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHER
 			
 			EXEC GEM4.spInsertarOperacion @OPERACION_ID,@OPERACION_TIPO,@FECHA,@CLIENTE;
 			
-			SELECT ' El depósito se ha realizado satisfactoriamente';
-			
-		
+			SELECT ' El depósito se ha realizado satisfactoriamente';	
 END;
-		
-		
+			
 GO
 
+-- 2. Cliente con mayor cantidad de comisiones facturadas en todas sus cuentas
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico2')
+	DROP PROCEDURE GEM4.spListadoEstadistico2;
+
+GO
+
+CREATE PROCEDURE GEM4.spListadoEstadistico2
+	@anio				INT,
+	@trimestre			INT
+AS
+	SELECT TOP 5 Operacion_Facturable_Cliente_ID, COUNT(Operacion_Facturable_Costo) Comisiones_Facturadas
+	FROM GEM4.Operacion_Facturable
+	WHERE (Operacion_Facturable_Tipo BETWEEN 4 AND 7) AND (YEAR(Operacion_Facturable_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Operacion_Facturable_Fecha) = @trimestre)
+	GROUP BY Operacion_Facturable_Cliente_ID
+	ORDER BY Comisiones_Facturadas DESC
+GO
+
+--3 .Clientes con mayor cantidad de transacciones realizadas entre cuenta propias
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico3')
+	DROP PROCEDURE GEM4.spListadoEstadistico3;
+
+GO
+
+CREATE PROCEDURE GEM4.spListadoEstadistico3
+	@anio				INT,
+	@trimestre			INT
+AS
+SELECT TOP 5 GEM4.fnObtenerClienteID_Cuenta(Transferencia_Cuenta_Origen) Cliente_ID, COUNT(Transferencia_Cuenta_Destino) Transacciones_Entre_Cuentas_Propias
+FROM GEM4.Transferencia
+WHERE (Transferencia_Cuenta_Destino = Transferencia_Cuenta_Origen) AND (YEAR(Transferencia_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Transferencia_Fecha) = @trimestre)
+GROUP BY GEM4.fnObtenerClienteID_Cuenta(Transferencia_Cuenta_Origen)
+ORDER BY Transacciones_Entre_Cuentas_Propias DESC
+GO

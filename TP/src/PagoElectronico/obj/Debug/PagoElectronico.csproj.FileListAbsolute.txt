@@ -124,3 +124,4 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Giuliano\Desktop\Ing. en Sistemas\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Retiros.RetirosPrincipal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Listados.ListadosPrincipal.resources
 Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Listados.ListadosPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Transferencias.TransferenciasPrincipal.resources

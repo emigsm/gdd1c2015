@@ -17,8 +17,13 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.SeleccionRol.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cliente.AltaCliente.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cliente.ModificacionCliente.resources
-C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cliente.VistaTarjetas.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cuenta.AltaCuenta.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Cuenta.ModificacionCuenta.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.ABMs.ABM_Rol.ModificarRol.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Depositos.DepositosPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Asociacion_TC.AltaTarjeta.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Asociacion_TC.AsociacionTCPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Consulta_Saldos.ConsultaSaldosPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Listados.ListadosPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Retiros.RetirosPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Transferencias.TransferenciasPrincipal.resources

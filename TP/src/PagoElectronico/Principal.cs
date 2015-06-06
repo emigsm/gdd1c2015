@@ -93,7 +93,7 @@ namespace PagoElectronico
                     break;
 
                 case "Transferencias":
-                    TransferenciasPrincipal frmTransferenciasPrincipal = new TransferenciasPrincipal();
+                    TransferenciasPrincipal frmTransferenciasPrincipal = new TransferenciasPrincipal(username);
                     frmTransferenciasPrincipal.Show(this);
                     this.Hide();
                     break;

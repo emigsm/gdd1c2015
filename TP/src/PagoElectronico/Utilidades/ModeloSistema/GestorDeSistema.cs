@@ -75,6 +75,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_BUSCARCLIENTE = "GEM4.spBuscarCliente";
         private const string STORE_EFECTUARRETIRO = "GEM4.spEfectuarRetiro";
         private const string STORE_OBTENERBANCOS = "GEM4.spObtenerBancos";
+        private const string STORE_BUSCARCUENTAS = "GEM4.spBuscarCuentas"; 
 
 
   public static int loginUsuario(string usuario, string contrasena)
@@ -747,6 +748,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerBancos.Dispose();
             return bancos;
+        }
+
+        public static DataTable buscarCuentas(string filtro)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Filtro",filtro));
+            SqlDataReader readerCuentas = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_BUSCARCUENTAS, READER, parametros);
+            DataTable cuentas = new DataTable();
+            if (readerCuentas.HasRows)
+            {
+                cuentas.Load(readerCuentas);
+            }
+            readerCuentas.Dispose();
+            return cuentas;
         }
       
     }

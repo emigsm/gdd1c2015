@@ -78,7 +78,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_BUSCARCUENTAS = "GEM4.spBuscarCuentas"; 
         private const string STORE_LISTADO2 = "GEM4.spListadoEstadistico2";
         private const string STORE_LISTADO3 = "GEM4.spListadoEstadistico3";
-
+        private const string STORE_TRANSFERIR = "GEM4.spTransferir";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -796,6 +796,19 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerListado.Dispose();
             return listado;
+        }
+
+        public static string transferir(string cuentaOrigen, string cuentaDestino,int importe)
+        {
+            String mensaje;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@CuentaOrigen", cuentaOrigen));
+            parametros.Add(new SqlParameter("@CuentaDestino", cuentaDestino));
+            parametros.Add(new SqlParameter("@Importe", importe));
+
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_TRANSFERIR, SCALAR, parametros);
+            mensaje = resultadoStoreProcedure.ToString();
+            return mensaje;
         }
     }
 }

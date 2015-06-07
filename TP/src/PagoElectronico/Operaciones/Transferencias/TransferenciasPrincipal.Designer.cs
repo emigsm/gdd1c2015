@@ -31,22 +31,22 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCuentaOrigen = new System.Windows.Forms.ComboBox();
             this.dgvCuentaDestino = new System.Windows.Forms.DataGridView();
+            this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCuenta = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.btnBuscarCuentas = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.FiltroText = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.ImporteText = new System.Windows.Forms.TextBox();
+            this.ImporteTextBox = new System.Windows.Forms.TextBox();
             this.btnTransferencias = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblCuenta = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentaDestino)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -82,6 +82,12 @@
             this.dgvCuentaDestino.TabIndex = 2;
             this.dgvCuentaDestino.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentaDestino_CellContentClick);
             // 
+            // NumeroCuenta
+            // 
+            this.NumeroCuenta.HeaderText = "Número de Cuenta";
+            this.NumeroCuenta.Name = "NumeroCuenta";
+            this.NumeroCuenta.ReadOnly = true;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -108,6 +114,33 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccione la Cuenta de Destino:";
+            // 
+            // lblCuenta
+            // 
+            this.lblCuenta.AutoSize = true;
+            this.lblCuenta.Location = new System.Drawing.Point(198, 203);
+            this.lblCuenta.Name = "lblCuenta";
+            this.lblCuenta.Size = new System.Drawing.Size(51, 13);
+            this.lblCuenta.TabIndex = 10;
+            this.lblCuenta.Text = "CUENTA";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 205);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(144, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Nro de cuenta seleccionada:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 82);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(276, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Seleccione la celda con el número de cuenta de destino.";
             // 
             // btnLimpiar
             // 
@@ -154,12 +187,12 @@
             this.label4.TabIndex = 5;
             this.label4.Text = "Ingrese el Importe a Transferir:";
             // 
-            // ImporteText
+            // ImporteTextBox
             // 
-            this.ImporteText.Location = new System.Drawing.Point(205, 334);
-            this.ImporteText.Name = "ImporteText";
-            this.ImporteText.Size = new System.Drawing.Size(127, 20);
-            this.ImporteText.TabIndex = 6;
+            this.ImporteTextBox.Location = new System.Drawing.Point(205, 334);
+            this.ImporteTextBox.Name = "ImporteTextBox";
+            this.ImporteTextBox.Size = new System.Drawing.Size(127, 20);
+            this.ImporteTextBox.TabIndex = 6;
             // 
             // btnTransferencias
             // 
@@ -169,6 +202,7 @@
             this.btnTransferencias.TabIndex = 7;
             this.btnTransferencias.Text = "Realizar Transferencia";
             this.btnTransferencias.UseVisualStyleBackColor = true;
+            this.btnTransferencias.Click += new System.EventHandler(this.btnTransferencias_Click);
             // 
             // label5
             // 
@@ -198,39 +232,6 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // NumeroCuenta
-            // 
-            this.NumeroCuenta.HeaderText = "Número de Cuenta";
-            this.NumeroCuenta.Name = "NumeroCuenta";
-            this.NumeroCuenta.ReadOnly = true;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 82);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(276, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Seleccione la celda con el número de cuenta de destino.";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 205);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(144, 13);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Nro de cuenta seleccionada:";
-            // 
-            // lblCuenta
-            // 
-            this.lblCuenta.AutoSize = true;
-            this.lblCuenta.Location = new System.Drawing.Point(198, 203);
-            this.lblCuenta.Name = "lblCuenta";
-            this.lblCuenta.Size = new System.Drawing.Size(51, 13);
-            this.lblCuenta.TabIndex = 10;
-            this.lblCuenta.Text = "CUENTA";
-            // 
             // TransferenciasPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -240,7 +241,7 @@
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnTransferencias);
-            this.Controls.Add(this.ImporteText);
+            this.Controls.Add(this.ImporteTextBox);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmbCuentaOrigen);
@@ -266,7 +267,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox FiltroText;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox ImporteText;
+        private System.Windows.Forms.TextBox ImporteTextBox;
         private System.Windows.Forms.Button btnTransferencias;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblFecha;

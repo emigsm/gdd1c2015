@@ -62,5 +62,25 @@ namespace PagoElectronico.Operaciones.Transferencias
         {
             NroCuenta = dgvCuentaDestino.Rows[e.RowIndex].Cells["NumeroCuenta"].Value.ToString();
         }
+
+        private void btnTransferencias_Click(object sender, EventArgs e)
+        {
+            if ((Convert.ToInt32(ImporteTextBox.Text) <1) || (ImporteTextBox.Text == "") )
+            {
+                MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+            else
+            {
+                string cuentaOrigen =cmbCuentaOrigen.SelectedValue.ToString();
+                string cuentaDestino =lblCuenta.Text;
+                int importe=Convert.ToInt32(ImporteTextBox.Text);
+                String mensaje = GestorDeSistema.transferir(cuentaOrigen,cuentaDestino,importe);
+                MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                
+            }
+        }
+        }
     }
 }

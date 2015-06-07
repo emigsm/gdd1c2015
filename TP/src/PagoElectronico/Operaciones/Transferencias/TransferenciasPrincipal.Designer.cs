@@ -31,7 +31,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCuentaOrigen = new System.Windows.Forms.ComboBox();
             this.dgvCuentaDestino = new System.Windows.Forms.DataGridView();
-            this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCuenta = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentaDestino)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -83,12 +83,6 @@
             this.dgvCuentaDestino.Size = new System.Drawing.Size(353, 86);
             this.dgvCuentaDestino.TabIndex = 2;
             this.dgvCuentaDestino.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentaDestino_CellContentClick);
-            // 
-            // NumeroCuenta
-            // 
-            this.NumeroCuenta.HeaderText = "Número de Cuenta";
-            this.NumeroCuenta.Name = "NumeroCuenta";
-            this.NumeroCuenta.ReadOnly = true;
             // 
             // label2
             // 
@@ -234,6 +228,13 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // NumeroCuenta
+            // 
+            this.NumeroCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumeroCuenta.HeaderText = "Número de Cuenta";
+            this.NumeroCuenta.Name = "NumeroCuenta";
+            this.NumeroCuenta.ReadOnly = true;
+            // 
             // Seleccionar
             // 
             this.Seleccionar.HeaderText = "Seleccionar";
@@ -282,10 +283,10 @@
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnBuscarCuentas;
         private System.Windows.Forms.Button btnLimpiar;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCuenta;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCuenta;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCuenta;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

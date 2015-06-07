@@ -729,6 +729,38 @@ RETURN @Resultado;
 END
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnDevolverTipoTransferencia')
+	DROP FUNCTION GEM4.fnDevolverTipoTransferencia
+GO
+CREATE FUNCTION GEM4.fnDevolverTipoTransferencia(@CuentaNro NVARCHAR(18))
+RETURNS INT
+AS
+BEGIN
+
+DECLARE @Resultado INT;
+DECLARE @CuentaTipo INT;
+SET @CuentaTipo = (SELECT C.Cuenta_Tipo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero =CONVERT(NUMERIC(18,0),@CuentaNro));
+
+IF(@CuentaTipo = 1)--ORO
+	BEGIN 
+		SET @Resultado = 7;
+	END
+IF(@CuentaTipo = 2)--Plata
+	BEGIN 
+		SET @Resultado = 6;
+	END
+IF(@CuentaTipo = 3)--Bronce
+	BEGIN 
+		SET @Resultado = 5;
+	END
+IF(@CuentaTipo = 2)--Gratuita
+	BEGIN 
+		SET @Resultado = 4;
+	END
+RETURN @Resultado;
+END
+GO		
+
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
@@ -1967,6 +1999,26 @@ AS
 SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE (C.Cuenta_Numero LIKE '%'+@Filtro+'%') OR (@Filtro ='')
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInsertarOperacionFacturable')
+	DROP PROCEDURE GEM4.spInsertarOperacionFacturable;
+GO
+
+CREATE PROCEDURE GEM4.spInsertarOperacionFacturable
+@Operacion_Facturable_Tipo				INT,
+@Operacion_Facturable_Fecha				DATETIME,
+@Operacion_Facturable_Detalle			NVARCHAR(255),
+@Operacion_Facturable_Costo				NUMERIC(18,2)
+
+AS
+
+	INSERT GEM4.Operacion_Facturable(Operacion_Facturable_Tipo,Operacion_Facturable_Fecha,
+			Operacion_Facturable_Detalle,Operacion_Facturable_Costo,Operacion_Facturable_Factura_Numero)	
+	VALUES (@Operacion_Facturable_Tipo,@Operacion_Facturable_Fecha,
+			@Operacion_Facturable_Detalle,@Operacion_Facturable_Costo,NULL);
+	
+GO	
+
+
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spTransferir')
 	DROP PROCEDURE GEM4.spTransferir;
 
@@ -1982,24 +2034,52 @@ DECLARE @EstadoCuentaDestino INT;
 DECLARE @ValidacionEstado NVARCHAR(60);
 DECLARE @ValidacionImporte INT;
 DECLARE @ValidacionEstadoDestino INT;
+DECLARE @CuentaOrigenCliente INT;
+DECLARE @CuentaDestinoCliente INT;
 SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaOrigen));
 SET @EstadoCuentaDestino = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaDestino));
 SET @ValidacionEstado = GEM4.fnPuedeTransferir(@EstadoCuenta);
 SET @ValidacionImporte = GEM4.fnValidarImporteTransferencia(@Importe,@CuentaOrigen);
 SET @ValidacionEstadoDestino = GEM4.fnPuedeRecibirTransferencia(@CuentaDestino,@EstadoCuentaDestino);
+SET @CuentaOrigenCliente= (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaOrigen));
+SET @CuentaDestinoCliente= (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaDestino));
 	IF (@ValidacionEstado !='Si')
 		BEGIN	
 			SELECT @ValidacionEstado;
+			BREAK;
 		END;
 	IF (@ValidacionImporte =1)
 		BEGIN	
 			SELECT 'La cuenta de origen no cuenta con los fondos necesarios.';
+			BREAK;
 		END;
 	IF (@ValidacionEstado !='Si')
 		BEGIN	
 			SELECT @ValidacionEstadoDestino;
+			BREAK;
 		END;
-	
 		
+	INSERT GEM4.Transferencia (Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans,
+			Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino)
+	VALUES(GEM4.fnDevolverFechaSistema(),@Importe,0,@CuentaOrigen,@CuentaDestino);
+	
+	IF(@CuentaOrigenCliente != @CuentaDestinoCliente)
+		BEGIN
+		DECLARE @TipoTransferencia INT;
+		DECLARE @Fecha DATETIME;
+		DECLARE @Costo NUMERIC(18,2);
+		DECLARE @Detalle	NVARCHAR(255);
+		SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
+		SET @Fecha = GEM4.fnDevolverFechaSistema();
+		SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
+		SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+''+'De:'+''+@CuentaOrigen+''+'A:'+@CuentaDestino;
+		
+		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@Detalle,@Costo;
+		
+		UPDATE GEM4.Transferencia
+		SET Transferencia_Costo_Trans =@Costo
+		WHERE Transferencia_Codigo = IDENT_CURRENT('GEM4.Transferencia')
+		 
+		END;		
 	
 GO

@@ -1872,3 +1872,15 @@ WHERE (Transferencia_Cuenta_Destino = Transferencia_Cuenta_Origen) AND (YEAR(Tra
 GROUP BY GEM4.fnObtenerClienteID_Cuenta(Transferencia_Cuenta_Origen)
 ORDER BY Transacciones_Entre_Cuentas_Propias DESC
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarCuentas')
+	DROP PROCEDURE GEM4.spBuscarCuentas;
+
+GO
+
+CREATE PROCEDURE GEM4.spBuscarCuentas
+	@Filtro				NVARCHAR(18)
+	
+AS
+SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE (C.Cuenta_Numero LIKE '%'+@Filtro+'%') OR (@Filtro ='')
+GO

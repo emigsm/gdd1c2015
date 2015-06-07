@@ -47,6 +47,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentaDestino)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -74,7 +75,8 @@
             this.dgvCuentaDestino.AllowUserToDeleteRows = false;
             this.dgvCuentaDestino.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCuentaDestino.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NumeroCuenta});
+            this.NumeroCuenta,
+            this.Seleccionar});
             this.dgvCuentaDestino.Location = new System.Drawing.Point(6, 101);
             this.dgvCuentaDestino.Name = "dgvCuentaDestino";
             this.dgvCuentaDestino.ReadOnly = true;
@@ -232,6 +234,12 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
+            // 
             // TransferenciasPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -278,5 +286,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblCuenta;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
     }
 }

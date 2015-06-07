@@ -40,7 +40,7 @@ namespace PagoElectronico.Operaciones.Transferencias
 
             foreach (DataRow cuenta in cuentas.Rows)
             {
-                dgvCuentaDestino.Rows.Add(cuenta.ItemArray[0]);
+                dgvCuentaDestino.Rows.Add(cuenta.ItemArray[0],"Seleccionar");
             }
             dgvCuentaDestino.Update();
         }
@@ -60,7 +60,11 @@ namespace PagoElectronico.Operaciones.Transferencias
 
         private void dgvCuentaDestino_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            NroCuenta = dgvCuentaDestino.Rows[e.RowIndex].Cells["NumeroCuenta"].Value.ToString();
+            if (e.ColumnIndex == 1)
+            {
+                NroCuenta = dgvCuentaDestino.Rows[e.RowIndex].Cells["NumeroCuenta"].Value.ToString();
+                lblCuenta.Text = NroCuenta;
+            }
         }
 
         private void btnTransferencias_Click(object sender, EventArgs e)
@@ -81,6 +85,6 @@ namespace PagoElectronico.Operaciones.Transferencias
                 
             }
         }
-        }
+        
     }
 }

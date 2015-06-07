@@ -33,6 +33,8 @@
             this.dgvCuentaDestino = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.btnBuscarCuentas = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.FiltroText = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -41,10 +43,10 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnBuscarCuentas = new System.Windows.Forms.Button();
-            this.btnLimpiar = new System.Windows.Forms.Button();
             this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.lblCuenta = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentaDestino)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +54,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 71);
+            this.label1.Location = new System.Drawing.Point(26, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(160, 13);
             this.label1.TabIndex = 0;
@@ -61,7 +63,7 @@
             // cmbCuentaOrigen
             // 
             this.cmbCuentaOrigen.FormattingEnabled = true;
-            this.cmbCuentaOrigen.Location = new System.Drawing.Point(234, 66);
+            this.cmbCuentaOrigen.Location = new System.Drawing.Point(234, 49);
             this.cmbCuentaOrigen.Name = "cmbCuentaOrigen";
             this.cmbCuentaOrigen.Size = new System.Drawing.Size(219, 21);
             this.cmbCuentaOrigen.TabIndex = 1;
@@ -72,13 +74,13 @@
             this.dgvCuentaDestino.AllowUserToDeleteRows = false;
             this.dgvCuentaDestino.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCuentaDestino.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NumeroCuenta,
-            this.Seleccionar});
-            this.dgvCuentaDestino.Location = new System.Drawing.Point(6, 86);
+            this.NumeroCuenta});
+            this.dgvCuentaDestino.Location = new System.Drawing.Point(6, 101);
             this.dgvCuentaDestino.Name = "dgvCuentaDestino";
             this.dgvCuentaDestino.ReadOnly = true;
-            this.dgvCuentaDestino.Size = new System.Drawing.Size(353, 85);
+            this.dgvCuentaDestino.Size = new System.Drawing.Size(353, 86);
             this.dgvCuentaDestino.TabIndex = 2;
+            this.dgvCuentaDestino.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentaDestino_CellContentClick);
             // 
             // label2
             // 
@@ -91,18 +93,41 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblCuenta);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.btnLimpiar);
             this.groupBox1.Controls.Add(this.btnBuscarCuentas);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.FiltroText);
             this.groupBox1.Controls.Add(this.dgvCuentaDestino);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(20, 101);
+            this.groupBox1.Location = new System.Drawing.Point(19, 81);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(583, 181);
+            this.groupBox1.Size = new System.Drawing.Size(583, 229);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccione la Cuenta de Destino:";
+            // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(393, 156);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(144, 25);
+            this.btnLimpiar.TabIndex = 7;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // btnBuscarCuentas
+            // 
+            this.btnBuscarCuentas.Location = new System.Drawing.Point(394, 103);
+            this.btnBuscarCuentas.Name = "btnBuscarCuentas";
+            this.btnBuscarCuentas.Size = new System.Drawing.Size(144, 26);
+            this.btnBuscarCuentas.TabIndex = 6;
+            this.btnBuscarCuentas.Text = "Buscar";
+            this.btnBuscarCuentas.UseVisualStyleBackColor = true;
+            this.btnBuscarCuentas.Click += new System.EventHandler(this.btnBuscarCuentas_Click);
             // 
             // label3
             // 
@@ -123,7 +148,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 301);
+            this.label4.Location = new System.Drawing.Point(23, 341);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(150, 13);
             this.label4.TabIndex = 5;
@@ -131,14 +156,14 @@
             // 
             // ImporteText
             // 
-            this.ImporteText.Location = new System.Drawing.Point(205, 294);
+            this.ImporteText.Location = new System.Drawing.Point(205, 334);
             this.ImporteText.Name = "ImporteText";
             this.ImporteText.Size = new System.Drawing.Size(127, 20);
             this.ImporteText.TabIndex = 6;
             // 
             // btnTransferencias
             // 
-            this.btnTransferencias.Location = new System.Drawing.Point(370, 349);
+            this.btnTransferencias.Location = new System.Drawing.Point(370, 379);
             this.btnTransferencias.Name = "btnTransferencias";
             this.btnTransferencias.Size = new System.Drawing.Size(186, 50);
             this.btnTransferencias.TabIndex = 7;
@@ -165,7 +190,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(84, 352);
+            this.btnVolver.Location = new System.Drawing.Point(84, 382);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(191, 47);
             this.btnVolver.TabIndex = 10;
@@ -173,44 +198,44 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // btnBuscarCuentas
-            // 
-            this.btnBuscarCuentas.Location = new System.Drawing.Point(375, 86);
-            this.btnBuscarCuentas.Name = "btnBuscarCuentas";
-            this.btnBuscarCuentas.Size = new System.Drawing.Size(144, 26);
-            this.btnBuscarCuentas.TabIndex = 6;
-            this.btnBuscarCuentas.Text = "Buscar";
-            this.btnBuscarCuentas.UseVisualStyleBackColor = true;
-            this.btnBuscarCuentas.Click += new System.EventHandler(this.btnBuscarCuentas_Click);
-            // 
-            // btnLimpiar
-            // 
-            this.btnLimpiar.Location = new System.Drawing.Point(375, 133);
-            this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(144, 25);
-            this.btnLimpiar.TabIndex = 7;
-            this.btnLimpiar.Text = "Limpiar";
-            this.btnLimpiar.UseVisualStyleBackColor = true;
-            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
-            // 
             // NumeroCuenta
             // 
             this.NumeroCuenta.HeaderText = "Número de Cuenta";
             this.NumeroCuenta.Name = "NumeroCuenta";
             this.NumeroCuenta.ReadOnly = true;
             // 
-            // Seleccionar
+            // label6
             // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
-            this.Seleccionar.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(7, 82);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(276, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Seleccione la celda con el número de cuenta de destino.";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 205);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(144, 13);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Nro de cuenta seleccionada:";
+            // 
+            // lblCuenta
+            // 
+            this.lblCuenta.AutoSize = true;
+            this.lblCuenta.Location = new System.Drawing.Point(198, 203);
+            this.lblCuenta.Name = "lblCuenta";
+            this.lblCuenta.Size = new System.Drawing.Size(51, 13);
+            this.lblCuenta.TabIndex = 10;
+            this.lblCuenta.Text = "CUENTA";
             // 
             // TransferenciasPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 426);
+            this.ClientSize = new System.Drawing.Size(627, 442);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.label5);
@@ -249,6 +274,8 @@
         private System.Windows.Forms.Button btnBuscarCuentas;
         private System.Windows.Forms.Button btnLimpiar;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCuenta;
-        private System.Windows.Forms.DataGridViewCheckBoxColumn Seleccionar;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblCuenta;
+        private System.Windows.Forms.Label label7;
     }
 }

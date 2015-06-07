@@ -12,6 +12,7 @@ namespace PagoElectronico.Operaciones.Transferencias
 {
     public partial class TransferenciasPrincipal : Form
     {
+        string NroCuenta ="" ;
         public TransferenciasPrincipal(string username)
         {
             InitializeComponent();
@@ -22,7 +23,7 @@ namespace PagoElectronico.Operaciones.Transferencias
             cmbCuentaOrigen.DataSource = cuenta;
 
             lblFecha.Text = Convert.ToString(GestorDeSistema.solicitarFecha());
-
+            lblCuenta.Text = NroCuenta;
 
         }
 
@@ -39,7 +40,7 @@ namespace PagoElectronico.Operaciones.Transferencias
 
             foreach (DataRow cuenta in cuentas.Rows)
             {
-                dgvCuentaDestino.Rows.Add(cuenta.ItemArray[0],"Seleccionar");
+                dgvCuentaDestino.Rows.Add(cuenta.ItemArray[0]);
             }
             dgvCuentaDestino.Update();
         }
@@ -55,6 +56,11 @@ namespace PagoElectronico.Operaciones.Transferencias
         {
             Owner.Show();
             this.Hide();
+        }
+
+        private void dgvCuentaDestino_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            NroCuenta = dgvCuentaDestino.Rows[e.RowIndex].Cells["NumeroCuenta"].Value.ToString();
         }
     }
 }

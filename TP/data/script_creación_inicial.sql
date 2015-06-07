@@ -648,6 +648,88 @@ RETURN @valorTrimestre;
 END
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnPuedeTransferir')
+	DROP FUNCTION GEM4.fnPuedeTransferir
+GO
+CREATE FUNCTION GEM4.fnPuedeTransferir(@EstadoCuenta INT)
+RETURNS NVARCHAR(25)
+AS
+BEGIN
+DECLARE @Resultado NVARCHAR(60)
+IF(@EstadoCuenta = 0)--Habilitada
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+IF(@EstadoCuenta = 1)--Inhabilitada
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+IF(@EstadoCuenta = 2)--Cerrada
+	BEGIN 
+		SET @Resultado = 'La cuenta de origen se encuentra cerrada';
+	END
+IF(@EstadoCuenta = 2)--Pendiente de activación
+	BEGIN 
+		SET @Resultado = 'La cuenta de origen se encuentra pendiente de activación';
+	END
+RETURN @Resultado;
+END
+GO
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnValidarImporteTransferencia')
+	DROP FUNCTION GEM4.fnValidarImporteTransferencia
+GO
+CREATE FUNCTION GEM4.fnValidarImporteTransferencia(@Importe NUMERIC(18,2),@CuentaNro NVARCHAR(18))
+RETURNS INT
+AS
+BEGIN
+
+DECLARE @Resultado INT;
+DECLARE @Saldo NUMERIC (18,2);
+SET @Saldo = (SELECT C.Cuenta_Saldo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero =CONVERT(NUMERIC(18,0),@CuentaNro));
+IF(@Saldo < @Importe)
+	BEGIN 
+		SET @Resultado = 1;
+	END
+ELSE
+	BEGIN
+		SET @Resultado =0;
+	END		
+
+RETURN @Resultado;
+
+END
+GO
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnPuedeRecibirTransferencia')
+	DROP FUNCTION GEM4.fnPuedeRecibirTransferencia
+GO
+CREATE FUNCTION GEM4.fnPuedeRecibirTransferencia(@CuentaNro NVARCHAR(18),@EstadoCuenta INT)
+RETURNS NVARCHAR(60)
+AS
+BEGIN
+DECLARE @Resultado NVARCHAR(60);
+IF(@EstadoCuenta = 0)--Habilitada
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+IF(@EstadoCuenta = 1)--Inhabilitada
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+IF(@EstadoCuenta = 2)--Cerrada
+	BEGIN 
+		SET @Resultado = 'La cuenta de origen se encuentra cerrada';
+	END
+IF(@EstadoCuenta = 2)--Pendiente de activación
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+RETURN @Resultado;
+END
+GO
+
+
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
 SET IDENTITY_INSERT GEM4.Rol ON;
@@ -1883,4 +1965,41 @@ CREATE PROCEDURE GEM4.spBuscarCuentas
 	
 AS
 SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE (C.Cuenta_Numero LIKE '%'+@Filtro+'%') OR (@Filtro ='')
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spTransferir')
+	DROP PROCEDURE GEM4.spTransferir;
+
+GO
+
+CREATE PROCEDURE GEM4.spTransferir
+	@CuentaOrigen				NVARCHAR(18),
+	@CuentaDestino				NVARCHAR(18),
+	@Importe					NUMERIC(18,2)
+AS
+DECLARE @EstadoCuenta INT;
+DECLARE @EstadoCuentaDestino INT;
+DECLARE @ValidacionEstado NVARCHAR(60);
+DECLARE @ValidacionImporte INT;
+DECLARE @ValidacionEstadoDestino INT;
+SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaOrigen));
+SET @EstadoCuentaDestino = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaDestino));
+SET @ValidacionEstado = GEM4.fnPuedeTransferir(@EstadoCuenta);
+SET @ValidacionImporte = GEM4.fnValidarImporteTransferencia(@Importe,@CuentaOrigen);
+SET @ValidacionEstadoDestino = GEM4.fnPuedeRecibirTransferencia(@CuentaDestino,@EstadoCuentaDestino);
+	IF (@ValidacionEstado !='Si')
+		BEGIN	
+			SELECT @ValidacionEstado;
+		END;
+	IF (@ValidacionImporte =1)
+		BEGIN	
+			SELECT 'La cuenta de origen no cuenta con los fondos necesarios.';
+		END;
+	IF (@ValidacionEstado !='Si')
+		BEGIN	
+			SELECT @ValidacionEstadoDestino;
+		END;
+	
+		
+	
 GO

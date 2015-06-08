@@ -761,6 +761,36 @@ RETURN @Resultado;
 END
 GO		
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnTipoAperturaCuenta')
+	DROP FUNCTION GEM4.fnTipoAperturaCuenta
+GO
+CREATE FUNCTION GEM4.fnTipoAperturaCuenta(@CuentaTipo INT)
+RETURNS INT
+AS
+BEGIN
+
+DECLARE @Resultado INT;
+
+IF(@CuentaTipo = 1)--ORO
+	BEGIN 
+		SET @Resultado = 8;
+	END
+IF(@CuentaTipo = 2)--Plata
+	BEGIN 
+		SET @Resultado = 9;
+	END
+IF(@CuentaTipo = 3)--Bronce
+	BEGIN 
+		SET @Resultado = 10;
+	END
+IF(@CuentaTipo = 4)--Gratuita
+	BEGIN 
+		SET @Resultado = 11;
+	END
+RETURN @Resultado;
+END
+GO		
+
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
@@ -1416,6 +1446,13 @@ CREATE PROCEDURE GEM4.spAltaCuenta
 	@codMoneda		INT,
 	@tipoCuenta		INT
 AS
+BEGIN
+DECLARE @TipoOperacionFacturable INT ;
+DECLARE @CuentaNro				 NUMERIC(18,0);
+DECLARE @Fecha					 DATETIME;
+DECLARE @Detalle				 NVARCHAR(255);
+DECLARE @Costo					 NUMERIC(18,2);
+
 	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha) VALUES
 		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0, 0, NULL)
 	
@@ -1425,7 +1462,16 @@ AS
 		FROM GEM4.Cuenta 
 		WHERE Cuenta_Cliente_ID = @clienteID 
 		ORDER BY Cuenta_Fecha_Creacion DESC
-	
+		
+SET @TipoOperacionFacturable = GEM4.fnTipoAperturaCuenta(@tipoCuenta);
+SET @Fecha =SYSDATETIME();
+SET @CuentaNro =IDENT_CURRENT('GEM4.Cuenta');
+SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable)+' '+@CuentaNro;		
+SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
+
+		EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@CuentaNro,@Detalle,@Costo;
+END;	
+
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarClientes')
@@ -1620,9 +1666,22 @@ CREATE PROCEDURE GEM4.spModificarTipoCuenta
 	@clienteID		INT,
 	@numeroCuenta	NUMERIC(18,0)
 AS
+
+DECLARE @TipoOperacionFacturable INT ;
+DECLARE @Fecha					 DATETIME;
+DECLARE @Detalle				 NVARCHAR(255);
+DECLARE @Costo					 NUMERIC(18,2);
+
+SET @TipoOperacionFacturable = 12;
+SET @Fecha =SYSDATETIME();
+SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable)+' '+@numeroCuenta;		
+SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
+
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Tipo = @codTipo
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	
+	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@numeroCuenta,@Detalle,@Costo;
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarCuenta')

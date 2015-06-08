@@ -1447,7 +1447,7 @@ CREATE PROCEDURE GEM4.spAltaCuenta
 	@tipoCuenta		INT
 AS
 BEGIN
-DECLARE @TipoOperacionFacturable INT ;
+DECLARE @TipoOperacionFacturable INT;
 DECLARE @CuentaNro				 NUMERIC(18,0);
 DECLARE @Fecha					 DATETIME;
 DECLARE @Detalle				 NVARCHAR(255);
@@ -1466,10 +1466,10 @@ DECLARE @Costo					 NUMERIC(18,2);
 SET @TipoOperacionFacturable = GEM4.fnTipoAperturaCuenta(@tipoCuenta);
 SET @Fecha =SYSDATETIME();
 SET @CuentaNro =IDENT_CURRENT('GEM4.Cuenta');
-SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable)+' '+@CuentaNro;		
+SET @Detalle = 'Apertura de Cuenta tipo: [' +(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @tipoCuenta)+ '] Cuenta NRO: ['+	CONVERT(NVARCHAR(18),@CuentaNro)+ ']';		
 SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
 
-		EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@CuentaNro,@Detalle,@Costo;
+		EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo;
 END;	
 
 GO

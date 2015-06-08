@@ -1671,17 +1671,21 @@ DECLARE @TipoOperacionFacturable INT ;
 DECLARE @Fecha					 DATETIME;
 DECLARE @Detalle				 NVARCHAR(255);
 DECLARE @Costo					 NUMERIC(18,2);
+DECLARE @tipoCuentaViejo		INT;
 
+SET @tipoCuentaViejo = (SELECT Cuenta_Tipo FROM GEM4.Cuenta WHERE Cuenta_Tipo = @codTipo);
 SET @TipoOperacionFacturable = 12;
 SET @Fecha =SYSDATETIME();
-SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable)+' '+@numeroCuenta;		
+SET @Detalle = 'Modificacion de tipo de Cuenta de: [' +(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @tipoCuentaViejo)+ '] a ['+(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @codTipo)+'] en Cuenta NRO: ['+	CONVERT(NVARCHAR(18),@numeroCuenta)+']';		
 SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
 
+
+	
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Tipo = @codTipo
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 	
-	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@numeroCuenta,@Detalle,@Costo;
+	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo;
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarCuenta')

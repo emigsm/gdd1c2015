@@ -13,7 +13,8 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
     public partial class AsociacionTCPrincipal : Form
     {
         Int32 idCliente { get; set; }
-
+        private DataTable tarjetas {get;set;}
+       
         public AsociacionTCPrincipal(string nombre,string apellido,Int32 id)
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
             tarjetaNombreCliLabel.Text = nombre;
             tarjetaCliIdLabel.Text = id.ToString();
             idCliente = id;
+           
 
             obtenerTarjetasCliente(id);
         }
@@ -51,21 +53,26 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
 
         public void obtenerTarjetasCliente(Int32 id)
         {
-            DataTable tarjetas = new DataTable();
-            tarjetas = GestorDeSistema.obtenerTarjetasCliente(id);
+            //DataTable tarjetas = new DataTable();
+            
+            this.tarjetas = GestorDeSistema.obtenerTarjetasCliente(id);
+            
             foreach (DataRow tarjeta in tarjetas.Rows)
             {
                 dgvTarjetas.Rows.Add(
-                tarjeta.ItemArray[0],
-                tarjeta.ItemArray[0],
+                
                 tarjeta.ItemArray[1],
-                tarjeta.ItemArray[2],
+                (Utilidades.Cifrado.Cifrador.Cifrar(tarjeta.ItemArray[2].ToString())),
                 tarjeta.ItemArray[3],
                 tarjeta.ItemArray[4],
-                tarjeta.ItemArray[5]
+                tarjeta.ItemArray[5],
+                tarjeta.ItemArray[6],
+                tarjeta.ItemArray[7]
                 );
             }
             dgvTarjetas.Update();
+
+            
          
         }
           public void deshabilitarModificaciones()
@@ -87,11 +94,15 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               string numeroTarjeta;
             if (dgvTarjetas.SelectedRows.Count == 1)
             {
-                numeroTarjeta=dgvTarjetas.SelectedRows[0].Cells["Primeros_Numeros_Tarjeta"].Value.ToString(); //aca iria la union de los primeros numeros y los ultimos 4 o 3 encriptados..
+                
+                
+                int indice = dgvTarjetas.Rows.IndexOf(dgvTarjetas.SelectedRows[0] );
                 dgvTarjetas.Rows.Clear();
+                numeroTarjeta = tarjetas.Rows[indice].ItemArray[0].ToString();
                 GestorDeSistema.desvincularTarjeta(numeroTarjeta);
                 obtenerTarjetasCliente(idCliente);
                     dgvTarjetas.Update();
+
              }
             else
             {
@@ -108,8 +119,10 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               string numeroTarjeta;
               if (dgvTarjetas.SelectedRows.Count == 1)
               {
-                  numeroTarjeta = dgvTarjetas.SelectedRows[0].Cells["Primeros_Numeros_Tarjeta"].Value.ToString(); //aca iria la union de los primeros numeros y los ultimos 4 o 3 encriptados..
+                  
+                  int indice = dgvTarjetas.Rows.IndexOf(dgvTarjetas.SelectedRows[0]);
                   dgvTarjetas.Rows.Clear();
+                  numeroTarjeta = tarjetas.Rows[indice].ItemArray[0].ToString();
                   GestorDeSistema.vincularTarjeta(numeroTarjeta);
                   obtenerTarjetasCliente(idCliente);
                   dgvTarjetas.Update();

@@ -1483,10 +1483,12 @@ GO
 CREATE PROCEDURE GEM4.spObtenerTarjetasCliente
 	@clienteID	INT
 AS
-	SELECT t.Tarjeta_Numero,t.Tarjeta_Codigo_Seg,GEM4.fnObtenerEmisorTarjeta(t.Tarjeta_Emisor),t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
+	SELECT t.Tarjeta_Numero,SUBSTRING(t.Tarjeta_Numero,0,LEN(t.Tarjeta_Numero)-3),(SUBSTRING(t.Tarjeta_Numero,LEN(t.Tarjeta_Numero)-3,LEN(t.Tarjeta_Numero))),t.Tarjeta_Codigo_Seg,GEM4.fnObtenerEmisorTarjeta(t.Tarjeta_Emisor),t.Tarjeta_Fecha_Emision,Tarjeta_Fecha_Vencimiento,Tarjeta_Habilitado
 	FROM GEM4.Tarjeta t
 	WHERE t.Tarjeta_Cliente_ID=@clienteID
-GO				
+GO	
+
+
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarNombreRol')
 	DROP PROCEDURE GEM4.spModificarNombreRol;

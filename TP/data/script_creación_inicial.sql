@@ -1,7 +1,7 @@
 USE GD1C2015
 GO
 
-SET LANGUAGE Spanish
+ SET LANGUAGE Spanish
 
 /*	****************************************	CREACION DEL SCHENMA	*********************************************** */
 
@@ -656,19 +656,19 @@ RETURNS NVARCHAR(25)
 AS
 BEGIN
 DECLARE @Resultado NVARCHAR(60)
-IF(@EstadoCuenta = 0)--Habilitada
+IF(@EstadoCuenta = 1)--Habilitada
 	BEGIN 
 		SET @Resultado = 'Si';
 	END
-IF(@EstadoCuenta = 1)--Inhabilitada
+IF(@EstadoCuenta = 2)--Inhabilitada
 	BEGIN 
 		SET @Resultado = 'Si';
 	END
-IF(@EstadoCuenta = 2)--Cerrada
+IF(@EstadoCuenta = 3)--Cerrada
 	BEGIN 
 		SET @Resultado = 'La cuenta de origen se encuentra cerrada';
 	END
-IF(@EstadoCuenta = 2)--Pendiente de activación
+IF(@EstadoCuenta = 4)--Pendiente de activación
 	BEGIN 
 		SET @Resultado = 'La cuenta de origen se encuentra pendiente de activación';
 	END
@@ -686,7 +686,7 @@ BEGIN
 
 DECLARE @Resultado INT;
 DECLARE @Saldo NUMERIC (18,2);
-SET @Saldo = (SELECT C.Cuenta_Saldo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero =CONVERT(NUMERIC(18,0),@CuentaNro));
+SET @Saldo = (SELECT C.Cuenta_Saldo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaNro);
 IF(@Saldo < @Importe)
 	BEGIN 
 		SET @Resultado = 1;
@@ -709,19 +709,19 @@ RETURNS NVARCHAR(60)
 AS
 BEGIN
 DECLARE @Resultado NVARCHAR(60);
-IF(@EstadoCuenta = 0)--Habilitada
+IF(@EstadoCuenta = 1)--Habilitada
 	BEGIN 
 		SET @Resultado = 'Si';
 	END
-IF(@EstadoCuenta = 1)--Inhabilitada
+IF(@EstadoCuenta = 2)--Inhabilitada
 	BEGIN 
 		SET @Resultado = 'Si';
 	END
-IF(@EstadoCuenta = 2)--Cerrada
+IF(@EstadoCuenta = 3)--Cerrada
 	BEGIN 
 		SET @Resultado = 'La cuenta de origen se encuentra cerrada';
 	END
-IF(@EstadoCuenta = 2)--Pendiente de activación
+IF(@EstadoCuenta = 4)--Pendiente de activación
 	BEGIN 
 		SET @Resultado = 'Si';
 	END
@@ -739,7 +739,7 @@ BEGIN
 
 DECLARE @Resultado INT;
 DECLARE @CuentaTipo INT;
-SET @CuentaTipo = (SELECT C.Cuenta_Tipo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero =CONVERT(NUMERIC(18,0),@CuentaNro));
+SET @CuentaTipo = (SELECT C.Cuenta_Tipo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaNro);
 
 IF(@CuentaTipo = 1)--ORO
 	BEGIN 
@@ -753,7 +753,7 @@ IF(@CuentaTipo = 3)--Bronce
 	BEGIN 
 		SET @Resultado = 5;
 	END
-IF(@CuentaTipo = 2)--Gratuita
+IF(@CuentaTipo = 4)--Gratuita
 	BEGIN 
 		SET @Resultado = 4;
 	END
@@ -2006,14 +2006,15 @@ GO
 CREATE PROCEDURE GEM4.spInsertarOperacionFacturable
 @Operacion_Facturable_Tipo				INT,
 @Operacion_Facturable_Fecha				DATETIME,
+@Operacion_Facturable_Cliente_ID		INT,
 @Operacion_Facturable_Detalle			NVARCHAR(255),
 @Operacion_Facturable_Costo				NUMERIC(18,2)
 
 AS
 
-	INSERT GEM4.Operacion_Facturable(Operacion_Facturable_Tipo,Operacion_Facturable_Fecha,
+	INSERT GEM4.Operacion_Facturable(Operacion_Facturable_Tipo,Operacion_Facturable_Fecha,Operacion_Facturable_Cliente_ID,
 			Operacion_Facturable_Detalle,Operacion_Facturable_Costo,Operacion_Facturable_Factura_Numero)	
-	VALUES (@Operacion_Facturable_Tipo,@Operacion_Facturable_Fecha,
+	VALUES (@Operacion_Facturable_Tipo,@Operacion_Facturable_Fecha,@Operacion_Facturable_Cliente_ID,		
 			@Operacion_Facturable_Detalle,@Operacion_Facturable_Costo,NULL);
 	
 GO	
@@ -2033,53 +2034,59 @@ DECLARE @EstadoCuenta INT;
 DECLARE @EstadoCuentaDestino INT;
 DECLARE @ValidacionEstado NVARCHAR(60);
 DECLARE @ValidacionImporte INT;
-DECLARE @ValidacionEstadoDestino INT;
+DECLARE @ValidacionEstadoDestino NVARCHAR(60);
 DECLARE @CuentaOrigenCliente INT;
 DECLARE @CuentaDestinoCliente INT;
-SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaOrigen));
-SET @EstadoCuentaDestino = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaDestino));
+DECLARE @TipoTransferencia INT;
+DECLARE @Fecha DATETIME;
+DECLARE @Costo NUMERIC(18,2);
+DECLARE @Detalle	NVARCHAR(255);
+SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
+SET @Fecha = GEM4.fnDevolverFechaSistema();
+SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaOrigen);
+SET @EstadoCuentaDestino = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaDestino);
 SET @ValidacionEstado = GEM4.fnPuedeTransferir(@EstadoCuenta);
 SET @ValidacionImporte = GEM4.fnValidarImporteTransferencia(@Importe,@CuentaOrigen);
 SET @ValidacionEstadoDestino = GEM4.fnPuedeRecibirTransferencia(@CuentaDestino,@EstadoCuentaDestino);
-SET @CuentaOrigenCliente= (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaOrigen));
-SET @CuentaDestinoCliente= (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = CONVERT(NUMERIC(18,0),@CuentaDestino));
+SET @CuentaOrigenCliente= (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaOrigen);
+SET @CuentaDestinoCliente= (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaDestino);
+SET @Costo =0;	
 	IF (@ValidacionEstado !='Si')
 		BEGIN	
 			SELECT @ValidacionEstado;
-			BREAK;
+			RETURN;
 		END;
 	IF (@ValidacionImporte =1)
 		BEGIN	
 			SELECT 'La cuenta de origen no cuenta con los fondos necesarios.';
-			BREAK;
+			RETURN;
 		END;
 	IF (@ValidacionEstado !='Si')
 		BEGIN	
 			SELECT @ValidacionEstadoDestino;
-			BREAK;
+			RETURN;
 		END;
 		
 	INSERT GEM4.Transferencia (Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans,
 			Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino)
-	VALUES(GEM4.fnDevolverFechaSistema(),@Importe,0,@CuentaOrigen,@CuentaDestino);
+	VALUES(GEM4.fnDevolverFechaSistema(),@Importe,@Costo,@CuentaOrigen,@CuentaDestino);
 	
 	IF(@CuentaOrigenCliente != @CuentaDestinoCliente)
 		BEGIN
-		DECLARE @TipoTransferencia INT;
-		DECLARE @Fecha DATETIME;
-		DECLARE @Costo NUMERIC(18,2);
-		DECLARE @Detalle	NVARCHAR(255);
+		SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
+		SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+' '+'Desde:'+' '+@CuentaOrigen+' '+'Hacia:'+@CuentaDestino;
 		SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
 		SET @Fecha = GEM4.fnDevolverFechaSistema();
-		SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
-		SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+''+'De:'+''+@CuentaOrigen+''+'A:'+@CuentaDestino;
 		
-		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@Detalle,@Costo;
+
+		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,@Detalle,@Costo;
 		
 		UPDATE GEM4.Transferencia
 		SET Transferencia_Costo_Trans =@Costo
 		WHERE Transferencia_Codigo = IDENT_CURRENT('GEM4.Transferencia')
 		 
 		END;		
+		
+	SELECT 'Transferencia realizada satisfactoriamente.'
 	
 GO

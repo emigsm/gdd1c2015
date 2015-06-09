@@ -99,7 +99,7 @@ namespace PagoElectronico
                     break;
 
                 case "Facturacion":
-                    FacturacionPrincipal frmFacturacionPrincipal = new FacturacionPrincipal();
+                    FacturacionPrincipal frmFacturacionPrincipal = new FacturacionPrincipal(username);
                     frmFacturacionPrincipal.Show(this);
                     this.Hide();
                     break;

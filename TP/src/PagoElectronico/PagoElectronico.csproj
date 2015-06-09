@@ -150,11 +150,23 @@
     <Compile Include="Operaciones\Depositos\DepositosPrincipal.Designer.cs">
       <DependentUpon>DepositosPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Operaciones\Facturacion\ComprarSuscripciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Facturacion\ComprarSuscripciones.Designer.cs">
+      <DependentUpon>ComprarSuscripciones.cs</DependentUpon>
+    </Compile>
     <Compile Include="Operaciones\Facturacion\FacturacionPrincipal.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Operaciones\Facturacion\FacturacionPrincipal.Designer.cs">
       <DependentUpon>FacturacionPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Operaciones\Facturacion\GenerarFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Operaciones\Facturacion\GenerarFactura.Designer.cs">
+      <DependentUpon>GenerarFactura.cs</DependentUpon>
     </Compile>
     <Compile Include="Operaciones\Listados\ListadosPrincipal.cs">
       <SubType>Form</SubType>
@@ -232,6 +244,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Operaciones\Depositos\DepositosPrincipal.resx">
       <DependentUpon>DepositosPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operaciones\Facturacion\ComprarSuscripciones.resx">
+      <DependentUpon>ComprarSuscripciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operaciones\Facturacion\FacturacionPrincipal.resx">
+      <DependentUpon>FacturacionPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Operaciones\Facturacion\GenerarFactura.resx">
+      <DependentUpon>GenerarFactura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Operaciones\Listados\ListadosPrincipal.resx">
       <DependentUpon>ListadosPrincipal.cs</DependentUpon>

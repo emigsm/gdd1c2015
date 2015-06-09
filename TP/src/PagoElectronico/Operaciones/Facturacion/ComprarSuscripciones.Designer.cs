@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.cmbCuenta = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblTipoCuenta = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -49,13 +49,14 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Seleccione la cuenta:";
             // 
-            // comboBox2
+            // cmbCuenta
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(169, 21);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(206, 21);
-            this.comboBox2.TabIndex = 3;
+            this.cmbCuenta.FormattingEnabled = true;
+            this.cmbCuenta.Location = new System.Drawing.Point(169, 21);
+            this.cmbCuenta.Name = "cmbCuenta";
+            this.cmbCuenta.Size = new System.Drawing.Size(206, 21);
+            this.cmbCuenta.TabIndex = 3;
+            this.cmbCuenta.SelectedIndexChanged += new System.EventHandler(this.cmbCuenta_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -66,15 +67,15 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Suscripción:";
             // 
-            // label4
+            // lblTipoCuenta
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(167, 61);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 13);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "TIPO DE CUENTA";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
+            this.lblTipoCuenta.AutoSize = true;
+            this.lblTipoCuenta.Location = new System.Drawing.Point(167, 61);
+            this.lblTipoCuenta.Name = "lblTipoCuenta";
+            this.lblTipoCuenta.Size = new System.Drawing.Size(97, 13);
+            this.lblTipoCuenta.TabIndex = 5;
+            this.lblTipoCuenta.Text = "TIPO DE CUENTA";
+            this.lblTipoCuenta.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -96,9 +97,9 @@
             // 
             this.groupBox1.Controls.Add(this.textBox1);
             this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.lblTipoCuenta);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.comboBox2);
+            this.groupBox1.Controls.Add(this.cmbCuenta);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Location = new System.Drawing.Point(8, 18);
             this.groupBox1.Name = "groupBox1";
@@ -145,9 +146,9 @@
         #endregion
 
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox cmbCuenta;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblTipoCuenta;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.GroupBox groupBox1;

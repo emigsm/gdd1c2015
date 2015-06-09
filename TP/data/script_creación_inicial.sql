@@ -652,7 +652,7 @@ IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnPuedeTransferir')
 	DROP FUNCTION GEM4.fnPuedeTransferir
 GO
 CREATE FUNCTION GEM4.fnPuedeTransferir(@EstadoCuenta INT)
-RETURNS NVARCHAR(25)
+RETURNS NVARCHAR(60)
 AS
 BEGIN
 DECLARE @Resultado NVARCHAR(60)
@@ -825,7 +825,7 @@ IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnPuedeComprarSuscripcion')
 	DROP FUNCTION GEM4.fnPuedeComprarSuscripcion
 GO
 CREATE FUNCTION GEM4.fnPuedeComprarSuscripcion(@EstadoCuenta INT)
-RETURNS NVARCHAR(25)
+RETURNS NVARCHAR(60)
 AS
 BEGIN
 DECLARE @Resultado NVARCHAR(60)
@@ -2299,7 +2299,7 @@ DECLARE @Cliente INT;
 DECLARE @Costo NUMERIC(18,2);
 DECLARE @Detalle NVARCHAR(255);
 DECLARE @EstadoCuenta INT;
-DECLARE @ValidarCuenta NVARCHAR(25);
+DECLARE @ValidarCuenta NVARCHAR(60);
 
 SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
 SET @ValidarCuenta = GEM4.fnPuedeComprarSuscripcion(@EstadoCuenta);

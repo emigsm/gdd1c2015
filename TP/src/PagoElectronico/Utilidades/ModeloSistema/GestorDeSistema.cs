@@ -80,6 +80,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_LISTADO3 = "GEM4.spListadoEstadistico3";
         private const string STORE_TRANSFERIR = "GEM4.spTransferir";
         private const string STORE_VALIDARDISPONIBILIDADMAIL = "GEM4.spValidarDisponibilidadMail";
+        private const string STORE_OBTENERROL = "GEM4.spObtenerRol";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -824,6 +825,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
         }
-       
+        
+        public static string obtenerRol(string username)
+        {
+            string mensajeResultado;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@username", username));
+            
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERROL, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
+            return mensajeResultado;
+        }
     }
 }

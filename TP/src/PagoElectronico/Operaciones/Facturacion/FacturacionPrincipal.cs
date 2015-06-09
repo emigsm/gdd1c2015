@@ -6,7 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using PagoElectronico.Operaciones.Facturacion;
+using PagoElectronico.Utilidades.ModeloSistema;
 
 namespace PagoElectronico.Operaciones.Facturacion
 {
@@ -22,16 +22,23 @@ namespace PagoElectronico.Operaciones.Facturacion
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            if (opComprarSuscripcion.Checked == true)
-            {
-                ComprarSuscripciones frmSuscripciones = new ComprarSuscripciones(usuario);
-                frmSuscripciones.Show();
-                this.Hide();
-            }
+            int rol = Convert.ToInt32(GestorDeSistema.obtenerRol(usuario));
+
             if (opGenerarFactura.Checked == true)
             {
                 GenerarFactura frmGenerarFactura = new GenerarFactura(usuario);
                 frmGenerarFactura.Show();
+                this.Hide();
+            }
+            if (opComprarSuscripcion.Checked == true && rol == 1)
+            {
+                MessageBox.Show("Esta funcionalidad solo está disponible para clientes", "Acceso Denegado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            if (opComprarSuscripcion.Checked == true && rol == 2)
+            {
+                ComprarSuscripciones frmSuscripciones = new ComprarSuscripciones(usuario);
+                frmSuscripciones.Show();
                 this.Hide();
             }
         }

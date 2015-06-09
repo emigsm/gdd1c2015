@@ -2206,3 +2206,15 @@ AS
 	SELECT R.Rol_Cod FROM GEM4.Usuario U JOIN GEM4.Usuario_Por_Rol R ON U.Usuario_ID = R.Usuario_ID
 	WHERE U.Usuario_Username = @username
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTipoCuenta')
+	DROP PROCEDURE GEM4.spObtenerTipoCuenta;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerTipoCuenta
+	@Cuenta		NVARCHAR(18)
+	
+AS
+	SELECT T.Tipo_Cuenta_Descripcion FROM GEM4.Cuenta C JOIN GEM4.Tipo_Cuenta T ON T.Tipo_Cuenta_ID=C.Cuenta_Tipo
+	WHERE c.Cuenta_Numero LIKE @Cuenta
+GO

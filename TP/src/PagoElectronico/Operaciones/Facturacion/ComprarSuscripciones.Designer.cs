@@ -33,10 +33,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.lblTipoCuenta = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.CantidadTextBox = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnComprar = new System.Windows.Forms.Button();
+            this.btnVolver = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -75,7 +75,6 @@
             this.lblTipoCuenta.Size = new System.Drawing.Size(97, 13);
             this.lblTipoCuenta.TabIndex = 5;
             this.lblTipoCuenta.Text = "TIPO DE CUENTA";
-            this.lblTipoCuenta.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -86,16 +85,16 @@
             this.label5.TabIndex = 6;
             this.label5.Text = "Cantidad de suscripciones:";
             // 
-            // textBox1
+            // CantidadTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(170, 97);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 20);
-            this.textBox1.TabIndex = 7;
+            this.CantidadTextBox.Location = new System.Drawing.Point(170, 97);
+            this.CantidadTextBox.Name = "CantidadTextBox";
+            this.CantidadTextBox.Size = new System.Drawing.Size(167, 20);
+            this.CantidadTextBox.TabIndex = 7;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.CantidadTextBox);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lblTipoCuenta);
             this.groupBox1.Controls.Add(this.label3);
@@ -108,31 +107,33 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de Compra:";
             // 
-            // button1
+            // btnComprar
             // 
-            this.button1.Location = new System.Drawing.Point(431, 38);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(149, 37);
-            this.button1.TabIndex = 9;
-            this.button1.Text = "Comprar";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnComprar.Location = new System.Drawing.Point(431, 38);
+            this.btnComprar.Name = "btnComprar";
+            this.btnComprar.Size = new System.Drawing.Size(149, 37);
+            this.btnComprar.TabIndex = 9;
+            this.btnComprar.Text = "Comprar";
+            this.btnComprar.UseVisualStyleBackColor = true;
+            this.btnComprar.Click += new System.EventHandler(this.btnComprar_Click);
             // 
-            // button2
+            // btnVolver
             // 
-            this.button2.Location = new System.Drawing.Point(431, 111);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(149, 34);
-            this.button2.TabIndex = 10;
-            this.button2.Text = "Volver";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnVolver.Location = new System.Drawing.Point(431, 111);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(149, 34);
+            this.btnVolver.TabIndex = 10;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
+            this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
             // ComprarSuscripciones
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 171);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.groupBox1);
             this.Name = "ComprarSuscripciones";
             this.Text = "ComprarSuscripciones";
@@ -150,9 +151,9 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblTipoCuenta;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox CantidadTextBox;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnComprar;
+        private System.Windows.Forms.Button btnVolver;
     }
 }

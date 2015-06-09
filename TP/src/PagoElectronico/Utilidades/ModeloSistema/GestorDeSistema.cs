@@ -81,7 +81,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_TRANSFERIR = "GEM4.spTransferir";
         private const string STORE_VALIDARDISPONIBILIDADMAIL = "GEM4.spValidarDisponibilidadMail";
         private const string STORE_OBTENERROL = "GEM4.spObtenerRol";
-        private const string STORE_OBTENERTIPOCUENTA = "GEM4.ObtenerTipoCuenta";
+        private const string STORE_OBTENERTIPOCUENTA = "GEM4.spObtenerTipoCuenta";
+        private const string STORE_COMPRARSUSCRIPCION = "GEM4.spComprarSuscripcion";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -847,5 +848,17 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
         }
+
+        public static string comprarSuscripcion(string cuenta,int cantidad)
+        {
+            string mensajeResultado;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Cuenta", cuenta));
+            parametros.Add(new SqlParameter("@Cantidad", cantidad));
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_COMPRARSUSCRIPCION, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
+            return mensajeResultado;
+        }
+        
     }
 }

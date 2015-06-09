@@ -2218,3 +2218,28 @@ AS
 	SELECT T.Tipo_Cuenta_Descripcion FROM GEM4.Cuenta C JOIN GEM4.Tipo_Cuenta T ON T.Tipo_Cuenta_ID=C.Cuenta_Tipo
 	WHERE c.Cuenta_Numero LIKE @Cuenta
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spComprarSuscripcion')
+	DROP PROCEDURE GEM4.spComprarSuscripcion;
+GO
+
+CREATE PROCEDURE GEM4.spComprarSuscripcion
+	@Cuenta		NVARCHAR(18),
+	@Cantidad	INT
+	
+AS
+DECLARE @TipoCuenta INT;
+DECLARE @DiasSuscripcion INT;
+DECLARE @FechaVencimiento DATETIME;
+
+SET @TipoCuenta = (SELECT C.Cuenta_Tipo FROM GEM4.Cuenta C	WHERE C.Cuenta_Numero LIKE @Cuenta);
+SET @DiasSuscripcion = (SELECT T.Tipo_Cuenta_Duracion FROM GEM4.Tipo_Cuenta T WHERE T.Tipo_Cuenta_ID = @TipoCuenta)*@Cantidad
+SET @FechaVencimiento = (SELECT C.Cuenta_Suscripciones_Fecha FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
+SET @FechaVencimiento = DATEADD(DAY,@DiasSuscripcion,@FechaVencimiento);
+
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Suscripciones_Compradas = Cuenta_Suscripciones_Compradas + @Cantidad,
+	Cuenta_Suscripciones_Fecha = @FechaVencimiento
+	WHERE Cuenta_Numero LIKE @Cuenta
+
+GO

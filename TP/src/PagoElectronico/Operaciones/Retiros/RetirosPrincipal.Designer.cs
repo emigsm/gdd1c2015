@@ -45,7 +45,6 @@
             this.Banco_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Banco_Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Banco_Direccion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvBancos)).BeginInit();
             this.SuspendLayout();
             // 
@@ -177,11 +176,11 @@
             this.Banco_Codigo,
             this.Banco_Nombre,
             this.Banco_Direccion});
-            this.dgvBancos.Location = new System.Drawing.Point(16, 216);
+            this.dgvBancos.Location = new System.Drawing.Point(16, 214);
             this.dgvBancos.Name = "dgvBancos";
             this.dgvBancos.ReadOnly = true;
             this.dgvBancos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvBancos.Size = new System.Drawing.Size(335, 135);
+            this.dgvBancos.Size = new System.Drawing.Size(335, 112);
             this.dgvBancos.TabIndex = 15;
             this.dgvBancos.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvBancos_CellContentClick);
             // 
@@ -203,21 +202,11 @@
             this.Banco_Direccion.Name = "Banco_Direccion";
             this.Banco_Direccion.ReadOnly = true;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(533, 188);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "label1";
-            // 
             // RetirosPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(718, 439);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvBancos);
             this.Controls.Add(this.bancoLabel);
             this.Controls.Add(this.fechaValorLabel);
@@ -260,6 +249,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Banco_Codigo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Banco_Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Banco_Direccion;
-        private System.Windows.Forms.Label label1;
     }
 }

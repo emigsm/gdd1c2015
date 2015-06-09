@@ -62,8 +62,19 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         private void CrearClienteBtn_Click(object sender, EventArgs e)
         {
 
-            
 
+            if (NombreClitextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar el Nombre de cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            if (ApellidoNuevoClitextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar el Apellido de cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
             if (NroDocClitextBox.Text == "")
             {
                 MessageBox.Show("Es obligatorio Insertar el Nro de Documento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -105,7 +116,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 //------------------------------------------------------VALIDACIONES------------------------------------------------------------------------------
         private void NombreClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back)&&!(char.IsSeparator(e.KeyChar)))
             {
 
 
@@ -114,15 +125,24 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 return;
 
             }
+            if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
+            }
         }
 
         private void ApellidoNuevoClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back)&&!(char.IsSeparator(e.KeyChar)))
             {
                 MessageBox.Show("el campo Apellido no puede tener numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;
                 return;
+            }
+
+            if (Char.IsSeparator(e.KeyChar))
+            {
+                e.Handled = false;
             }
         }
 

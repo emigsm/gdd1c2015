@@ -88,6 +88,18 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 return;
             }
 
+            if (NombreClitextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar el Nombre de cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            if (ApellidoClitextBox.Text == "")
+            {
+                MessageBox.Show("Es obligatorio Insertar el Apellido de cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
 
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
@@ -128,7 +140,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 //--------------------------------------VALIDACIONES----TEXTBOX-------------------------------------------------------------------------------
         private void NombreClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back)&&!(char.IsSeparator(e.KeyChar)))
             {
 
               
@@ -141,7 +153,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void ApellidoClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back)&&!(char.IsSeparator(e.KeyChar)))
             {
                 MessageBox.Show("el campo Apellido no puede tener numeros", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 e.Handled = true;

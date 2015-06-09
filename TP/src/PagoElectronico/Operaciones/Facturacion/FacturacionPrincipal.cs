@@ -27,6 +27,7 @@ namespace PagoElectronico.Operaciones.Facturacion
             if (opGenerarFactura.Checked == true)
             {
                 GenerarFactura frmGenerarFactura = new GenerarFactura(usuario);
+                frmGenerarFactura.Owner = this;
                 frmGenerarFactura.Show();
                 this.Hide();
             }
@@ -38,9 +39,16 @@ namespace PagoElectronico.Operaciones.Facturacion
             if (opComprarSuscripcion.Checked == true && rol == 2)
             {
                 ComprarSuscripciones frmSuscripciones = new ComprarSuscripciones(usuario);
+                frmSuscripciones.Owner = this;
                 frmSuscripciones.Show();
                 this.Hide();
             }
+        }
+
+        private void btnVolver_Click(object sender, EventArgs e)
+        {
+            Owner.Show();
+            this.Hide();
         }
     }
 }

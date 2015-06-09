@@ -79,6 +79,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_LISTADO2 = "GEM4.spListadoEstadistico2";
         private const string STORE_LISTADO3 = "GEM4.spListadoEstadistico3";
         private const string STORE_TRANSFERIR = "GEM4.spTransferir";
+        private const string STORE_VALIDARDISPONIBILIDADMAIL = "GEM4.spValidarDisponibilidadMail";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -810,5 +811,19 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             mensaje = resultadoStoreProcedure.ToString();
             return mensaje;
         }
+
+        public static string validarDisponibilidadMail(string mail,Int32 clienteID)
+        {
+            string mensajeResultado;
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@mail", mail));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+           
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_VALIDARDISPONIBILIDADMAIL, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
+            return mensajeResultado;
+        }
+       
     }
 }

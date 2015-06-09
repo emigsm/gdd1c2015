@@ -2155,3 +2155,42 @@ SET @Costo =0;
 	SELECT 'Transferencia realizada satisfactoriamente.'
 	
 GO
+
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spValidarDisponibilidadMail')
+	DROP PROCEDURE GEM4.spValidarDisponibilidadMail;
+
+GO
+
+CREATE PROCEDURE GEM4.spValidarDisponibilidadMail
+	@mail				NVARCHAR(255),
+	@clienteID			INT
+
+AS	
+
+	DECLARE @resultado INT;
+	
+	IF(@clienteID =0)
+		BEGIN
+			IF EXISTS (SELECT 1 FROM GEM4.Cliente WHERE @mail=Cliente_Mail)
+				BEGIN
+					SELECT 0; 
+				END;
+			ELSE 
+				BEGIN
+					SELECT 1;
+				END
+		END
+	
+	ELSE
+		BEGIN 
+			IF EXISTS (SELECT 1 FROM GEM4.Cliente WHERE @mail=Cliente_Mail AND Cliente_ID<>@clienteID)
+				BEGIN
+					SELECT 0; 
+				END;
+			ELSE 
+				BEGIN
+					SELECT 1;
+				END
+		END;
+GO

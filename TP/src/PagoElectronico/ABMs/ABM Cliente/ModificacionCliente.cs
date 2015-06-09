@@ -75,6 +75,13 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void guardarBoton_Click(object sender, EventArgs e)
         {
+            if (GestorDeSistema.validarDisponibilidadMail(MailtextBox.Text,idCliente) == "0")
+            {
+                MessageBox.Show("el Mail ingresado ya Existe en la base de datos, lo sentimos!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            
             if (NroDocClitextBox.Text == "")
             {
                 MessageBox.Show("Es obligatorio Insertar el Nro de Documento", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

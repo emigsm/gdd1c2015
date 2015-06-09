@@ -61,7 +61,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
         private void CrearClienteBtn_Click(object sender, EventArgs e)
         {
+            if (GestorDeSistema.validarDisponibilidadMail(MailtextBox.Text,0) == "0")
+            {
+                MessageBox.Show("el Mail ingresado ya Existe en la base de datos, lo sentimos!", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                return;
+            }
 
             if (NombreClitextBox.Text == "")
             {

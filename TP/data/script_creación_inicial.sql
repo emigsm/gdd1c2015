@@ -791,6 +791,64 @@ RETURN @Resultado;
 END
 GO		
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnTipoSuscripcionCuenta')
+	DROP FUNCTION GEM4.fnTipoSuscripcionCuenta
+GO
+CREATE FUNCTION GEM4.fnTipoSuscripcionCuenta(@CuentaTipo INT)
+RETURNS INT
+AS
+BEGIN
+
+DECLARE @Resultado INT;
+
+IF(@CuentaTipo = 1)--ORO
+	BEGIN 
+		SET @Resultado = 13;
+	END
+IF(@CuentaTipo = 2)--Plata
+	BEGIN 
+		SET @Resultado = 14;
+	END
+IF(@CuentaTipo = 3)--Bronce
+	BEGIN 
+		SET @Resultado = 15;
+	END
+IF(@CuentaTipo = 4)--Gratuita
+	BEGIN 
+		SET @Resultado = 16;
+	END
+RETURN @Resultado;
+END
+GO		
+
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnPuedeComprarSuscripcion')
+	DROP FUNCTION GEM4.fnPuedeComprarSuscripcion
+GO
+CREATE FUNCTION GEM4.fnPuedeComprarSuscripcion(@EstadoCuenta INT)
+RETURNS NVARCHAR(25)
+AS
+BEGIN
+DECLARE @Resultado NVARCHAR(60)
+IF(@EstadoCuenta = 1)--Habilitada
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+IF(@EstadoCuenta = 2)--Inhabilitada
+	BEGIN 
+		SET @Resultado = 'Si';
+	END
+IF(@EstadoCuenta = 3)--Cerrada
+	BEGIN 
+		SET @Resultado = 'La cuenta de origen se encuentra cerrada';
+	END
+IF(@EstadoCuenta = 4)--Pendiente de activación
+	BEGIN 
+		SET @Resultado = 'La cuenta de origen se encuentra pendiente de activación';
+	END
+RETURN @Resultado;
+END
+GO
+
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
@@ -869,7 +927,12 @@ INSERT INTO GEM4.Tipo_Operacion(Tipo_Operacion_ID, Tipo_Operacion_Descripcion, T
 		(9, 'Apertura de Cuenta Tipo PLATA', 150),
 		(10, 'Apertura de Cuenta Tipo BRONCE', 100),
 		(11, 'Apertura de Cuenta Tipo GRATUITA', 0),
-		(12, 'Modificación del Tipo de CUENTA', 200) --creo que es mejor dejarlo con un valor fijo independiente del tipo de cuenta que era antes, y que sea caro para que e cliente se joda por boludo si queire cambiar el tipo 
+		(12, 'Modificación del Tipo de CUENTA', 200), --creo que es mejor dejarlo con un valor fijo independiente del tipo de cuenta que era antes, y que sea caro para que e cliente se joda por boludo si queire cambiar el tipo 
+		(13, 'Suscripción de Cuenta Tipo ORO', 200),
+		(14, 'Suscripción de Cuenta Tipo PLATA', 150),
+		(15, 'Suscripción de Cuenta Tipo BRONCE', 100),
+		(16, 'Suscripción de Cuenta Tipo GRATUITA', 0)
+		
 SET IDENTITY_INSERT GEM4.Tipo_Operacion OFF
 
 SET IDENTITY_INSERT GEM4.Tipo_Cuenta ON;
@@ -2229,17 +2292,53 @@ CREATE PROCEDURE GEM4.spComprarSuscripcion
 	
 AS
 DECLARE @TipoCuenta INT;
-DECLARE @DiasSuscripcion INT;
-DECLARE @FechaVencimiento DATETIME;
+DECLARE @Suscripciones INT;
+DECLARE @Fecha DATETIME;
+DECLARE @TipoSuscripcion INT;
+DECLARE @Cliente INT;
+DECLARE @Costo NUMERIC(18,2);
+DECLARE @Detalle NVARCHAR(255);
+DECLARE @EstadoCuenta INT;
+DECLARE @ValidarCuenta NVARCHAR(25);
 
+SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
+SET @ValidarCuenta = GEM4.fnPuedeComprarSuscripcion(@EstadoCuenta);
+SET @Suscripciones = (SELECT C.Cuenta_Suscripciones_Compradas FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
 SET @TipoCuenta = (SELECT C.Cuenta_Tipo FROM GEM4.Cuenta C	WHERE C.Cuenta_Numero LIKE @Cuenta);
-SET @DiasSuscripcion = (SELECT T.Tipo_Cuenta_Duracion FROM GEM4.Tipo_Cuenta T WHERE T.Tipo_Cuenta_ID = @TipoCuenta)*@Cantidad
-SET @FechaVencimiento = (SELECT C.Cuenta_Suscripciones_Fecha FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
-SET @FechaVencimiento = DATEADD(DAY,@DiasSuscripcion,@FechaVencimiento);
-
-	UPDATE GEM4.Cuenta
-	SET Cuenta_Suscripciones_Compradas = Cuenta_Suscripciones_Compradas + @Cantidad,
-	Cuenta_Suscripciones_Fecha = @FechaVencimiento
-	WHERE Cuenta_Numero LIKE @Cuenta
-
+SET @Fecha = SYSDATETIME();
+SET @TipoSuscripcion = GEM4.fnTipoSuscripcionCuenta(@TipoCuenta);
+SET @Cliente = (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
+SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID = @TipoSuscripcion)*@Cantidad;
+SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID = @TipoSuscripcion)+' '+'Cantidad:'
+				+CONVERT(NVARCHAR(10),@Cantidad)+' '+'Cuenta:'+' '+@Cuenta;
+	
+	IF @ValidarCuenta <> 'Si'
+		BEGIN
+			SELECT @ValidarCuenta;
+			RETURN;
+		END
+		
+	IF (@Suscripciones > 0)
+		BEGIN
+			UPDATE GEM4.Cuenta
+			SET Cuenta_Suscripciones_Compradas = Cuenta_Suscripciones_Compradas + @Cantidad
+			WHERE Cuenta_Numero LIKE @Cuenta
+		END
+		
+	ELSE
+	
+		BEGIN
+			UPDATE GEM4.Cuenta
+			SET Cuenta_Suscripciones_Compradas = @Cantidad,
+			Cuenta_Suscripciones_Fecha = @Fecha
+			WHERE Cuenta_Numero LIKE @Cuenta
+		END;
+		
+	IF	(@TipoCuenta <> 4)
+		
+		BEGIN
+			EXEC GEM4.spInsertarOperacionFacturable @TipoSuscripcion,@Fecha,@Cliente,@Detalle,@Costo;
+		END
+		
+		SELECT 'La operación ha sido realizada exitosamente ';
 GO

@@ -31,6 +31,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cmbCuentaOrigen = new System.Windows.Forms.ComboBox();
             this.dgvCuentaDestino = new System.Windows.Forms.DataGridView();
+            this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCuenta = new System.Windows.Forms.Label();
@@ -46,8 +48,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.lblFecha = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.NumeroCuenta = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seleccionar = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnLimpiar2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCuentaDestino)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -83,6 +84,19 @@
             this.dgvCuentaDestino.Size = new System.Drawing.Size(353, 86);
             this.dgvCuentaDestino.TabIndex = 2;
             this.dgvCuentaDestino.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentaDestino_CellContentClick);
+            // 
+            // NumeroCuenta
+            // 
+            this.NumeroCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NumeroCuenta.HeaderText = "Número de Cuenta";
+            this.NumeroCuenta.Name = "NumeroCuenta";
+            this.NumeroCuenta.ReadOnly = true;
+            // 
+            // Seleccionar
+            // 
+            this.Seleccionar.HeaderText = "Seleccionar";
+            this.Seleccionar.Name = "Seleccionar";
+            this.Seleccionar.ReadOnly = true;
             // 
             // label2
             // 
@@ -224,28 +238,26 @@
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(191, 47);
             this.btnVolver.TabIndex = 10;
-            this.btnVolver.Text = "Vover";
+            this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // NumeroCuenta
+            // btnLimpiar2
             // 
-            this.NumeroCuenta.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NumeroCuenta.HeaderText = "Número de Cuenta";
-            this.NumeroCuenta.Name = "NumeroCuenta";
-            this.NumeroCuenta.ReadOnly = true;
-            // 
-            // Seleccionar
-            // 
-            this.Seleccionar.HeaderText = "Seleccionar";
-            this.Seleccionar.Name = "Seleccionar";
-            this.Seleccionar.ReadOnly = true;
+            this.btnLimpiar2.Location = new System.Drawing.Point(425, 334);
+            this.btnLimpiar2.Name = "btnLimpiar2";
+            this.btnLimpiar2.Size = new System.Drawing.Size(109, 20);
+            this.btnLimpiar2.TabIndex = 11;
+            this.btnLimpiar2.Text = "Limpiar";
+            this.btnLimpiar2.UseVisualStyleBackColor = true;
+            this.btnLimpiar2.Click += new System.EventHandler(this.btnLimpiar2_Click);
             // 
             // TransferenciasPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(627, 442);
+            this.Controls.Add(this.btnLimpiar2);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.lblFecha);
             this.Controls.Add(this.label5);
@@ -288,5 +300,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumeroCuenta;
         private System.Windows.Forms.DataGridViewButtonColumn Seleccionar;
+        private System.Windows.Forms.Button btnLimpiar2;
     }
 }

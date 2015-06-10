@@ -69,9 +69,15 @@ namespace PagoElectronico.Operaciones.Transferencias
 
         private void btnTransferencias_Click(object sender, EventArgs e)
         {
-            if ((Convert.ToInt32(ImporteTextBox.Text) <1) || (ImporteTextBox.Text == "") )
+            if ((ImporteTextBox.Text == "") || (Convert.ToInt32(ImporteTextBox.Text) < 1))
             {
                 MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+            if (lblCuenta.Text == "")
+            {
+                MessageBox.Show("Por favor seleccione una cuenta de destino", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
 
             }
@@ -84,6 +90,11 @@ namespace PagoElectronico.Operaciones.Transferencias
                 MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 
             }
+        }
+
+        private void btnLimpiar2_Click(object sender, EventArgs e)
+        {
+            ImporteTextBox.Text = String.Empty;
         }
         
     }

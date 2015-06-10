@@ -2202,7 +2202,7 @@ SET @Costo =0;
 	SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+' '+'Desde:'+' '+@CuentaOrigen+' '+'Hacia:'+@CuentaDestino;
 	SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
 	SET @Fecha = GEM4.fnDevolverFechaSistema();
-	SET @Costo = 0;	
+	
 	
 	IF(@CuentaOrigenCliente != @CuentaDestinoCliente)
 		BEGIN

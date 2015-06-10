@@ -2382,13 +2382,15 @@ SET @HayPedienteDeFacturacion = (SELECT COUNT(O.Operacion_Facturable_ID) FROM GE
 								WHERE O.Operacion_Facturable_Cliente_ID =@ClienteID 
 								AND O.Operacion_Facturable_Factura_Numero IS NULL );
 SET @Fecha = SYSDATETIME();
-SET @Factura= IDENT_CURRENT('GEM4.Factura');
+
 SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 4);
 
 	IF (@HayPedienteDeFacturacion > 0)
 	BEGIN
 		INSERT INTO GEM4.Factura (Factura_Cliente_ID,Factura_Fecha)	VALUES(@ClienteID,@Fecha)
-	
+		
+		SET @Factura= IDENT_CURRENT('GEM4.Factura');
+		
 		UPDATE GEM4.Operacion_Facturable
 		SET Operacion_Facturable_Factura_Numero = @Factura
 		WHERE Operacion_Facturable_Cliente_ID = @ClienteID AND Operacion_Facturable_Factura_Numero IS NULL

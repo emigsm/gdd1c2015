@@ -2342,3 +2342,14 @@ SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T W
 		
 		SELECT 'La operación ha sido realizada exitosamente ';
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerClientes')
+	DROP PROCEDURE GEM4.spObtenerClientes;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerClientes
+		
+AS
+	SELECT C.Cliente_ID FROM GEM4.Cliente C
+GO
+

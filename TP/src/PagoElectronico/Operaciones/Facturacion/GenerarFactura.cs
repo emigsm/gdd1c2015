@@ -12,7 +12,7 @@ namespace PagoElectronico.Operaciones.Facturacion
 {
     public partial class GenerarFactura : Form
     {
-        string cliente;
+        int cliente;
 
         public GenerarFactura(string usuario)
         {
@@ -30,7 +30,8 @@ namespace PagoElectronico.Operaciones.Facturacion
             }
             else
             {
-                cliente ="falta sp" ;
+                cliente =Convert.ToInt32(GestorDeSistema.obtenerIDCliente(usuario));
+                
             }
 
         }
@@ -44,6 +45,12 @@ namespace PagoElectronico.Operaciones.Facturacion
         {
             Owner.Show();
             this.Hide();
+        }
+
+        private void cmbClientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            cliente = Convert.ToInt32(cmbClientes.SelectedValue.ToString());
+            
         }
 
         

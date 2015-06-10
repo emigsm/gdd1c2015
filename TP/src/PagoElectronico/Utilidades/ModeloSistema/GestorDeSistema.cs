@@ -84,6 +84,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERTIPOCUENTA = "GEM4.spObtenerTipoCuenta";
         private const string STORE_COMPRARSUSCRIPCION = "GEM4.spComprarSuscripcion";
         private const string STORE_OBTENERCLIENTES = "GEM4.spObtenerClientes";
+        private const string STORE_OBTENERIDCLIENTE = "GEM4.spObtenerIDCliente";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -872,6 +873,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             readerClientes.Dispose();
             return clientes;
         }
+        public static string obtenerIDCliente(string usuario)
+        {
+            string mensajeResultado;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@Usuario", usuario));
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERIDCLIENTE, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
+            return mensajeResultado;
+        }
+        
 
         
     }

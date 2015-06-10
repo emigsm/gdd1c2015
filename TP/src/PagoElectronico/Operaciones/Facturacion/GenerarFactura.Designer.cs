@@ -67,6 +67,7 @@
             this.cmbClientes.Size = new System.Drawing.Size(161, 21);
             this.cmbClientes.TabIndex = 2;
             this.cmbClientes.Visible = false;
+            this.cmbClientes.SelectedIndexChanged += new System.EventHandler(this.cmbClientes_SelectedIndexChanged);
             // 
             // button1
             // 

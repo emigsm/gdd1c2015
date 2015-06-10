@@ -2350,6 +2350,17 @@ GO
 CREATE PROCEDURE GEM4.spObtenerClientes
 		
 AS
-	SELECT C.Cliente_ID FROM GEM4.Cliente C
+	SELECT C.Cliente_ID FROM GEM4.Cliente C ORDER BY C.Cliente_ID
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerIDCliente')
+	DROP PROCEDURE GEM4.spObtenerIDCliente;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerIDCliente
+@Usuario NVARCHAR(30)
+		
+AS
+	SELECT U.Cliente_ID FROM GEM4.Usuario U WHERE U.Usuario_Username LIKE @Usuario
 GO
 

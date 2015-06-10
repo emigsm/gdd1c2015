@@ -2199,21 +2199,22 @@ SET @Costo =0;
 			Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino)
 	VALUES(GEM4.fnDevolverFechaSistema(),@Importe,@Costo,@CuentaOrigen,@CuentaDestino);
 	
+	SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+' '+'Desde:'+' '+@CuentaOrigen+' '+'Hacia:'+@CuentaDestino;
+	SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
+	SET @Fecha = GEM4.fnDevolverFechaSistema();
+	SET @Costo = 0;	
+	
 	IF(@CuentaOrigenCliente != @CuentaDestinoCliente)
 		BEGIN
-		SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
-		SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+' '+'Desde:'+' '+@CuentaOrigen+' '+'Hacia:'+@CuentaDestino;
-		SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
-		SET @Fecha = GEM4.fnDevolverFechaSistema();
-		
-
+			SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
+		END;
+	
 		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,@Detalle,@Costo;
 		
 		UPDATE GEM4.Transferencia
 		SET Transferencia_Costo_Trans =@Costo
 		WHERE Transferencia_Codigo = IDENT_CURRENT('GEM4.Transferencia')
-		 
-		END;		
+		 			
 		
 	SELECT 'Transferencia realizada satisfactoriamente.'
 	
@@ -2391,6 +2392,7 @@ SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHER
 		UPDATE GEM4.Operacion_Facturable
 		SET Operacion_Facturable_Factura_Numero = @Factura
 		WHERE Operacion_Facturable_Cliente_ID = @ClienteID AND Operacion_Facturable_Factura_Numero IS NULL
+				AND Operacion_Facturable_Costo > 0
 	
 		IF @CuentasNoActivadas > 0
 	

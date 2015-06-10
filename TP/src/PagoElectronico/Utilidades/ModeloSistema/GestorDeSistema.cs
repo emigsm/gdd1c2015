@@ -85,6 +85,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_COMPRARSUSCRIPCION = "GEM4.spComprarSuscripcion";
         private const string STORE_OBTENERCLIENTES = "GEM4.spObtenerClientes";
         private const string STORE_OBTENERIDCLIENTE = "GEM4.spObtenerIDCliente";
+        private const string STORE_FACTURAR = "GEM4.spFacturar";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -882,7 +883,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
         }
-        
+
+        public static string facturar(int clienteID)
+        {
+            string mensajeResultado;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@ClienteID", clienteID));
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_FACTURAR, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
+            return mensajeResultado;
+        }
 
         
     }

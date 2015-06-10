@@ -13,6 +13,7 @@ namespace PagoElectronico.Operaciones.Facturacion
     public partial class GenerarFactura : Form
     {
         int cliente;
+        int factura;
 
         public GenerarFactura(string usuario)
         {
@@ -53,6 +54,19 @@ namespace PagoElectronico.Operaciones.Facturacion
             
         }
 
-        
+        private void btnGenerarFactura_Click(object sender, EventArgs e)
+        {
+            if (Convert.ToInt32(GestorDeSistema.facturar(cliente)) > 0)
+            {
+                factura = Convert.ToInt32(GestorDeSistema.facturar(cliente));
+            }
+            else
+            { 
+            MessageBox.Show("No hay operaciones pendientes de facturación","Resultado Operación",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+            }
+            
+        }
+
+                
     }
 }

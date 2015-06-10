@@ -2364,3 +2364,45 @@ AS
 	SELECT U.Cliente_ID FROM GEM4.Usuario U WHERE U.Usuario_Username LIKE @Usuario
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spFacturar')
+	DROP PROCEDURE GEM4.spFacturar;
+GO
+
+CREATE PROCEDURE GEM4.spFacturar
+@ClienteID INT
+		
+AS
+DECLARE @Fecha DATETIME;
+DECLARE @Factura NUMERIC(18,0);
+DECLARE @CuentasNoActivadas INT;
+DECLARE @HayPedienteDeFacturacion INT;
+
+SET @HayPedienteDeFacturacion = (SELECT COUNT(O.Operacion_Facturable_ID) FROM GEM4.Operacion_Facturable O 
+								WHERE O.Operacion_Facturable_Cliente_ID =@ClienteID 
+								AND O.Operacion_Facturable_Factura_Numero IS NULL );
+SET @Fecha = SYSDATETIME();
+SET @Factura= IDENT_CURRENT('GEM4.Factura');
+SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 4);
+
+	IF (@HayPedienteDeFacturacion > 0)
+	BEGIN
+		INSERT INTO GEM4.Factura (Factura_Cliente_ID,Factura_Fecha)	VALUES(@ClienteID,@Fecha)
+	
+		UPDATE GEM4.Operacion_Facturable
+		SET Operacion_Facturable_Factura_Numero = @Factura
+		WHERE Operacion_Facturable_Cliente_ID = @ClienteID AND Operacion_Facturable_Factura_Numero IS NULL
+	
+		IF @CuentasNoActivadas > 0
+	
+		BEGIN
+			UPDATE GEM4.Cuenta
+			SET Cuenta_Estado = 1
+			WHERE Cuenta_Cliente_ID = @ClienteID AND Cuenta_Estado = 4
+		END
+		
+		SELECT @Factura;
+		RETURN;
+	END
+	
+		SELECT '0' --No se facturó nada
+GO

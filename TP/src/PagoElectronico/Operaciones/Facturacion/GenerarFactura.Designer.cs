@@ -31,7 +31,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblinstruccion = new System.Windows.Forms.Label();
             this.cmbClientes = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnGenerarFactura = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -69,14 +69,15 @@
             this.cmbClientes.Visible = false;
             this.cmbClientes.SelectedIndexChanged += new System.EventHandler(this.cmbClientes_SelectedIndexChanged);
             // 
-            // button1
+            // btnGenerarFactura
             // 
-            this.button1.Location = new System.Drawing.Point(552, 70);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 63);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Generar Factura";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnGenerarFactura.Location = new System.Drawing.Point(552, 70);
+            this.btnGenerarFactura.Name = "btnGenerarFactura";
+            this.btnGenerarFactura.Size = new System.Drawing.Size(144, 63);
+            this.btnGenerarFactura.TabIndex = 3;
+            this.btnGenerarFactura.Text = "Generar Factura";
+            this.btnGenerarFactura.UseVisualStyleBackColor = true;
+            this.btnGenerarFactura.Click += new System.EventHandler(this.btnGenerarFactura_Click);
             // 
             // groupBox1
             // 
@@ -105,7 +106,7 @@
             this.ClientSize = new System.Drawing.Size(713, 228);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnGenerarFactura);
             this.Controls.Add(this.cmbClientes);
             this.Controls.Add(this.lblinstruccion);
             this.Name = "GenerarFactura";
@@ -123,7 +124,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblinstruccion;
         private System.Windows.Forms.ComboBox cmbClientes;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGenerarFactura;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnVolver;
     }

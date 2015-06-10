@@ -2406,3 +2406,15 @@ SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHER
 	
 		SELECT '0' --No se facturó nada
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerFactura')
+	DROP PROCEDURE GEM4.spObtenerFactura;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerFactura
+@FacturaID NUMERIC (18,0)
+		
+AS
+	SELECT DISTINCT F.Factura_Numero,F.Factura_Fecha,O.Operacion_Facturable_Fecha,O.Operacion_Facturable_Detalle,O.Operacion_Facturable_Costo FROM GEM4.Factura F JOIN GEM4.Operacion_Facturable O ON (F.Factura_Numero = O.Operacion_Facturable_Factura_Numero)
+		   WHERE F.Factura_Numero = @FacturaID
+GO

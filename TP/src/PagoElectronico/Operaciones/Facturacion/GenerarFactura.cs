@@ -14,6 +14,7 @@ namespace PagoElectronico.Operaciones.Facturacion
     {
         int cliente;
         int factura;
+        int resultadoOperacion;
 
         public GenerarFactura(string usuario)
         {
@@ -56,9 +57,22 @@ namespace PagoElectronico.Operaciones.Facturacion
 
         private void btnGenerarFactura_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(GestorDeSistema.facturar(cliente)) > 0)
+            resultadoOperacion = Convert.ToInt32(GestorDeSistema.facturar(cliente));
+            if (resultadoOperacion > 0)
             {
-                factura = Convert.ToInt32(GestorDeSistema.facturar(cliente));
+                factura = resultadoOperacion;
+                
+                dgvFactura.Rows.Clear();
+                dgvFactura.Update();
+
+                DataTable operacionesFacturadas = GestorDeSistema.obtenerFactura(factura);
+
+                foreach (DataRow operacionFacturada in operacionesFacturadas.Rows)
+                {
+                    dgvFactura.Rows.Add(operacionFacturada.ItemArray[0],operacionFacturada.ItemArray[1],
+                        operacionFacturada.ItemArray[2], operacionFacturada.ItemArray[3], operacionFacturada.ItemArray[4]);
+                }
+                dgvFactura.Update();
             }
             else
             { 

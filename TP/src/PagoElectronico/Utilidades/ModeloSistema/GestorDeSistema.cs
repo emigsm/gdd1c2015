@@ -86,6 +86,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERCLIENTES = "GEM4.spObtenerClientes";
         private const string STORE_OBTENERIDCLIENTE = "GEM4.spObtenerIDCliente";
         private const string STORE_FACTURAR = "GEM4.spFacturar";
+        private const string STORE_OBTENERFACTURA = "GEM4.spObtenerFactura";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -893,7 +894,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
         }
-
+        
+        public static DataTable obtenerFactura(int facturaID)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@FacturaID", facturaID));
+            SqlDataReader readerFactura = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERFACTURA, READER, parametros);
+            DataTable factura = new DataTable();
+            if (readerFactura.HasRows)
+            {
+                factura.Load(readerFactura);
+            }
+            readerFactura.Dispose();
+            return factura;
+        }
         
     }
 }

@@ -47,37 +47,41 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
 
         private void btnBuscarCuenta_Click(object sender, EventArgs e)
         {
-            dgvCuenta.Rows.Clear();
-            string cuentaABuscar = txtBuscarCuentaNumero.Text;
-
-            string clienteABuscar = txtClienteID.Text;
-            DataTable cuentasEncontradas = GestorDeSistema.obtenerDatosCuenta(cuentaABuscar, clienteABuscar);
-            if (cuentasEncontradas.Rows.Count > 0)
+            bool validacionCorrecta = validaciones();
+            if(validacionCorrecta == true)
             {
-                foreach (DataRow usuarioEncontrado in cuentasEncontradas.Rows)
+                dgvCuenta.Rows.Clear();
+                string cuentaABuscar = txtBuscarCuentaNumero.Text;
+                string clienteABuscar = txtClienteID.Text;
+                DataTable cuentasEncontradas = GestorDeSistema.obtenerDatosCuenta(cuentaABuscar, clienteABuscar);
+                if (cuentasEncontradas.Rows.Count > 0)
                 {
-                    dgvCuenta.Rows.Add(usuarioEncontrado.ItemArray[0],
-                                         usuarioEncontrado.ItemArray[1],
-                                         usuarioEncontrado.ItemArray[2].ToString(),
-                                         usuarioEncontrado.ItemArray[3].ToString(),
-                                         usuarioEncontrado.ItemArray[4],
-                                         usuarioEncontrado.ItemArray[5],
-                                         usuarioEncontrado.ItemArray[6],
-                                         usuarioEncontrado.ItemArray[7],
-                                         usuarioEncontrado.ItemArray[8],
-                                         usuarioEncontrado.ItemArray[9],
-                                         usuarioEncontrado.ItemArray[10],
-                                         "Modificar",
-                                         "Inhabilitar",
-                                         "Cerrar");
+                    foreach (DataRow usuarioEncontrado in cuentasEncontradas.Rows)
+                    {
+                        dgvCuenta.Rows.Add(usuarioEncontrado.ItemArray[0],
+                                             usuarioEncontrado.ItemArray[1],
+                                             usuarioEncontrado.ItemArray[2].ToString(),
+                                             usuarioEncontrado.ItemArray[3].ToString(),
+                                             usuarioEncontrado.ItemArray[4],
+                                             usuarioEncontrado.ItemArray[5],
+                                             usuarioEncontrado.ItemArray[6],
+                                             usuarioEncontrado.ItemArray[7],
+                                             usuarioEncontrado.ItemArray[8],
+                                             usuarioEncontrado.ItemArray[9],
+                                             usuarioEncontrado.ItemArray[10],
+                                             "Modificar",
+                                             "Inhabilitar",
+                                             "Cerrar");
+                    }
+                    dgvCuenta.Update();
                 }
-                dgvCuenta.Update();
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No se encontraron cuentas con los datos proporcionados");
+                }
             }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show("No se encontraron cuentas con los datos proporcionados");
             }
-        }
+
 
         private void btnLimpiarBusqueda_Click(object sender, EventArgs e)
         {
@@ -135,9 +139,10 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
                 }
             }
         }
-
+        
         private void txtBuscarCuentaNumero_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             if (Convert.ToInt32(e.KeyChar) == 13)
             {
                 btnBuscarCuenta.PerformClick();
@@ -146,11 +151,40 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
 
         private void txtClienteID_KeyPress(object sender, KeyPressEventArgs e)
         {
+
             if (Convert.ToInt32(e.KeyChar) == 13)
             {
                 btnBuscarCuenta.PerformClick();
             }
         }
+
+        //VALIDACIONES
+
+        private bool validaciones()
+        {
+            string valorNumeroCuenta = txtBuscarCuentaNumero.Text;
+            string valorClienteID = txtClienteID.Text;
+            long verificacion = 0;
+            bool canConvert = long.TryParse(valorNumeroCuenta, out verificacion);
+            if (canConvert != true && valorNumeroCuenta != "")
+            { 
+                MessageBox.Show("El campo 'Número de Cuenta' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            canConvert = long.TryParse(valorClienteID, out verificacion);
+            if (canConvert != true && valorClienteID != "")
+            {
+                MessageBox.Show("El campo 'Cliente ID' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
+
+                
+                
+        }
+        
+       
 
     }
 }

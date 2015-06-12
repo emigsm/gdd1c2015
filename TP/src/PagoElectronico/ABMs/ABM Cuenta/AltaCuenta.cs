@@ -57,11 +57,33 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
 
         private void btnAltaCuenta_Click(object sender, EventArgs e)
         {
-            clienteID = txtClienteID.Text;
-            numeroCuenta = GestorDeSistema.altaCuenta(clienteID, Convert.ToInt32(cmbPais.SelectedValue), Convert.ToInt32(cmbMoneda.SelectedValue), Convert.ToInt32(cmbTipoCuenta.SelectedValue));
-            System.Windows.Forms.MessageBox.Show("Cuenta creada correctamente");
-            System.Windows.Forms.MessageBox.Show("Su Cuenta ha sido dada de alta. \nEl numero de cuenta es:" + numeroCuenta.ToString() + " \nActualmente su cuenta se encuenta PENDIENTE DE ACTIVACION, consulte la seccion de Facturación. Una vez activada, recuerde comprar suscripciones.");
-            //METODO DE FACTURACION
+            bool validacionCorrecta = validaciones();
+            if (validacionCorrecta == true)
+            {
+                clienteID = txtClienteID.Text;
+                numeroCuenta = GestorDeSistema.altaCuenta(clienteID, Convert.ToInt32(cmbPais.SelectedValue), Convert.ToInt32(cmbMoneda.SelectedValue), Convert.ToInt32(cmbTipoCuenta.SelectedValue));
+                System.Windows.Forms.MessageBox.Show("Cuenta creada correctamente");
+                System.Windows.Forms.MessageBox.Show("Su Cuenta ha sido dada de alta. \nEl numero de cuenta es:" + numeroCuenta.ToString() + " \nActualmente su cuenta se encuenta PENDIENTE DE ACTIVACION, consulte la seccion de Facturación. Una vez activada, recuerde comprar suscripciones.");
+            }
+            
+
+        }
+
+        private bool validaciones()
+        {
+            string valorClienteID = txtClienteID.Text;
+            int verificacion = 0;
+            bool canConvert = int.TryParse(valorClienteID, out verificacion);
+            if (canConvert != true)
+            {
+                MessageBox.Show("El campo 'Cliente ID' sólo puede contener números y no debe estar vacío", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+
+            return true;
+
+
+
         }
     }
 }

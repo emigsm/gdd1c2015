@@ -2511,3 +2511,16 @@ AS
 	SELECT DISTINCT F.Factura_Numero,F.Factura_Fecha,O.Operacion_Facturable_Fecha,O.Operacion_Facturable_Detalle,O.Operacion_Facturable_Costo FROM GEM4.Factura F JOIN GEM4.Operacion_Facturable O ON (F.Factura_Numero = O.Operacion_Facturable_Factura_Numero)
 		   WHERE F.Factura_Numero = @FacturaID
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerOperacionesSinFacturar')
+	DROP PROCEDURE GEM4.spObtenerOperacionesSinFacturar;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerOperacionesSinFacturar
+@clienteID INT
+		
+AS
+	SELECT COUNT(Operacion_Facturable_ID) Operaciones_Sin_Facturar
+	FROM GEM4.Operacion_Facturable 
+	WHERE Operacion_Facturable_Cliente_ID = @clienteID AND Operacion_Facturable_Factura_Numero IS NULL
+GO

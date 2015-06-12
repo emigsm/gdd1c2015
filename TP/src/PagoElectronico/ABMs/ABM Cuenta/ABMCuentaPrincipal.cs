@@ -123,9 +123,16 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             }
             if (e.ColumnIndex == 13)
             {
-                GestorDeSistema.cerrarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
-                //verificar si esta todo facturado y pagado, ahi si se peude cerrar
-                System.Windows.Forms.MessageBox.Show("La cuenta ha sido Cerrada correctamente");
+                int operacionesPendientesDePagar = GestorDeSistema.obtenerOperacionesSinFacturar(numeroClienteAModificar);
+                if (operacionesPendientesDePagar == 0)
+                {
+                    GestorDeSistema.cerrarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
+                    System.Windows.Forms.MessageBox.Show("La cuenta ha sido Cerrada correctamente");
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No se pudo cerrar la Cuenta. Posee operaciones sin pagar. Consulte sección Facturación.", "Error");
+                }
             }
         }
 

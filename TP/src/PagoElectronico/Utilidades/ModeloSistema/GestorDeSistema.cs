@@ -90,6 +90,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERIDCLIENTE = "GEM4.spObtenerIDCliente";
         private const string STORE_FACTURAR = "GEM4.spFacturar";
         private const string STORE_OBTENERFACTURA = "GEM4.spObtenerFactura";
+        private const string STORE_OBTENEROPERACIONESSINFACTURAR = "GEM4.spObtenerOperacionesSinFacturar";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -959,6 +960,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerFactura.Dispose();
             return factura;
+        }
+
+        public static int obtenerOperacionesSinFacturar(int clienteID)
+        {
+            int resultado;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENEROPERACIONESSINFACTURAR, SCALAR, parametros);
+            resultado = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return resultado;
         }
         
     }

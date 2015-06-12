@@ -94,6 +94,17 @@ namespace PagoElectronico.Operaciones.Listados
 
                     break;
                 case 4:
+                    DataTable listado4I = GestorDeSistema.listado4I(anioSeleccionado, trimestreSeleccionado);
+                    DataTable listado4E = GestorDeSistema.listado4E(anioSeleccionado, trimestreSeleccionado);
+                    listado4E.Merge(listado4I);
+                    if (listado4E.Rows.Count > 0)
+                    {
+                        dgvResultados.DataSource = listado4E;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("No se encontraron operaciones con los datos proporcionados");
+                    } 
                     break;
                 case 5:
                     break;

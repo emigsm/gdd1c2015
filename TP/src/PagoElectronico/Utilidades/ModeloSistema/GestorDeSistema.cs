@@ -78,6 +78,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_BUSCARCUENTAS = "GEM4.spBuscarCuentas"; 
         private const string STORE_LISTADO2 = "GEM4.spListadoEstadistico2";
         private const string STORE_LISTADO3 = "GEM4.spListadoEstadistico3";
+        private const string STORE_LISTADO4E = "GEM4.spListadoEstadistico4Egresos";
+        private const string STORE_LISTADO4I = "GEM4.spListadoEstadistico4Ingresos";
         private const string STORE_TRANSFERIR = "GEM4.spTransferir";
         private const string STORE_VALIDARDISPONIBILIDADMAIL = "GEM4.spValidarDisponibilidadMail";
         private const string STORE_OBTENERROL = "GEM4.spObtenerRol";
@@ -804,6 +806,38 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerListado.Dispose();
             return listado;
+        }
+
+        public static DataTable listado4E(int anio, int trimestre)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@anio", anio));
+            parametros.Add(new SqlParameter("@trimestre", trimestre));
+            SqlDataReader readerListado = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LISTADO4E, READER, parametros);
+            DataTable listado = new DataTable();
+            if (readerListado.HasRows)
+            {
+                listado.Load(readerListado);
+            }
+            readerListado.Dispose();
+            return listado;
+
+        }
+
+        public static DataTable listado4I(int anio, int trimestre)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@anio", anio));
+            parametros.Add(new SqlParameter("@trimestre", trimestre));
+            SqlDataReader readerListado = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LISTADO4I, READER, parametros);
+            DataTable listado = new DataTable();
+            if (readerListado.HasRows)
+            {
+                listado.Load(readerListado);
+            }
+            readerListado.Dispose();
+            return listado;
+
         }
 
         public static string transferir(string cuentaOrigen, string cuentaDestino,int importe)

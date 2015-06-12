@@ -2115,6 +2115,50 @@ GROUP BY GEM4.fnObtenerClienteID_Cuenta(Transferencia_Cuenta_Origen)
 ORDER BY Transacciones_Entre_Cuentas_Propias DESC
 GO
 
+--4. Países con mayor cantidad de movimientos tanto ingresos como egresos
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico4Egresos')
+	DROP PROCEDURE GEM4.spListadoEstadistico4Egresos;
+
+GO
+
+CREATE PROCEDURE GEM4.spListadoEstadistico4Egresos
+	@anio				INT,
+	@trimestre			INT
+AS
+--EGRESOS: retiros, transf origen
+SELECT TOP 5 T1.Pais_Egreso, T1.Cantidad_Egresos + T2.Cantidad_Egresos AS Cantidad_Egresos
+FROM (SELECT DISTINCT COUNT(Retiro_Cuenta) Cantidad_Egresos, GEM4.fnDevolverPais(Retiro_Cuenta) Pais_Egreso
+		FROM GEM4.Retiro
+		WHERE (YEAR(Retiro_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Retiro_Fecha) = @trimestre)
+		GROUP BY GEM4.fnDevolverPais(Retiro_Cuenta)) T1 FULL OUTER JOIN (SELECT DISTINCT COUNT(Transferencia_Cuenta_Origen) Cantidad_Egresos, GEM4.fnDevolverPais(Transferencia_Cuenta_Origen) Pais_Egreso
+		FROM GEM4.Transferencia
+		WHERE (YEAR(Transferencia_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Transferencia_Fecha) = @trimestre)
+		GROUP BY GEM4.fnDevolverPais(Transferencia_Cuenta_Origen)) T2 ON (T1.Pais_Egreso = T2.Pais_Egreso)
+ORDER BY Cantidad_Egresos DESC
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico4Ingresos')
+	DROP PROCEDURE GEM4.spListadoEstadistico4Ingresos;
+
+GO
+
+CREATE PROCEDURE GEM4.spListadoEstadistico4Ingresos
+	@anio				INT,
+	@trimestre			INT
+AS
+--INGRESOS: depositos, transf destino
+SELECT TOP 5 T1.Pais_Ingreso, T1.Cantidad_Ingresos + T2.Cantidad_Ingresos AS Cantidad_Ingresos
+FROM (SELECT DISTINCT COUNT(Deposito_Cuenta) Cantidad_Ingresos, GEM4.fnDevolverPais(Deposito_Cuenta) Pais_Ingreso
+		FROM GEM4.Deposito
+		WHERE (YEAR(Deposito_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Deposito_Fecha) = @trimestre)
+		GROUP BY GEM4.fnDevolverPais(Deposito_Cuenta)) T1 FULL OUTER JOIN (SELECT DISTINCT COUNT(Transferencia_Cuenta_Destino) Cantidad_Ingresos, GEM4.fnDevolverPais(Transferencia_Cuenta_Destino) Pais_Ingreso
+		FROM GEM4.Transferencia
+		WHERE (YEAR(Transferencia_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Transferencia_Fecha) = @trimestre)
+		GROUP BY GEM4.fnDevolverPais(Transferencia_Cuenta_Destino)) T2 ON (T1.Pais_Ingreso = T2.Pais_Ingreso)
+ORDER BY Cantidad_Ingresos DESC
+GO
+
+
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarCuentas')
 	DROP PROCEDURE GEM4.spBuscarCuentas;
 

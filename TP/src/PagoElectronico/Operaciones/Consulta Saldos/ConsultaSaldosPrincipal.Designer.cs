@@ -45,12 +45,12 @@
             this.gbDepositos = new System.Windows.Forms.GroupBox();
             this.gbRetiros = new System.Windows.Forms.GroupBox();
             this.dgvRetiros = new System.Windows.Forms.DataGridView();
-            this.gbT = new System.Windows.Forms.GroupBox();
-            this.dgvTransferencias = new System.Windows.Forms.DataGridView();
             this.Retiro_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Retiro_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Retiro_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Retiro_Cheque = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbT = new System.Windows.Forms.GroupBox();
+            this.dgvTransferencias = new System.Windows.Forms.DataGridView();
             this.Transferencia_Codigo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Transferencia_Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Transferencia_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -228,6 +228,30 @@
             this.dgvRetiros.Size = new System.Drawing.Size(653, 150);
             this.dgvRetiros.TabIndex = 7;
             // 
+            // Retiro_Codigo
+            // 
+            this.Retiro_Codigo.HeaderText = "Codigo";
+            this.Retiro_Codigo.Name = "Retiro_Codigo";
+            this.Retiro_Codigo.Width = 150;
+            // 
+            // Retiro_Fecha
+            // 
+            this.Retiro_Fecha.HeaderText = "Fecha";
+            this.Retiro_Fecha.Name = "Retiro_Fecha";
+            this.Retiro_Fecha.Width = 150;
+            // 
+            // Retiro_Importe
+            // 
+            this.Retiro_Importe.HeaderText = "Importe";
+            this.Retiro_Importe.Name = "Retiro_Importe";
+            this.Retiro_Importe.Width = 150;
+            // 
+            // Retiro_Cheque
+            // 
+            this.Retiro_Cheque.HeaderText = "Cheque";
+            this.Retiro_Cheque.Name = "Retiro_Cheque";
+            this.Retiro_Cheque.Width = 200;
+            // 
             // gbT
             // 
             this.gbT.Controls.Add(this.dgvTransferencias);
@@ -254,30 +278,6 @@
             this.dgvTransferencias.RowTemplate.Height = 28;
             this.dgvTransferencias.Size = new System.Drawing.Size(755, 150);
             this.dgvTransferencias.TabIndex = 7;
-            // 
-            // Retiro_Codigo
-            // 
-            this.Retiro_Codigo.HeaderText = "Codigo";
-            this.Retiro_Codigo.Name = "Retiro_Codigo";
-            this.Retiro_Codigo.Width = 150;
-            // 
-            // Retiro_Fecha
-            // 
-            this.Retiro_Fecha.HeaderText = "Fecha";
-            this.Retiro_Fecha.Name = "Retiro_Fecha";
-            this.Retiro_Fecha.Width = 150;
-            // 
-            // Retiro_Importe
-            // 
-            this.Retiro_Importe.HeaderText = "Importe";
-            this.Retiro_Importe.Name = "Retiro_Importe";
-            this.Retiro_Importe.Width = 150;
-            // 
-            // Retiro_Cheque
-            // 
-            this.Retiro_Cheque.HeaderText = "Cheque";
-            this.Retiro_Cheque.Name = "Retiro_Cheque";
-            this.Retiro_Cheque.Width = 200;
             // 
             // Transferencia_Codigo
             // 
@@ -313,6 +313,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 883);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.gbT);
             this.Controls.Add(this.gbRetiros);
             this.Controls.Add(this.lblVSaldo);
@@ -320,7 +321,6 @@
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.gbDepositos);
-            this.Controls.Add(this.panel1);
             this.Name = "ConsultaSaldosPrincipal";
             this.Text = "Consulta de Saldos";
             this.Load += new System.EventHandler(this.ConsultaSaldosPrincipal_Load);

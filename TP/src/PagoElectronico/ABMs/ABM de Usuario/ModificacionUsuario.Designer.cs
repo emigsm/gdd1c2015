@@ -42,6 +42,8 @@
             this.lblRespSecretanueva = new System.Windows.Forms.Label();
             this.lblPregSecreta = new System.Windows.Forms.Label();
             this.groupBoxRol = new System.Windows.Forms.GroupBox();
+            this.cmbRolActual = new System.Windows.Forms.ComboBox();
+            this.rbEliminarRol = new System.Windows.Forms.RadioButton();
             this.checkBoxCambioRol = new System.Windows.Forms.CheckBox();
             this.rbAgregarRol = new System.Windows.Forms.RadioButton();
             this.cmbCambioRol = new System.Windows.Forms.ComboBox();
@@ -55,8 +57,6 @@
             this.btnCambiarPregunta = new System.Windows.Forms.Button();
             this.btnCambiarRol = new System.Windows.Forms.Button();
             this.btnCambiarEstado = new System.Windows.Forms.Button();
-            this.rbEliminarRol = new System.Windows.Forms.RadioButton();
-            this.cmbRolActual = new System.Windows.Forms.ComboBox();
             this.groupBoxContraseña.SuspendLayout();
             this.groupBoxPregunta.SuspendLayout();
             this.groupBoxRol.SuspendLayout();
@@ -65,9 +65,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(379, 287);
+            this.btnVolver.Location = new System.Drawing.Point(568, 442);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(112, 35);
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -80,9 +81,11 @@
             this.groupBoxContraseña.Controls.Add(this.lblVerifContraseña);
             this.groupBoxContraseña.Controls.Add(this.lblNuevaContraseña);
             this.groupBoxContraseña.Controls.Add(this.checkBoxContraseña);
-            this.groupBoxContraseña.Location = new System.Drawing.Point(13, 13);
+            this.groupBoxContraseña.Location = new System.Drawing.Point(20, 20);
+            this.groupBoxContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxContraseña.Name = "groupBoxContraseña";
-            this.groupBoxContraseña.Size = new System.Drawing.Size(320, 81);
+            this.groupBoxContraseña.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBoxContraseña.Size = new System.Drawing.Size(480, 125);
             this.groupBoxContraseña.TabIndex = 1;
             this.groupBoxContraseña.TabStop = false;
             this.groupBoxContraseña.Text = "Cambio de contraseña";
@@ -90,28 +93,31 @@
             // txtVerificarContraseña
             // 
             this.txtVerificarContraseña.Enabled = false;
-            this.txtVerificarContraseña.Location = new System.Drawing.Point(157, 40);
+            this.txtVerificarContraseña.Location = new System.Drawing.Point(236, 62);
+            this.txtVerificarContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtVerificarContraseña.Name = "txtVerificarContraseña";
             this.txtVerificarContraseña.PasswordChar = '*';
-            this.txtVerificarContraseña.Size = new System.Drawing.Size(157, 20);
+            this.txtVerificarContraseña.Size = new System.Drawing.Size(234, 26);
             this.txtVerificarContraseña.TabIndex = 4;
             // 
             // txtContraseña
             // 
             this.txtContraseña.Enabled = false;
-            this.txtContraseña.Location = new System.Drawing.Point(157, 13);
+            this.txtContraseña.Location = new System.Drawing.Point(236, 20);
+            this.txtContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtContraseña.Name = "txtContraseña";
             this.txtContraseña.PasswordChar = '*';
-            this.txtContraseña.Size = new System.Drawing.Size(157, 20);
+            this.txtContraseña.Size = new System.Drawing.Size(234, 26);
             this.txtContraseña.TabIndex = 3;
             // 
             // lblVerifContraseña
             // 
             this.lblVerifContraseña.AutoSize = true;
             this.lblVerifContraseña.Enabled = false;
-            this.lblVerifContraseña.Location = new System.Drawing.Point(6, 47);
+            this.lblVerifContraseña.Location = new System.Drawing.Point(9, 72);
+            this.lblVerifContraseña.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVerifContraseña.Name = "lblVerifContraseña";
-            this.lblVerifContraseña.Size = new System.Drawing.Size(104, 13);
+            this.lblVerifContraseña.Size = new System.Drawing.Size(155, 20);
             this.lblVerifContraseña.TabIndex = 2;
             this.lblVerifContraseña.Text = "Verificar contraseña:";
             // 
@@ -119,16 +125,18 @@
             // 
             this.lblNuevaContraseña.AutoSize = true;
             this.lblNuevaContraseña.Enabled = false;
-            this.lblNuevaContraseña.Location = new System.Drawing.Point(6, 20);
+            this.lblNuevaContraseña.Location = new System.Drawing.Point(9, 31);
+            this.lblNuevaContraseña.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNuevaContraseña.Name = "lblNuevaContraseña";
-            this.lblNuevaContraseña.Size = new System.Drawing.Size(98, 13);
+            this.lblNuevaContraseña.Size = new System.Drawing.Size(142, 20);
             this.lblNuevaContraseña.TabIndex = 1;
             this.lblNuevaContraseña.Text = "Nueva contraseña:";
             // 
             // checkBoxContraseña
             // 
             this.checkBoxContraseña.AutoSize = true;
-            this.checkBoxContraseña.Location = new System.Drawing.Point(121, 0);
+            this.checkBoxContraseña.Location = new System.Drawing.Point(182, 0);
+            this.checkBoxContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxContraseña.Name = "checkBoxContraseña";
             this.checkBoxContraseña.Size = new System.Drawing.Size(15, 14);
             this.checkBoxContraseña.TabIndex = 0;
@@ -142,9 +150,11 @@
             this.groupBoxPregunta.Controls.Add(this.txtPregSec);
             this.groupBoxPregunta.Controls.Add(this.lblRespSecretanueva);
             this.groupBoxPregunta.Controls.Add(this.lblPregSecreta);
-            this.groupBoxPregunta.Location = new System.Drawing.Point(12, 100);
+            this.groupBoxPregunta.Location = new System.Drawing.Point(18, 154);
+            this.groupBoxPregunta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxPregunta.Name = "groupBoxPregunta";
-            this.groupBoxPregunta.Size = new System.Drawing.Size(321, 81);
+            this.groupBoxPregunta.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBoxPregunta.Size = new System.Drawing.Size(482, 125);
             this.groupBoxPregunta.TabIndex = 2;
             this.groupBoxPregunta.TabStop = false;
             this.groupBoxPregunta.Text = "Cambio de pregunta secreta";
@@ -152,7 +162,8 @@
             // checkBoxPregunta
             // 
             this.checkBoxPregunta.AutoSize = true;
-            this.checkBoxPregunta.Location = new System.Drawing.Point(148, 0);
+            this.checkBoxPregunta.Location = new System.Drawing.Point(222, 0);
+            this.checkBoxPregunta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxPregunta.Name = "checkBoxPregunta";
             this.checkBoxPregunta.Size = new System.Drawing.Size(15, 14);
             this.checkBoxPregunta.TabIndex = 5;
@@ -162,26 +173,29 @@
             // txtRespSec
             // 
             this.txtRespSec.Enabled = false;
-            this.txtRespSec.Location = new System.Drawing.Point(158, 42);
+            this.txtRespSec.Location = new System.Drawing.Point(237, 65);
+            this.txtRespSec.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtRespSec.Name = "txtRespSec";
-            this.txtRespSec.Size = new System.Drawing.Size(157, 20);
+            this.txtRespSec.Size = new System.Drawing.Size(234, 26);
             this.txtRespSec.TabIndex = 7;
             // 
             // txtPregSec
             // 
             this.txtPregSec.Enabled = false;
-            this.txtPregSec.Location = new System.Drawing.Point(158, 16);
+            this.txtPregSec.Location = new System.Drawing.Point(237, 25);
+            this.txtPregSec.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtPregSec.Name = "txtPregSec";
-            this.txtPregSec.Size = new System.Drawing.Size(157, 20);
+            this.txtPregSec.Size = new System.Drawing.Size(234, 26);
             this.txtPregSec.TabIndex = 5;
             // 
             // lblRespSecretanueva
             // 
             this.lblRespSecretanueva.AutoSize = true;
             this.lblRespSecretanueva.Enabled = false;
-            this.lblRespSecretanueva.Location = new System.Drawing.Point(7, 42);
+            this.lblRespSecretanueva.Location = new System.Drawing.Point(10, 65);
+            this.lblRespSecretanueva.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRespSecretanueva.Name = "lblRespSecretanueva";
-            this.lblRespSecretanueva.Size = new System.Drawing.Size(132, 13);
+            this.lblRespSecretanueva.Size = new System.Drawing.Size(195, 20);
             this.lblRespSecretanueva.TabIndex = 6;
             this.lblRespSecretanueva.Text = "Respuesta secreta nueva:";
             // 
@@ -189,9 +203,10 @@
             // 
             this.lblPregSecreta.AutoSize = true;
             this.lblPregSecreta.Enabled = false;
-            this.lblPregSecreta.Location = new System.Drawing.Point(7, 16);
+            this.lblPregSecreta.Location = new System.Drawing.Point(10, 25);
+            this.lblPregSecreta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPregSecreta.Name = "lblPregSecreta";
-            this.lblPregSecreta.Size = new System.Drawing.Size(124, 13);
+            this.lblPregSecreta.Size = new System.Drawing.Size(182, 20);
             this.lblPregSecreta.TabIndex = 5;
             this.lblPregSecreta.Text = "Pregunta secreta nueva:";
             this.lblPregSecreta.Click += new System.EventHandler(this.label1_Click);
@@ -206,18 +221,45 @@
             this.groupBoxRol.Controls.Add(this.rbModificarRol);
             this.groupBoxRol.Controls.Add(this.lblCambioRol);
             this.groupBoxRol.Controls.Add(this.lblRolActual);
-            this.groupBoxRol.Location = new System.Drawing.Point(12, 187);
+            this.groupBoxRol.Location = new System.Drawing.Point(18, 288);
+            this.groupBoxRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxRol.Name = "groupBoxRol";
-            this.groupBoxRol.Size = new System.Drawing.Size(376, 56);
+            this.groupBoxRol.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBoxRol.Size = new System.Drawing.Size(564, 86);
             this.groupBoxRol.TabIndex = 3;
             this.groupBoxRol.TabStop = false;
             this.groupBoxRol.Text = "Cambio de rol";
             this.groupBoxRol.Enter += new System.EventHandler(this.groupBox1_Enter);
             // 
+            // cmbRolActual
+            // 
+            this.cmbRolActual.Enabled = false;
+            this.cmbRolActual.FormattingEnabled = true;
+            this.cmbRolActual.Location = new System.Drawing.Point(111, 26);
+            this.cmbRolActual.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbRolActual.Name = "cmbRolActual";
+            this.cmbRolActual.Size = new System.Drawing.Size(148, 28);
+            this.cmbRolActual.TabIndex = 14;
+            // 
+            // rbEliminarRol
+            // 
+            this.rbEliminarRol.AutoSize = true;
+            this.rbEliminarRol.Enabled = false;
+            this.rbEliminarRol.Location = new System.Drawing.Point(435, -5);
+            this.rbEliminarRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.rbEliminarRol.Name = "rbEliminarRol";
+            this.rbEliminarRol.Size = new System.Drawing.Size(83, 24);
+            this.rbEliminarRol.TabIndex = 13;
+            this.rbEliminarRol.TabStop = true;
+            this.rbEliminarRol.Text = "Eliminar";
+            this.rbEliminarRol.UseVisualStyleBackColor = true;
+            this.rbEliminarRol.CheckedChanged += new System.EventHandler(this.rbEliminarRol_CheckedChanged);
+            // 
             // checkBoxCambioRol
             // 
             this.checkBoxCambioRol.AutoSize = true;
-            this.checkBoxCambioRol.Location = new System.Drawing.Point(90, 0);
+            this.checkBoxCambioRol.Location = new System.Drawing.Point(135, 0);
+            this.checkBoxCambioRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxCambioRol.Name = "checkBoxCambioRol";
             this.checkBoxCambioRol.Size = new System.Drawing.Size(15, 14);
             this.checkBoxCambioRol.TabIndex = 8;
@@ -228,30 +270,34 @@
             // 
             this.rbAgregarRol.AutoSize = true;
             this.rbAgregarRol.Enabled = false;
-            this.rbAgregarRol.Location = new System.Drawing.Point(222, -2);
+            this.rbAgregarRol.Location = new System.Drawing.Point(333, -3);
+            this.rbAgregarRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbAgregarRol.Name = "rbAgregarRol";
-            this.rbAgregarRol.Size = new System.Drawing.Size(62, 17);
+            this.rbAgregarRol.Size = new System.Drawing.Size(84, 24);
             this.rbAgregarRol.TabIndex = 12;
             this.rbAgregarRol.TabStop = true;
             this.rbAgregarRol.Text = "Agregar";
             this.rbAgregarRol.UseVisualStyleBackColor = true;
+            this.rbAgregarRol.CheckedChanged += new System.EventHandler(this.rbAgregarRol_CheckedChanged);
             // 
             // cmbCambioRol
             // 
             this.cmbCambioRol.Enabled = false;
             this.cmbCambioRol.FormattingEnabled = true;
-            this.cmbCambioRol.Location = new System.Drawing.Point(244, 16);
+            this.cmbCambioRol.Location = new System.Drawing.Point(366, 25);
+            this.cmbCambioRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbCambioRol.Name = "cmbCambioRol";
-            this.cmbCambioRol.Size = new System.Drawing.Size(107, 21);
+            this.cmbCambioRol.Size = new System.Drawing.Size(158, 28);
             this.cmbCambioRol.TabIndex = 10;
             // 
             // rbModificarRol
             // 
             this.rbModificarRol.AutoSize = true;
             this.rbModificarRol.Enabled = false;
-            this.rbModificarRol.Location = new System.Drawing.Point(148, -2);
+            this.rbModificarRol.Location = new System.Drawing.Point(222, -3);
+            this.rbModificarRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.rbModificarRol.Name = "rbModificarRol";
-            this.rbModificarRol.Size = new System.Drawing.Size(68, 17);
+            this.rbModificarRol.Size = new System.Drawing.Size(91, 24);
             this.rbModificarRol.TabIndex = 11;
             this.rbModificarRol.TabStop = true;
             this.rbModificarRol.Text = "Modificar";
@@ -261,9 +307,10 @@
             // 
             this.lblCambioRol.AutoSize = true;
             this.lblCambioRol.Enabled = false;
-            this.lblCambioRol.Location = new System.Drawing.Point(181, 20);
+            this.lblCambioRol.Location = new System.Drawing.Point(272, 31);
+            this.lblCambioRol.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCambioRol.Name = "lblCambioRol";
-            this.lblCambioRol.Size = new System.Drawing.Size(57, 13);
+            this.lblCambioRol.Size = new System.Drawing.Size(85, 20);
             this.lblCambioRol.TabIndex = 9;
             this.lblCambioRol.Text = "Cambiar a:";
             // 
@@ -271,9 +318,10 @@
             // 
             this.lblRolActual.AutoSize = true;
             this.lblRolActual.Enabled = false;
-            this.lblRolActual.Location = new System.Drawing.Point(10, 20);
+            this.lblRolActual.Location = new System.Drawing.Point(15, 31);
+            this.lblRolActual.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRolActual.Name = "lblRolActual";
-            this.lblRolActual.Size = new System.Drawing.Size(58, 13);
+            this.lblRolActual.Size = new System.Drawing.Size(84, 20);
             this.lblRolActual.TabIndex = 0;
             this.lblRolActual.Text = "Rol actual:";
             // 
@@ -281,9 +329,11 @@
             // 
             this.groupBoxEstado.Controls.Add(this.checkBoxEstado);
             this.groupBoxEstado.Controls.Add(this.cmbEstado);
-            this.groupBoxEstado.Location = new System.Drawing.Point(13, 252);
+            this.groupBoxEstado.Location = new System.Drawing.Point(20, 388);
+            this.groupBoxEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBoxEstado.Name = "groupBoxEstado";
-            this.groupBoxEstado.Size = new System.Drawing.Size(162, 58);
+            this.groupBoxEstado.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBoxEstado.Size = new System.Drawing.Size(243, 89);
             this.groupBoxEstado.TabIndex = 4;
             this.groupBoxEstado.TabStop = false;
             this.groupBoxEstado.Text = "Estado";
@@ -291,7 +341,8 @@
             // checkBoxEstado
             // 
             this.checkBoxEstado.AutoSize = true;
-            this.checkBoxEstado.Location = new System.Drawing.Point(52, 0);
+            this.checkBoxEstado.Location = new System.Drawing.Point(78, 0);
+            this.checkBoxEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.checkBoxEstado.Name = "checkBoxEstado";
             this.checkBoxEstado.Size = new System.Drawing.Size(15, 14);
             this.checkBoxEstado.TabIndex = 11;
@@ -302,17 +353,19 @@
             // 
             this.cmbEstado.Enabled = false;
             this.cmbEstado.FormattingEnabled = true;
-            this.cmbEstado.Location = new System.Drawing.Point(6, 19);
+            this.cmbEstado.Location = new System.Drawing.Point(9, 29);
+            this.cmbEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbEstado.Name = "cmbEstado";
-            this.cmbEstado.Size = new System.Drawing.Size(130, 21);
+            this.cmbEstado.Size = new System.Drawing.Size(193, 28);
             this.cmbEstado.TabIndex = 11;
             // 
             // btnCambiarContraseña
             // 
             this.btnCambiarContraseña.Enabled = false;
-            this.btnCambiarContraseña.Location = new System.Drawing.Point(339, 13);
+            this.btnCambiarContraseña.Location = new System.Drawing.Point(508, 20);
+            this.btnCambiarContraseña.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCambiarContraseña.Name = "btnCambiarContraseña";
-            this.btnCambiarContraseña.Size = new System.Drawing.Size(75, 81);
+            this.btnCambiarContraseña.Size = new System.Drawing.Size(112, 125);
             this.btnCambiarContraseña.TabIndex = 5;
             this.btnCambiarContraseña.Text = "Cambiar";
             this.btnCambiarContraseña.UseVisualStyleBackColor = true;
@@ -321,9 +374,10 @@
             // btnCambiarPregunta
             // 
             this.btnCambiarPregunta.Enabled = false;
-            this.btnCambiarPregunta.Location = new System.Drawing.Point(339, 100);
+            this.btnCambiarPregunta.Location = new System.Drawing.Point(508, 154);
+            this.btnCambiarPregunta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCambiarPregunta.Name = "btnCambiarPregunta";
-            this.btnCambiarPregunta.Size = new System.Drawing.Size(75, 81);
+            this.btnCambiarPregunta.Size = new System.Drawing.Size(112, 125);
             this.btnCambiarPregunta.TabIndex = 13;
             this.btnCambiarPregunta.Text = "Cambiar";
             this.btnCambiarPregunta.UseVisualStyleBackColor = true;
@@ -332,9 +386,10 @@
             // btnCambiarRol
             // 
             this.btnCambiarRol.Enabled = false;
-            this.btnCambiarRol.Location = new System.Drawing.Point(394, 187);
+            this.btnCambiarRol.Location = new System.Drawing.Point(591, 288);
+            this.btnCambiarRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCambiarRol.Name = "btnCambiarRol";
-            this.btnCambiarRol.Size = new System.Drawing.Size(60, 56);
+            this.btnCambiarRol.Size = new System.Drawing.Size(90, 86);
             this.btnCambiarRol.TabIndex = 14;
             this.btnCambiarRol.Text = "Cambiar";
             this.btnCambiarRol.UseVisualStyleBackColor = true;
@@ -343,40 +398,20 @@
             // btnCambiarEstado
             // 
             this.btnCambiarEstado.Enabled = false;
-            this.btnCambiarEstado.Location = new System.Drawing.Point(181, 254);
+            this.btnCambiarEstado.Location = new System.Drawing.Point(272, 391);
+            this.btnCambiarEstado.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCambiarEstado.Name = "btnCambiarEstado";
-            this.btnCambiarEstado.Size = new System.Drawing.Size(60, 56);
+            this.btnCambiarEstado.Size = new System.Drawing.Size(90, 86);
             this.btnCambiarEstado.TabIndex = 15;
             this.btnCambiarEstado.Text = "Cambiar";
             this.btnCambiarEstado.UseVisualStyleBackColor = true;
             this.btnCambiarEstado.Click += new System.EventHandler(this.btnCambiarEstado_Click);
             // 
-            // rbEliminarRol
-            // 
-            this.rbEliminarRol.AutoSize = true;
-            this.rbEliminarRol.Enabled = false;
-            this.rbEliminarRol.Location = new System.Drawing.Point(290, -3);
-            this.rbEliminarRol.Name = "rbEliminarRol";
-            this.rbEliminarRol.Size = new System.Drawing.Size(61, 17);
-            this.rbEliminarRol.TabIndex = 13;
-            this.rbEliminarRol.TabStop = true;
-            this.rbEliminarRol.Text = "Eliminar";
-            this.rbEliminarRol.UseVisualStyleBackColor = true;
-            // 
-            // cmbRolActual
-            // 
-            this.cmbRolActual.Enabled = false;
-            this.cmbRolActual.FormattingEnabled = true;
-            this.cmbRolActual.Location = new System.Drawing.Point(74, 17);
-            this.cmbRolActual.Name = "cmbRolActual";
-            this.cmbRolActual.Size = new System.Drawing.Size(100, 21);
-            this.cmbRolActual.TabIndex = 14;
-            // 
             // ModificacionUsuario
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(466, 318);
+            this.ClientSize = new System.Drawing.Size(699, 489);
             this.Controls.Add(this.btnCambiarEstado);
             this.Controls.Add(this.btnCambiarRol);
             this.Controls.Add(this.btnCambiarPregunta);
@@ -386,6 +421,7 @@
             this.Controls.Add(this.groupBoxPregunta);
             this.Controls.Add(this.groupBoxContraseña);
             this.Controls.Add(this.btnVolver);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ModificacionUsuario";
             this.Text = "Modificacion de Usuario";
             this.groupBoxContraseña.ResumeLayout(false);

@@ -94,24 +94,60 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
         private void btnAltaUsuario_Click(object sender, EventArgs e)
         {
-            if (GestorDeSistema.usuarioExiste(txtUsuario.Text) == false)
+            bool validacionCorrecta = validaciones();
+            if (validacionCorrecta == true)
             {
-                if (txtContraseña.Text == txtVerificarContraseña.Text)
+                if (GestorDeSistema.usuarioExiste(txtUsuario.Text) == false)
                 {
-                    GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, clienteID);
-                    System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
-                    Owner.Show();
-                    this.Hide();
+                    if (txtContraseña.Text == txtVerificarContraseña.Text)
+                    {
+                        GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, clienteID);
+                        System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
+                        Owner.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("Los campos de contraseña no coinciden. Por favor verifique.");
+                    }
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Los campos de contraseña no coinciden. Por favor verifique.");
+                    System.Windows.Forms.MessageBox.Show("Usuario existente. Por favor elija otro nombre de Usuario.");
                 }
             }
-            else 
+
+            
+        }
+
+        private bool validaciones()
+        {
+            string textoUsuario = txtUsuario.Text;
+            string textoContraseña = txtContraseña.Text;
+            string textoPregSec = txtPreguntaSecreta.Text;
+            string textoRespSec = txtRespuestaSecreta.Text;
+
+            if (textoUsuario == "")
             {
-                System.Windows.Forms.MessageBox.Show("Usuario existente. Por favor elija otro nombre de Usuario.");
+                MessageBox.Show("El campo 'Usuario' no puede estar vacío", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
             }
+            if (textoContraseña == "")
+            {
+                MessageBox.Show("El campo 'Contraseña' no puede estar vacío", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (textoPregSec == "")
+            {
+                MessageBox.Show("El campo 'Pregunta secreta' no puede estar vacío", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (textoRespSec == "")
+            {
+                MessageBox.Show("El campo 'Respuesta secreta' no puede estar vacío", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            return true;
         }
     }
     

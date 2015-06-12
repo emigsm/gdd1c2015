@@ -22,6 +22,13 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             InitializeComponent();
             usuarioID = usuarioIDP;
             estadoUsuario = estadoUsuarioP;
+            inicializar();
+            
+    
+        }
+        private void inicializar()
+        {
+
 
             DataTable dtcmbEstado = new DataTable();
             dtcmbEstado.Columns.Add("DisplayMember");
@@ -30,7 +37,6 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             dtcmbEstado.Rows.Add("Habilitado", true);
             dtcmbEstado.Rows.Add("Deshabilitado", false);
 
-            cmbEstado.Items.Clear();
             cmbEstado.DataSource = dtcmbEstado;
             cmbEstado.DisplayMember = "DisplayMember";
             cmbEstado.ValueMember = "ValueMember";
@@ -45,8 +51,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             DataTable rolesUsuario = GestorDeSistema.obtenerRolesParaUsuario(usuarioID);
             cmbRolActual.DisplayMember = "Rol_Nombre";
             cmbRolActual.ValueMember = "Rol_Cod";
-            cmbRolActual.DataSource = rolesUsuario;
-        
+            cmbRolActual.DataSource = rolesUsuario;    
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -122,6 +127,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 cmbCambioRol.Enabled = true;
                 rbModificarRol.Enabled = true;
                 rbAgregarRol.Enabled = true;
+                rbAgregarRol.Checked = true;
                 btnCambiarRol.Enabled = true;
                 rbEliminarRol.Enabled = true;
             }
@@ -178,19 +184,44 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             System.Windows.Forms.MessageBox.Show("Pregunta secreta cambiada correctamente");
         }
 
-        private void btnCambiarRol_Click(object sender, EventArgs e)
+        private void btnCambiarRol_Click(object sender, EventArgs e) // ACTUALIZA UNA VEZ HECHA LA ACION
         {
-            if (rbAgregarRol.Checked == true)
+            List<int> rolesActuales = new List<int>();
+            for (int i = 0; i < cmbRolActual.Items.Count; i++)
             {
-                /*FALTA VERIFICAR QUE NO AGREGUE ROLES QUE YA POSEE*/
-                GestorDeSistema.agregarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue));
-                System.Windows.Forms.MessageBox.Show("Rol agregado correctamente");
+                cmbRolActual.SelectedIndex = i;
+                rolesActuales.Add(Convert.ToInt32(cmbRolActual.SelectedValue));
+            }
+
+            
+            if (rbAgregarRol.Checked == true)
+                            
+            {
+                if (rolesActuales.Contains(Convert.ToInt32(cmbCambioRol.SelectedValue)))
+                {
+                    MessageBox.Show("Ya posee el rol que intenta agregar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    GestorDeSistema.agregarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue));
+                    System.Windows.Forms.MessageBox.Show("Rol agregado correctamente");
+                }
+
+
             }
             else if(rbModificarRol.Checked == true)
             {
-                /*FALTA VERIFICAR QUE NO SE PUEDA CAMBIAR UN ROL AL MISMO Y COSAS ASI*/
-                GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
-                System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
+
+                if (rolesActuales.Contains(Convert.ToInt32(cmbCambioRol.SelectedValue)))
+                {
+                    MessageBox.Show("Ya posee el rol que intenta modificar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
+                    System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
+                }
+
             }
             else if (rbEliminarRol.Checked == true)
             {
@@ -210,6 +241,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             {
                 System.Windows.Forms.MessageBox.Show("Debe elegir una accion para realizar sobre el Rol", "Error");
             }
+            this.inicializar();
         }
 
         private void btnCambiarEstado_Click(object sender, EventArgs e)
@@ -218,6 +250,33 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             GestorDeSistema.cambiarHabilitacionUsuario(Convert.ToBoolean(cmbEstado.SelectedValue), usuarioID);
             System.Windows.Forms.MessageBox.Show("Habilitacion cambiada correctamente");
         }
+
+        private void rbAgregarRol_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbAgregarRol.Checked == true)
+            {
+                lblCambioRol.Text = "Agregar:";
+            }
+            else
+            {
+                lblCambioRol.Text = "Cambiar a:";
+            }
+        }
+
+        private void rbEliminarRol_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbEliminarRol.Checked == true)
+            {
+                lblCambioRol.Enabled = false;
+                cmbCambioRol.Enabled = false;
+            }
+            else
+            {
+                lblCambioRol.Enabled = true;
+                cmbCambioRol.Enabled = true;
+            }
+        }
+
 
     }
 }

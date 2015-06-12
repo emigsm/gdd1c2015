@@ -27,3 +27,6 @@ C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Listados.ListadosPrincipal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Retiros.RetirosPrincipal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Transferencias.TransferenciasPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Facturacion.ComprarSuscripciones.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Facturacion.FacturacionPrincipal.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Release\PagoElectronico.Operaciones.Facturacion.GenerarFactura.resources

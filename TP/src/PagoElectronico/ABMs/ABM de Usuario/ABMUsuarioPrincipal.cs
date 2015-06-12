@@ -81,10 +81,11 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 bool estadoHabilitacion = Convert.ToBoolean(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_Habilitado"].Value.ToString());
                 int usuarioIDAModificar = Convert.ToInt32(dgvUsuario.Rows[e.RowIndex].Cells["Usuario_ID"].Value.ToString());
                 ModificacionUsuario frmModificacionUsuario = new ModificacionUsuario(usuarioIDAModificar, estadoHabilitacion);
-                frmModificacionUsuario.Show(this);
                 this.Hide();
+                frmModificacionUsuario.ShowDialog(this);
+                btnBuscarUsuario.PerformClick();                
             }
-            else if (e.ColumnIndex == 5)
+            if (e.ColumnIndex == 5)
             {
                 string usernameAEliminar = dgvUsuario.Rows[e.RowIndex].Cells["Usuario_Username"].Value.ToString();
                 DialogResult res = MessageBox.Show("Se inhabilitará el usuario: " + usernameAEliminar + "\n¿Está seguro?", "Atención", MessageBoxButtons.YesNo);

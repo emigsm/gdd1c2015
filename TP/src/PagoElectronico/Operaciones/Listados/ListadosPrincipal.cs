@@ -107,6 +107,15 @@ namespace PagoElectronico.Operaciones.Listados
                     } 
                     break;
                 case 5:
+                    DataTable listado5 = GestorDeSistema.listado5(anioSeleccionado, trimestreSeleccionado);
+                    if (listado5.Rows.Count > 0)
+                    {
+                        dgvResultados.DataSource = listado5;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("No se encontraron operaciones con los datos proporcionados");
+                    } 
                     break;
             }
         }

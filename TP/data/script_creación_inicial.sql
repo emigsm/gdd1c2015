@@ -849,6 +849,35 @@ RETURN @Resultado;
 END
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerTipoCuentaDeOperacion')
+	DROP FUNCTION GEM4.fnObtenerTipoCuentaDeOperacion
+GO
+CREATE FUNCTION GEM4.fnObtenerTipoCuentaDeOperacion (@tipoOperacion INT)
+RETURNS  NVARCHAR(8)
+AS
+BEGIN
+DECLARE @retorno NVARCHAR(8);
+IF (@tipoOperacion = 4) OR (@tipoOperacion = 11) OR(@tipoOperacion = 16)
+	BEGIN
+		SET @retorno = 'GRATIS';
+	END 
+IF (@tipoOperacion = 5) OR (@tipoOperacion = 10) OR(@tipoOperacion = 15)
+	BEGIN
+		SET @retorno = 'BRONCE';
+	END 
+IF (@tipoOperacion = 6) OR (@tipoOperacion = 9) OR(@tipoOperacion = 14)
+	BEGIN
+		SET @retorno = 'PLATA';
+	END 
+IF (@tipoOperacion = 7) OR (@tipoOperacion = 8) OR(@tipoOperacion = 13)
+	BEGIN
+		SET @retorno = 'ORO';
+	END 	
+
+RETURN @retorno;
+END;
+GO
+
 
 /* ***************************************** INICIALIZACION DE DATOS ************************************************** */
 
@@ -2158,6 +2187,22 @@ FROM (SELECT DISTINCT COUNT(Deposito_Cuenta) Cantidad_Ingresos, GEM4.fnDevolverP
 ORDER BY Cantidad_Ingresos DESC
 GO
 
+--5. Total facturado para los distintos tipos de cuentas. (ya sean apertura, transferencia o compra de suscripciones, dependiendo del tipo de cuenta, se considera facturable a tal tipo de cuenta)
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico5')
+	DROP PROCEDURE GEM4.spListadoEstadistico5;
+
+GO
+
+CREATE PROCEDURE GEM4.spListadoEstadistico5
+	@anio				INT,
+	@trimestre			INT
+AS
+SELECT TOP 5 GEM4.fnObtenerTipoCuentaDeOperacion(Operacion_Facturable_Tipo) Tipo_Cuenta , SUM(Operacion_Facturable_Costo) Total_Facturado
+FROM GEM4.Operacion_Facturable 
+WHERE (Operacion_Facturable_Factura_Numero IS NOT NULL) AND (Operacion_Facturable_Tipo BETWEEN 4 AND 11 OR Operacion_Facturable_Tipo BETWEEN 13 AND 16) AND (YEAR(Operacion_Facturable_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Operacion_Facturable_Fecha) = @trimestre)
+GROUP BY GEM4.fnObtenerTipoCuentaDeOperacion(Operacion_Facturable_Tipo) 
+ORDER BY Total_Facturado
+GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spBuscarCuentas')
 	DROP PROCEDURE GEM4.spBuscarCuentas;

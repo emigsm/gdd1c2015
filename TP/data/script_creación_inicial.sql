@@ -2304,6 +2304,14 @@ SET @Costo =0;
 	SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
 	SET @Fecha = GEM4.fnDevolverFechaSistema();
 	
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Saldo = Cuenta_Saldo + @Importe
+	WHERE Cuenta_Numero = @CuentaDestino
+	
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Saldo = Cuenta_Saldo - @Importe
+	WHERE Cuenta_Numero = @CuentaOrigen
+	
 	
 	IF(@CuentaOrigenCliente != @CuentaDestinoCliente)
 		BEGIN

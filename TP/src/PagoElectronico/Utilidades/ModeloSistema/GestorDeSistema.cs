@@ -64,6 +64,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_DESVINCULARTARJETA = "GEM4.spDesvincularTarjeta";
         private const string STORE_VINCULARTARJETA = "GEM4.spVincularTarjeta";
         private const string STORE_OBTENERCUENTASCLIENTE = "GEM4.spObtenerCuentasCliente";
+        private const string STORE_OBTENERSALDO = "GEM4.spObtenerSaldo";
         private const string STORE_SALDOSDEPOSITOS = "GEM4.spConsultaSaldosDepositos";
         private const string STORE_SALDOSRETIROS = "GEM4.spConsultaSaldosRetiros";
         private const string STORE_SALDOSTRANSFERENCIAS = "GEM4.spConsultaSaldosTransferencias";
@@ -612,6 +613,17 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerCuentas.Dispose();
             return cuentas;
+        }
+
+        public static string obtenerSaldo(int clienteID, long numeroCuenta)
+        {
+            string saldo;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@cuentaNro", numeroCuenta));
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERSALDO, SCALAR, parametros);
+            saldo = resultadoStoreProcedure.ToString();
+            return saldo;
         }
 
         public static DataTable saldosDepositos(int clienteID, long numeroCuenta)

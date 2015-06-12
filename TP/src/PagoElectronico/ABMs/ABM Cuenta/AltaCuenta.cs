@@ -60,7 +60,7 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             clienteID = txtClienteID.Text;
             numeroCuenta = GestorDeSistema.altaCuenta(clienteID, Convert.ToInt32(cmbPais.SelectedValue), Convert.ToInt32(cmbMoneda.SelectedValue), Convert.ToInt32(cmbTipoCuenta.SelectedValue));
             System.Windows.Forms.MessageBox.Show("Cuenta creada correctamente");
-            System.Windows.Forms.MessageBox.Show("Su Cuenta ha sido dada de alta. \nEl numero de cuenta es: " + numeroCuenta.ToString() + " \nActualmente su cuenta se encuenta PENDIENTE DE ACTIVACION, consulte la seccion de Facturación");
+            System.Windows.Forms.MessageBox.Show("Su Cuenta ha sido dada de alta. \nEl numero de cuenta es:" + numeroCuenta.ToString() + " \nActualmente su cuenta se encuenta PENDIENTE DE ACTIVACION, consulte la seccion de Facturación. Una vez activada, recuerde comprar suscripciones.");
             //METODO DE FACTURACION
         }
     }

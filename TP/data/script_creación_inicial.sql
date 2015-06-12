@@ -1878,7 +1878,19 @@ AS
 			DATEADD(YEAR,1,GEM4.fnDevolverFechaSistema()),@clienteID);
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerSaldo')
+	DROP PROCEDURE GEM4.spObtenerSaldo;
 
+GO
+
+CREATE PROCEDURE GEM4.spObtenerSaldo
+	@clienteID			INT,
+	@cuentaNro			NUMERIC(18,0)
+AS
+	SELECT Cuenta_Saldo
+	FROM GEM4.Cuenta
+	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @cuentaNro
+GO
 
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosDepositos')

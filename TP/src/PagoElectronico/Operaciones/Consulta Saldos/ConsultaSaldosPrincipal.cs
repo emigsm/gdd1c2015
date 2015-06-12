@@ -79,6 +79,7 @@ namespace PagoElectronico.Operaciones.Consulta_Saldos
 
             int clienteABuscar = Convert.ToInt32(txtClienteNumero.Text);
             long cuentaABuscar = Convert.ToInt64(cmbCuentas.SelectedValue);
+            lblVSaldo.Text = GestorDeSistema.obtenerSaldo(clienteABuscar, cuentaABuscar);
             DataTable saldosDepositos = GestorDeSistema.saldosDepositos(clienteABuscar, cuentaABuscar);
             if (saldosDepositos.Rows.Count > 0)
             {

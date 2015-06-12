@@ -233,6 +233,7 @@
             // 
             // cmbRolActual
             // 
+            this.cmbRolActual.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRolActual.Enabled = false;
             this.cmbRolActual.FormattingEnabled = true;
             this.cmbRolActual.Location = new System.Drawing.Point(111, 26);
@@ -282,6 +283,7 @@
             // 
             // cmbCambioRol
             // 
+            this.cmbCambioRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCambioRol.Enabled = false;
             this.cmbCambioRol.FormattingEnabled = true;
             this.cmbCambioRol.Location = new System.Drawing.Point(366, 25);
@@ -351,6 +353,7 @@
             // 
             // cmbEstado
             // 
+            this.cmbEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbEstado.Enabled = false;
             this.cmbEstado.FormattingEnabled = true;
             this.cmbEstado.Location = new System.Drawing.Point(9, 29);

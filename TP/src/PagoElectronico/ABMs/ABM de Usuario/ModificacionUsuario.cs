@@ -165,7 +165,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
         private void btnVerificarContraseña_Click(object sender, EventArgs e)
         {
-            if (txtContraseña.Text == txtVerificarContraseña.Text)
+            if ((txtContraseña.Text == txtVerificarContraseña.Text) && (txtContraseña.Text != ""))
             {
                 /*CAMBIO DE CONTRASEÑA*/
                 GestorDeSistema.cambiarContraseña(usuarioID, Cifrador.Cifrar(txtContraseña.Text));
@@ -174,14 +174,22 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             else
             {
                 /*CAMPOS NO COINCIDEN*/
-                System.Windows.Forms.MessageBox.Show("Los campos no coinciden. Por favor verifique.");
+                System.Windows.Forms.MessageBox.Show("Los campos no coinciden o estan vacíos. Por favor verifique las inconsistencias.", "Error");
             }
         }
 
         private void btnCambiarPregunta_Click(object sender, EventArgs e)
         {
-            GestorDeSistema.cambiarPreguntaSecreta(usuarioID, txtPregSec.Text, txtRespSec.Text);
-            System.Windows.Forms.MessageBox.Show("Pregunta secreta cambiada correctamente");
+            if (txtPregSec.Text != "" && txtRespSec.Text != "")
+            {
+                GestorDeSistema.cambiarPreguntaSecreta(usuarioID, txtPregSec.Text, txtRespSec.Text);
+                System.Windows.Forms.MessageBox.Show("Pregunta secreta cambiada correctamente");
+            }
+            else
+            {
+                System.Windows.Forms.MessageBox.Show("No puede dejar campos vacíos. Por favor verifique las inconsistencias.", "Error");
+            }
+
         }
 
         private void btnCambiarRol_Click(object sender, EventArgs e) // ACTUALIZA UNA VEZ HECHA LA ACION
@@ -241,7 +249,6 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             {
                 System.Windows.Forms.MessageBox.Show("Debe elegir una accion para realizar sobre el Rol", "Error");
             }
-            this.inicializar();
         }
 
         private void btnCambiarEstado_Click(object sender, EventArgs e)

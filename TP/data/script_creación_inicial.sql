@@ -2113,6 +2113,11 @@ SET @OPERACION_TIPO =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHER
 			,Deposito_Cuenta)
 			VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
 			
+			UPDATE GEM4.Cuenta
+			SET Cuenta_Saldo = Cuenta_Saldo + @Importe
+			WHERE Cuenta_Numero = @Cuenta
+	
+			
 			SET @OPERACION_ID= IDENT_CURRENT('GEM4.Deposito');
 			
 			EXEC GEM4.spInsertarOperacion @OPERACION_ID,@OPERACION_TIPO,@FECHA,@CLIENTE;

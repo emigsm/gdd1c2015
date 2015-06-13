@@ -1862,7 +1862,7 @@ SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.
 
 	
 	UPDATE GEM4.Cuenta
-	SET Cuenta_Tipo = @codTipo
+	SET Cuenta_Tipo = @codTipo, Cuenta_Suscripciones_Compradas = 0, Cuenta_Suscripciones_Fecha = SYSDATETIME()
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 	
 	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo;

@@ -130,5 +130,10 @@ namespace PagoElectronico
         {
 
         }
+
+        private void cmbFuncionalidades_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

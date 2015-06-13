@@ -35,18 +35,21 @@
             // 
             // cmbRol
             // 
+            this.cmbRol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRol.FormattingEnabled = true;
-            this.cmbRol.Location = new System.Drawing.Point(12, 12);
+            this.cmbRol.Location = new System.Drawing.Point(18, 18);
+            this.cmbRol.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbRol.Name = "cmbRol";
-            this.cmbRol.Size = new System.Drawing.Size(121, 21);
+            this.cmbRol.Size = new System.Drawing.Size(180, 28);
             this.cmbRol.TabIndex = 0;
             this.cmbRol.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.cmbRol_KeyPress);
             // 
             // btnSeleccionar
             // 
-            this.btnSeleccionar.Location = new System.Drawing.Point(149, 12);
+            this.btnSeleccionar.Location = new System.Drawing.Point(224, 18);
+            this.btnSeleccionar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnSeleccionar.Name = "btnSeleccionar";
-            this.btnSeleccionar.Size = new System.Drawing.Size(75, 23);
+            this.btnSeleccionar.Size = new System.Drawing.Size(112, 35);
             this.btnSeleccionar.TabIndex = 1;
             this.btnSeleccionar.Text = "Seleccionar";
             this.btnSeleccionar.UseVisualStyleBackColor = true;
@@ -54,9 +57,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(149, 41);
+            this.btnVolver.Location = new System.Drawing.Point(224, 63);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(112, 35);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -64,12 +68,13 @@
             // 
             // SeleccionRol
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(248, 74);
+            this.ClientSize = new System.Drawing.Size(372, 114);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnSeleccionar);
             this.Controls.Add(this.cmbRol);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "SeleccionRol";
             this.Text = "SeleccionRol";
             this.Load += new System.EventHandler(this.SeleccionRol_Load);

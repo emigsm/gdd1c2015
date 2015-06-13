@@ -84,12 +84,26 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
         private void btnRegistrarCliente_Click(object sender, EventArgs e)
         {
-            AltaCliente nuevoCliente = new AltaCliente();
-            System.Windows.Forms.MessageBox.Show("El usuario sera dado de alta una vez que se registre como Nuevo Cliente.");
+            bool validacionCorrecta = validaciones();
+            if (validacionCorrecta == true)
+            {
+                if (txtContraseña.Text == txtVerificarContraseña.Text)
+                {
+                    AltaCliente nuevoCliente = new AltaCliente();
+                    System.Windows.Forms.MessageBox.Show("El usuario sera dado de alta una vez que se registre como Nuevo Cliente.");
 
-            nuevoCliente.altaProvenienteDeUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);
-            nuevoCliente.Show(this);
-            this.Hide();
+                    nuevoCliente.altaProvenienteDeUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text);
+                    nuevoCliente.Show(this);
+                    this.Hide();
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("Los campos de contraseña no coinciden. Por favor verifique.");
+
+                }
+
+            }
+
         }
 
         private void btnAltaUsuario_Click(object sender, EventArgs e)
@@ -97,23 +111,16 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             bool validacionCorrecta = validaciones();
             if (validacionCorrecta == true)
             {
-                if (GestorDeSistema.usuarioExiste(txtUsuario.Text) == false)
+                if (txtContraseña.Text == txtVerificarContraseña.Text)
                 {
-                    if (txtContraseña.Text == txtVerificarContraseña.Text)
-                    {
-                        GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, clienteID);
-                        System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
-                        Owner.Show();
-                        this.Hide();
-                    }
-                    else
-                    {
-                        System.Windows.Forms.MessageBox.Show("Los campos de contraseña no coinciden. Por favor verifique.");
-                    }
+                    GestorDeSistema.altaUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContraseña.Text), Convert.ToInt32(cmbRol.SelectedValue), txtPreguntaSecreta.Text, txtRespuestaSecreta.Text, clienteID);
+                    System.Windows.Forms.MessageBox.Show("El usuario fue dado de Alta correctamente");
+                    Owner.Show();
+                    this.Hide();
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Usuario existente. Por favor elija otro nombre de Usuario.");
+                    System.Windows.Forms.MessageBox.Show("Los campos de contraseña no coinciden. Por favor verifique.");
                 }
             }
 
@@ -145,6 +152,11 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             if (textoRespSec == "")
             {
                 MessageBox.Show("El campo 'Respuesta secreta' no puede estar vacío", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (GestorDeSistema.usuarioExiste(txtUsuario.Text) == true)
+            {
+                MessageBox.Show("Usuario existente. Por favor elija otro nombre de Usuario.", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             return true;

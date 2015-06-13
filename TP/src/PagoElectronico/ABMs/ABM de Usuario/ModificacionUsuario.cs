@@ -195,11 +195,13 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
         private void btnCambiarRol_Click(object sender, EventArgs e) // ACTUALIZA UNA VEZ HECHA LA ACION
         {
             List<int> rolesActuales = new List<int>();
+            int indexAnterior = cmbRolActual.SelectedIndex;
             for (int i = 0; i < cmbRolActual.Items.Count; i++)
             {
                 cmbRolActual.SelectedIndex = i;
                 rolesActuales.Add(Convert.ToInt32(cmbRolActual.SelectedValue));
             }
+            cmbRolActual.SelectedIndex = indexAnterior;
 
             
             if (rbAgregarRol.Checked == true)
@@ -236,7 +238,8 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 /*VERIFICAR QUE NO SE QUEDE SIN ROLES*/
                 if (cmbRolActual.Items.Count > 1)
                 {
-                    GestorDeSistema.eliminarRolAUsuario(usuarioID, Convert.ToInt32(cmbRolActual.SelectedValue));
+                    int rolAEliminar = Convert.ToInt32(cmbRolActual.SelectedValue);
+                    GestorDeSistema.eliminarRolAUsuario(usuarioID, rolAEliminar);
                     System.Windows.Forms.MessageBox.Show("Rol eliminado correctamente");
                 }
                 else

@@ -1406,8 +1406,17 @@ CREATE PROCEDURE GEM4.spAgregarRolAUsuario
 	@usuarioID		INT,
 	@rolCod			INT
 AS
-	INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
-		(@usuarioID, @rolCod, 1)
+	IF EXISTS(SELECT 1 FROM GEM4.Usuario_Por_Rol WHERE Usuario_ID = @usuarioID AND Rol_Cod = @rolCod) 
+	BEGIN
+		UPDATE GEM4.Usuario_Por_Rol
+		SET Habilitado = 1
+		WHERE Usuario_ID = @usuarioID AND Rol_Cod = @rolCod
+	END
+	ELSE
+	BEGIN
+		INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
+			(@usuarioID, @rolCod, 1)
+	END
 GO	
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarRolAUsuario')

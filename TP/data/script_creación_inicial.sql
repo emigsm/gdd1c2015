@@ -446,11 +446,15 @@ BEGIN
 	DECLARE @retorno BIT
 	DECLARE @duracion INT = (SELECT Tipo_Cuenta_Duracion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @cuentaTipo)
 	DECLARE @diasTotales INT = @duracion * @suscripcionesCompradas
-	IF ((DATEDIFF(D, SYSDATETIME() ,@fecha)) <= @diasTotales)
+	IF ((DATEDIFF(D, SYSDATETIME() ,@fecha)) >= @diasTotales)
 	BEGIN
-		SET @retorno = 0
+		SET @retorno = 0 /*NO ESTA VENCIDA , O SEA FALSE(0)*/
 	END
 	ELSE
+	BEGIN
+		SET @retorno = 1 /*ESTA VENCIDA , O SEA TRUE(1)*/
+	END
+		IF (@suscripcionesCompradas = 0)
 	BEGIN
 		SET @retorno = 1
 	END
@@ -909,8 +913,8 @@ BEGIN
 	INSERT INTO GEM4.Log_Login(Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento)
 	SELECT Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento FROM inserted
 	
-	DECLARE @loginCorrecto BIT = (SELECT TOP 1 Log_Login_Incorrecto FROM inserted)
-	IF @loginCorrecto = 0 /* VERIFICO SUSCRIPCIONES EN LAS CUENTAS */
+	DECLARE @login BIT = (SELECT TOP 1 Log_Login_Incorrecto FROM inserted)
+	IF @login = 0 /* LOGUEO CORRECTO ---> VERIFICO SUSCRIPCIONES EN LAS CUENTAS */
 	BEGIN
 		DECLARE @clienteID INT = (SELECT Usuario.Cliente_ID FROM inserted JOIN GEM4.Usuario ON (inserted.Log_Login_Usuario_ID = Usuario_ID) WHERE Cliente_ID IS NOT NULL)
 
@@ -923,7 +927,7 @@ BEGIN
 		FETCH NEXT FROM cursor_cuentas INTO @cuentaNumero, @cuentaEstado, @cuentaTipo, @cuentaSuscripcionesCompradas, @cuentaSuscripcionesFecha
 		WHILE @@FETCH_STATUS = 0
 		BEGIN
-			IF((GEM4.fnCuentaEstaVencida(@cuentaTipo, @cuentaSuscripcionesCompradas, @cuentaSuscripcionesFecha)) = 0)
+			IF((GEM4.fnCuentaEstaVencida(@cuentaTipo, @cuentaSuscripcionesCompradas, @cuentaSuscripcionesFecha)) = 1)
 				BEGIN
 					UPDATE GEM4.Cuenta
 					SET Cuenta_Estado = 2

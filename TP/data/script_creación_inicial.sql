@@ -446,7 +446,8 @@ BEGIN
 	DECLARE @retorno BIT
 	DECLARE @duracion INT = (SELECT Tipo_Cuenta_Duracion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @cuentaTipo)
 	DECLARE @diasTotales INT = @duracion * @suscripcionesCompradas
-	IF ((DATEDIFF(D, SYSDATETIME() ,@fecha)) >= @diasTotales)
+	DECLARE @diferenciaDias INT = ABS((DATEDIFF(D, SYSDATETIME() ,@fecha)))
+	IF (@diferenciaDias <= @diasTotales)
 	BEGIN
 		SET @retorno = 0 /*NO ESTA VENCIDA , O SEA FALSE(0)*/
 	END

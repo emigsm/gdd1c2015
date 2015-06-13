@@ -435,11 +435,28 @@ FROM GEM4.Cuenta JOIN GEM4.Tipo_Cuenta ON (Cuenta.Cuenta_Tipo = Tipo_Cuenta.Tipo
 					JOIN GEM4.Pais ON (Cuenta.Cuenta_Pais = Pais.Pais_Cod)
 GO
 
-/* *****************************************     CREACION DE TRIGGERS    ********************************************** */
-/* *****************************************	PROCEDIMIENTOS DE MIGRACION *******************************************/
-
-
 /********************************************	FUNCIONES AUXILIARES		*******************************************/
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnCuentaEstaVencida')
+	DROP FUNCTION GEM4.fnCuentaEstaVencida
+GO
+CREATE FUNCTION GEM4.fnCuentaEstaVencida(@cuentaTipo INT, @suscripcionesCompradas TINYINT , @fecha DATETIME)
+RETURNS BIT
+AS
+BEGIN
+	DECLARE @retorno BIT
+	DECLARE @duracion INT = (SELECT Tipo_Cuenta_Duracion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @cuentaTipo)
+	DECLARE @diasTotales INT = @duracion * @suscripcionesCompradas
+	IF ((DATEDIFF(D, SYSDATETIME() ,@fecha)) <= @diasTotales)
+	BEGIN
+		SET @retorno = 0
+	END
+	ELSE
+	BEGIN
+		SET @retorno = 1
+	END
+RETURN @retorno
+END
+GO
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnObtenerNumTarjetaCredito')
 	DROP FUNCTION GEM4.fnObtenerNumTarjetaCredito
@@ -876,6 +893,50 @@ IF (@tipoOperacion = 7) OR (@tipoOperacion = 8) OR(@tipoOperacion = 13)
 
 RETURN @retorno;
 END;
+GO
+
+/* *****************************************     CREACION DE TRIGGERS    ********************************************** */
+
+IF EXISTS (SELECT 1 FROM sysobjects WHERE name = 'verificacionSuscripcionesCuentas' AND type = 'TR')
+	DROP TRIGGER GEM4.verificacionSuscripcionesCuentas;
+GO
+
+CREATE TRIGGER GEM4.verificacionSuscripcionesCuentas
+ON GEM4.Log_Login
+INSTEAD OF INSERT AS
+BEGIN
+/* INSERTO FILAS EN EL LOGUEO PARA NO PERDERLAS */
+	INSERT INTO GEM4.Log_Login(Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento)
+	SELECT Log_Login_Usuario_ID, Log_Login_Fecha, Log_Login_Incorrecto, Log_Login_NIntento FROM inserted
+	
+	DECLARE @loginCorrecto BIT = (SELECT TOP 1 Log_Login_Incorrecto FROM inserted)
+	IF @loginCorrecto = 0 /* VERIFICO SUSCRIPCIONES EN LAS CUENTAS */
+	BEGIN
+		DECLARE @clienteID INT = (SELECT Usuario.Cliente_ID FROM inserted JOIN GEM4.Usuario ON (inserted.Log_Login_Usuario_ID = Usuario_ID) WHERE Cliente_ID IS NOT NULL)
+
+		/* CURSOR POR CUENTA*/
+		DECLARE @cuentaNumero NUMERIC(18,0), @cuentaEstado INT, @cuentaTipo INT, @cuentaSuscripcionesCompradas TINYINT, @cuentaSuscripcionesFecha DATETIME
+		
+		DECLARE cursor_cuentas CURSOR FOR
+		SELECT Cuenta_Numero, Cuenta_Estado, Cuenta_Tipo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha FROM GEM4.Cuenta WHERE Cuenta_Cliente_ID = @clienteID	
+		OPEN cursor_cuentas
+		FETCH NEXT FROM cursor_cuentas INTO @cuentaNumero, @cuentaEstado, @cuentaTipo, @cuentaSuscripcionesCompradas, @cuentaSuscripcionesFecha
+		WHILE @@FETCH_STATUS = 0
+		BEGIN
+			IF((GEM4.fnCuentaEstaVencida(@cuentaTipo, @cuentaSuscripcionesCompradas, @cuentaSuscripcionesFecha)) = 0)
+				BEGIN
+					UPDATE GEM4.Cuenta
+					SET Cuenta_Estado = 2
+					WHERE Cuenta_Numero = @cuentaNumero AND Cuenta_Estado != 3 AND Cuenta_Estado != 4
+				END
+			FETCH NEXT FROM cursor_cuentas INTO @cuentaNumero, @cuentaEstado, @cuentaTipo, @cuentaSuscripcionesCompradas, @cuentaSuscripcionesFecha
+		END
+		CLOSE cursor_cuentas
+		DEALLOCATE cursor_cuentas 
+		
+		/* FIN CURSOR POR CUENTA*/
+	END
+END
 GO
 
 

@@ -112,7 +112,9 @@ IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' A
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Deposito')
 	DROP TABLE GEM4.Deposito;
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Operacion_Facturable')	
-	DROP TABLE GEM4.Operacion_Facturable; 
+	DROP TABLE GEM4.Operacion_Facturable;
+IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Log_Cuentas_Inhabilitadas')	
+	DROP TABLE 	GEM4.Log_Cuentas_Inhabilitadas; 
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND TABLE_NAME = 'Operacion')
 	DROP TABLE GEM4.Operacion
 IF EXISTS (SELECT 1 FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'GEM4' AND  TABLE_NAME = 'Tipo_Operacion')
@@ -421,6 +423,17 @@ CREATE TABLE GEM4.Log_Login(
 	Log_Login_NIntento						INT,
 	PRIMARY KEY(Log_Login_Numero),
 	FOREIGN KEY(Log_Login_Usuario_ID) REFERENCES GEM4.Usuario(Usuario_ID)
+	)
+GO
+
+CREATE TABLE GEM4.Log_Cuentas_Inhabilitadas(
+	Log_Cuentas_Inhabilitadas_Numero		INT IDENTITY(1,1),
+	Log_Cuentas_Inhabilitadas_Cuenta		NUMERIC(18,0),
+	Log_Cuentas_Inhabilitadas_Fecha			DATETIME,
+	Log_Cuentas_Inhabilitadas_Veces			INT,
+	Log_Cuentas_Inhabilitadas_ClienteID		INT
+	PRIMARY KEY(Log_Cuentas_Inhabilitadas_Numero),
+	FOREIGN KEY(Log_Cuentas_Inhabilitadas_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
 	)
 GO
 	
@@ -1236,6 +1249,57 @@ AS
 		
 	END
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgInhabilitarCuentas')
+	DROP TRIGGER GEM4.tgInhabilitarCuentas;
+GO
+
+CREATE TRIGGER GEM4.tgInhabilitarCuentas
+ON GEM4.Operacion_Facturable
+INSTEAD OF INSERT
+AS
+	BEGIN
+		DECLARE @Cuenta Numeric(18,0);
+		
+		SELECT @Cuenta = Operacion_Facturable_Cuenta_Numero
+		FROM inserted;
+		
+		IF ((SELECT COUNT(O.Operacion_Facturable_ID) FROM GEM4.Operacion_Facturable O WHERE O.Operacion_Facturable_Cuenta_Numero = @Cuenta
+				AND O.Operacion_Facturable_Factura_Numero IS NULL AND O.Operacion_Facturable_Costo >0)=5)
+			AND (SELECT C.Cuenta_Estado	FROM GEM4.Cuenta C WHERE C.Cuenta_Numero = @Cuenta)=1
+				
+			BEGIN
+			
+				UPDATE GEM4.Cuenta
+				SET Cuenta_Estado = 2
+				WHERE Cuenta_Numero =@Cuenta;
+				
+				IF @Cuenta NOT IN (SELECT L.Log_Cuentas_Inhabilitadas_Cuenta FROM GEM4.Log_Cuentas_Inhabilitadas L)
+					INSERT INTO Log_Cuentas_Inhabilitadas (Log_Cuentas_Inhabilitadas_ClienteID,Log_Cuentas_Inhabilitadas_Cuenta
+					,Log_Cuentas_Inhabilitadas_Fecha,Log_Cuentas_Inhabilitadas_Veces)
+					SELECT I.Operacion_Facturable_Cliente_ID,I.Operacion_Facturable_Cuenta_Numero,SYSDATETIME(),
+					0
+					FROM inserted I
+				ELSE
+					UPDATE GEM4.Log_Cuentas_Inhabilitadas
+					SET Log_Cuentas_Inhabilitadas_Veces = Log_Cuentas_Inhabilitadas_Veces +1
+					WHERE Log_Cuentas_Inhabilitadas_Cuenta = @Cuenta
+			END
+			
+		ELSE
+		
+			BEGIN
+				INSERT INTO GEM4.Operacion_Facturable (Operacion_Facturable_Cliente_ID,Operacion_Facturable_Costo,Operacion_Facturable_Cuenta_Numero,
+				Operacion_Facturable_Detalle,Operacion_Facturable_Factura_Numero,Operacion_Facturable_Fecha,Operacion_Facturable_Tipo)
+				
+				SELECT Operacion_Facturable_Cliente_ID,Operacion_Facturable_Costo,Operacion_Facturable_Cuenta_Numero,
+				Operacion_Facturable_Detalle,Operacion_Facturable_Factura_Numero,Operacion_Facturable_Fecha,Operacion_Facturable_Tipo
+				FROM inserted
+			END
+	END		
+GO
+
+
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaRol')
 	DROP TRIGGER GEM4.tgActualizaRol;

@@ -326,10 +326,12 @@ CREATE TABLE GEM4.Operacion_Facturable(
 	Operacion_Facturable_Cliente_ID			INT, --ME PARECE QUE ES MEJOR QUE APUNTE A UN CLIENTE EN VEZ DE UN USUARIO, ES MAS DESCRIPTIVO
 	Operacion_Facturable_Detalle			NVARCHAR(255), --'DESCRIPCION DETALLADA' o algo por el estilo que muestra  directamente lo que iria en la factura, tipo [Apertura de cuenta 122422313234]
 	Operacion_Facturable_Costo				NUMERIC(18,2),
-	Operacion_Facturable_Factura_Numero		NUMERIC(18,0) 
+	Operacion_Facturable_Factura_Numero		NUMERIC(18,0),
+	Operacion_Facturable_Cuenta_Numero		NUMERIC(18,0) 
 	PRIMARY KEY(Operacion_Facturable_ID),
 	FOREIGN KEY(Operacion_Facturable_Factura_Numero) REFERENCES GEM4.Factura(Factura_Numero),
-	FOREIGN KEY(Operacion_Facturable_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID)
+	FOREIGN KEY(Operacion_Facturable_Tipo) REFERENCES GEM4.Tipo_Operacion(Tipo_Operacion_ID),
+	FOREIGN KEY(Operacion_Facturable_Cuenta_Numero) REFERENCES GEM4.Cuenta(Cuenta_Numero)
 	)
 /*	
 Agrego una lista de cosas facturables que encontre (creo que son todas, vayan aggregando si encuentran mas), son las cosas que irian en operaciones facturables
@@ -1649,7 +1651,7 @@ SET @CuentaNro =IDENT_CURRENT('GEM4.Cuenta');
 SET @Detalle = 'Apertura de Cuenta tipo: [' +(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @tipoCuenta)+ '] Cuenta NRO: ['+	CONVERT(NVARCHAR(18),@CuentaNro)+ ']';		
 SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
 
-		EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo;
+		EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo,@CuentaNro;
 END;	
 
 GO
@@ -1865,7 +1867,7 @@ SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.
 	SET Cuenta_Tipo = @codTipo, Cuenta_Suscripciones_Compradas = 0, Cuenta_Suscripciones_Fecha = SYSDATETIME()
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 	
-	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo;
+	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo,@numeroCuenta;
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spInhabilitarCuenta')
@@ -2330,14 +2332,14 @@ CREATE PROCEDURE GEM4.spInsertarOperacionFacturable
 @Operacion_Facturable_Fecha				DATETIME,
 @Operacion_Facturable_Cliente_ID		INT,
 @Operacion_Facturable_Detalle			NVARCHAR(255),
-@Operacion_Facturable_Costo				NUMERIC(18,2)
-
+@Operacion_Facturable_Costo				NUMERIC(18,2),
+@Operacion_Facturable_Cuenta_Numero		NUMERIC(18,0)
 AS
 
 	INSERT GEM4.Operacion_Facturable(Operacion_Facturable_Tipo,Operacion_Facturable_Fecha,Operacion_Facturable_Cliente_ID,
-			Operacion_Facturable_Detalle,Operacion_Facturable_Costo,Operacion_Facturable_Factura_Numero)	
+			Operacion_Facturable_Detalle,Operacion_Facturable_Costo,Operacion_Facturable_Factura_Numero,Operacion_Facturable_Cuenta_Numero)	
 	VALUES (@Operacion_Facturable_Tipo,@Operacion_Facturable_Fecha,@Operacion_Facturable_Cliente_ID,		
-			@Operacion_Facturable_Detalle,@Operacion_Facturable_Costo,NULL);
+			@Operacion_Facturable_Detalle,@Operacion_Facturable_Costo,NULL,@Operacion_Facturable_Cuenta_Numero);
 	
 GO	
 
@@ -2363,6 +2365,8 @@ DECLARE @TipoTransferencia INT;
 DECLARE @Fecha DATETIME;
 DECLARE @Costo NUMERIC(18,2);
 DECLARE @Detalle	NVARCHAR(255);
+DECLARE @NroCuenta NUMERIC(18,0);
+SET @NroCuenta = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaOrigen)
 SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
 SET @Fecha = GEM4.fnDevolverFechaSistema();
 SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaOrigen);
@@ -2411,7 +2415,7 @@ SET @Costo =0;
 			SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
 		END;
 	
-		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,@Detalle,@Costo;
+		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,@Detalle,@Costo,@NroCuenta;
 		
 		UPDATE GEM4.Transferencia
 		SET Transferencia_Costo_Trans =@Costo
@@ -2503,7 +2507,9 @@ DECLARE @Costo NUMERIC(18,2);
 DECLARE @Detalle NVARCHAR(255);
 DECLARE @EstadoCuenta INT;
 DECLARE @ValidarCuenta NVARCHAR(60);
+DECLARE @NumeroCuenta NUMERIC(18,0);
 
+SET @NumeroCuenta = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
 SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
 SET @ValidarCuenta = GEM4.fnPuedeComprarSuscripcion(@EstadoCuenta);
 SET @Suscripciones = (SELECT C.Cuenta_Suscripciones_Compradas FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
@@ -2540,7 +2546,7 @@ SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T W
 	IF	(@TipoCuenta <> 4)
 		
 		BEGIN
-			EXEC GEM4.spInsertarOperacionFacturable @TipoSuscripcion,@Fecha,@Cliente,@Detalle,@Costo;
+			EXEC GEM4.spInsertarOperacionFacturable @TipoSuscripcion,@Fecha,@Cliente,@Detalle,@Costo,@NumeroCuenta;
 		END
 		
 		SELECT 'La operación ha sido realizada exitosamente ';

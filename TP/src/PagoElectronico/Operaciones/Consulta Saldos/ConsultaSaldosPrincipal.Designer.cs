@@ -56,6 +56,7 @@
             this.Transferencia_Importe = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Transferencia_Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Transferencia_Cuenta_Destino = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnCargarCuentas = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDepositos)).BeginInit();
             this.gbDepositos.SuspendLayout();
@@ -105,6 +106,7 @@
             // 
             // cmbCuentas
             // 
+            this.cmbCuentas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCuentas.FormattingEnabled = true;
             this.cmbCuentas.Location = new System.Drawing.Point(141, 58);
             this.cmbCuentas.Name = "cmbCuentas";
@@ -125,9 +127,9 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(384, 12);
+            this.btnConsultar.Location = new System.Drawing.Point(384, 70);
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(94, 97);
+            this.btnConsultar.Size = new System.Drawing.Size(301, 39);
             this.btnConsultar.TabIndex = 6;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
@@ -308,11 +310,22 @@
             this.Transferencia_Cuenta_Destino.Name = "Transferencia_Cuenta_Destino";
             this.Transferencia_Cuenta_Destino.Width = 200;
             // 
+            // btnCargarCuentas
+            // 
+            this.btnCargarCuentas.Location = new System.Drawing.Point(384, 12);
+            this.btnCargarCuentas.Name = "btnCargarCuentas";
+            this.btnCargarCuentas.Size = new System.Drawing.Size(301, 39);
+            this.btnCargarCuentas.TabIndex = 13;
+            this.btnCargarCuentas.Text = "Cargar Cuentas";
+            this.btnCargarCuentas.UseVisualStyleBackColor = true;
+            this.btnCargarCuentas.Click += new System.EventHandler(this.btnCargarCuentas_Click);
+            // 
             // ConsultaSaldosPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(813, 883);
+            this.Controls.Add(this.btnCargarCuentas);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gbT);
             this.Controls.Add(this.gbRetiros);
@@ -367,5 +380,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Importe;
         private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Costo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Transferencia_Cuenta_Destino;
+        private System.Windows.Forms.Button btnCargarCuentas;
     }
 }

@@ -1913,13 +1913,13 @@ CREATE PROCEDURE GEM4.spModificarTipoCuenta
 	@numeroCuenta	NUMERIC(18,0)
 AS
 
-DECLARE @TipoOperacionFacturable INT ;
+DECLARE @TipoOperacionFacturable INT;
 DECLARE @Fecha					 DATETIME;
 DECLARE @Detalle				 NVARCHAR(255);
 DECLARE @Costo					 NUMERIC(18,2);
 DECLARE @tipoCuentaViejo		INT;
 
-SET @tipoCuentaViejo = (SELECT Cuenta_Tipo FROM GEM4.Cuenta WHERE Cuenta_Tipo = @codTipo);
+SET @tipoCuentaViejo = (SELECT Cuenta_Tipo FROM GEM4.Cuenta WHERE Cuenta_Numero = @numeroCuenta);
 SET @TipoOperacionFacturable = 12;
 SET @Fecha =SYSDATETIME();
 SET @Detalle = 'Modificacion de tipo de Cuenta de: [' +(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @tipoCuentaViejo)+ '] a ['+(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @codTipo)+'] en Cuenta NRO: ['+	CONVERT(NVARCHAR(18),@numeroCuenta)+']';		
@@ -1929,7 +1929,7 @@ SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.
 	
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Tipo = @codTipo, Cuenta_Suscripciones_Compradas = 0, Cuenta_Suscripciones_Fecha = SYSDATETIME()
-	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	WHERE Cuenta_Numero = @numeroCuenta
 	
 	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo,@numeroCuenta;
 GO

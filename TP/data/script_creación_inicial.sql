@@ -2281,6 +2281,23 @@ END;
 			
 GO
 
+--1. Clientes que alguna de sus cuentas fueron inhabilitadas por no pagar los costos de transacción
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico1')
+	DROP PROCEDURE GEM4.spListadoEstadistico1;
+
+GO
+
+CREATE PROCEDURE GEM4.spListadoEstadistico1
+	@anio				INT,
+	@trimestre			INT
+AS
+	SELECT TOP 5 Log_Cuentas_Inhabilitadas_ClienteID, COUNT(Log_Cuentas_Inhabilitadas_Numero) Cantidad_Veces_Inhabilitado
+	FROM GEM4.Log_Cuentas_Inhabilitadas
+	WHERE (YEAR(Log_Cuentas_Inhabilitadas_Fecha) = @anio) AND (GEM4.fnDevolverTrimestre(Log_Cuentas_Inhabilitadas_Fecha) = @trimestre)
+	GROUP BY Log_Cuentas_Inhabilitadas_ClienteID
+	ORDER BY Cantidad_Veces_Inhabilitado DESC
+GO
+
 -- 2. Cliente con mayor cantidad de comisiones facturadas en todas sus cuentas
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spListadoEstadistico2')
 	DROP PROCEDURE GEM4.spListadoEstadistico2;

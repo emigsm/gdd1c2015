@@ -67,6 +67,15 @@ namespace PagoElectronico.Operaciones.Listados
             switch (Convert.ToInt32(cmbListados.SelectedValue))
             { 
                 case 1:
+                    DataTable listado1 = GestorDeSistema.listado1(anioSeleccionado, trimestreSeleccionado);
+                    if (listado1.Rows.Count > 0)
+                    {
+                        dgvResultados.DataSource = listado1;
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("No se encontraron operaciones con los datos proporcionados");
+                    }
                     break;
                 case 2:
                     DataTable listado2 = GestorDeSistema.listado2(anioSeleccionado, trimestreSeleccionado);

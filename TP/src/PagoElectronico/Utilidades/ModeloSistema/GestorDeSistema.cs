@@ -76,7 +76,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_BUSCARCLIENTE = "GEM4.spBuscarCliente";
         private const string STORE_EFECTUARRETIRO = "GEM4.spEfectuarRetiro";
         private const string STORE_OBTENERBANCOS = "GEM4.spObtenerBancos";
-        private const string STORE_BUSCARCUENTAS = "GEM4.spBuscarCuentas"; 
+        private const string STORE_BUSCARCUENTAS = "GEM4.spBuscarCuentas";
+        private const string STORE_LISTADO1 = "GEM4.spListadoEstadistico1";
         private const string STORE_LISTADO2 = "GEM4.spListadoEstadistico2";
         private const string STORE_LISTADO3 = "GEM4.spListadoEstadistico3";
         private const string STORE_LISTADO4E = "GEM4.spListadoEstadistico4Egresos";
@@ -789,6 +790,22 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             }
             readerCuentas.Dispose();
             return cuentas;
+        }
+
+        public static DataTable listado1(int anio, int trimestre)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@anio", anio));
+            parametros.Add(new SqlParameter("@trimestre", trimestre));
+            SqlDataReader readerListado = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LISTADO1, READER, parametros);
+            DataTable listado = new DataTable();
+            if (readerListado.HasRows)
+            {
+                listado.Load(readerListado);
+            }
+            readerListado.Dispose();
+            return listado;
+
         }
 
         public static DataTable listado2(int anio, int trimestre)

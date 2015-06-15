@@ -1123,8 +1123,8 @@ WHERE m.Banco_Cogido IS NOT NULL;
 SET IDENTITY_INSERT GEM4.Banco OFF;
 
 SET IDENTITY_INSERT GEM4.Cuenta ON;
-INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Fecha_Cierre,Cuenta_Pais,Cuenta_Cliente_ID)
-SELECT	DISTINCT m.Cuenta_Numero,GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion),DATEADD(DAY,GEM4.fnObtenerDuracionCuenta(1),GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion)),m.Cuenta_Pais_Codigo,c.Cliente_ID
+INSERT INTO GEM4.Cuenta(Cuenta_Numero,Cuenta_Fecha_Creacion,Cuenta_Pais,Cuenta_Cliente_ID)
+SELECT	DISTINCT m.Cuenta_Numero, GEM4.fnValidarFecha(m.Cuenta_Fecha_Creacion) ,m.Cuenta_Pais_Codigo,c.Cliente_ID
 FROM gd_esquema.Maestra m JOIN GEM4.Cliente c ON (m.Cli_Mail=c.Cliente_Mail)
 WHERE M.Cuenta_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cuenta OFF;
@@ -1956,7 +1956,7 @@ AS
 
 --TIENE QUE HABER ALGUN PROCEDURE DE FATUCTURACION PARA VERIFICAR SI ESTA TDO PAGO ANTES DE CERRARLA
 	UPDATE GEM4.Cuenta
-	SET Cuenta_Estado = 3, Cuenta_Fecha_Cierre = SYSDATETIME()
+	SET Cuenta_Estado = 3, Cuenta_Fecha_Cierre = GEM4.fnDevolverFechaSistema()
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 GO
 

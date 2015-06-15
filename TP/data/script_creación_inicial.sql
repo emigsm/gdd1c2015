@@ -2639,10 +2639,13 @@ SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T W
 	ELSE
 	
 		BEGIN
+			
 			UPDATE GEM4.Cuenta
 			SET Cuenta_Suscripciones_Compradas = @Cantidad,
-			Cuenta_Suscripciones_Fecha = @Fecha
+			Cuenta_Suscripciones_Fecha = @Fecha,
+			Cuenta_Estado = 1
 			WHERE Cuenta_Numero LIKE @Cuenta
+			
 		END;
 		
 	IF	(@TipoCuenta <> 4)

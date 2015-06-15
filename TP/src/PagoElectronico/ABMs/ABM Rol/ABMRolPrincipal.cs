@@ -38,7 +38,7 @@ namespace PagoElectronico.ABMs.ABM_Rol
 
         private void BuscarRolesButton_Click(object sender, EventArgs e)
         {
-            if (Convert.ToInt32(Rol_CodTextBox.Text)>2147483647)
+            if (Convert.ToInt64(Rol_CodTextBox.Text)>2147483647)
             {
                 MessageBox.Show("El número ingresado en Codigo de Rol es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;

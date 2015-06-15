@@ -50,6 +50,7 @@ namespace PagoElectronico.Operaciones.Transferencias
             FiltroText.Text = String.Empty;
             dgvCuentaDestino.Rows.Clear();
             dgvCuentaDestino.Update();
+            lblCuenta.Text = String.Empty;
         }
 
         private void btnVolver_Click(object sender, EventArgs e)
@@ -85,6 +86,13 @@ namespace PagoElectronico.Operaciones.Transferencias
             {
                 string cuentaOrigen =cmbCuentaOrigen.SelectedValue.ToString();
                 string cuentaDestino =lblCuenta.Text;
+                
+                if (cuentaOrigen == cuentaDestino)
+                {
+                    MessageBox.Show("Las cuentas de origen y destino deben ser distintas ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+
+                }
                 int importe=Convert.ToInt32(ImporteTextBox.Text);
                 String mensaje = GestorDeSistema.transferir(cuentaOrigen,cuentaDestino,importe);
                 MessageBox.Show(mensaje, "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

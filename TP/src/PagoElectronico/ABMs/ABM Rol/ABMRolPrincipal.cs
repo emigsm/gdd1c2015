@@ -40,7 +40,7 @@ namespace PagoElectronico.ABMs.ABM_Rol
         {
             if (Convert.ToInt64(Rol_CodTextBox.Text)>2147483647)
             {
-                MessageBox.Show("El número ingresado en Codigo de Rol es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("El número ingresado en el campo 'Código de Rol' es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
             dgvRoles.Rows.Clear();

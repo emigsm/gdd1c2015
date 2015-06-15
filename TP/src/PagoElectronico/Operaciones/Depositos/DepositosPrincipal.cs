@@ -62,7 +62,19 @@ namespace PagoElectronico.Operaciones.Depositos
 
         private void btnDepositar_Click(object sender, EventArgs e)
         {
-            if ((Convert.ToInt32(ImporteTextBox.Text) <1) || (ImporteTextBox.Text == "") )
+            if (ImporteTextBox.Text == "")
+            {
+                MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+            
+            if (Convert.ToInt64(ImporteTextBox.Text) > 2147483647)
+            {
+                MessageBox.Show("El número ingresado en el campo 'Importe' es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (Convert.ToInt32(ImporteTextBox.Text) <1)
             {
                 MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -70,6 +82,7 @@ namespace PagoElectronico.Operaciones.Depositos
             }
             else
             {
+                
                 string cuenta =cmbCuenta.SelectedValue.ToString();
                 int importe=Convert.ToInt32(ImporteTextBox.Text);
                 string moneda= cmbMoneda.SelectedValue.ToString();

@@ -100,6 +100,7 @@
             // ImporteTextBox
             // 
             this.ImporteTextBox.Location = new System.Drawing.Point(216, 57);
+            this.ImporteTextBox.MaxLength = 10;
             this.ImporteTextBox.Name = "ImporteTextBox";
             this.ImporteTextBox.Size = new System.Drawing.Size(235, 20);
             this.ImporteTextBox.TabIndex = 6;
@@ -178,7 +179,7 @@
             this.Controls.Add(this.btnDepositar);
             this.Controls.Add(this.btnVolver);
             this.Name = "DepositosPrincipal";
-            this.Text = "DepositosPrincipal";
+            this.Text = "Depósitos";
             this.Load += new System.EventHandler(this.DepositosPrincipal_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

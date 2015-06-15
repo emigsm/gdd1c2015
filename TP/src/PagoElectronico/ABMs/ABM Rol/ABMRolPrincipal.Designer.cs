@@ -61,6 +61,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(387, 129);
             this.panel1.TabIndex = 0;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // LimpiarBusquedaButton
             // 
@@ -103,6 +104,7 @@
             // Rol_NombreTextBox
             // 
             this.Rol_NombreTextBox.Location = new System.Drawing.Point(145, 48);
+            this.Rol_NombreTextBox.MaxLength = 50;
             this.Rol_NombreTextBox.Name = "Rol_NombreTextBox";
             this.Rol_NombreTextBox.Size = new System.Drawing.Size(113, 20);
             this.Rol_NombreTextBox.TabIndex = 1;
@@ -111,6 +113,7 @@
             // Rol_CodTextBox
             // 
             this.Rol_CodTextBox.Location = new System.Drawing.Point(145, 14);
+            this.Rol_CodTextBox.MaxLength = 10;
             this.Rol_CodTextBox.Name = "Rol_CodTextBox";
             this.Rol_CodTextBox.Size = new System.Drawing.Size(113, 20);
             this.Rol_CodTextBox.TabIndex = 0;

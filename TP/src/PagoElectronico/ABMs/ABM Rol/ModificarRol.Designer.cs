@@ -121,6 +121,7 @@
             // RolNombreTextBox
             // 
             this.RolNombreTextBox.Location = new System.Drawing.Point(126, 21);
+            this.RolNombreTextBox.MaxLength = 50;
             this.RolNombreTextBox.Name = "RolNombreTextBox";
             this.RolNombreTextBox.Size = new System.Drawing.Size(129, 20);
             this.RolNombreTextBox.TabIndex = 7;

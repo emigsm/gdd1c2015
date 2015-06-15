@@ -38,6 +38,11 @@ namespace PagoElectronico.ABMs.ABM_Rol
 
         private void BuscarRolesButton_Click(object sender, EventArgs e)
         {
+            if (Convert.ToInt32(Rol_CodTextBox.Text)>2147483647)
+            {
+                MessageBox.Show("El número ingresado en Codigo de Rol es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             dgvRoles.Rows.Clear();
             dgvRoles.Update();
             DataTable roles = GestorDeSistema.buscarRoles(Rol_CodTextBox.Text, Rol_NombreTextBox.Text);
@@ -110,6 +115,11 @@ namespace PagoElectronico.ABMs.ABM_Rol
                 return;
 
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

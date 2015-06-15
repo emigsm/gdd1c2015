@@ -45,7 +45,7 @@ AS
 	END
 GO
 
-EXEC GEM4.spRegistrarFechaDelSistema '2015-01-01 00:00:00.000' --NULL
+EXEC GEM4.spRegistrarFechaDelSistema '2015-01-01 00:00:00.000' 
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spInsertarFechaFuncionamiento')
 	DROP PROCEDURE GEM4.spInsertarFechaFuncionamiento
@@ -461,7 +461,7 @@ BEGIN
 	DECLARE @retorno BIT
 	DECLARE @duracion INT = (SELECT Tipo_Cuenta_Duracion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @cuentaTipo)
 	DECLARE @diasTotales INT = @duracion * @suscripcionesCompradas
-	DECLARE @diferenciaDias INT = ABS((DATEDIFF(D, SYSDATETIME() ,@fecha)))
+	DECLARE @diferenciaDias INT = ABS((DATEDIFF(D, GEM4.fnDevolverFechaSistema() ,@fecha)))
 	IF (@diferenciaDias <= @diasTotales)
 	BEGIN
 		SET @retorno = 0 /*NO ESTA VENCIDA , O SEA FALSE(0)*/
@@ -1153,13 +1153,13 @@ SET IDENTITY_INSERT GEM4.Cuenta OFF;
 
 /*AGREGO FECHAS DE COMPRA DE SUSCRIPCION*/
 UPDATE GEM4.Cuenta
-SET Cuenta_Suscripciones_Fecha = SYSDATETIME(); --tiene esta fecha por ahora, despues vemos la fecha de que ponerle
+SET Cuenta_Suscripciones_Fecha = GEM4.fnDevolverFechaSistema(); --tiene esta fecha por ahora, despues vemos la fecha de que ponerle
 
 --NUEVA MIGRACIÓN
 --DEPOSITO
 SET IDENTITY_INSERT GEM4.Deposito ON
-INSERT INTO GEM4.Deposito(Deposito_Codigo, Deposito_Fecha, Deposito_Importe, Deposito_Cliente, Deposito_Tarjeta, Deposito_Moneda, Deposito_Cuenta)
-SELECT Deposito_Codigo, Deposito_Fecha, Deposito_Importe, Cliente_ID , Tarjeta_Numero, 1, Cuenta_Numero
+INSERT INTO GEM4.Deposito(Deposito_Codigo,Deposito_Fecha, Deposito_Importe, Deposito_Cliente, Deposito_Tarjeta, Deposito_Moneda, Deposito_Cuenta)
+SELECT Deposito_Codigo, GEM4.fnValidarFecha(Deposito_Fecha), Deposito_Importe, Cliente_ID , Tarjeta_Numero, 1, Cuenta_Numero
 FROM gd_esquema.Maestra JOIN GEM4.Cliente ON (Maestra.Cli_Nro_Doc = Cliente.Cliente_Numero_Documento)
 WHERE Deposito_Codigo IS NOT NULL
 SET IDENTITY_INSERT GEM4.Deposito OFF
@@ -1177,14 +1177,14 @@ FROM GEM4.Cuenta JOIN (SELECT SUM(Deposito_Importe) Total_Importe, Deposito_Cuen
 --MIGRACION DE CHEQUES, PARA PODER MIGRAR LOS RETIROS LUEGO
 SET IDENTITY_INSERT GEM4.Cheque ON
 INSERT INTO GEM4.Cheque(Cheque_Numero, Cheque_Fecha, Cheque_Importe, Cheque_Cliente_ID, Cheque_Banco)
-SELECT Cheque_Numero, Cheque_Fecha, Cheque_Importe, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Banco_Cogido
+SELECT Cheque_Numero, GEM4.fnValidarFecha(Cheque_Fecha), Cheque_Importe, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Banco_Cogido
 FROM gd_esquema.Maestra
 WHERE Retiro_Codigo IS NOT NULL
 SET IDENTITY_INSERT GEM4.Cheque OFF
 --MIGRO LOS RETIROS
 SET IDENTITY_INSERT GEM4.Retiro ON
 INSERT INTO GEM4.Retiro(Retiro_Codigo, Retiro_Importe, Retiro_Fecha, Retiro_Cuenta, Retiro_Cheque)
-SELECT Retiro_Codigo, Retiro_Importe, Retiro_Fecha, Cuenta_Numero, Cheque_Numero
+SELECT Retiro_Codigo, Retiro_Importe, GEM4.fnValidarFecha(Retiro_Fecha), Cuenta_Numero, Cheque_Numero
 FROM gd_esquema.Maestra					
 WHERE Retiro_Codigo IS NOT NULL
 SET IDENTITY_INSERT GEM4.Retiro OFF
@@ -1201,7 +1201,7 @@ FROM GEM4.Cuenta JOIN (SELECT SUM(Retiro_Importe) Total_Importe, Retiro_Cuenta F
 --MIGRACION DE TRANSFERENCIAS
 --MIGRO LAS TRANSFERENCIAS
 INSERT INTO GEM4.Transferencia( Transferencia_Fecha, Transferencia_Importe, Transferencia_Costo_Trans, Transferencia_Cuenta_Origen, Transferencia_Cuenta_Destino)
-SELECT Transf_Fecha, Trans_Importe, Trans_Costo_Trans, Cuenta_Numero, Cuenta_Dest_Numero
+SELECT GEM4.fnValidarFecha(Transf_Fecha), Trans_Importe, Trans_Costo_Trans, Cuenta_Numero, Cuenta_Dest_Numero
 FROM gd_esquema.Maestra
 WHERE Transf_Fecha IS NOT NULL
 --ACTUALIZO OPERACIONES
@@ -1222,7 +1222,7 @@ FROM GEM4.Cuenta JOIN (SELECT SUM(Transferencia_Importe) Total_Importe,Transfere
 --FACTURAS
 SET IDENTITY_INSERT GEM4.Factura ON
 INSERT INTO GEM4.Factura(Factura_Numero, Factura_Fecha, Factura_Cliente_ID)
-SELECT Factura_Numero, Factura_Fecha, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc)
+SELECT Factura_Numero, GEM4.fnValidarFecha(Factura_Fecha), GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc)
 FROM gd_esquema.Maestra
 WHERE Factura_Numero IS NOT NULL
 SET IDENTITY_INSERT GEM4.Factura OFF
@@ -1231,7 +1231,7 @@ SET IDENTITY_INSERT GEM4.Factura OFF
 --ACLARACION 1: el detalle es generico para este caso, que son cosas viejas, despues habria que hacerlo personalizado por cada operacion nueva que se genere para que el detalle de la factura sea mas copado
 --ACLARACION 2: tome las comisiones por transferencias hitoricas como si fuesen de cuenta gratuita, total no tenemos informacion al respecto, habia que inventarlas
 INSERT INTO GEM4.Operacion_Facturable(Operacion_Facturable_Tipo, Operacion_Facturable_Fecha, Operacion_Facturable_Cliente_ID, Operacion_Facturable_Detalle, Operacion_Facturable_Costo, Operacion_Facturable_Factura_Numero)
-SELECT  4, Factura_Fecha, GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Item_Factura_Descr, Item_Factura_Importe, Factura_Numero
+SELECT  4, GEM4.fnValidarFecha(Factura_Fecha), GEM4.fnObtenerClienteID_Documento(Cli_Nro_Doc), Item_Factura_Descr, Item_Factura_Importe, Factura_Numero
 FROM gd_esquema.Maestra
 WHERE Factura_Numero IS NOT NULL		
 		
@@ -1321,32 +1321,6 @@ AS
 	END		
 GO
 
-
-
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgActualizaRol')
-	DROP TRIGGER GEM4.tgActualizaRol;
-GO
-
--- Creo que no lo necesito
-/*
-CREATE TRIGGER GEM4.tgActualizaRol
-ON GEM4.Rol
-FOR UPDATE
-AS
-	BEGIN
-		DECLARE @rolCod INT	,@habilitado BIT;
-		
-		SELECT @rolCod=Rol_Cod,@habilitado=Rol_Habilitado
-		FROM inserted;
-		
-		UPDATE GEM4.Rol_Por_Funcionalidad
-		SET Rol_Por_Funcionalidad_Habilitado=@habilitado
-		WHERE Rol_Cod=@rolCod;
-		
-	END		
-GO
-*/
-
 /* ***************************************** STORED PROCEDURES ************************************************** */
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spLoginUsuario')
@@ -1401,7 +1375,7 @@ CREATE PROCEDURE GEM4.spInhabilitarUsuario
 AS
 	UPDATE GEM4.Usuario
 	SET Usuario_Habilitado = 0,
-		Usuario_Fecha_Ultima_Modificacion=GETDATE()
+		Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema()
 	WHERE Usuario_Username = @username
 GO
 
@@ -1438,7 +1412,7 @@ CREATE PROCEDURE GEM4.spBajaLogicaUsuario
 AS
 	UPDATE GEM4.Usuario
 	SET Usuario_Habilitado = 0,
-		Usuario_Fecha_Ultima_Modificacion=GETDATE() 
+		Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema() 
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -1477,7 +1451,7 @@ CREATE PROCEDURE GEM4.spCambiarHabilitacionUsuario
 AS
 	UPDATE GEM4.Usuario
 	SET Usuario_Habilitado = @estado,
-		Usuario_Fecha_Ultima_Modificacion=GETDATE() 
+		Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema() 
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -1522,7 +1496,7 @@ CREATE PROCEDURE GEM4.spCambiarContraseña
 AS
 	UPDATE GEM4.Usuario
 	SET Usuario_Contrasena = @nuevaPass,
-	Usuario_Fecha_Ultima_Modificacion=GETDATE()
+	Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema()
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -1538,7 +1512,7 @@ AS
 	UPDATE GEM4.Usuario
 	SET Usuario_Pregunta_Secreta = @nuevaPreg,
 		Usuario_Respuesta_Secreta = @nuevaResp,
-		Usuario_Fecha_Ultima_Modificacion=GETDATE()
+		Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema()
 	WHERE Usuario_ID = @usuarioID
 GO
 
@@ -1627,7 +1601,7 @@ AS
 		SET @clienteID = NULL
 	END
 	INSERT INTO GEM4.Usuario(Usuario_Username, Usuario_Contrasena, Usuario_Pregunta_Secreta, Usuario_Respuesta_Secreta, Usuario_Fecha_Creacion, Usuario_Fecha_Ultima_Modificacion, Cliente_ID) VALUES
-		(@username, @contraseña, @pregSec, @respSec, SYSDATETIME(), SYSDATETIME(), @clienteID);
+		(@username, @contraseña, @pregSec, @respSec, GEM4.fnDevolverFechaSistema(), GEM4.fnDevolverFechaSistema(), @clienteID);
 	DECLARE @usuarioID INT
 	SET @usuarioID = (SELECT Usuario_ID FROM GEM4.Usuario WHERE Usuario_Username = @username)
 	INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
@@ -1722,7 +1696,7 @@ DECLARE @Detalle				 NVARCHAR(255);
 DECLARE @Costo					 NUMERIC(18,2);
 
 	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha) VALUES
-		(@clienteID, @codPais, @codMoneda, @tipoCuenta, SYSDATETIME(), 4, 0, 0, NULL)
+		(@clienteID, @codPais, @codMoneda, @tipoCuenta, GEM4.fnDevolverFechaSistema(), 4, 0, 0, NULL)
 	
 	 
 		
@@ -1732,7 +1706,7 @@ DECLARE @Costo					 NUMERIC(18,2);
 		ORDER BY Cuenta_Fecha_Creacion DESC
 		
 SET @TipoOperacionFacturable = GEM4.fnTipoAperturaCuenta(@tipoCuenta);
-SET @Fecha =SYSDATETIME();
+SET @Fecha =GEM4.fnDevolverFechaSistema();
 SET @CuentaNro =IDENT_CURRENT('GEM4.Cuenta');
 SET @Detalle = 'Apertura de Cuenta tipo: [' +(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @tipoCuenta)+ '] Cuenta NRO: ['+	CONVERT(NVARCHAR(18),@CuentaNro)+ ']';		
 SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
@@ -1943,14 +1917,14 @@ DECLARE @tipoCuentaViejo		INT;
 
 SET @tipoCuentaViejo = (SELECT Cuenta_Tipo FROM GEM4.Cuenta WHERE Cuenta_Numero = @numeroCuenta);
 SET @TipoOperacionFacturable = 12;
-SET @Fecha =SYSDATETIME();
+SET @Fecha = GEM4.fnDevolverFechaSistema();
 SET @Detalle = 'Modificacion de tipo de Cuenta de: [' +(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @tipoCuentaViejo)+ '] a ['+(SELECT Tipo_Cuenta_Descripcion FROM GEM4.Tipo_Cuenta WHERE Tipo_Cuenta_ID = @codTipo)+'] en Cuenta NRO: ['+	CONVERT(NVARCHAR(18),@numeroCuenta)+']';		
 SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoOperacionFacturable);		
 
 
 	
 	UPDATE GEM4.Cuenta
-	SET Cuenta_Tipo = @codTipo, Cuenta_Suscripciones_Compradas = 0, Cuenta_Suscripciones_Fecha = SYSDATETIME()
+	SET Cuenta_Tipo = @codTipo, Cuenta_Suscripciones_Compradas = 0, Cuenta_Suscripciones_Fecha = GEM4.fnDevolverFechaSistema()
 	WHERE Cuenta_Numero = @numeroCuenta
 	
 	EXEC GEM4.spInsertarOperacionFacturable @TipoOperacionFacturable,@Fecha,@clienteID,@Detalle,@Costo,@numeroCuenta;
@@ -2194,13 +2168,13 @@ AS
 							--TODO:VERIFICAR COMO VAMOS A MANEJAR EL TEMA DE LAS FECHAS, EN 2016 O 2015
 							DECLARE @retiro NUMERIC(18,0);
 							INSERT INTO GEM4.Cheque(Cheque_Fecha,Cheque_Importe,Cheque_Cliente_ID,Cheque_Banco)
-							VALUES(@fecha,@importe,@clienteID,@banco);
+							VALUES(GEM4.fnValidarFecha(@fecha),@importe,@clienteID,@banco);
 							
 							INSERT INTO GEM4.Retiro(Retiro_Importe,Retiro_Fecha,Retiro_Cuenta,Retiro_Cheque)
-							VALUES(@importe,@fecha,@cuentaNro,IDENT_CURRENT('GEM4.Cheque'));
+							VALUES(@importe,GEM4.fnValidarFecha(@fecha),@cuentaNro,IDENT_CURRENT('GEM4.Cheque'));
 							
 							INSERT INTO GEM4.Operacion(Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Cliente_ID)
-							VALUES(IDENT_CURRENT('GEM4.Retiro'),2,@fecha,@clienteID)
+							VALUES(IDENT_CURRENT('GEM4.Retiro'),2,GEM4.fnValidarFecha(@fecha),@clienteID)
 							
 							UPDATE GEM4.Cuenta
 							SET Cuenta_Saldo=Cuenta_Saldo-@importe
@@ -2243,7 +2217,7 @@ CREATE PROCEDURE GEM4.spInsertarOperacion
 AS
 
 	INSERT INTO GEM4.Operacion (Operacion_ID,Operacion_Tipo,Operacion_Fecha,Operacion_Cliente_ID)	
-	VALUES (@Operacion_ID,@Operacion_Tipo,@Operacion_Fecha,@Operacion_Cliente_ID);
+	VALUES (@Operacion_ID,@Operacion_Tipo,GEM4.fnValidarFecha(@Operacion_Fecha),@Operacion_Cliente_ID);
 	
 GO	
  
@@ -2269,7 +2243,6 @@ DECLARE @MONEDA_COD			INT;
 DECLARE @CUENTA_NRO			NUMERIC (18,0);
 DECLARE @OPERACION_TIPO		INT;
 DECLARE @OPERACION_ID		NUMERIC(18,0);
-DECLARE @VENCIMIENTOTARJETA DATETIME;
 
 SET @FECHA= (SELECT TOP 1 a.fechaSistema FROM GEM4.fechaSistema a );
 SET @CLIENTE =(SELECT T.Tarjeta_Cliente_ID FROM GEM4.Tarjeta T WHERE T.Tarjeta_Numero=@Tarjeta);
@@ -2285,12 +2258,12 @@ SET @VENCIMIENTOTARJETA = (SELECT T.Tarjeta_Fecha_Vencimiento FROM GEM4.Tarjeta 
 			SELECT ' El depósito no se pudo realizar ya que la cuenta no se encuentra habilitada ';
 		
 	ELSE
-		IF (GEM4.fnTarjetaEstaVencida(@VENCIMIENTOTARJETA) = 1)
+			IF (GEM4.fnTarjetaEstaVencida(@VENCIMIENTOTARJETA) = 1)
 		
-			SELECT 'La tarjeta de crédito seleccionada se encuentra vencida'
+			SELECT 'La tarjeta de credito seleccionada se encuentra vencida'
 			
 		ELSE	
-			
+		
 			INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
 			,Deposito_Cuenta)
 			VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
@@ -2301,6 +2274,7 @@ SET @VENCIMIENTOTARJETA = (SELECT T.Tarjeta_Fecha_Vencimiento FROM GEM4.Tarjeta 
 	
 			
 			SET @OPERACION_ID= IDENT_CURRENT('GEM4.Deposito');
+			DECLARE @VENCIMIENTOTARJETA DATETIME;
 			
 			EXEC GEM4.spInsertarOperacion @OPERACION_ID,@OPERACION_TIPO,@FECHA,@CLIENTE;
 			
@@ -2447,7 +2421,7 @@ AS
 
 	INSERT GEM4.Operacion_Facturable(Operacion_Facturable_Tipo,Operacion_Facturable_Fecha,Operacion_Facturable_Cliente_ID,
 			Operacion_Facturable_Detalle,Operacion_Facturable_Costo,Operacion_Facturable_Factura_Numero,Operacion_Facturable_Cuenta_Numero)	
-	VALUES (@Operacion_Facturable_Tipo,@Operacion_Facturable_Fecha,@Operacion_Facturable_Cliente_ID,		
+	VALUES (@Operacion_Facturable_Tipo,GEM4.fnValidarFecha(@Operacion_Facturable_Fecha),@Operacion_Facturable_Cliente_ID,		
 			@Operacion_Facturable_Detalle,@Operacion_Facturable_Costo,NULL,@Operacion_Facturable_Cuenta_Numero);
 	
 GO	
@@ -2616,7 +2590,7 @@ SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Nu
 SET @ValidarCuenta = GEM4.fnPuedeComprarSuscripcion(@EstadoCuenta);
 SET @Suscripciones = (SELECT C.Cuenta_Suscripciones_Compradas FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
 SET @TipoCuenta = (SELECT C.Cuenta_Tipo FROM GEM4.Cuenta C	WHERE C.Cuenta_Numero LIKE @Cuenta);
-SET @Fecha = SYSDATETIME();
+SET @Fecha = GEM4.fnDevolverFechaSistema();
 SET @TipoSuscripcion = GEM4.fnTipoSuscripcionCuenta(@TipoCuenta);
 SET @Cliente = (SELECT C.Cuenta_Cliente_ID FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta);
 SET @Costo =(SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID = @TipoSuscripcion)*@Cantidad;
@@ -2694,7 +2668,7 @@ DECLARE @HayPedienteDeFacturacion INT;
 SET @HayPedienteDeFacturacion = (SELECT COUNT(O.Operacion_Facturable_ID) FROM GEM4.Operacion_Facturable O 
 								WHERE O.Operacion_Facturable_Cliente_ID =@ClienteID 
 								AND O.Operacion_Facturable_Factura_Numero IS NULL );
-SET @Fecha = SYSDATETIME();
+SET @Fecha = GEM4.fnDevolverFechaSistema();
 
 SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 4);
 

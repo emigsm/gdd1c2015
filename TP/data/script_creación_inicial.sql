@@ -699,7 +699,7 @@ IF(@EstadoCuenta = 1)--Habilitada
 	END
 IF(@EstadoCuenta = 2)--Inhabilitada
 	BEGIN 
-		SET @Resultado = 'Si';
+		SET @Resultado = 'La cuenta de origen se encuentra inhabilitada';
 	END
 IF(@EstadoCuenta = 3)--Cerrada
 	BEGIN 

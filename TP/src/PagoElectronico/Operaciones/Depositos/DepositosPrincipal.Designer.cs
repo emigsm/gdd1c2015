@@ -47,95 +47,109 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 25);
+            this.label1.Location = new System.Drawing.Point(9, 38);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(162, 13);
+            this.label1.Size = new System.Drawing.Size(238, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seleccione la cuenta de destino:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 57);
+            this.label2.Location = new System.Drawing.Point(9, 88);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(97, 13);
+            this.label2.Size = new System.Drawing.Size(146, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Ingrese un importe:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 93);
+            this.label3.Location = new System.Drawing.Point(9, 143);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(164, 13);
+            this.label3.Size = new System.Drawing.Size(243, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Seleccione la moneda a emplear:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 127);
+            this.label4.Location = new System.Drawing.Point(9, 195);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(197, 13);
+            this.label4.Size = new System.Drawing.Size(292, 20);
             this.label4.TabIndex = 3;
             this.label4.Text = "Seleccione la tarjeta de crédito a utilizar:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 161);
+            this.label5.Location = new System.Drawing.Point(9, 248);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 13);
+            this.label5.Size = new System.Drawing.Size(126, 20);
             this.label5.TabIndex = 4;
             this.label5.Text = "Fecha a realizar:";
             // 
             // cmbCuenta
             // 
+            this.cmbCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCuenta.FormattingEnabled = true;
-            this.cmbCuenta.Location = new System.Drawing.Point(216, 22);
+            this.cmbCuenta.Location = new System.Drawing.Point(324, 34);
+            this.cmbCuenta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbCuenta.Name = "cmbCuenta";
-            this.cmbCuenta.Size = new System.Drawing.Size(235, 21);
+            this.cmbCuenta.Size = new System.Drawing.Size(350, 28);
             this.cmbCuenta.TabIndex = 5;
             // 
             // ImporteTextBox
             // 
-            this.ImporteTextBox.Location = new System.Drawing.Point(216, 57);
+            this.ImporteTextBox.Location = new System.Drawing.Point(324, 88);
+            this.ImporteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ImporteTextBox.MaxLength = 10;
             this.ImporteTextBox.Name = "ImporteTextBox";
-            this.ImporteTextBox.Size = new System.Drawing.Size(235, 20);
+            this.ImporteTextBox.Size = new System.Drawing.Size(350, 26);
             this.ImporteTextBox.TabIndex = 6;
             this.ImporteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImporteTextBox_KeyPress);
             // 
             // cmbMoneda
             // 
+            this.cmbMoneda.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMoneda.FormattingEnabled = true;
-            this.cmbMoneda.Location = new System.Drawing.Point(216, 90);
+            this.cmbMoneda.Location = new System.Drawing.Point(324, 138);
+            this.cmbMoneda.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbMoneda.Name = "cmbMoneda";
-            this.cmbMoneda.Size = new System.Drawing.Size(235, 21);
+            this.cmbMoneda.Size = new System.Drawing.Size(350, 28);
             this.cmbMoneda.TabIndex = 7;
             // 
             // cmbTarjeta
             // 
+            this.cmbTarjeta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbTarjeta.FormattingEnabled = true;
-            this.cmbTarjeta.Location = new System.Drawing.Point(216, 124);
+            this.cmbTarjeta.Location = new System.Drawing.Point(324, 191);
+            this.cmbTarjeta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbTarjeta.Name = "cmbTarjeta";
-            this.cmbTarjeta.Size = new System.Drawing.Size(235, 21);
+            this.cmbTarjeta.Size = new System.Drawing.Size(350, 28);
             this.cmbTarjeta.TabIndex = 8;
             // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(217, 163);
+            this.lblFecha.Location = new System.Drawing.Point(326, 251);
+            this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(42, 13);
+            this.lblFecha.Size = new System.Drawing.Size(64, 20);
             this.lblFecha.TabIndex = 9;
             this.lblFecha.Text = "FECHA";
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(100, 209);
+            this.btnVolver.Location = new System.Drawing.Point(150, 322);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(127, 30);
+            this.btnVolver.Size = new System.Drawing.Size(190, 46);
             this.btnVolver.TabIndex = 10;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -143,9 +157,10 @@
             // 
             // btnDepositar
             // 
-            this.btnDepositar.Location = new System.Drawing.Point(301, 209);
+            this.btnDepositar.Location = new System.Drawing.Point(452, 322);
+            this.btnDepositar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnDepositar.Name = "btnDepositar";
-            this.btnDepositar.Size = new System.Drawing.Size(134, 30);
+            this.btnDepositar.Size = new System.Drawing.Size(201, 46);
             this.btnDepositar.TabIndex = 11;
             this.btnDepositar.Text = "Depositar";
             this.btnDepositar.UseVisualStyleBackColor = true;
@@ -163,21 +178,24 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(12, 12);
+            this.groupBox1.Location = new System.Drawing.Point(18, 18);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(467, 188);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(700, 289);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos del Depósito";
             // 
             // DepositosPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 256);
+            this.ClientSize = new System.Drawing.Size(747, 394);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnDepositar);
             this.Controls.Add(this.btnVolver);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DepositosPrincipal";
             this.Text = "Depósitos";
             this.Load += new System.EventHandler(this.DepositosPrincipal_Load);

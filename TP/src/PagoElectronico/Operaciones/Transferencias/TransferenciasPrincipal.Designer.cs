@@ -56,18 +56,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 54);
+            this.label1.Location = new System.Drawing.Point(39, 83);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 13);
+            this.label1.Size = new System.Drawing.Size(236, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Seleccione la Cuenta de Origen:";
             // 
             // cmbCuentaOrigen
             // 
+            this.cmbCuentaOrigen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCuentaOrigen.FormattingEnabled = true;
-            this.cmbCuentaOrigen.Location = new System.Drawing.Point(234, 49);
+            this.cmbCuentaOrigen.Location = new System.Drawing.Point(351, 75);
+            this.cmbCuentaOrigen.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbCuentaOrigen.Name = "cmbCuentaOrigen";
-            this.cmbCuentaOrigen.Size = new System.Drawing.Size(219, 21);
+            this.cmbCuentaOrigen.Size = new System.Drawing.Size(326, 28);
             this.cmbCuentaOrigen.TabIndex = 1;
             // 
             // dgvCuentaDestino
@@ -78,10 +81,11 @@
             this.dgvCuentaDestino.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.NumeroCuenta,
             this.Seleccionar});
-            this.dgvCuentaDestino.Location = new System.Drawing.Point(6, 101);
+            this.dgvCuentaDestino.Location = new System.Drawing.Point(9, 155);
+            this.dgvCuentaDestino.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvCuentaDestino.Name = "dgvCuentaDestino";
             this.dgvCuentaDestino.ReadOnly = true;
-            this.dgvCuentaDestino.Size = new System.Drawing.Size(353, 86);
+            this.dgvCuentaDestino.Size = new System.Drawing.Size(530, 132);
             this.dgvCuentaDestino.TabIndex = 2;
             this.dgvCuentaDestino.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCuentaDestino_CellContentClick);
             // 
@@ -101,9 +105,10 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 26);
+            this.label2.Location = new System.Drawing.Point(9, 40);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(353, 13);
+            this.label2.Size = new System.Drawing.Size(521, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Ingrese el número exacto o parcial de la cuenta, para acotar la selección.";
             // 
@@ -118,9 +123,11 @@
             this.groupBox1.Controls.Add(this.FiltroText);
             this.groupBox1.Controls.Add(this.dgvCuentaDestino);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(19, 81);
+            this.groupBox1.Location = new System.Drawing.Point(28, 125);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(583, 229);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(874, 352);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Seleccione la Cuenta de Destino:";
@@ -128,35 +135,39 @@
             // lblCuenta
             // 
             this.lblCuenta.AutoSize = true;
-            this.lblCuenta.Location = new System.Drawing.Point(198, 203);
+            this.lblCuenta.Location = new System.Drawing.Point(297, 312);
+            this.lblCuenta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCuenta.Name = "lblCuenta";
-            this.lblCuenta.Size = new System.Drawing.Size(51, 13);
+            this.lblCuenta.Size = new System.Drawing.Size(74, 20);
             this.lblCuenta.TabIndex = 10;
             this.lblCuenta.Text = "CUENTA";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(12, 205);
+            this.label7.Location = new System.Drawing.Point(18, 315);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(144, 13);
+            this.label7.Size = new System.Drawing.Size(210, 20);
             this.label7.TabIndex = 9;
             this.label7.Text = "Nro de cuenta seleccionada:";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(7, 82);
+            this.label6.Location = new System.Drawing.Point(10, 126);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(276, 13);
+            this.label6.Size = new System.Drawing.Size(406, 20);
             this.label6.TabIndex = 8;
             this.label6.Text = "Seleccione la celda con el número de cuenta de destino.";
             // 
             // btnLimpiar
             // 
-            this.btnLimpiar.Location = new System.Drawing.Point(393, 156);
+            this.btnLimpiar.Location = new System.Drawing.Point(590, 240);
+            this.btnLimpiar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLimpiar.Name = "btnLimpiar";
-            this.btnLimpiar.Size = new System.Drawing.Size(144, 25);
+            this.btnLimpiar.Size = new System.Drawing.Size(216, 38);
             this.btnLimpiar.TabIndex = 7;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
@@ -164,9 +175,10 @@
             // 
             // btnBuscarCuentas
             // 
-            this.btnBuscarCuentas.Location = new System.Drawing.Point(394, 103);
+            this.btnBuscarCuentas.Location = new System.Drawing.Point(591, 158);
+            this.btnBuscarCuentas.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnBuscarCuentas.Name = "btnBuscarCuentas";
-            this.btnBuscarCuentas.Size = new System.Drawing.Size(144, 26);
+            this.btnBuscarCuentas.Size = new System.Drawing.Size(216, 40);
             this.btnBuscarCuentas.TabIndex = 6;
             this.btnBuscarCuentas.Text = "Buscar";
             this.btnBuscarCuentas.UseVisualStyleBackColor = true;
@@ -175,44 +187,49 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 55);
+            this.label3.Location = new System.Drawing.Point(18, 85);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(32, 13);
+            this.label3.Size = new System.Drawing.Size(48, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "Filtro:";
             // 
             // FiltroText
             // 
-            this.FiltroText.Location = new System.Drawing.Point(99, 52);
+            this.FiltroText.Location = new System.Drawing.Point(148, 80);
+            this.FiltroText.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.FiltroText.MaxLength = 10;
             this.FiltroText.Name = "FiltroText";
-            this.FiltroText.Size = new System.Drawing.Size(149, 20);
+            this.FiltroText.Size = new System.Drawing.Size(222, 26);
             this.FiltroText.TabIndex = 4;
             this.FiltroText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FiltroText_KeyPress);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 341);
+            this.label4.Location = new System.Drawing.Point(34, 525);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(150, 13);
+            this.label4.Size = new System.Drawing.Size(226, 20);
             this.label4.TabIndex = 5;
             this.label4.Text = "Ingrese el Importe a Transferir:";
             // 
             // ImporteTextBox
             // 
-            this.ImporteTextBox.Location = new System.Drawing.Point(205, 334);
+            this.ImporteTextBox.Location = new System.Drawing.Point(308, 514);
+            this.ImporteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.ImporteTextBox.MaxLength = 10;
             this.ImporteTextBox.Name = "ImporteTextBox";
-            this.ImporteTextBox.Size = new System.Drawing.Size(127, 20);
+            this.ImporteTextBox.Size = new System.Drawing.Size(188, 26);
             this.ImporteTextBox.TabIndex = 6;
             this.ImporteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImporteTextBox_KeyPress);
             // 
             // btnTransferencias
             // 
-            this.btnTransferencias.Location = new System.Drawing.Point(370, 379);
+            this.btnTransferencias.Location = new System.Drawing.Point(555, 583);
+            this.btnTransferencias.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnTransferencias.Name = "btnTransferencias";
-            this.btnTransferencias.Size = new System.Drawing.Size(186, 50);
+            this.btnTransferencias.Size = new System.Drawing.Size(279, 77);
             this.btnTransferencias.TabIndex = 7;
             this.btnTransferencias.Text = "Realizar Transferencia";
             this.btnTransferencias.UseVisualStyleBackColor = true;
@@ -221,26 +238,29 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(27, 19);
+            this.label5.Location = new System.Drawing.Point(40, 29);
+            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(73, 13);
+            this.label5.Size = new System.Drawing.Size(107, 20);
             this.label5.TabIndex = 8;
             this.label5.Text = "Fecha Actual:";
             // 
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(233, 19);
+            this.lblFecha.Location = new System.Drawing.Point(350, 29);
+            this.lblFecha.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.Size = new System.Drawing.Size(42, 13);
+            this.lblFecha.Size = new System.Drawing.Size(64, 20);
             this.lblFecha.TabIndex = 9;
             this.lblFecha.Text = "FECHA";
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(84, 382);
+            this.btnVolver.Location = new System.Drawing.Point(126, 588);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(191, 47);
+            this.btnVolver.Size = new System.Drawing.Size(286, 72);
             this.btnVolver.TabIndex = 10;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -248,9 +268,10 @@
             // 
             // btnLimpiar2
             // 
-            this.btnLimpiar2.Location = new System.Drawing.Point(425, 334);
+            this.btnLimpiar2.Location = new System.Drawing.Point(638, 514);
+            this.btnLimpiar2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnLimpiar2.Name = "btnLimpiar2";
-            this.btnLimpiar2.Size = new System.Drawing.Size(109, 20);
+            this.btnLimpiar2.Size = new System.Drawing.Size(164, 31);
             this.btnLimpiar2.TabIndex = 11;
             this.btnLimpiar2.Text = "Limpiar";
             this.btnLimpiar2.UseVisualStyleBackColor = true;
@@ -258,9 +279,9 @@
             // 
             // TransferenciasPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(627, 442);
+            this.ClientSize = new System.Drawing.Size(940, 680);
             this.Controls.Add(this.btnLimpiar2);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.lblFecha);
@@ -271,6 +292,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.cmbCuentaOrigen);
             this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "TransferenciasPrincipal";
             this.Text = "Transferencias";
             this.Load += new System.EventHandler(this.TransferenciasPrincipal_Load);

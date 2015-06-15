@@ -54,10 +54,11 @@
             this.OperacionFecha,
             this.Detalle,
             this.Costo});
-            this.dgvFactura.Location = new System.Drawing.Point(12, 20);
+            this.dgvFactura.Location = new System.Drawing.Point(18, 31);
+            this.dgvFactura.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dgvFactura.Name = "dgvFactura";
             this.dgvFactura.ReadOnly = true;
-            this.dgvFactura.Size = new System.Drawing.Size(687, 148);
+            this.dgvFactura.Size = new System.Drawing.Size(1030, 228);
             this.dgvFactura.TabIndex = 0;
             // 
             // FacturaNro
@@ -67,7 +68,7 @@
             this.FacturaNro.Name = "FacturaNro";
             this.FacturaNro.ReadOnly = true;
             this.FacturaNro.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FacturaNro.Width = 80;
+            this.FacturaNro.Width = 117;
             // 
             // FacturaFecha
             // 
@@ -76,7 +77,7 @@
             this.FacturaFecha.Name = "FacturaFecha";
             this.FacturaFecha.ReadOnly = true;
             this.FacturaFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FacturaFecha.Width = 74;
+            this.FacturaFecha.Width = 107;
             // 
             // OperacionFecha
             // 
@@ -85,7 +86,7 @@
             this.OperacionFecha.Name = "OperacionFecha";
             this.OperacionFecha.ReadOnly = true;
             this.OperacionFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.OperacionFecha.Width = 86;
+            this.OperacionFecha.Width = 123;
             // 
             // Detalle
             // 
@@ -94,7 +95,7 @@
             this.Detalle.Name = "Detalle";
             this.Detalle.ReadOnly = true;
             this.Detalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Detalle.Width = 46;
+            this.Detalle.Width = 65;
             // 
             // Costo
             // 
@@ -103,33 +104,37 @@
             this.Costo.Name = "Costo";
             this.Costo.ReadOnly = true;
             this.Costo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Costo.Width = 40;
+            this.Costo.Width = 57;
             // 
             // lblinstruccion
             // 
             this.lblinstruccion.AutoSize = true;
-            this.lblinstruccion.Location = new System.Drawing.Point(14, 16);
+            this.lblinstruccion.Location = new System.Drawing.Point(21, 25);
+            this.lblinstruccion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblinstruccion.Name = "lblinstruccion";
-            this.lblinstruccion.Size = new System.Drawing.Size(181, 13);
+            this.lblinstruccion.Size = new System.Drawing.Size(265, 20);
             this.lblinstruccion.TabIndex = 1;
             this.lblinstruccion.Text = "Seleccione el cliente al cual facturar:";
             this.lblinstruccion.Visible = false;
             // 
             // cmbClientes
             // 
+            this.cmbClientes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbClientes.FormattingEnabled = true;
-            this.cmbClientes.Location = new System.Drawing.Point(228, 12);
+            this.cmbClientes.Location = new System.Drawing.Point(342, 18);
+            this.cmbClientes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.cmbClientes.Name = "cmbClientes";
-            this.cmbClientes.Size = new System.Drawing.Size(161, 21);
+            this.cmbClientes.Size = new System.Drawing.Size(240, 28);
             this.cmbClientes.TabIndex = 2;
             this.cmbClientes.Visible = false;
             this.cmbClientes.SelectedIndexChanged += new System.EventHandler(this.cmbClientes_SelectedIndexChanged);
             // 
             // btnGenerarFactura
             // 
-            this.btnGenerarFactura.Location = new System.Drawing.Point(747, 55);
+            this.btnGenerarFactura.Location = new System.Drawing.Point(1120, 85);
+            this.btnGenerarFactura.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnGenerarFactura.Name = "btnGenerarFactura";
-            this.btnGenerarFactura.Size = new System.Drawing.Size(144, 63);
+            this.btnGenerarFactura.Size = new System.Drawing.Size(216, 97);
             this.btnGenerarFactura.TabIndex = 3;
             this.btnGenerarFactura.Text = "Generar Factura";
             this.btnGenerarFactura.UseVisualStyleBackColor = true;
@@ -138,18 +143,21 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.dgvFactura);
-            this.groupBox1.Location = new System.Drawing.Point(8, 38);
+            this.groupBox1.Location = new System.Drawing.Point(12, 58);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(705, 177);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Size = new System.Drawing.Size(1058, 272);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operaciones Facturadas";
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(753, 166);
+            this.btnVolver.Location = new System.Drawing.Point(1130, 255);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(134, 30);
+            this.btnVolver.Size = new System.Drawing.Size(201, 46);
             this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -157,14 +165,15 @@
             // 
             // GenerarFactura
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(908, 228);
+            this.ClientSize = new System.Drawing.Size(1362, 351);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnGenerarFactura);
             this.Controls.Add(this.cmbClientes);
             this.Controls.Add(this.lblinstruccion);
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "GenerarFactura";
             this.Text = "Generar Factura";
             this.Load += new System.EventHandler(this.GenerarFactura_Load);

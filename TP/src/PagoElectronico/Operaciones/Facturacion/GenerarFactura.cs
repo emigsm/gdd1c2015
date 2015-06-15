@@ -15,11 +15,12 @@ namespace PagoElectronico.Operaciones.Facturacion
         int cliente;
         int factura;
         int resultadoOperacion;
+        int rol;
 
-        public GenerarFactura(string usuario)
+        public GenerarFactura(int rolCod, string usuario)
         {
             InitializeComponent();
-            int rol = Convert.ToInt32(GestorDeSistema.obtenerRol(usuario));
+            int rol = rolCod;
             if (rol == 1)
             {
                 cmbClientes.Visible = true;

@@ -13,20 +13,20 @@ namespace PagoElectronico.Operaciones.Facturacion
     public partial class FacturacionPrincipal : Form
     {
         string usuario;
+        int rol;
 
-        public FacturacionPrincipal(string username)
+        public FacturacionPrincipal(int rolCod , string username)
         {
             InitializeComponent();
             usuario = username;
+            rol = rolCod;
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            int rol = Convert.ToInt32(GestorDeSistema.obtenerRol(usuario));
-
             if (opGenerarFactura.Checked == true)
             {
-                GenerarFactura frmGenerarFactura = new GenerarFactura(usuario);
+                GenerarFactura frmGenerarFactura = new GenerarFactura(rol,usuario);
                 frmGenerarFactura.Owner = this;
                 frmGenerarFactura.Show();
                 this.Hide();
@@ -49,6 +49,11 @@ namespace PagoElectronico.Operaciones.Facturacion
         {
             Owner.Show();
             this.Hide();
+        }
+
+        private void FacturacionPrincipal_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

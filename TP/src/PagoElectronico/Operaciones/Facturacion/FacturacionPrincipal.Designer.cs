@@ -99,6 +99,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "FacturacionPrincipal";
             this.Text = "FacturacionPrincipal";
+            this.Load += new System.EventHandler(this.FacturacionPrincipal_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

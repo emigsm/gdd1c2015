@@ -85,7 +85,6 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_LISTADO5 = "GEM4.spListadoEstadistico5";
         private const string STORE_TRANSFERIR = "GEM4.spTransferir";
         private const string STORE_VALIDARDISPONIBILIDADMAIL = "GEM4.spValidarDisponibilidadMail";
-        private const string STORE_OBTENERROL = "GEM4.spObtenerRol";
         private const string STORE_OBTENERTIPOCUENTA = "GEM4.spObtenerTipoCuenta";
         private const string STORE_COMPRARSUSCRIPCION = "GEM4.spComprarSuscripcion";
         private const string STORE_OBTENERCLIENTES = "GEM4.spObtenerClientes";
@@ -914,16 +913,6 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return mensajeResultado;
         }
         
-        public static string obtenerRol(string username)
-        {
-            string mensajeResultado;
-            List<SqlParameter> parametros = new List<SqlParameter>();
-            parametros.Add(new SqlParameter("@username", username));
-            
-            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERROL, SCALAR, parametros);
-            mensajeResultado = resultadoStoreProcedure.ToString();
-            return mensajeResultado;
-        }
         public static string obtenerTipoDeCuenta(string cuenta)
         {
             string mensajeResultado;

@@ -2546,16 +2546,9 @@ AS
 		END;
 GO
 
+--PROCEDURE BORRADO
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRol')
 	DROP PROCEDURE GEM4.spObtenerRol;
-GO
-
-CREATE PROCEDURE GEM4.spObtenerRol
-	@username		NVARCHAR(30)
-	
-AS
-	SELECT R.Rol_Cod FROM GEM4.Usuario U JOIN GEM4.Usuario_Por_Rol R ON U.Usuario_ID = R.Usuario_ID
-	WHERE U.Usuario_Username = @username
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTipoCuenta')

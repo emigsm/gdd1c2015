@@ -184,9 +184,11 @@
             // FiltroText
             // 
             this.FiltroText.Location = new System.Drawing.Point(99, 52);
+            this.FiltroText.MaxLength = 10;
             this.FiltroText.Name = "FiltroText";
             this.FiltroText.Size = new System.Drawing.Size(149, 20);
             this.FiltroText.TabIndex = 4;
+            this.FiltroText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FiltroText_KeyPress);
             // 
             // label4
             // 
@@ -200,9 +202,11 @@
             // ImporteTextBox
             // 
             this.ImporteTextBox.Location = new System.Drawing.Point(205, 334);
+            this.ImporteTextBox.MaxLength = 10;
             this.ImporteTextBox.Name = "ImporteTextBox";
             this.ImporteTextBox.Size = new System.Drawing.Size(127, 20);
             this.ImporteTextBox.TabIndex = 6;
+            this.ImporteTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ImporteTextBox_KeyPress);
             // 
             // btnTransferencias
             // 

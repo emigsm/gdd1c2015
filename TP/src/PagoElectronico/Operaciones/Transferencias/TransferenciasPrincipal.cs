@@ -70,7 +70,19 @@ namespace PagoElectronico.Operaciones.Transferencias
 
         private void btnTransferencias_Click(object sender, EventArgs e)
         {
-            if ((ImporteTextBox.Text == "") || (Convert.ToInt32(ImporteTextBox.Text) < 1))
+            if (ImporteTextBox.Text == "")
+            {
+                MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+
+            if (Convert.ToInt64(ImporteTextBox.Text) > 2147483647)
+            {
+                MessageBox.Show("El número ingresado en el campo 'Importe' es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if ((Convert.ToInt32(ImporteTextBox.Text) < 1))
             {
                 MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -99,7 +111,26 @@ namespace PagoElectronico.Operaciones.Transferencias
                 
             }
         }
+        private void ImporteTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo 'Importe' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
 
+            }
+        }
+        private void FiltroText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo 'Filtro' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+
+            }
+        }
         private void btnLimpiar2_Click(object sender, EventArgs e)
         {
             ImporteTextBox.Text = String.Empty;

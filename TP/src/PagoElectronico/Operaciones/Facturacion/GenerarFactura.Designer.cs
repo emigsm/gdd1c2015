@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.dgvFactura = new System.Windows.Forms.DataGridView();
-            this.lblinstruccion = new System.Windows.Forms.Label();
-            this.cmbClientes = new System.Windows.Forms.ComboBox();
-            this.btnGenerarFactura = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnVolver = new System.Windows.Forms.Button();
             this.FacturaNro = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FacturaFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.OperacionFecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Detalle = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lblinstruccion = new System.Windows.Forms.Label();
+            this.cmbClientes = new System.Windows.Forms.ComboBox();
+            this.btnGenerarFactura = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnVolver = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactura)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +59,51 @@
             this.dgvFactura.ReadOnly = true;
             this.dgvFactura.Size = new System.Drawing.Size(687, 148);
             this.dgvFactura.TabIndex = 0;
+            // 
+            // FacturaNro
+            // 
+            this.FacturaNro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FacturaNro.HeaderText = "Factura Número";
+            this.FacturaNro.Name = "FacturaNro";
+            this.FacturaNro.ReadOnly = true;
+            this.FacturaNro.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FacturaNro.Width = 80;
+            // 
+            // FacturaFecha
+            // 
+            this.FacturaFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.FacturaFecha.HeaderText = "Factura Fecha";
+            this.FacturaFecha.Name = "FacturaFecha";
+            this.FacturaFecha.ReadOnly = true;
+            this.FacturaFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.FacturaFecha.Width = 74;
+            // 
+            // OperacionFecha
+            // 
+            this.OperacionFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.OperacionFecha.HeaderText = "Operación Fecha";
+            this.OperacionFecha.Name = "OperacionFecha";
+            this.OperacionFecha.ReadOnly = true;
+            this.OperacionFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.OperacionFecha.Width = 86;
+            // 
+            // Detalle
+            // 
+            this.Detalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Detalle.HeaderText = "Detalle";
+            this.Detalle.Name = "Detalle";
+            this.Detalle.ReadOnly = true;
+            this.Detalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Detalle.Width = 46;
+            // 
+            // Costo
+            // 
+            this.Costo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
+            this.Costo.HeaderText = "Costo";
+            this.Costo.Name = "Costo";
+            this.Costo.ReadOnly = true;
+            this.Costo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Costo.Width = 40;
             // 
             // lblinstruccion
             // 
@@ -110,51 +155,6 @@
             this.btnVolver.UseVisualStyleBackColor = true;
             this.btnVolver.Click += new System.EventHandler(this.btnVolver_Click);
             // 
-            // FacturaNro
-            // 
-            this.FacturaNro.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FacturaNro.HeaderText = "Factura Número";
-            this.FacturaNro.Name = "FacturaNro";
-            this.FacturaNro.ReadOnly = true;
-            this.FacturaNro.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FacturaNro.Width = 80;
-            // 
-            // FacturaFecha
-            // 
-            this.FacturaFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.FacturaFecha.HeaderText = "Factura Fecha";
-            this.FacturaFecha.Name = "FacturaFecha";
-            this.FacturaFecha.ReadOnly = true;
-            this.FacturaFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.FacturaFecha.Width = 74;
-            // 
-            // OperacionFecha
-            // 
-            this.OperacionFecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.OperacionFecha.HeaderText = "Operación Fecha";
-            this.OperacionFecha.Name = "OperacionFecha";
-            this.OperacionFecha.ReadOnly = true;
-            this.OperacionFecha.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.OperacionFecha.Width = 86;
-            // 
-            // Detalle
-            // 
-            this.Detalle.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Detalle.HeaderText = "Detalle";
-            this.Detalle.Name = "Detalle";
-            this.Detalle.ReadOnly = true;
-            this.Detalle.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Detalle.Width = 46;
-            // 
-            // Costo
-            // 
-            this.Costo.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells;
-            this.Costo.HeaderText = "Costo";
-            this.Costo.Name = "Costo";
-            this.Costo.ReadOnly = true;
-            this.Costo.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Costo.Width = 40;
-            // 
             // GenerarFactura
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -166,7 +166,7 @@
             this.Controls.Add(this.cmbClientes);
             this.Controls.Add(this.lblinstruccion);
             this.Name = "GenerarFactura";
-            this.Text = "GenerarFactura";
+            this.Text = "Generar Factura";
             this.Load += new System.EventHandler(this.GenerarFactura_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFactura)).EndInit();
             this.groupBox1.ResumeLayout(false);

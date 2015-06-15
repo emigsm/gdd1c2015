@@ -88,9 +88,11 @@
             // CantidadTextBox
             // 
             this.CantidadTextBox.Location = new System.Drawing.Point(170, 97);
+            this.CantidadTextBox.MaxLength = 10;
             this.CantidadTextBox.Name = "CantidadTextBox";
             this.CantidadTextBox.Size = new System.Drawing.Size(167, 20);
             this.CantidadTextBox.TabIndex = 7;
+            this.CantidadTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CantidadTextBox_KeyPress);
             // 
             // groupBox1
             // 

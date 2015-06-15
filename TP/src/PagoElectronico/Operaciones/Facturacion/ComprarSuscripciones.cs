@@ -41,10 +41,36 @@ namespace PagoElectronico.Operaciones.Facturacion
 
         private void btnComprar_Click(object sender, EventArgs e)
         {
+            if (CantidadTextBox.Text == "")
+            {
+                MessageBox.Show("El campo 'Cantidad de Suscripciones' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+
+            if (Convert.ToInt64(CantidadTextBox.Text) > 2147483647)
+            {
+                MessageBox.Show("El número ingresado en el campo 'Cantidad de Suscripciones' es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+            if (Convert.ToInt32(CantidadTextBox.Text) < 1)
+            {
+                MessageBox.Show("El campo 'Cantidad de Suscripciones' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             String resultado;
             resultado = GestorDeSistema.comprarSuscripcion(cmbCuenta.SelectedValue.ToString(), Convert.ToInt32(CantidadTextBox.Text));
             MessageBox.Show(resultado, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
+        private void CantidadTextBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!(char.IsNumber(e.KeyChar)) && (e.KeyChar != (char)Keys.Back))
+            {
+                MessageBox.Show("El campo 'Cantidad de Suscrupciones' sólo puede contener números", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
 
+            }
+        }
     }
 }

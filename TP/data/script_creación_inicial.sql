@@ -915,6 +915,28 @@ RETURN @retorno;
 END;
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnTarjetaEstaVencida')
+	DROP FUNCTION GEM4.fnTarjetaEstaVencida
+GO
+CREATE FUNCTION GEM4.fnTarjetaEstaVencida(@fechaVencimiento DATETIME)
+RETURNS BIT
+AS
+BEGIN
+	DECLARE @retorno BIT
+	DECLARE @diferenciaDias INT = (DATEDIFF(D,@fechaVencimiento,GEM4.fnDevolverFechaSistema()));
+	SET @retorno = 0;
+IF (@diferenciaDias <0)
+	BEGIN
+		SET @retorno = 1;
+	END
+
+RETURN @retorno
+
+END
+GO
+
+
+
 /* *****************************************     CREACION DE TRIGGERS    ********************************************** */
 
 IF EXISTS (SELECT 1 FROM sysobjects WHERE name = 'verificacionSuscripcionesCuentas' AND type = 'TR')
@@ -2247,6 +2269,7 @@ DECLARE @MONEDA_COD			INT;
 DECLARE @CUENTA_NRO			NUMERIC (18,0);
 DECLARE @OPERACION_TIPO		INT;
 DECLARE @OPERACION_ID		NUMERIC(18,0);
+DECLARE @VENCIMIENTOTARJETA DATETIME;
 
 SET @FECHA= (SELECT TOP 1 a.fechaSistema FROM GEM4.fechaSistema a );
 SET @CLIENTE =(SELECT T.Tarjeta_Cliente_ID FROM GEM4.Tarjeta T WHERE T.Tarjeta_Numero=@Tarjeta);
@@ -2254,7 +2277,7 @@ SET @MONEDA_COD = (SELECT M.Moneda_Codigo FROM GEM4.Moneda M WHERE M.Moneda_Desc
 SET @CUENTA_NRO = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta AND C.Cuenta_Cliente_ID
 =@CLIENTE);
 SET @OPERACION_TIPO =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHERE O.Tipo_Operacion_Descripcion LIKE 'Deposito');
-
+SET @VENCIMIENTOTARJETA = (SELECT T.Tarjeta_Fecha_Vencimiento FROM GEM4.Tarjeta T WHERE T.Tarjeta_Numero LIKE @Tarjeta );
 
 
 	IF(GEM4.fnValidarCuentaHabilitada(@CUENTA_NRO)=0)   
@@ -2262,7 +2285,12 @@ SET @OPERACION_TIPO =(SELECT O.Tipo_Operacion_ID FROM GEM4.Tipo_Operacion O WHER
 			SELECT ' El depósito no se pudo realizar ya que la cuenta no se encuentra habilitada ';
 		
 	ELSE
+		IF (GEM4.fnTarjetaEstaVencida(@VENCIMIENTOTARJETA) = 1)
 		
+			SELECT 'La tarjeta de crédito seleccionada se encuentra vencida'
+			
+		ELSE	
+			
 			INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
 			,Deposito_Cuenta)
 			VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)

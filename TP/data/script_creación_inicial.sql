@@ -2245,7 +2245,7 @@ DECLARE @OPERACION_TIPO		INT;
 DECLARE @OPERACION_ID		NUMERIC(18,0);
 DECLARE @VENCIMIENTOTARJETA DATETIME;
 
-SET @FECHA= (SELECT TOP 1 a.fechaSistema FROM GEM4.fechaSistema a );
+SET @FECHA= GEM4.fnDevolverFechaSistema();
 SET @CLIENTE =(SELECT T.Tarjeta_Cliente_ID FROM GEM4.Tarjeta T WHERE T.Tarjeta_Numero=@Tarjeta);
 SET @MONEDA_COD = (SELECT M.Moneda_Codigo FROM GEM4.Moneda M WHERE M.Moneda_Descripcion = @Moneda);
 SET @CUENTA_NRO = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta AND C.Cuenta_Cliente_ID

@@ -1299,7 +1299,7 @@ AS
 				IF @Cuenta NOT IN (SELECT L.Log_Cuentas_Inhabilitadas_Cuenta FROM GEM4.Log_Cuentas_Inhabilitadas L)
 					INSERT INTO Log_Cuentas_Inhabilitadas (Log_Cuentas_Inhabilitadas_ClienteID,Log_Cuentas_Inhabilitadas_Cuenta
 					,Log_Cuentas_Inhabilitadas_Fecha,Log_Cuentas_Inhabilitadas_Veces)
-					SELECT I.Operacion_Facturable_Cliente_ID,I.Operacion_Facturable_Cuenta_Numero,SYSDATETIME(),
+					SELECT I.Operacion_Facturable_Cliente_ID,I.Operacion_Facturable_Cuenta_Numero,GEM4.fnDevolverFechaSistema(),
 					0
 					FROM inserted I
 				ELSE

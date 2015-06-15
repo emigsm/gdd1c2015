@@ -2665,6 +2665,7 @@ DECLARE @Fecha DATETIME;
 DECLARE @Factura NUMERIC(18,0);
 DECLARE @CuentasNoActivadas INT;
 DECLARE @HayPedienteDeFacturacion INT;
+DECLARE @CuentasInhabilitadas INT;
 
 SET @HayPedienteDeFacturacion = (SELECT COUNT(O.Operacion_Facturable_ID) FROM GEM4.Operacion_Facturable O 
 								WHERE O.Operacion_Facturable_Cliente_ID =@ClienteID 
@@ -2672,6 +2673,7 @@ SET @HayPedienteDeFacturacion = (SELECT COUNT(O.Operacion_Facturable_ID) FROM GE
 SET @Fecha = GEM4.fnDevolverFechaSistema();
 
 SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 4);
+SET @CuentasInhabilitadas =(SELECT COUNT(C.Cuenta_Numero)FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 2);
 
 	IF (@HayPedienteDeFacturacion > 0)
 	BEGIN
@@ -2683,7 +2685,17 @@ SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHER
 		SET Operacion_Facturable_Factura_Numero = @Factura
 		WHERE Operacion_Facturable_Cliente_ID = @ClienteID AND Operacion_Facturable_Factura_Numero IS NULL
 				AND Operacion_Facturable_Costo > 0
-	
+		
+		IF @CuentasInhabilitadas >0
+		
+		BEGIN
+			UPDATE GEM4.Cuenta
+			SET Cuenta_Estado =1
+			WHERE Cuenta_Numero IN
+			(SELECT DISTINCT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 2
+			AND GEM4.fnCuentaEstaVencida(C.Cuenta_Tipo,C.Cuenta_Suscripciones_Compradas,C.Cuenta_Suscripciones_Fecha)=0)
+		END
+		
 		IF @CuentasNoActivadas > 0
 	
 		BEGIN

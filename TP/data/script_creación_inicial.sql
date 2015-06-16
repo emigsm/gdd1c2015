@@ -1001,7 +1001,8 @@ INSERT INTO GEM4.Funcionalidad(Funcionalidad_Cod,Funcionalidad_Descripcion) VALU
 	(8,'Transferencias'),
 	(9,'Facturacion'),
 	(10,'Consulta Saldos'),
-	(11,'Listados Estadisticos');
+	(11,'Listados Estadisticos'),
+	(12,'Cambio de Contraseña/Pregunta Secreta');
 	
 INSERT INTO GEM4.Rol_Por_Funcionalidad (Rol_Cod, Funcionalidad_Cod) VALUES
 	(1,1),
@@ -1017,7 +1018,8 @@ INSERT INTO GEM4.Rol_Por_Funcionalidad (Rol_Cod, Funcionalidad_Cod) VALUES
 	(2,9),
 	(1,10),
 	(2,10),
-	(1,11);
+	(1,11),
+	(2,12);
 	
 --Completa las funcionalidades deshabilitadas--
 
@@ -2734,4 +2736,17 @@ AS
 	SELECT COUNT(Operacion_Facturable_ID) Operaciones_Sin_Facturar
 	FROM GEM4.Operacion_Facturable 
 	WHERE Operacion_Facturable_Cliente_ID = @clienteID AND Operacion_Facturable_Factura_Numero IS NULL
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerUsuarioID')
+	DROP PROCEDURE GEM4.spObtenerUsuarioID;
+GO
+
+CREATE PROCEDURE GEM4.spObtenerUsuarioID
+@username NVARCHAR(30)
+		
+AS
+	SELECT Usuario_ID
+	FROM GEM4.Usuario
+	WHERE Usuario_Username = @username
 GO

@@ -26,6 +26,16 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             cargarCmbsRol();
         }
 
+        public ModificacionUsuario(int usuarioIDP)
+        {
+            InitializeComponent();
+            usuarioID = usuarioIDP;
+            groupBoxRol.Enabled = false;
+            groupBoxEstado.Enabled = false;
+            cargarCmbsEstado();
+            cargarCmbsRol();
+        }
+
         private void cargarCmbsRol()
         {
             DataTable roles = GestorDeSistema.obtenerRoles();

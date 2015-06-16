@@ -92,6 +92,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_FACTURAR = "GEM4.spFacturar";
         private const string STORE_OBTENERFACTURA = "GEM4.spObtenerFactura";
         private const string STORE_OBTENEROPERACIONESSINFACTURAR = "GEM4.spObtenerOperacionesSinFacturar";
+        private const string STORE_OBTENERUSUARIOID = "GEM4.spObtenerUsuarioID";
 
   public static int loginUsuario(string usuario, string contrasena)
         {
@@ -989,6 +990,17 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             resultado = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return resultado;
         }
-        
+
+        public static int obtenerUsuarioID(string usuario)
+        {
+            int usuarioID;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter user = new SqlParameter("@username", usuario);
+            parametros.Add(user);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERUSUARIOID, SCALAR, parametros);
+            usuarioID = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return usuarioID;
+
+        }
     }
 }

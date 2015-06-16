@@ -115,6 +115,13 @@ namespace PagoElectronico
                     frmListadosPrincipal.Show(this);
                     this.Hide();
                     break;
+
+                case "Cambio de Contraseña/Pregunta Secreta":
+                    ModificacionUsuario cambioContraseña = new ModificacionUsuario(GestorDeSistema.obtenerUsuarioID(username));
+                    cambioContraseña.Show(this);
+                    this.Hide();
+                    break;
+                    
             }
         }
 

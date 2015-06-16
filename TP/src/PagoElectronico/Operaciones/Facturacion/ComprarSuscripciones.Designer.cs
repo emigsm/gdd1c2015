@@ -43,10 +43,9 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(30, 37);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(20, 24);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(160, 20);
+            this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Seleccione la cuenta:";
             // 
@@ -54,50 +53,45 @@
             // 
             this.cmbCuenta.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCuenta.FormattingEnabled = true;
-            this.cmbCuenta.Location = new System.Drawing.Point(254, 32);
-            this.cmbCuenta.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.cmbCuenta.Location = new System.Drawing.Point(169, 21);
             this.cmbCuenta.Name = "cmbCuenta";
-            this.cmbCuenta.Size = new System.Drawing.Size(307, 28);
+            this.cmbCuenta.Size = new System.Drawing.Size(206, 21);
             this.cmbCuenta.TabIndex = 3;
             this.cmbCuenta.SelectedIndexChanged += new System.EventHandler(this.cmbCuenta_SelectedIndexChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(33, 94);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(22, 61);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(95, 20);
+            this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Suscripción:";
             // 
             // lblTipoCuenta
             // 
             this.lblTipoCuenta.AutoSize = true;
-            this.lblTipoCuenta.Location = new System.Drawing.Point(250, 94);
-            this.lblTipoCuenta.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTipoCuenta.Location = new System.Drawing.Point(167, 61);
             this.lblTipoCuenta.Name = "lblTipoCuenta";
-            this.lblTipoCuenta.Size = new System.Drawing.Size(141, 20);
+            this.lblTipoCuenta.Size = new System.Drawing.Size(97, 13);
             this.lblTipoCuenta.TabIndex = 5;
             this.lblTipoCuenta.Text = "TIPO DE CUENTA";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(33, 154);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(22, 100);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(199, 20);
+            this.label5.Size = new System.Drawing.Size(134, 13);
             this.label5.TabIndex = 6;
             this.label5.Text = "Cantidad de suscripciones:";
             // 
             // CantidadTextBox
             // 
-            this.CantidadTextBox.Location = new System.Drawing.Point(255, 149);
-            this.CantidadTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.CantidadTextBox.MaxLength = 10;
+            this.CantidadTextBox.Location = new System.Drawing.Point(170, 97);
+            this.CantidadTextBox.MaxLength = 3;
             this.CantidadTextBox.Name = "CantidadTextBox";
-            this.CantidadTextBox.Size = new System.Drawing.Size(248, 26);
+            this.CantidadTextBox.Size = new System.Drawing.Size(167, 20);
             this.CantidadTextBox.TabIndex = 7;
             this.CantidadTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.CantidadTextBox_KeyPress);
             // 
@@ -109,21 +103,18 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.cmbCuenta);
             this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 28);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.groupBox1.Location = new System.Drawing.Point(8, 18);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox1.Size = new System.Drawing.Size(600, 209);
+            this.groupBox1.Size = new System.Drawing.Size(400, 136);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Datos de Compra:";
             // 
             // btnComprar
             // 
-            this.btnComprar.Location = new System.Drawing.Point(646, 58);
-            this.btnComprar.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnComprar.Location = new System.Drawing.Point(431, 38);
             this.btnComprar.Name = "btnComprar";
-            this.btnComprar.Size = new System.Drawing.Size(224, 57);
+            this.btnComprar.Size = new System.Drawing.Size(149, 37);
             this.btnComprar.TabIndex = 9;
             this.btnComprar.Text = "Comprar";
             this.btnComprar.UseVisualStyleBackColor = true;
@@ -131,10 +122,9 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(646, 171);
-            this.btnVolver.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.btnVolver.Location = new System.Drawing.Point(431, 111);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(224, 52);
+            this.btnVolver.Size = new System.Drawing.Size(149, 34);
             this.btnVolver.TabIndex = 10;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -142,13 +132,12 @@
             // 
             // ComprarSuscripciones
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(927, 263);
+            this.ClientSize = new System.Drawing.Size(618, 171);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnComprar);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ComprarSuscripciones";
             this.Text = "ComprarSuscripciones";
             this.Load += new System.EventHandler(this.ComprarSuscripciones_Load);

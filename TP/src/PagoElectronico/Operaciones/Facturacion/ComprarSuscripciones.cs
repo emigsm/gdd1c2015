@@ -48,7 +48,7 @@ namespace PagoElectronico.Operaciones.Facturacion
 
             }
 
-            if (Convert.ToInt64(CantidadTextBox.Text) > 2147483647)
+            if (Convert.ToInt64(CantidadTextBox.Text) > 254)
             {
                 MessageBox.Show("El número ingresado en el campo 'Cantidad de Suscripciones' es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;

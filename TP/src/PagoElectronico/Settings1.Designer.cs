@@ -25,10 +25,10 @@ namespace PagoElectronico {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("2017-01-01")]
-        public global::System.DateTime Fecha_de_Sistema {
+        [global::System.Configuration.DefaultSettingValueAttribute("2017-01-01 00:00:00.000")]
+        public string Fecha_de_Sistema {
             get {
-                return ((global::System.DateTime)(this["Fecha_de_Sistema"]));
+                return ((string)(this["Fecha_de_Sistema"]));
             }
         }
         

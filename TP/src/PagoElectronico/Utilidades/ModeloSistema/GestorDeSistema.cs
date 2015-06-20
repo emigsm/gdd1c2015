@@ -19,6 +19,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const int SCALAR = 3;
 
         //Constantes de StoreProcedure
+        private const string STORE_INSERTARFECHAFUNCIONAMIENTO = "GEM4.spInsertarFechaFuncionamiento";
         private const string STORE_LOGINUSUARIO = "GEM4.spLoginUsuario";
         private const string STORE_CANTIDADROLES = "GEM4.spCantidadRoles";
         private const string STORE_OBTENERROLES = "GEM4.spObtenerRoles";
@@ -93,8 +94,15 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERFACTURA = "GEM4.spObtenerFactura";
         private const string STORE_OBTENEROPERACIONESSINFACTURAR = "GEM4.spObtenerOperacionesSinFacturar";
         private const string STORE_OBTENERUSUARIOID = "GEM4.spObtenerUsuarioID";
-
-  public static int loginUsuario(string usuario, string contrasena)
+        
+      public static void insertarFechaFuncionamiento (string fecha)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@fecha", fecha));
+            ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_INSERTARFECHAFUNCIONAMIENTO, NONQUERY, parametros);
+        }  
+      
+      public static int loginUsuario(string usuario, string contrasena)
         {
             int Rol_Cod;
             List<SqlParameter> parametros = new List<SqlParameter>();

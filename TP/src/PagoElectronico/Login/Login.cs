@@ -21,6 +21,7 @@ namespace PagoElectronico
         public Login()
         {
             InitializeComponent();
+            GestorDeSistema.insertarFechaFuncionamiento(Settings1.Default.Fecha_de_Sistema);
             cantidadIntentos = 0;
 
         }

@@ -45,7 +45,7 @@ AS
 	END
 GO
 
-EXEC GEM4.spRegistrarFechaDelSistema '2015-01-01 00:00:00.000' 
+EXEC GEM4.spRegistrarFechaDelSistema '2017-01-01 00:00:00.000' 
 
 IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='spInsertarFechaFuncionamiento')
 	DROP PROCEDURE GEM4.spInsertarFechaFuncionamiento

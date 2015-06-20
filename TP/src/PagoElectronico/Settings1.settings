@@ -2,8 +2,8 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PagoElectronico" GeneratedClassName="Settings1">
   <Profiles />
   <Settings>
-    <Setting Name="Fecha_de_Sistema" Type="System.DateTime" Scope="Application">
-      <Value Profile="(Default)">2017-01-01</Value>
+    <Setting Name="Fecha_de_Sistema" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">2017-01-01 00:00:00.000</Value>
     </Setting>
     <Setting Name="Parametros_de_Conexion" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Server=localhost\SQLSERVER2008;Database=GD1C2015;User Id=gd;Password=gd2015;</Value>

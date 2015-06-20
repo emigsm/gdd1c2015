@@ -88,11 +88,10 @@
             this.ModificarCliente,
             this.BorrarCliente,
             this.Cliente_Habilitado});
-            this.dgvClientes.Location = new System.Drawing.Point(24, 429);
-            this.dgvClientes.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.dgvClientes.Location = new System.Drawing.Point(16, 279);
             this.dgvClientes.Name = "dgvClientes";
             this.dgvClientes.ReadOnly = true;
-            this.dgvClientes.Size = new System.Drawing.Size(969, 271);
+            this.dgvClientes.Size = new System.Drawing.Size(646, 176);
             this.dgvClientes.TabIndex = 0;
             this.dgvClientes.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvClientes_CellContentClick);
             // 
@@ -207,38 +206,34 @@
             // 
             // nombreClienteTextBox
             // 
-            this.nombreClienteTextBox.Location = new System.Drawing.Point(202, 35);
-            this.nombreClienteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nombreClienteTextBox.Location = new System.Drawing.Point(135, 23);
             this.nombreClienteTextBox.Name = "nombreClienteTextBox";
-            this.nombreClienteTextBox.Size = new System.Drawing.Size(169, 26);
+            this.nombreClienteTextBox.Size = new System.Drawing.Size(114, 20);
             this.nombreClienteTextBox.TabIndex = 1;
             this.nombreClienteTextBox.TextChanged += new System.EventHandler(this.nombreClienteTextBox_TextChanged);
             // 
             // ApellidoClienteTextBox
             // 
-            this.ApellidoClienteTextBox.Location = new System.Drawing.Point(202, 95);
-            this.ApellidoClienteTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ApellidoClienteTextBox.Location = new System.Drawing.Point(135, 62);
             this.ApellidoClienteTextBox.Name = "ApellidoClienteTextBox";
-            this.ApellidoClienteTextBox.Size = new System.Drawing.Size(169, 26);
+            this.ApellidoClienteTextBox.Size = new System.Drawing.Size(114, 20);
             this.ApellidoClienteTextBox.TabIndex = 2;
             // 
             // nombreClienteLabek
             // 
             this.nombreClienteLabek.AutoSize = true;
-            this.nombreClienteLabek.Location = new System.Drawing.Point(20, 46);
-            this.nombreClienteLabek.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.nombreClienteLabek.Location = new System.Drawing.Point(13, 30);
             this.nombreClienteLabek.Name = "nombreClienteLabek";
-            this.nombreClienteLabek.Size = new System.Drawing.Size(65, 20);
+            this.nombreClienteLabek.Size = new System.Drawing.Size(44, 13);
             this.nombreClienteLabek.TabIndex = 3;
             this.nombreClienteLabek.Text = "Nombre";
             // 
             // apellidoLabel
             // 
             this.apellidoLabel.AutoSize = true;
-            this.apellidoLabel.Location = new System.Drawing.Point(24, 100);
-            this.apellidoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.apellidoLabel.Location = new System.Drawing.Point(16, 65);
             this.apellidoLabel.Name = "apellidoLabel";
-            this.apellidoLabel.Size = new System.Drawing.Size(65, 20);
+            this.apellidoLabel.Size = new System.Drawing.Size(44, 13);
             this.apellidoLabel.TabIndex = 4;
             this.apellidoLabel.Text = "Apellido";
             // 
@@ -246,46 +241,41 @@
             // 
             this.tipoDocComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tipoDocComboBox.FormattingEnabled = true;
-            this.tipoDocComboBox.Location = new System.Drawing.Point(202, 152);
-            this.tipoDocComboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tipoDocComboBox.Location = new System.Drawing.Point(135, 99);
             this.tipoDocComboBox.Name = "tipoDocComboBox";
-            this.tipoDocComboBox.Size = new System.Drawing.Size(169, 28);
+            this.tipoDocComboBox.Size = new System.Drawing.Size(114, 21);
             this.tipoDocComboBox.TabIndex = 5;
             // 
             // tipoDocLabel
             // 
             this.tipoDocLabel.AutoSize = true;
-            this.tipoDocLabel.Location = new System.Drawing.Point(24, 157);
-            this.tipoDocLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.tipoDocLabel.Location = new System.Drawing.Point(16, 102);
             this.tipoDocLabel.Name = "tipoDocLabel";
-            this.tipoDocLabel.Size = new System.Drawing.Size(126, 20);
+            this.tipoDocLabel.Size = new System.Drawing.Size(86, 13);
             this.tipoDocLabel.TabIndex = 6;
             this.tipoDocLabel.Text = "Tipo Documento";
             // 
             // nroDocLabel
             // 
             this.nroDocLabel.AutoSize = true;
-            this.nroDocLabel.Location = new System.Drawing.Point(447, 157);
-            this.nroDocLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.nroDocLabel.Location = new System.Drawing.Point(298, 102);
             this.nroDocLabel.Name = "nroDocLabel";
-            this.nroDocLabel.Size = new System.Drawing.Size(121, 20);
+            this.nroDocLabel.Size = new System.Drawing.Size(82, 13);
             this.nroDocLabel.TabIndex = 7;
             this.nroDocLabel.Text = "Nro Documento";
             // 
             // nroDocTextBox
             // 
-            this.nroDocTextBox.Location = new System.Drawing.Point(579, 152);
-            this.nroDocTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nroDocTextBox.Location = new System.Drawing.Point(386, 99);
             this.nroDocTextBox.Name = "nroDocTextBox";
-            this.nroDocTextBox.Size = new System.Drawing.Size(206, 26);
+            this.nroDocTextBox.Size = new System.Drawing.Size(139, 20);
             this.nroDocTextBox.TabIndex = 8;
             // 
             // nuevoClienteButton
             // 
-            this.nuevoClienteButton.Location = new System.Drawing.Point(604, 308);
-            this.nuevoClienteButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.nuevoClienteButton.Location = new System.Drawing.Point(403, 200);
             this.nuevoClienteButton.Name = "nuevoClienteButton";
-            this.nuevoClienteButton.Size = new System.Drawing.Size(129, 108);
+            this.nuevoClienteButton.Size = new System.Drawing.Size(86, 70);
             this.nuevoClienteButton.TabIndex = 9;
             this.nuevoClienteButton.Text = "Nuevo Cliente";
             this.nuevoClienteButton.UseVisualStyleBackColor = true;
@@ -294,27 +284,24 @@
             // mailLabel
             // 
             this.mailLabel.AutoSize = true;
-            this.mailLabel.Location = new System.Drawing.Point(28, 214);
-            this.mailLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.mailLabel.Location = new System.Drawing.Point(19, 139);
             this.mailLabel.Name = "mailLabel";
-            this.mailLabel.Size = new System.Drawing.Size(37, 20);
+            this.mailLabel.Size = new System.Drawing.Size(26, 13);
             this.mailLabel.TabIndex = 10;
             this.mailLabel.Text = "Mail";
             // 
             // mailTextBox
             // 
-            this.mailTextBox.Location = new System.Drawing.Point(202, 209);
-            this.mailTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mailTextBox.Location = new System.Drawing.Point(135, 136);
             this.mailTextBox.Name = "mailTextBox";
-            this.mailTextBox.Size = new System.Drawing.Size(169, 26);
+            this.mailTextBox.Size = new System.Drawing.Size(114, 20);
             this.mailTextBox.TabIndex = 11;
             // 
             // buscarButton
             // 
-            this.buscarButton.Location = new System.Drawing.Point(18, 337);
-            this.buscarButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.buscarButton.Location = new System.Drawing.Point(12, 219);
             this.buscarButton.Name = "buscarButton";
-            this.buscarButton.Size = new System.Drawing.Size(256, 49);
+            this.buscarButton.Size = new System.Drawing.Size(171, 32);
             this.buscarButton.TabIndex = 12;
             this.buscarButton.Text = "Buscar";
             this.buscarButton.UseVisualStyleBackColor = true;
@@ -322,10 +309,9 @@
             // 
             // limpiarButton
             // 
-            this.limpiarButton.Location = new System.Drawing.Point(303, 337);
-            this.limpiarButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.limpiarButton.Location = new System.Drawing.Point(202, 219);
             this.limpiarButton.Name = "limpiarButton";
-            this.limpiarButton.Size = new System.Drawing.Size(256, 49);
+            this.limpiarButton.Size = new System.Drawing.Size(171, 32);
             this.limpiarButton.TabIndex = 13;
             this.limpiarButton.Text = "Limpiar";
             this.limpiarButton.UseVisualStyleBackColor = true;
@@ -333,10 +319,9 @@
             // 
             // volverButton
             // 
-            this.volverButton.Location = new System.Drawing.Point(1032, 429);
-            this.volverButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.volverButton.Location = new System.Drawing.Point(688, 279);
             this.volverButton.Name = "volverButton";
-            this.volverButton.Size = new System.Drawing.Size(112, 108);
+            this.volverButton.Size = new System.Drawing.Size(75, 70);
             this.volverButton.TabIndex = 15;
             this.volverButton.Text = "Volver";
             this.volverButton.UseVisualStyleBackColor = true;
@@ -344,9 +329,9 @@
             // 
             // ABMClientePrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1162, 737);
+            this.ClientSize = new System.Drawing.Size(821, 530);
             this.Controls.Add(this.volverButton);
             this.Controls.Add(this.limpiarButton);
             this.Controls.Add(this.buscarButton);
@@ -362,7 +347,6 @@
             this.Controls.Add(this.ApellidoClienteTextBox);
             this.Controls.Add(this.nombreClienteTextBox);
             this.Controls.Add(this.dgvClientes);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ABMClientePrincipal";
             this.Text = "ABMClientePrincipal";
             this.Load += new System.EventHandler(this.ABMClientePrincipal_Load);

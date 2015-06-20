@@ -65,30 +65,27 @@
             // NombreLabel
             // 
             this.NombreLabel.AutoSize = true;
-            this.NombreLabel.Location = new System.Drawing.Point(27, 54);
-            this.NombreLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.NombreLabel.Location = new System.Drawing.Point(18, 35);
             this.NombreLabel.Name = "NombreLabel";
-            this.NombreLabel.Size = new System.Drawing.Size(69, 20);
+            this.NombreLabel.Size = new System.Drawing.Size(47, 13);
             this.NombreLabel.TabIndex = 0;
             this.NombreLabel.Text = "Nombre:";
             // 
             // apellidoClilabel
             // 
             this.apellidoClilabel.AutoSize = true;
-            this.apellidoClilabel.Location = new System.Drawing.Point(27, 94);
-            this.apellidoClilabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.apellidoClilabel.Location = new System.Drawing.Point(18, 61);
             this.apellidoClilabel.Name = "apellidoClilabel";
-            this.apellidoClilabel.Size = new System.Drawing.Size(69, 20);
+            this.apellidoClilabel.Size = new System.Drawing.Size(47, 13);
             this.apellidoClilabel.TabIndex = 1;
             this.apellidoClilabel.Text = "Apellido:";
             // 
             // TipoLabel
             // 
             this.TipoLabel.AutoSize = true;
-            this.TipoLabel.Location = new System.Drawing.Point(27, 148);
-            this.TipoLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TipoLabel.Location = new System.Drawing.Point(18, 96);
             this.TipoLabel.Name = "TipoLabel";
-            this.TipoLabel.Size = new System.Drawing.Size(76, 20);
+            this.TipoLabel.Size = new System.Drawing.Size(54, 13);
             this.TipoLabel.TabIndex = 2;
             this.TipoLabel.Text = "Tipo Doc:";
             // 
@@ -96,10 +93,9 @@
             // 
             this.TipoDcomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TipoDcomboBox.FormattingEnabled = true;
-            this.TipoDcomboBox.Location = new System.Drawing.Point(189, 143);
-            this.TipoDcomboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.TipoDcomboBox.Location = new System.Drawing.Point(126, 93);
             this.TipoDcomboBox.Name = "TipoDcomboBox";
-            this.TipoDcomboBox.Size = new System.Drawing.Size(180, 28);
+            this.TipoDcomboBox.Size = new System.Drawing.Size(121, 21);
             this.TipoDcomboBox.TabIndex = 3;
             this.TipoDcomboBox.SelectedIndexChanged += new System.EventHandler(this.TipoDcomboBox_SelectedIndexChanged);
             this.TipoDcomboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TipoDcomboBox_KeyDown);
@@ -107,39 +103,35 @@
             // NroDocLabel
             // 
             this.NroDocLabel.AutoSize = true;
-            this.NroDocLabel.Location = new System.Drawing.Point(388, 148);
-            this.NroDocLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.NroDocLabel.Location = new System.Drawing.Point(259, 96);
             this.NroDocLabel.Name = "NroDocLabel";
-            this.NroDocLabel.Size = new System.Drawing.Size(71, 20);
+            this.NroDocLabel.Size = new System.Drawing.Size(50, 13);
             this.NroDocLabel.TabIndex = 4;
             this.NroDocLabel.Text = "Nro Doc:";
             // 
             // NroDocClitextBox
             // 
-            this.NroDocClitextBox.Location = new System.Drawing.Point(472, 143);
-            this.NroDocClitextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NroDocClitextBox.Location = new System.Drawing.Point(315, 93);
             this.NroDocClitextBox.Name = "NroDocClitextBox";
-            this.NroDocClitextBox.Size = new System.Drawing.Size(194, 26);
+            this.NroDocClitextBox.Size = new System.Drawing.Size(131, 20);
             this.NroDocClitextBox.TabIndex = 5;
             this.NroDocClitextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NroDocClitextBox_KeyDown);
             this.NroDocClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NroDocClitextBox_KeyPress);
             // 
             // ApellidoClitextBox
             // 
-            this.ApellidoClitextBox.Location = new System.Drawing.Point(189, 89);
-            this.ApellidoClitextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.ApellidoClitextBox.Location = new System.Drawing.Point(126, 58);
             this.ApellidoClitextBox.Name = "ApellidoClitextBox";
-            this.ApellidoClitextBox.Size = new System.Drawing.Size(220, 26);
+            this.ApellidoClitextBox.Size = new System.Drawing.Size(148, 20);
             this.ApellidoClitextBox.TabIndex = 6;
             this.ApellidoClitextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ApellidoClitextBox_KeyDown);
             this.ApellidoClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ApellidoClitextBox_KeyPress);
             // 
             // NombreClitextBox
             // 
-            this.NombreClitextBox.Location = new System.Drawing.Point(189, 49);
-            this.NombreClitextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NombreClitextBox.Location = new System.Drawing.Point(126, 32);
             this.NombreClitextBox.Name = "NombreClitextBox";
-            this.NombreClitextBox.Size = new System.Drawing.Size(220, 26);
+            this.NombreClitextBox.Size = new System.Drawing.Size(148, 20);
             this.NombreClitextBox.TabIndex = 7;
             this.NombreClitextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NombreClitextBox_KeyDown);
             this.NombreClitextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NombreClitextBox_KeyPress);
@@ -147,19 +139,17 @@
             // Maillabel
             // 
             this.Maillabel.AutoSize = true;
-            this.Maillabel.Location = new System.Drawing.Point(24, 195);
-            this.Maillabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Maillabel.Location = new System.Drawing.Point(16, 127);
             this.Maillabel.Name = "Maillabel";
-            this.Maillabel.Size = new System.Drawing.Size(41, 20);
+            this.Maillabel.Size = new System.Drawing.Size(29, 13);
             this.Maillabel.TabIndex = 8;
             this.Maillabel.Text = "Mail:";
             // 
             // MailtextBox
             // 
-            this.MailtextBox.Location = new System.Drawing.Point(189, 191);
-            this.MailtextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MailtextBox.Location = new System.Drawing.Point(126, 124);
             this.MailtextBox.Name = "MailtextBox";
-            this.MailtextBox.Size = new System.Drawing.Size(180, 26);
+            this.MailtextBox.Size = new System.Drawing.Size(121, 20);
             this.MailtextBox.TabIndex = 9;
             this.MailtextBox.TextChanged += new System.EventHandler(this.MailtextBox_TextChanged);
             this.MailtextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MailtextBox_KeyDown);
@@ -167,48 +157,43 @@
             // Paislabel
             // 
             this.Paislabel.AutoSize = true;
-            this.Paislabel.Location = new System.Drawing.Point(24, 238);
-            this.Paislabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.Paislabel.Location = new System.Drawing.Point(16, 155);
             this.Paislabel.Name = "Paislabel";
-            this.Paislabel.Size = new System.Drawing.Size(43, 20);
+            this.Paislabel.Size = new System.Drawing.Size(30, 13);
             this.Paislabel.TabIndex = 10;
             this.Paislabel.Text = "Pais:";
             // 
             // domiciliolabel
             // 
             this.domiciliolabel.AutoSize = true;
-            this.domiciliolabel.Location = new System.Drawing.Point(24, 285);
-            this.domiciliolabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.domiciliolabel.Location = new System.Drawing.Point(16, 185);
             this.domiciliolabel.Name = "domiciliolabel";
-            this.domiciliolabel.Size = new System.Drawing.Size(115, 20);
+            this.domiciliolabel.Size = new System.Drawing.Size(78, 13);
             this.domiciliolabel.TabIndex = 12;
             this.domiciliolabel.Text = "Domicilio Calle:";
             // 
             // DomicilioCalletextBox
             // 
-            this.DomicilioCalletextBox.Location = new System.Drawing.Point(189, 280);
-            this.DomicilioCalletextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DomicilioCalletextBox.Location = new System.Drawing.Point(126, 182);
             this.DomicilioCalletextBox.Name = "DomicilioCalletextBox";
-            this.DomicilioCalletextBox.Size = new System.Drawing.Size(180, 26);
+            this.DomicilioCalletextBox.Size = new System.Drawing.Size(121, 20);
             this.DomicilioCalletextBox.TabIndex = 13;
             this.DomicilioCalletextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomicilioCalletextBox_KeyDown);
             // 
             // DomNrolabel
             // 
             this.DomNrolabel.AutoSize = true;
-            this.DomNrolabel.Location = new System.Drawing.Point(24, 334);
-            this.DomNrolabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DomNrolabel.Location = new System.Drawing.Point(16, 217);
             this.DomNrolabel.Name = "DomNrolabel";
-            this.DomNrolabel.Size = new System.Drawing.Size(136, 20);
+            this.DomNrolabel.Size = new System.Drawing.Size(92, 13);
             this.DomNrolabel.TabIndex = 14;
             this.DomNrolabel.Text = "Domicilio Numero:";
             // 
             // DomNumerotextBox
             // 
-            this.DomNumerotextBox.Location = new System.Drawing.Point(194, 329);
-            this.DomNumerotextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DomNumerotextBox.Location = new System.Drawing.Point(129, 214);
             this.DomNumerotextBox.Name = "DomNumerotextBox";
-            this.DomNumerotextBox.Size = new System.Drawing.Size(175, 26);
+            this.DomNumerotextBox.Size = new System.Drawing.Size(118, 20);
             this.DomNumerotextBox.TabIndex = 15;
             this.DomNumerotextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomNumerotextBox_KeyDown);
             this.DomNumerotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomNumerotextBox_KeyPress);
@@ -216,19 +201,17 @@
             // DomPisolabel
             // 
             this.DomPisolabel.AutoSize = true;
-            this.DomPisolabel.Location = new System.Drawing.Point(24, 378);
-            this.DomPisolabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DomPisolabel.Location = new System.Drawing.Point(16, 246);
             this.DomPisolabel.Name = "DomPisolabel";
-            this.DomPisolabel.Size = new System.Drawing.Size(110, 20);
+            this.DomPisolabel.Size = new System.Drawing.Size(75, 13);
             this.DomPisolabel.TabIndex = 16;
             this.DomPisolabel.Text = "Domicilio Piso:";
             // 
             // DomicilioPisoTextBox
             // 
-            this.DomicilioPisoTextBox.Location = new System.Drawing.Point(194, 374);
-            this.DomicilioPisoTextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DomicilioPisoTextBox.Location = new System.Drawing.Point(129, 243);
             this.DomicilioPisoTextBox.Name = "DomicilioPisoTextBox";
-            this.DomicilioPisoTextBox.Size = new System.Drawing.Size(175, 26);
+            this.DomicilioPisoTextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioPisoTextBox.TabIndex = 17;
             this.DomicilioPisoTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomicilioPisoTextBox_KeyDown);
             this.DomicilioPisoTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioPisoTextBox_KeyPress);
@@ -236,19 +219,17 @@
             // DomicilioDeptoNuevolabel
             // 
             this.DomicilioDeptoNuevolabel.AutoSize = true;
-            this.DomicilioDeptoNuevolabel.Location = new System.Drawing.Point(24, 425);
-            this.DomicilioDeptoNuevolabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.DomicilioDeptoNuevolabel.Location = new System.Drawing.Point(16, 276);
             this.DomicilioDeptoNuevolabel.Name = "DomicilioDeptoNuevolabel";
-            this.DomicilioDeptoNuevolabel.Size = new System.Drawing.Size(124, 20);
+            this.DomicilioDeptoNuevolabel.Size = new System.Drawing.Size(84, 13);
             this.DomicilioDeptoNuevolabel.TabIndex = 18;
             this.DomicilioDeptoNuevolabel.Text = "Domicilio Depto:";
             // 
             // DomicilioDeptotextBox
             // 
-            this.DomicilioDeptotextBox.Location = new System.Drawing.Point(194, 420);
-            this.DomicilioDeptotextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.DomicilioDeptotextBox.Location = new System.Drawing.Point(129, 273);
             this.DomicilioDeptotextBox.Name = "DomicilioDeptotextBox";
-            this.DomicilioDeptotextBox.Size = new System.Drawing.Size(175, 26);
+            this.DomicilioDeptotextBox.Size = new System.Drawing.Size(118, 20);
             this.DomicilioDeptotextBox.TabIndex = 19;
             this.DomicilioDeptotextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DomicilioDeptotextBox_KeyDown);
             this.DomicilioDeptotextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DomicilioDeptotextBox_KeyPress);
@@ -256,57 +237,51 @@
             // localLabel
             // 
             this.localLabel.AutoSize = true;
-            this.localLabel.Location = new System.Drawing.Point(24, 472);
-            this.localLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.localLabel.Location = new System.Drawing.Point(16, 307);
             this.localLabel.Name = "localLabel";
-            this.localLabel.Size = new System.Drawing.Size(81, 20);
+            this.localLabel.Size = new System.Drawing.Size(56, 13);
             this.localLabel.TabIndex = 20;
             this.localLabel.Text = "Localidad:";
             // 
             // LocalidadtextBox
             // 
-            this.LocalidadtextBox.Location = new System.Drawing.Point(194, 468);
-            this.LocalidadtextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.LocalidadtextBox.Location = new System.Drawing.Point(129, 304);
             this.LocalidadtextBox.Name = "LocalidadtextBox";
-            this.LocalidadtextBox.Size = new System.Drawing.Size(175, 26);
+            this.LocalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.LocalidadtextBox.TabIndex = 21;
             this.LocalidadtextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LocalidadtextBox_KeyDown);
             // 
             // NacionalidadLabel
             // 
             this.NacionalidadLabel.AutoSize = true;
-            this.NacionalidadLabel.Location = new System.Drawing.Point(24, 525);
-            this.NacionalidadLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.NacionalidadLabel.Location = new System.Drawing.Point(16, 341);
             this.NacionalidadLabel.Name = "NacionalidadLabel";
-            this.NacionalidadLabel.Size = new System.Drawing.Size(104, 20);
+            this.NacionalidadLabel.Size = new System.Drawing.Size(72, 13);
             this.NacionalidadLabel.TabIndex = 22;
             this.NacionalidadLabel.Text = "Nacionalidad:";
             // 
             // fechaNacimientodateTimePicker
             // 
-            this.fechaNacimientodateTimePicker.Location = new System.Drawing.Point(200, 591);
-            this.fechaNacimientodateTimePicker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.fechaNacimientodateTimePicker.Location = new System.Drawing.Point(133, 384);
             this.fechaNacimientodateTimePicker.Name = "fechaNacimientodateTimePicker";
-            this.fechaNacimientodateTimePicker.Size = new System.Drawing.Size(298, 26);
+            this.fechaNacimientodateTimePicker.Size = new System.Drawing.Size(200, 20);
             this.fechaNacimientodateTimePicker.TabIndex = 24;
             this.fechaNacimientodateTimePicker.KeyDown += new System.Windows.Forms.KeyEventHandler(this.fechaNacimientodateTimePicker_KeyDown);
             // 
             // FechaNaclabel
             // 
             this.FechaNaclabel.AutoSize = true;
-            this.FechaNaclabel.Location = new System.Drawing.Point(24, 600);
-            this.FechaNaclabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.FechaNaclabel.Location = new System.Drawing.Point(16, 390);
             this.FechaNaclabel.Name = "FechaNaclabel";
-            this.FechaNaclabel.Size = new System.Drawing.Size(163, 20);
+            this.FechaNaclabel.Size = new System.Drawing.Size(111, 13);
             this.FechaNaclabel.TabIndex = 25;
             this.FechaNaclabel.Text = "Fecha de Nacimiento:";
             // 
             // VolverButton
             // 
-            this.VolverButton.Location = new System.Drawing.Point(446, 789);
-            this.VolverButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.VolverButton.Location = new System.Drawing.Point(297, 513);
             this.VolverButton.Name = "VolverButton";
-            this.VolverButton.Size = new System.Drawing.Size(243, 68);
+            this.VolverButton.Size = new System.Drawing.Size(162, 44);
             this.VolverButton.TabIndex = 31;
             this.VolverButton.Text = "Volver";
             this.VolverButton.UseVisualStyleBackColor = true;
@@ -316,19 +291,17 @@
             // 
             this.PaiscomboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.PaiscomboBox.FormattingEnabled = true;
-            this.PaiscomboBox.Location = new System.Drawing.Point(189, 234);
-            this.PaiscomboBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.PaiscomboBox.Location = new System.Drawing.Point(126, 152);
             this.PaiscomboBox.Name = "PaiscomboBox";
-            this.PaiscomboBox.Size = new System.Drawing.Size(180, 28);
+            this.PaiscomboBox.Size = new System.Drawing.Size(121, 21);
             this.PaiscomboBox.TabIndex = 32;
             this.PaiscomboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PaiscomboBox_KeyDown);
             // 
             // NacionalidadtextBox
             // 
-            this.NacionalidadtextBox.Location = new System.Drawing.Point(194, 520);
-            this.NacionalidadtextBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.NacionalidadtextBox.Location = new System.Drawing.Point(129, 338);
             this.NacionalidadtextBox.Name = "NacionalidadtextBox";
-            this.NacionalidadtextBox.Size = new System.Drawing.Size(175, 26);
+            this.NacionalidadtextBox.Size = new System.Drawing.Size(118, 20);
             this.NacionalidadtextBox.TabIndex = 33;
             this.NacionalidadtextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NacionalidadtextBox_KeyDown);
             this.NacionalidadtextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.NacionalidadtextBox_KeyPress);
@@ -336,10 +309,9 @@
             // habilitadocheckBox
             // 
             this.habilitadocheckBox.AutoSize = true;
-            this.habilitadocheckBox.Location = new System.Drawing.Point(28, 651);
-            this.habilitadocheckBox.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.habilitadocheckBox.Location = new System.Drawing.Point(19, 423);
             this.habilitadocheckBox.Name = "habilitadocheckBox";
-            this.habilitadocheckBox.Size = new System.Drawing.Size(79, 24);
+            this.habilitadocheckBox.Size = new System.Drawing.Size(59, 17);
             this.habilitadocheckBox.TabIndex = 34;
             this.habilitadocheckBox.Text = "Estado";
             this.habilitadocheckBox.UseVisualStyleBackColor = true;
@@ -348,29 +320,26 @@
             // IDClienteDesclabel
             // 
             this.IDClienteDesclabel.AutoSize = true;
-            this.IDClienteDesclabel.Location = new System.Drawing.Point(24, 14);
-            this.IDClienteDesclabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.IDClienteDesclabel.Location = new System.Drawing.Point(16, 9);
             this.IDClienteDesclabel.Name = "IDClienteDesclabel";
-            this.IDClienteDesclabel.Size = new System.Drawing.Size(108, 20);
+            this.IDClienteDesclabel.Size = new System.Drawing.Size(73, 13);
             this.IDClienteDesclabel.TabIndex = 35;
             this.IDClienteDesclabel.Text = "ID del Cliente:";
             // 
             // IDLabelValor
             // 
             this.IDLabelValor.AutoSize = true;
-            this.IDLabelValor.Location = new System.Drawing.Point(194, 12);
-            this.IDLabelValor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.IDLabelValor.Location = new System.Drawing.Point(129, 8);
             this.IDLabelValor.Name = "IDLabelValor";
-            this.IDLabelValor.Size = new System.Drawing.Size(60, 20);
+            this.IDLabelValor.Size = new System.Drawing.Size(40, 13);
             this.IDLabelValor.TabIndex = 36;
             this.IDLabelValor.Text = "ValorId";
             // 
             // modificarTarjetasbutton
             // 
-            this.modificarTarjetasbutton.Location = new System.Drawing.Point(32, 706);
-            this.modificarTarjetasbutton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.modificarTarjetasbutton.Location = new System.Drawing.Point(21, 459);
             this.modificarTarjetasbutton.Name = "modificarTarjetasbutton";
-            this.modificarTarjetasbutton.Size = new System.Drawing.Size(248, 60);
+            this.modificarTarjetasbutton.Size = new System.Drawing.Size(165, 39);
             this.modificarTarjetasbutton.TabIndex = 37;
             this.modificarTarjetasbutton.Text = "Tarjetas";
             this.modificarTarjetasbutton.UseVisualStyleBackColor = true;
@@ -378,10 +347,9 @@
             // 
             // guardarBoton
             // 
-            this.guardarBoton.Location = new System.Drawing.Point(38, 789);
-            this.guardarBoton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.guardarBoton.Location = new System.Drawing.Point(25, 513);
             this.guardarBoton.Name = "guardarBoton";
-            this.guardarBoton.Size = new System.Drawing.Size(242, 68);
+            this.guardarBoton.Size = new System.Drawing.Size(161, 44);
             this.guardarBoton.TabIndex = 38;
             this.guardarBoton.Text = "Guardar Cambios";
             this.guardarBoton.UseVisualStyleBackColor = true;
@@ -389,9 +357,9 @@
             // 
             // ModificacionCliente
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(756, 892);
+            this.ClientSize = new System.Drawing.Size(629, 590);
             this.Controls.Add(this.guardarBoton);
             this.Controls.Add(this.modificarTarjetasbutton);
             this.Controls.Add(this.IDLabelValor);
@@ -424,7 +392,6 @@
             this.Controls.Add(this.TipoLabel);
             this.Controls.Add(this.apellidoClilabel);
             this.Controls.Add(this.NombreLabel);
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "ModificacionCliente";
             this.Text = "Modificar Cliente";
             this.Load += new System.EventHandler(this.ModificacionCliente_Load);

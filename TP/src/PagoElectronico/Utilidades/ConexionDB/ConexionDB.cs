@@ -14,8 +14,8 @@ namespace PagoElectronico.Utilidades.ConexionDB
 
         public static SqlConnection ConectarDB() //método para conectar a la DB
         {
-            string datosConexionDB = @"Server=localhost\SQLSERVER2008;Database=GD1C2015;User Id=gd;Password=gd2015;";
-            conexionDB = new SqlConnection(datosConexionDB);
+            string datosConexionDBc = @Settings1.Default.Parametros_de_Conexion;
+            conexionDB = new SqlConnection(datosConexionDBc);
             if (conexionDB.State != System.Data.ConnectionState.Open)
             {
                 conexionDB.Open();

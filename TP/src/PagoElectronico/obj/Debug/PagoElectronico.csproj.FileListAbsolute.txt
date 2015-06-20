@@ -134,3 +134,4 @@ Z:\ConexionVM\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaci
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Facturacion.ComprarSuscripciones.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Facturacion.FacturacionPrincipal.resources
 C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\obj\Debug\PagoElectronico.Operaciones.Facturacion.GenerarFactura.resources
+C:\Users\Gestion de Datos\Documents\GitHub\gdd1c2015\TP\src\PagoElectronico\bin\Debug\PagoElectronico.exe.config

@@ -92,40 +92,62 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
           private void desvincularTarjetabutton_Click(object sender, EventArgs e)
           {
               string numeroTarjeta;
-            if (dgvTarjetas.SelectedRows.Count == 1)
-            {
-                
-                
-                int indice = dgvTarjetas.Rows.IndexOf(dgvTarjetas.SelectedRows[0] );
-                dgvTarjetas.Rows.Clear();
-                numeroTarjeta = tarjetas.Rows[indice].ItemArray[0].ToString();
-                GestorDeSistema.desvincularTarjeta(numeroTarjeta);
-                obtenerTarjetasCliente(idCliente);
-                    dgvTarjetas.Update();
+              if (dgvTarjetas.SelectedRows.Count == 1)
+              {
 
-             }
-            else
-            {
-                MessageBox.Show("Seleccione la Tarjeta que quiere Desvincular", "Advertencia!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-              
-                return;
-            }
-          
-       
-        }
+                  int indice = dgvTarjetas.Rows.IndexOf(dgvTarjetas.SelectedRows[0]);
+                  dgvTarjetas.Rows.Clear();
+                  numeroTarjeta = tarjetas.Rows[indice].ItemArray[0].ToString();
+
+                  if (Convert.ToBoolean(tarjetas.Rows[indice].ItemArray[7].ToString()) == true)
+                  {
+                      GestorDeSistema.desvincularTarjeta(numeroTarjeta);
+                      MessageBox.Show("La tarjeta ha sido desvinculada Efectivamente", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                      obtenerTarjetasCliente(idCliente);
+                      dgvTarjetas.Update();
+                  }
+                  else
+                  {
+                      MessageBox.Show("La tarjeta ya está desvinculada", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                      obtenerTarjetasCliente(idCliente);
+                      dgvTarjetas.Update();
+                  }
+
+              }
+              else
+              {
+                  MessageBox.Show("Seleccione la Tarjeta que quiere Desvincular", "Advertencia!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                  return;
+              }
+
+
+          }
 
           private void VincularTarjetabutton_Click(object sender, EventArgs e)
           {
               string numeroTarjeta;
               if (dgvTarjetas.SelectedRows.Count == 1)
               {
-                  
+
                   int indice = dgvTarjetas.Rows.IndexOf(dgvTarjetas.SelectedRows[0]);
                   dgvTarjetas.Rows.Clear();
                   numeroTarjeta = tarjetas.Rows[indice].ItemArray[0].ToString();
-                  GestorDeSistema.vincularTarjeta(numeroTarjeta);
-                  obtenerTarjetasCliente(idCliente);
-                  dgvTarjetas.Update();
+
+                  if (Convert.ToBoolean(tarjetas.Rows[indice].ItemArray[7].ToString()) == false)
+                  {
+                      GestorDeSistema.vincularTarjeta(numeroTarjeta);
+                      MessageBox.Show("La tarjeta ha sido vinculada Efectivamente con el cliente.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                      obtenerTarjetasCliente(idCliente);
+                      dgvTarjetas.Update();
+                  }
+                  else
+                  {
+                      MessageBox.Show("La tarjeta ya está vinculada con el Cliente", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                      obtenerTarjetasCliente(idCliente);
+                      dgvTarjetas.Update();
+                  }
+
               }
               else
               {
@@ -134,19 +156,22 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
                   return;
               }
           }
-
           private void NuevaTarjetabutton_Click(object sender, EventArgs e)
           {
               AltaTarjeta altaTarjeta = new AltaTarjeta(idCliente);
               this.Hide();
               altaTarjeta.ShowDialog(this);
-              actualizarBoton.PerformClick();
+              
+              this.actualizarLista();
 
           }
 
           public void actualizarLista()
           {
+              
               dgvTarjetas.Update();
+              dgvTarjetas.Rows.Clear();
+              obtenerTarjetasCliente(idCliente);
           }
 
           private void AsociacionTCPrincipal_Load(object sender, EventArgs e)
@@ -155,11 +180,7 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
               obtenerTarjetasCliente(idCliente);
           }
 
-          private void actualizarBoton_Click(object sender, EventArgs e)
-          {
-              dgvTarjetas.Rows.Clear();
-              obtenerTarjetasCliente(idCliente);
-          }
+        
 
           
           

@@ -1,0 +1,47 @@
+#MIGRACION
+Hay mas transferencias que operaciones facturables. Si en operaciones facturables voy a tener las aperturas y las transferencias, 
+como minimo count de transferencias debe ser igual a operaciones, porq no estoy contando las aperturas en la migracion porq es un 
+requerimientos nuevo. Nos da la impresión que contabilizaron 2 veces una misma transferencia
+
+CORREGIDO, faltaba un DISTINCT en la migracion de las transferencias.
+Luego del proceso de migracion, operaciones_facturables posee MAS filas que transferencias. Esto se debe a que en la tabla maestra
+hay menos transferencias que comisiones a migrar ya que hay transferencias cuya columna Factura_Numero es NULL, pero las comisiones 
+se migraron igualmente.
+-------------------------------------------------------------------------------------------------------------------------------------
+#APLICACION
+Falta el archivo de configuración para la fecha y la conexion.
+Si bien el string de conexión esta en la clase ConexionDB, debe estar en otro archivo aparte. Para el menjo de la fecha es lo mismo, 
+y no en la base de datos. Supongan que el inicio el 01-01-2017 que son los ultimo registros de la migracion
+
+CORREGIDO Al momento de migración, se “hardcodea” una fecha de sistema para que el proceso se realice con
+dicha fecha. Este valor está en el script. Luego, una vez realizada la migración, el programa tiene
+cargado en un ARCHIVO DE CONFIGURACIÓN (app.config) la fecha de funcionamiento, tal como se
+requiere en el enunciado.
+Dicho archivo de configuración también posee el string de conexión a la BD, respetando las
+condiciones pedidas por enunciado.
+-------------------------------------------------------------------------------------------------------------------------------------
+ABM ROL
+Se busco sin ingresar ningun caracter y dio error, luego se creo un rol y se busco por su nombre y se volvió a presentar el mismo error
+
+CORREGIDO, faltaba una validacion por textbox vacio.
+-------------------------------------------------------------------------------------------------------------------------------------
+ABM CUENTA
+Si creo cuenta y no tengo TC asociada, deberia cachear el error y no que termine la ejecucion por error
+
+NO SE CORRIGIO PORQUE NO HAY NINGUN ERROR AL HACER ESO, no tira ningun error ni se termina la ejecucion
+al crear una cuenta con un cliente sin TC asociada.
+-------------------------------------------------------------------------------------------------------------------------------------
+VINCULAR TC
+No se comprende que hacen los botones vincular y actualizar, porq crear solo permite seleccionar un tipo de TC pero nada mas. No sabemos 
+si esto es asi o les faltó algo por desrrollar :S No se emiten mensajes 
+
+CORREGIDO, el boton actualizar se elimino, ya que se actualiza automaticamente el grid ahora. 
+TAmbén se emiten los mensajes pedidos. TOdas las funcionalidades de Asociacion TC estan desarrolladas.
+-------------------------------------------------------------------------------------------------------------------------------------
+CONSULTA DE SALDO
+Emite 3 mensajes seguidos, suponemos que es por los 3 grid que tienen si ellos estan vacios.
+
+NO SE CORIGIO Emite 1 mensaje por grid vacío, indicando cual operacion no posee movimientos.
+Nos parecio correcto dejarlo así, en cuyo caso si asi lo requieren eliminamos los mensajes.
+
+

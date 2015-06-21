@@ -923,9 +923,8 @@ RETURNS BIT
 AS
 BEGIN
 	DECLARE @retorno BIT
-	DECLARE @diferenciaDias INT = (DATEDIFF(D,@fechaVencimiento,GEM4.fnDevolverFechaSistema()));
 	SET @retorno = 0;
-IF (@diferenciaDias <0)
+IF ( @fechaVencimiento < GEM4.fnDevolverFechaSistema())
 	BEGIN
 		SET @retorno = 1;
 	END

@@ -74,6 +74,11 @@ namespace PagoElectronico.Operaciones.Depositos
                 MessageBox.Show("El número ingresado en el campo 'Importe' es demasiado grande ", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            if (cmbTarjeta.Items.Count == 0)
+            {
+                MessageBox.Show("No posee tarjetas para efectivizar el depósito", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             if (Convert.ToInt32(ImporteTextBox.Text) <1)
             {
                 MessageBox.Show("El campo 'Importe' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

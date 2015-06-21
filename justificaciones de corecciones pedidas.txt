@@ -30,6 +30,7 @@ Si creo cuenta y no tengo TC asociada, deberia cachear el error y no que termine
 
 NO SE CORRIGIO PORQUE NO HAY NINGUN ERROR AL HACER ESO, no tira ningun error ni se termina la ejecucion
 al crear una cuenta con un cliente sin TC asociada.
+SI se producia un error al ocurrir esto en DEPOSITOS, el cual SE CORRIGIO
 -------------------------------------------------------------------------------------------------------------------------------------
 VINCULAR TC
 No se comprende que hacen los botones vincular y actualizar, porq crear solo permite seleccionar un tipo de TC pero nada mas. No sabemos 

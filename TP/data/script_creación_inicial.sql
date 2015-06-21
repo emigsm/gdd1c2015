@@ -1202,7 +1202,7 @@ FROM GEM4.Cuenta JOIN (SELECT SUM(Retiro_Importe) Total_Importe, Retiro_Cuenta F
 --MIGRACION DE TRANSFERENCIAS
 --MIGRO LAS TRANSFERENCIAS
 INSERT INTO GEM4.Transferencia( Transferencia_Fecha, Transferencia_Importe, Transferencia_Costo_Trans, Transferencia_Cuenta_Origen, Transferencia_Cuenta_Destino)
-SELECT GEM4.fnValidarFecha(Transf_Fecha), Trans_Importe, Trans_Costo_Trans, Cuenta_Numero, Cuenta_Dest_Numero
+SELECT DISTINCT GEM4.fnValidarFecha(Transf_Fecha), Trans_Importe, Trans_Costo_Trans, Cuenta_Numero, Cuenta_Dest_Numero
 FROM gd_esquema.Maestra
 WHERE Transf_Fecha IS NOT NULL
 --ACTUALIZO OPERACIONES

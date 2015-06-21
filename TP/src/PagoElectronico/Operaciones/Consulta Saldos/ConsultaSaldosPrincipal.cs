@@ -63,7 +63,7 @@ namespace PagoElectronico.Operaciones.Consulta_Saldos
 
         private void txtClienteNumero_TextChanged(object sender, EventArgs e)
         {
-
+            cmbCuentas.DataSource = null;
         }
 
         private void btnConsultar_Click(object sender, EventArgs e)

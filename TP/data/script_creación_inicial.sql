@@ -2720,7 +2720,7 @@ CREATE PROCEDURE GEM4.spObtenerFactura
 @FacturaID NUMERIC (18,0)
 		
 AS
-	SELECT DISTINCT F.Factura_Numero,F.Factura_Fecha,O.Operacion_Facturable_Fecha,O.Operacion_Facturable_Detalle,O.Operacion_Facturable_Costo FROM GEM4.Factura F JOIN GEM4.Operacion_Facturable O ON (F.Factura_Numero = O.Operacion_Facturable_Factura_Numero)
+	SELECT F.Factura_Numero,F.Factura_Fecha,O.Operacion_Facturable_Fecha,O.Operacion_Facturable_Detalle,O.Operacion_Facturable_Costo FROM GEM4.Factura F JOIN GEM4.Operacion_Facturable O ON (F.Factura_Numero = O.Operacion_Facturable_Factura_Numero)
 		   WHERE F.Factura_Numero = @FacturaID
 GO
 

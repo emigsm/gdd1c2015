@@ -1697,7 +1697,7 @@ DECLARE @Detalle				 NVARCHAR(255);
 DECLARE @Costo					 NUMERIC(18,2);
 
 	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha) VALUES
-		(@clienteID, @codPais, @codMoneda, @tipoCuenta, GEM4.fnDevolverFechaSistema(), 4, 0, 0, NULL)
+		(@clienteID, @codPais, @codMoneda, @tipoCuenta, GEM4.fnDevolverFechaSistema(), 4, 0, 1, NULL)
 	
 	 
 		

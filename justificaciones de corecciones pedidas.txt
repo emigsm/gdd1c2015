@@ -44,5 +44,15 @@ Emite 3 mensajes seguidos, suponemos que es por los 3 grid que tienen si ellos e
 
 NO SE CORIGIO Emite 1 mensaje por grid vacío, indicando cual operacion no posee movimientos.
 Nos parecio correcto dejarlo así, en cuyo caso si asi lo requieren eliminamos los mensajes.
+-------------------------------------------------------------------------------------------------------------------------------------
+TRANSFERENCIAS
+Se creo cliente, se creo usuario, creo una cuenta, se pago facturó la comision, se hicieron 2 depositos, se intento ahcer una trasnfenecia
+de la cuenta nueva terminada en 452 a 450 y emitio mensaje que la cuenta origen no estaba hablitada ¿? Pero si ya pague el cargo de apertura, 
+porq no esta habilitada?
+
+CORREGIDO, al realizar una ALTA de cuenta se le asignaban 0 suscripciones, por lo que el usuario quedaba inhabilitado si no compraba al menos
+1 suscripcion luego de realizada el alta. Se corrigió dejando por defecto 1 suscripcion al momento de realizar un alta de cuenta, con lo cual actualmente
+al momento de pagar los costos de apertura ya se encuentra completamente habilitada la cuenta para operar.
+
 
 

@@ -94,6 +94,13 @@ namespace PagoElectronico.Operaciones.Transferencias
                 return;
 
             }
+            if (cmbCuentaOrigen.Items.Count == 0)
+            {
+                MessageBox.Show("No posee ninguna cuenta para realizar la operacion", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+
+            }
+
             else
             {
                 string cuentaOrigen =cmbCuentaOrigen.SelectedValue.ToString();

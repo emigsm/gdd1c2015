@@ -1697,14 +1697,11 @@ DECLARE @Detalle				 NVARCHAR(255);
 DECLARE @Costo					 NUMERIC(18,2);
 
 	INSERT INTO GEM4.Cuenta(Cuenta_Cliente_ID, Cuenta_Pais, Cuenta_Moneda, Cuenta_Tipo, Cuenta_Fecha_Creacion, Cuenta_Estado, Cuenta_Saldo, Cuenta_Suscripciones_Compradas, Cuenta_Suscripciones_Fecha) VALUES
-		(@clienteID, @codPais, @codMoneda, @tipoCuenta, GEM4.fnDevolverFechaSistema(), 4, 0, 1, NULL)
+		(@clienteID, @codPais, @codMoneda, @tipoCuenta, GEM4.fnDevolverFechaSistema(), 4, 0, 1, GEM4.fnDevolverFechaSistema())
 	
 	 
 		
-		SELECT TOP 1 Cuenta_Numero 
-		FROM GEM4.Cuenta 
-		WHERE Cuenta_Cliente_ID = @clienteID 
-		ORDER BY Cuenta_Fecha_Creacion DESC
+	SELECT IDENT_CURRENT('GEM4.Cuenta')
 		
 SET @TipoOperacionFacturable = GEM4.fnTipoAperturaCuenta(@tipoCuenta);
 SET @Fecha =GEM4.fnDevolverFechaSistema();

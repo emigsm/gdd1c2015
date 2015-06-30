@@ -2256,32 +2256,34 @@ SET @VENCIMIENTOTARJETA = (SELECT T.Tarjeta_Fecha_Vencimiento FROM GEM4.Tarjeta 
 
 
 	IF(GEM4.fnValidarCuentaHabilitada(@CUENTA_NRO)=0)   
-		
+		BEGIN
 			SELECT ' El depósito no se pudo realizar ya que la cuenta no se encuentra habilitada ';
-		
-	ELSE
-			IF (GEM4.fnTarjetaEstaVencida(@VENCIMIENTOTARJETA) = 1)
-		
-			SELECT 'La tarjeta de credito seleccionada se encuentra vencida'
+			RETURN;
+		END
+	IF (GEM4.fnTarjetaEstaVencida(@VENCIMIENTOTARJETA) = 1)
+		BEGIN	
+			SELECT 'La tarjeta de credito seleccionada se encuentra vencida';
+			RETURN;
+		END
+	
+	INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
+		,Deposito_Cuenta)
+		VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
 			
-		ELSE	
-		
-			INSERT GEM4.Deposito (	Deposito_Fecha,	Deposito_Importe,Deposito_Cliente,Deposito_Tarjeta,Deposito_Moneda							
-			,Deposito_Cuenta)
-			VALUES (@FECHA,@Importe,@CLIENTE,@Tarjeta,@MONEDA_COD,@CUENTA_NRO)
-			
-			UPDATE GEM4.Cuenta
-			SET Cuenta_Saldo = Cuenta_Saldo + @Importe
-			WHERE Cuenta_Numero = @Cuenta
+	UPDATE GEM4.Cuenta
+	SET Cuenta_Saldo = Cuenta_Saldo + @Importe
+	WHERE Cuenta_Numero = @Cuenta
 	
 			
-			SET @OPERACION_ID= IDENT_CURRENT('GEM4.Deposito');
+	SET @OPERACION_ID= IDENT_CURRENT('GEM4.Deposito');
 			
 			
-			EXEC GEM4.spInsertarOperacion @OPERACION_ID,@OPERACION_TIPO,@FECHA,@CLIENTE;
+	EXEC GEM4.spInsertarOperacion @OPERACION_ID,@OPERACION_TIPO,@FECHA,@CLIENTE;
 			
-			SELECT ' El depósito se ha realizado satisfactoriamente';	
-END;
+	SELECT ' El depósito se ha realizado satisfactoriamente';	
+	
+	
+END
 			
 GO
 

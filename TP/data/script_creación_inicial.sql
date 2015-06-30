@@ -934,6 +934,18 @@ RETURN @retorno
 END
 GO
 
+IF EXISTS (SELECT id FROM sys.sysobjects WHERE name='fnDevolverPais')
+	DROP FUNCTION GEM4.fnDevolverPais
+GO
+CREATE FUNCTION GEM4.fnDevolverPais(@numeroCuenta NUMERIC(18,0))
+RETURNS NVARCHAR(250)
+AS
+BEGIN
+	DECLARE @return NVARCHAR(250) = (SELECT TOP 1 Pais_Descripcion FROM Pais JOIN Cuenta ON (Pais.Pais_Cod = Cuenta.Cuenta_Pais) WHERE Cuenta_Numero = @numeroCuenta)
+	RETURN @return
+END
+GO
+
 
 
 /* *****************************************     CREACION DE TRIGGERS    ********************************************** */

@@ -35,6 +35,8 @@ namespace PagoElectronico.Operaciones.Listados
             dtcmbAnio.Rows.Add("2014", "2014");
             dtcmbAnio.Rows.Add("2015", "2015");
             dtcmbAnio.Rows.Add("2016", "2016");
+            dtcmbAnio.Rows.Add("2017", "2017");
+            dtcmbAnio.Rows.Add("2018", "2018");
             cmbAnio.DataSource = dtcmbAnio;
             cmbAnio.DisplayMember = "DisplayMember";
             cmbAnio.ValueMember = "ValueMember";

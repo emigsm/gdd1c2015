@@ -69,6 +69,13 @@ namespace PagoElectronico.Operaciones.Consulta_Saldos
         private void btnConsultar_Click(object sender, EventArgs e)
         {
             bool validacionesCorrectas = validaciones();
+
+            if (cmbCuentas.Items.Count == 0)
+            {
+                System.Windows.Forms.MessageBox.Show("Debe elegir una cuenta para consultar el saldo");
+                return;
+            }
+            
             if (validacionesCorrectas == true)
             {
                 dgvDepositos.Rows.Clear();
@@ -158,6 +165,7 @@ namespace PagoElectronico.Operaciones.Consulta_Saldos
 
         private bool validaciones()
         {
+
             if (txtClienteNumero.Text == "")
             {
                 System.Windows.Forms.MessageBox.Show("El campo 'Cliente Número' no puede estar vacío");

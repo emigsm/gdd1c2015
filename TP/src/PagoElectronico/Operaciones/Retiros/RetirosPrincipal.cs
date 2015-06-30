@@ -85,6 +85,14 @@ namespace PagoElectronico.Operaciones.Retiros
                 return;
             }
 
+            if (cuentacomboBox.Items.Count == 0)
+            {
+                MessageBox.Show("No puede realizar retiros sin tener Cuentas.", "Resultado Operacion",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
+            
             if(dgvBancos.SelectedRows.Count==1)
             {
             

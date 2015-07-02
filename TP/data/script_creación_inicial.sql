@@ -2462,9 +2462,10 @@ DECLARE @Fecha DATETIME;
 DECLARE @Costo NUMERIC(18,2);
 DECLARE @Detalle	NVARCHAR(255);
 DECLARE @NroCuenta NUMERIC(18,0);
+DECLARE @FlagTransaction INT;
 SET @NroCuenta = (SELECT C.Cuenta_Numero FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaOrigen)
-SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
-SET @Fecha = GEM4.fnDevolverFechaSistema();
+--SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
+--SET @Fecha = GEM4.fnDevolverFechaSistema();
 SET @EstadoCuenta = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaOrigen);
 SET @EstadoCuentaDestino = (SELECT C.Cuenta_Estado FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @CuentaDestino);
 SET @ValidacionEstado = GEM4.fnPuedeTransferir(@EstadoCuenta);
@@ -2488,14 +2489,14 @@ SET @Costo =0;
 			SELECT @ValidacionEstadoDestino;
 			RETURN;
 		END;
-		
+BEGIN TRANSACTION		
 	INSERT GEM4.Transferencia (Transferencia_Fecha,Transferencia_Importe,Transferencia_Costo_Trans,
 			Transferencia_Cuenta_Origen,Transferencia_Cuenta_Destino)
 	VALUES(GEM4.fnDevolverFechaSistema(),@Importe,@Costo,@CuentaOrigen,@CuentaDestino);
 	
-	SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+' '+'Desde:'+' '+@CuentaOrigen+' '+'Hacia:'+@CuentaDestino;
 	SET @TipoTransferencia = (GEM4.fnDevolverTipoTransferencia(@CuentaOrigen));
 	SET @Fecha = GEM4.fnDevolverFechaSistema();
+	SET @Detalle = (SELECT T.Tipo_Operacion_Descripcion FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia)+' '+'Desde:'+' '+@CuentaOrigen+' '+'Hacia:'+@CuentaDestino;
 	
 	UPDATE GEM4.Cuenta
 	SET Cuenta_Saldo = Cuenta_Saldo + @Importe
@@ -2511,12 +2512,23 @@ SET @Costo =0;
 			SET @Costo = (SELECT T.Tipo_Operacion_Importe FROM GEM4.Tipo_Operacion T WHERE T.Tipo_Operacion_ID =@TipoTransferencia);
 		END;
 	
-		EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,@Detalle,@Costo,@NroCuenta;
+	SET @FlagTransaction = IDENT_CURRENT('GEM4.Operacion_Facturable');
+	
+	EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,@Detalle,@Costo,@NroCuenta;
+	
+	IF @FlagTransaction =  IDENT_CURRENT('GEM4.Operacion_Facturable')
+		BEGIN
+			ROLLBACK TRANSACTION
+			EXEC GEM4.spInsertarOperacionFacturable @TipoTransferencia,@Fecha,@CuentaOrigenCliente,'Falla',@Costo,@NroCuenta;
+			SELECT 'Transferencia Fallida: Su cuenta ha sido inhabilitada por superar el límite de operaciones sin facturar';
+			RETURN;
+		END
 		
-		UPDATE GEM4.Transferencia
-		SET Transferencia_Costo_Trans =@Costo
-		WHERE Transferencia_Codigo = IDENT_CURRENT('GEM4.Transferencia')
-		 			
+	UPDATE GEM4.Transferencia
+	SET Transferencia_Costo_Trans =@Costo
+	WHERE Transferencia_Codigo = IDENT_CURRENT('GEM4.Transferencia')
+	
+COMMIT TRANSACTION	 			
 		
 	SELECT 'Transferencia realizada satisfactoriamente.'
 	

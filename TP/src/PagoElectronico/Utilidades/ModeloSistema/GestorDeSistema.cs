@@ -23,6 +23,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_LOGINUSUARIO = "GEM4.spLoginUsuario";
         private const string STORE_CANTIDADROLES = "GEM4.spCantidadRoles";
         private const string STORE_OBTENERROLES = "GEM4.spObtenerRoles";
+        private const string STORE_OBTENERROLESLOGIN = "GEM4.spObtenerRolesLogin";
         private const string STORE_OBTENERFUNCIONALIDADES = "GEM4.spObtenerFuncionalidades";
         private const string STORE_INHABILITARUSUARIO = "GEM4.spInhabilitarUsuario";
         private const string STORE_BUSCARROLES = "GEM4.spBuscarRoles";
@@ -131,6 +132,20 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
             SqlDataReader readerRoles = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERROLES, READER, parametros);
+            DataTable roles = new DataTable();
+            if (readerRoles.HasRows)
+            {
+                roles.Load(readerRoles);
+            }
+            readerRoles.Dispose();
+            return roles;
+        }
+
+        public static DataTable obtenerRolesLogin(string username)
+        {
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@usuario", username));
+            SqlDataReader readerRoles = (SqlDataReader)ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERROLESLOGIN, READER, parametros);
             DataTable roles = new DataTable();
             if (readerRoles.HasRows)
             {

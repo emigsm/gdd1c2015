@@ -1365,8 +1365,21 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRoles')
 GO
 CREATE PROCEDURE GEM4.spObtenerRoles
 AS
-	SELECT Rol_Nombre, Rol_Cod
-	FROM GEM4.Rol
+	SELECT Rol.Rol_Nombre, Rol.Rol_Cod
+	FROM GEM4.Rol 
+GO
+
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRolesLogin')
+	DROP PROCEDURE GEM4.spObtenerRolesLogin;
+GO
+CREATE PROCEDURE GEM4.spObtenerRolesLogin
+	@usuario NVARCHAR(30)
+AS
+	SELECT Rol.Rol_Nombre, Rol.Rol_Cod
+	FROM GEM4.Rol JOIN GEM4.Usuario_Por_Rol ON (Rol.Rol_Cod = Usuario_Por_Rol.Rol_Cod)
+					JOIN GEM4.Usuario ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID)
+	WHERE Usuario.Usuario_Username = @usuario AND Usuario_Por_Rol.Habilitado = 1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerFuncionalidades')

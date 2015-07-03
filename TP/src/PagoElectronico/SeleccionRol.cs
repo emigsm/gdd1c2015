@@ -19,7 +19,7 @@ namespace PagoElectronico
         {
             InitializeComponent();
             username = usernameP;
-            DataTable roles = GestorDeSistema.obtenerRoles();
+            DataTable roles = GestorDeSistema.obtenerRolesLogin(usernameP);
             cmbRol.DisplayMember = "Rol_Nombre";
             cmbRol.ValueMember = "Rol_Cod";
             cmbRol.DataSource = roles;

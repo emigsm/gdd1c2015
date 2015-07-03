@@ -95,6 +95,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERFACTURA = "GEM4.spObtenerFactura";
         private const string STORE_OBTENEROPERACIONESSINFACTURAR = "GEM4.spObtenerOperacionesSinFacturar";
         private const string STORE_OBTENERUSUARIOID = "GEM4.spObtenerUsuarioID";
+        private const string STORE_ROLEXISTE = "GEM4.spRolExiste";
         
       public static void insertarFechaFuncionamiento (string fecha)
         {
@@ -1023,6 +1024,18 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERUSUARIOID, SCALAR, parametros);
             usuarioID = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return usuarioID;
+
+        }
+
+        public static bool rolExiste(string rolNombre)
+        {
+            int existe;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter rol = new SqlParameter("@rolNombre", rolNombre);
+            parametros.Add(rol);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_ROLEXISTE, SCALAR, parametros);
+            existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return Convert.ToBoolean(existe);
 
         }
     }

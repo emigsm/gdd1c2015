@@ -37,7 +37,7 @@ namespace PagoElectronico.ABMs.ABM_Rol
 
             if (Rol_NombreTextBox.Text == "")
             { MessageBox.Show("Ingrese un nombre para el nuevo rol"); return; }
-            if (GestorDeSistema.buscarRoles("",Rol_NombreTextBox.Text).Rows.Count>=1)
+            if (GestorDeSistema.rolExiste(Rol_NombreTextBox.Text) == true)
             { MessageBox.Show("Ya existe un rol con ese nombre"); return; }
             if (Funcionalidades.CheckedItems.Count ==0)
             { MessageBox.Show("Seleccione alguna funcionalidad"); return; }

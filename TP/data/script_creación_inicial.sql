@@ -2780,3 +2780,12 @@ AS
 	FROM GEM4.Usuario
 	WHERE Usuario_Username = @username
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spRolExiste')
+	DROP PROCEDURE GEM4.spRolExiste;
+GO
+CREATE PROCEDURE GEM4.spRolExiste
+	@rolNombre		NVARCHAR(50)
+AS
+	SELECT COUNT(Rol_Nombre) FROM GEM4.Rol WHERE Rol_Nombre = @rolNombre
+GO

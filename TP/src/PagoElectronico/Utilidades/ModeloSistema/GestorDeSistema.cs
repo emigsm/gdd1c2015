@@ -509,7 +509,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_DARBAJACLIENTE, NONQUERY, parametros);
         }
 
-        public static void crearCliente(string nombre,string apellido,int tipoDoc,int nroDoc,string mail,int pais,string domCalle,
+        public static void crearCliente(string nombre,string apellido,int tipoDoc,Decimal nroDoc,string mail,Decimal pais,string domCalle,
                                         String domNumero,String domPiso,string domDepto,string localidad, string nacionalidad, DateTime fechaNac)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();

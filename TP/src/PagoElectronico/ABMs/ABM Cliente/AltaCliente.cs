@@ -94,7 +94,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             }
 
             GestorDeSistema.crearCliente(NombreClitextBox.Text, ApellidoNuevoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
-                                         Convert.ToInt32(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
+                                         Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToDecimal(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          DomNumerotextBox.Text, DomicilioPisoTextBox.Text, DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value);
             int clienteID = GestorDeSistema.obtenerClienteRecienCreado();

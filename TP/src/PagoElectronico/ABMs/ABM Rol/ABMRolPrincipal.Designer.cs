@@ -151,6 +151,7 @@
             this.EliminarButton});
             this.dgvRoles.Location = new System.Drawing.Point(22, 212);
             this.dgvRoles.Name = "dgvRoles";
+            this.dgvRoles.ReadOnly = true;
             this.dgvRoles.Size = new System.Drawing.Size(543, 147);
             this.dgvRoles.TabIndex = 3;
             this.dgvRoles.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvRoles_CellContentClick);

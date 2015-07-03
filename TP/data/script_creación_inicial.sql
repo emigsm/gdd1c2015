@@ -430,7 +430,7 @@ CREATE TABLE GEM4.Log_Cuentas_Inhabilitadas(
 	Log_Cuentas_Inhabilitadas_Numero		INT IDENTITY(1,1),
 	Log_Cuentas_Inhabilitadas_Cuenta		NUMERIC(18,0),
 	Log_Cuentas_Inhabilitadas_Fecha			DATETIME,
-	Log_Cuentas_Inhabilitadas_Veces			INT,
+	--Log_Cuentas_Inhabilitadas_Veces			INT,
 	Log_Cuentas_Inhabilitadas_ClienteID		INT
 	PRIMARY KEY(Log_Cuentas_Inhabilitadas_Numero),
 	FOREIGN KEY(Log_Cuentas_Inhabilitadas_Cuenta) REFERENCES GEM4.Cuenta(Cuenta_Numero)
@@ -1309,16 +1309,11 @@ AS
 				SET Cuenta_Estado = 2
 				WHERE Cuenta_Numero =@Cuenta;
 				
-				IF @Cuenta NOT IN (SELECT L.Log_Cuentas_Inhabilitadas_Cuenta FROM GEM4.Log_Cuentas_Inhabilitadas L)
-					INSERT INTO Log_Cuentas_Inhabilitadas (Log_Cuentas_Inhabilitadas_ClienteID,Log_Cuentas_Inhabilitadas_Cuenta
-					,Log_Cuentas_Inhabilitadas_Fecha,Log_Cuentas_Inhabilitadas_Veces)
-					SELECT I.Operacion_Facturable_Cliente_ID,I.Operacion_Facturable_Cuenta_Numero,GEM4.fnDevolverFechaSistema(),
-					0
-					FROM inserted I
-				ELSE
-					UPDATE GEM4.Log_Cuentas_Inhabilitadas
-					SET Log_Cuentas_Inhabilitadas_Veces = Log_Cuentas_Inhabilitadas_Veces +1
-					WHERE Log_Cuentas_Inhabilitadas_Cuenta = @Cuenta
+				INSERT INTO Log_Cuentas_Inhabilitadas (Log_Cuentas_Inhabilitadas_ClienteID,Log_Cuentas_Inhabilitadas_Cuenta
+				,Log_Cuentas_Inhabilitadas_Fecha)
+				SELECT I.Operacion_Facturable_Cliente_ID,I.Operacion_Facturable_Cuenta_Numero,GEM4.fnDevolverFechaSistema()
+				FROM inserted I
+				
 			END
 			
 		ELSE

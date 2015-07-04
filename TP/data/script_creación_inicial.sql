@@ -2789,3 +2789,13 @@ CREATE PROCEDURE GEM4.spRolExiste
 AS
 	SELECT COUNT(Rol_Nombre) FROM GEM4.Rol WHERE Rol_Nombre = @rolNombre
 GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCuentaGratuitaPendiente')
+	DROP PROCEDURE GEM4.spCuentaGratuitaPendiente;
+GO
+CREATE PROCEDURE GEM4.spCuentaGratuitaPendiente
+	@cliente		INT
+AS
+	SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID = @cliente
+	AND C.Cuenta_Tipo=4 AND C.Cuenta_Estado =4
+GO

@@ -22,6 +22,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_INSERTARFECHAFUNCIONAMIENTO = "GEM4.spInsertarFechaFuncionamiento";
         private const string STORE_LOGINUSUARIO = "GEM4.spLoginUsuario";
         private const string STORE_CANTIDADROLES = "GEM4.spCantidadRoles";
+        private const string STORE_OBTENERROL = "GEM4.spObtenerRol";
         private const string STORE_OBTENERROLES = "GEM4.spObtenerRoles";
         private const string STORE_OBTENERROLESLOGIN = "GEM4.spObtenerRolesLogin";
         private const string STORE_OBTENERFUNCIONALIDADES = "GEM4.spObtenerFuncionalidades";
@@ -107,15 +108,15 @@ namespace PagoElectronico.Utilidades.ModeloSistema
       
       public static int loginUsuario(string usuario, string contrasena)
         {
-            int Rol_Cod;
+            int existe;
             List<SqlParameter> parametros = new List<SqlParameter>();
             SqlParameter user = new SqlParameter("@usuario", usuario);
             SqlParameter pass = new SqlParameter("@pass", contrasena);
             parametros.Add(user);
             parametros.Add(pass);
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LOGINUSUARIO, SCALAR, parametros);
-            Rol_Cod = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
-            return Rol_Cod;
+            existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return existe;
         }
 
         public static int cantidadRoles(string usuario)
@@ -128,6 +129,19 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             cantidadRoles = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return cantidadRoles;
 
+        }
+
+        public static int obtenerRol(string usuario)
+        { 
+            int rol;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter user = new SqlParameter("@usuario", usuario);
+            parametros.Add(user);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENERROL, SCALAR, parametros);
+            rol = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return rol;
+            
+        
         }
 
         public static DataTable obtenerRoles()

@@ -31,10 +31,10 @@ namespace PagoElectronico
             bool validacionesCorrectas = validaciones();
             if (validacionesCorrectas == true)
             {
-                int rolCod = GestorDeSistema.loginUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContrasena.Text));
+                bool existeUsuario = Convert.ToBoolean(GestorDeSistema.loginUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContrasena.Text)));
                 int cantidadRoles = GestorDeSistema.cantidadRoles(txtUsuario.Text);
 
-                if (rolCod == 1)
+                if (existeUsuario == true)
                 {
                     GestorDeSistema.logLogin(txtUsuario.Text, false, cantidadIntentos + 1);  /*Agrega el log de logueo correcto a la base*/
                     /*Login Correcto como ADMIN*/
@@ -49,26 +49,7 @@ namespace PagoElectronico
                     else
                     {
                         /*Tiene un solo Rol*/
-                        Principal frmPrincipal = new Principal(rolCod, txtUsuario.Text);
-                        frmPrincipal.Show(this);
-                        this.Hide();
-                    }
-                }
-                else if (rolCod == 2)
-                {
-                    GestorDeSistema.logLogin(txtUsuario.Text, false, cantidadIntentos + 1);  /*Agrega el log de logueo correcto a la base*/
-                    /*Login Correcto como CLIENTE*/
-                    cantidadIntentos = 0;
-                    if (cantidadRoles > 1)
-                    {
-                        /*Tiene mas de un Rol*/
-                        SeleccionRol frmSeleccionRol = new SeleccionRol(txtUsuario.Text);
-                        frmSeleccionRol.Show(this);
-                        this.Hide();
-                    }
-                    else
-                    {
-                        /*Tiene un solo Rol*/
+                        int rolCod = GestorDeSistema.obtenerRol(txtUsuario.Text);
                         Principal frmPrincipal = new Principal(rolCod, txtUsuario.Text);
                         frmPrincipal.Show(this);
                         this.Hide();

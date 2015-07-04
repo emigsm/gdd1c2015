@@ -1338,9 +1338,24 @@ CREATE PROCEDURE GEM4.spLoginUsuario
     @usuario nvarchar(30), 
     @pass char(44) 
 AS 
-    SELECT Rol_Cod
+    IF EXISTS (	SELECT 1 
+				FROM GEM4.Usuario JOIN GEM4.Usuario_Por_Rol ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID) 
+				WHERE Usuario_Username = @usuario AND Usuario_Contrasena = @pass AND Usuario_Habilitado = 1)
+	SELECT 1
+	ELSE
+	SELECT 0
+
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRol')
+	DROP PROCEDURE GEM4.spObtenerRol;
+GO
+CREATE PROCEDURE GEM4.spObtenerRol
+    @usuario nvarchar(30) 
+AS 
+    SELECT TOP 1 Rol_Cod
 		FROM GEM4.Usuario JOIN GEM4.Usuario_Por_Rol ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID)
-		WHERE Usuario_Username = @usuario AND Usuario_Contrasena = @pass AND Usuario_Habilitado = 1;
+		WHERE Usuario_Username = @usuario AND Usuario_Habilitado = 1 AND Usuario_Por_Rol.Habilitado = 1;
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCantidadRoles')

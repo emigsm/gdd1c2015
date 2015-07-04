@@ -58,10 +58,6 @@ namespace PagoElectronico.Operaciones.Facturacion
 
         private void btnGenerarFactura_Click(object sender, EventArgs e)
         {
-            if(GestorDeSistema.cuentaGratuitaPendiente(cliente)==true)
-            {
-                MessageBox.Show("Una o más cuentas gratuitas han sido activadas, dicha activación es sin cargo.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
             resultadoOperacion = Convert.ToInt32(GestorDeSistema.facturar(cliente));
             if (resultadoOperacion > 0)
             {

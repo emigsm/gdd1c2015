@@ -2000,7 +2000,7 @@ AS
 	
 	SELECT t.Tarjeta_Numero
 	FROM GEM4.Tarjeta t
-	WHERE t.Tarjeta_Cliente_ID=@cliente AND t.Tarjeta_Habilitado=1
+	WHERE t.Tarjeta_Cliente_ID=@Cliente AND t.Tarjeta_Habilitado=1
 GO	
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerCuentasCliente')

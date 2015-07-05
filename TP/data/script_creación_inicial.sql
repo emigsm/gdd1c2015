@@ -1997,7 +1997,10 @@ CREATE PROCEDURE GEM4.spObtenerTarjetasUsuario
 AS
 	DECLARE @Cliente INT;
 	SET @Cliente = (SELECT u.Cliente_ID	FROM Usuario u WHERE u.Usuario_Username= @usuarioNombre);
-	EXEC GEM4.spObtenerTarjetasCliente @Cliente;
+	
+	SELECT t.Tarjeta_Numero
+	FROM GEM4.Tarjeta t
+	WHERE t.Tarjeta_Cliente_ID=@cliente AND t.Tarjeta_Habilitado=1
 GO	
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerCuentasCliente')

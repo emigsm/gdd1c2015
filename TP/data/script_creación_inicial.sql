@@ -2596,11 +2596,6 @@ AS
 		END;
 GO
 
---PROCEDURE BORRADO
-IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRol')
-	DROP PROCEDURE GEM4.spObtenerRol;
-GO
-
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTipoCuenta')
 	DROP PROCEDURE GEM4.spObtenerTipoCuenta;
 GO

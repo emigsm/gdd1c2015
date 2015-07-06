@@ -158,12 +158,15 @@ namespace PagoElectronico.ABMs.ABM_Cliente
               int id = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_ID"].Value.ToString());
               GestorDeSistema.darBajaCliente(id);
 
+              
 
               dgvClientes.Rows.Clear();
               nroDocTextBox.Text = "";
               nombreClienteTextBox.Text = "";
               ApellidoClienteTextBox.Text = "";
-              mailTextBox.Text = ""; 
+              mailTextBox.Text = "";
+
+              MessageBox.Show("El cliente ha sido dado de baja", "Resultado Operacion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
            
         }

@@ -112,6 +112,8 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToDecimal(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value, habilitadocheckBox.Checked);
+
+            MessageBox.Show("El cliente ha sido modificado", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             Owner.Show();
             this.Hide();
         }

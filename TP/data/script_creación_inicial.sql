@@ -2714,7 +2714,7 @@ DECLARE @CuentasInhabilitadas INT;
 
 SET @HayPedienteDeFacturacion = (SELECT COUNT(O.Operacion_Facturable_ID) FROM GEM4.Operacion_Facturable O 
 								WHERE O.Operacion_Facturable_Cliente_ID =@ClienteID 
-								AND O.Operacion_Facturable_Factura_Numero IS NULL );
+								AND O.Operacion_Facturable_Factura_Numero IS NULL AND Operacion_Facturable_Costo > 0 );
 SET @Fecha = GEM4.fnDevolverFechaSistema();
 
 SET @CuentasNoActivadas =( SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID =@ClienteID AND C.Cuenta_Estado = 4);
@@ -2811,4 +2811,16 @@ CREATE PROCEDURE GEM4.spCuentaGratuitaPendiente
 AS
 	SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID = @cliente
 	AND C.Cuenta_Tipo=4 AND C.Cuenta_Estado =4
+	
+	IF (SELECT COUNT(C.Cuenta_Numero) FROM GEM4.Cuenta C WHERE C.Cuenta_Cliente_ID = @cliente
+	AND C.Cuenta_Tipo=4 AND C.Cuenta_Estado =4)>0
+	
+	BEGIN
+			UPDATE GEM4.Cuenta
+			SET Cuenta_Estado = 1
+			WHERE Cuenta_Cliente_ID = @Cliente AND Cuenta_Estado = 4
+	END	
+		
+
+	
 GO

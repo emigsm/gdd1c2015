@@ -34,6 +34,7 @@ namespace PagoElectronico.Operaciones.Transferencias
 
         private void btnBuscarCuentas_Click(object sender, EventArgs e)
         {
+            lblCuenta.Text = String.Empty;
             dgvCuentaDestino.Rows.Clear();
             dgvCuentaDestino.Update();
             DataTable cuentas = GestorDeSistema.buscarCuentas(FiltroText.Text);

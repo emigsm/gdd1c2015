@@ -131,7 +131,7 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
         private void btnCambiarTipoCuenta_Click(object sender, EventArgs e)
         {
             GestorDeSistema.modificarTipoCuenta(Convert.ToInt32(cmbTipoCuentaNuevo.SelectedValue), clienteID, numeroCuenta);
-            System.Windows.Forms.MessageBox.Show("Tipo de cuenta cambiado, consulte la sección Facturación. Recuerde comprar suscripciones, ya que las suscripciones actuales caducaron.");
+            System.Windows.Forms.MessageBox.Show("Tipo de cuenta cambiado, consulte la sección Facturación. Recuerde que solo poseerá 1 suscripción.");
         }
     }
 }

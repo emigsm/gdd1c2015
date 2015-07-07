@@ -1270,7 +1270,7 @@ AS
 		UPDATE GEM4.Cliente
 		SET	Cliente_Habilitado=@habilitado
 		WHERE Cliente_ID=@cliente;
-		
+		/*
 		IF(@habilitado=0)
 		BEGIN
 			SET	@cuentaEstado=2;
@@ -1279,7 +1279,7 @@ AS
 		WHERE Cuenta_Cliente_ID=@cliente;
 		
 		END;
-		
+		*/
 		
 		
 	END

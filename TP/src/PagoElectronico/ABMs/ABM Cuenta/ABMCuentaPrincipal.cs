@@ -127,7 +127,7 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             }
             if (e.ColumnIndex == 13)
             {
-                int operacionesPendientesDePagar = GestorDeSistema.obtenerOperacionesSinFacturar(numeroClienteAModificar);
+                int operacionesPendientesDePagar = GestorDeSistema.obtenerOperacionesSinFacturar(numeroClienteAModificar, numeroCuentaAModificar);
                 if (operacionesPendientesDePagar == 0)
                 {
                     GestorDeSistema.cerrarCuenta(numeroClienteAModificar, numeroCuentaAModificar);

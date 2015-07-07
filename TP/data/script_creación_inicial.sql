@@ -1250,7 +1250,7 @@ WHERE Factura_Numero IS NOT NULL
 		
 /* ******************************************TRIGGERS************************************************************ */
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'tgModificacionUsuario')
-	DROP PROCEDURE GEM4.tgModificacionUsuario;
+	DROP TRIGGER GEM4.tgModificacionUsuario;
 GO
 
 CREATE TRIGGER GEM4.tgModificacionUsuario
@@ -2091,7 +2091,7 @@ AS
 	SELECT TOP 5 Deposito_Codigo, Deposito_Fecha, Deposito_Importe, Deposito_Tarjeta 
 	FROM GEM4.Deposito	JOIN GEM4.Cuenta ON (Deposito.Deposito_Cuenta = Cuenta.Cuenta_Numero)
 	WHERE Cuenta_Cliente_ID = @clienteID AND Deposito_Cuenta = @cuentaNro
-	ORDER BY Deposito_Fecha DESC
+	ORDER BY Deposito_Fecha DESC, Deposito_Codigo DESC
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosRetiros')
@@ -2106,7 +2106,7 @@ AS
 	SELECT TOP 5 Retiro_Codigo, Retiro_Fecha, Retiro_Importe, Retiro_Cheque
 	FROM GEM4.Retiro	JOIN GEM4.Cuenta ON (Retiro.Retiro_Cuenta = Cuenta.Cuenta_Numero)
 	WHERE Cuenta_Cliente_ID = @clienteID AND Retiro_Cuenta = @cuentaNro
-	ORDER BY Retiro_Fecha DESC
+	ORDER BY Retiro_Fecha DESC, Retiro_Codigo DESC
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spConsultaSaldosTransferencias')
@@ -2121,7 +2121,7 @@ AS
 	SELECT TOP 10 Transferencia_Codigo, Transferencia_Fecha, Transferencia_Importe, Transferencia_Costo_Trans, Transferencia_Cuenta_Destino
 	FROM GEM4.Transferencia	JOIN GEM4.Cuenta ON (Transferencia.Transferencia_Cuenta_Origen = Cuenta.Cuenta_Numero)
 	WHERE Cuenta_Cliente_ID = @clienteID AND Transferencia_Cuenta_Origen = @cuentaNro
-	ORDER BY Transferencia_Fecha DESC
+	ORDER BY Transferencia_Fecha DESC, Transferencia_Codigo DESC
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerClienteRecienCreado')
@@ -2773,12 +2773,13 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerOperacionesSinFac
 GO
 
 CREATE PROCEDURE GEM4.spObtenerOperacionesSinFacturar
-@clienteID INT
+	@clienteID INT,
+	@cuentaNro DECIMAL(18,0)
 		
 AS
 	SELECT COUNT(Operacion_Facturable_ID) Operaciones_Sin_Facturar
 	FROM GEM4.Operacion_Facturable 
-	WHERE Operacion_Facturable_Cliente_ID = @clienteID AND Operacion_Facturable_Factura_Numero IS NULL
+	WHERE Operacion_Facturable_Cliente_ID = @clienteID AND Operacion_Facturable_Factura_Numero IS NULL AND Operacion_Facturable_Costo > 0 AND Operacion_Facturable_Cuenta_Numero = @cuentaNro
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerUsuarioID')

@@ -1020,11 +1020,12 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             return factura;
         }
 
-        public static int obtenerOperacionesSinFacturar(int clienteID)
+        public static int obtenerOperacionesSinFacturar(int clienteID, long numeroCuenta )
         {
             int resultado;
             List<SqlParameter> parametros = new List<SqlParameter>();
             parametros.Add(new SqlParameter("@clienteID", clienteID));
+            parametros.Add(new SqlParameter("@cuentaNro", numeroCuenta));
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OBTENEROPERACIONESSINFACTURAR, SCALAR, parametros);
             resultado = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return resultado;

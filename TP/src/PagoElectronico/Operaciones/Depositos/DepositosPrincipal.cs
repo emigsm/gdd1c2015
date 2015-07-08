@@ -90,6 +90,11 @@ namespace PagoElectronico.Operaciones.Depositos
                 return;
 
             }
+            if (GestorDeSistema.overflowSaldos(Convert.ToInt32(ImporteTextBox.Text),cmbCuenta.SelectedValue.ToString()) == true)
+            {
+                MessageBox.Show("Operación abortada.", "Prevención de Overflow", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             else
             {
                 

@@ -101,6 +101,12 @@ namespace PagoElectronico.Operaciones.Transferencias
                 return;
 
             }
+            if (GestorDeSistema.overflowSaldos(Convert.ToInt32(ImporteTextBox.Text),lblCuenta.Text) == true)
+            {
+                MessageBox.Show("Operación abortada.", "Prevención de Overflow", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
 
             else
             {

@@ -98,6 +98,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_OBTENERUSUARIOID = "GEM4.spObtenerUsuarioID";
         private const string STORE_ROLEXISTE = "GEM4.spRolExiste";
         private const string STORE_CUENTAGRATUITAPENDIENTE = "GEM4.spCuentaGratuitaPendiente";
+        private const string STORE_OVERFLOWSALDOS = "GEM4.spOverflowSaldos";
+        private const string STORE_OVERFLOWSUSCRIPCIONES = "GEM4.spOverflowSuscripciones";
         
       public static void insertarFechaFuncionamiento (string fecha)
         {
@@ -1062,6 +1064,34 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             SqlParameter cli = new SqlParameter("@cliente", cliente);
             parametros.Add(cli);
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_CUENTAGRATUITAPENDIENTE, SCALAR, parametros);
+            existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return Convert.ToBoolean(existe);
+
+        }
+
+        public static bool overflowSaldos(int importe,string cuenta)
+        {
+            int existe;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter imp = new SqlParameter("@Importe", importe);
+            SqlParameter cue = new SqlParameter("@Cuenta", cuenta);
+            parametros.Add(imp);
+            parametros.Add(cue);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OVERFLOWSALDOS, SCALAR, parametros);
+            existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return Convert.ToBoolean(existe);
+
+        }
+
+        public static bool overflowSuscripciones(int cantidad, string cuenta)
+        {
+            int existe;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter can = new SqlParameter("@Cantidad", cantidad);
+            SqlParameter cue = new SqlParameter("@Cuenta", cuenta);
+            parametros.Add(can);
+            parametros.Add(cue);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_OVERFLOWSUSCRIPCIONES, SCALAR, parametros);
             existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return Convert.ToBoolean(existe);
 

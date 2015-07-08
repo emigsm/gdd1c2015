@@ -58,6 +58,11 @@ namespace PagoElectronico.Operaciones.Facturacion
                 MessageBox.Show("El campo 'Cantidad de Suscripciones' debe ser mayor o igual a 1", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            if (GestorDeSistema.overflowSuscripciones(Convert.ToInt32(CantidadTextBox.Text), cmbCuenta.SelectedValue.ToString()) == true)
+            {
+                MessageBox.Show("Operación abortada.", "Prevención de Overflow", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             String resultado;
             resultado = GestorDeSistema.comprarSuscripcion(cmbCuenta.SelectedValue.ToString(), Convert.ToInt32(CantidadTextBox.Text));
             MessageBox.Show(resultado, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

@@ -2828,10 +2828,10 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spOverflowSaldos')
 GO
 CREATE PROCEDURE GEM4.spOverflowSaldos
 	@Importe		INT,
-	@Cuenta			NUMERIC(18,0)
+	@Cuenta			NVARCHAR(18)
 AS
 
-	IF ((@Importe+ (SELECT C.Cuenta_Saldo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero=@Cuenta))> 9999999999999999.99)
+	IF ((@Importe+ (SELECT C.Cuenta_Saldo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta))> 9999999999999999.99)
 		BEGIN
 			SELECT 1	
 			RETURN;
@@ -2848,10 +2848,10 @@ IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spOverflowSuscripciones')
 GO
 CREATE PROCEDURE GEM4.spOverflowSuscripciones
 	@Cantidad		INT,
-	@Cuenta			NUMERIC(18,0)
+	@Cuenta			NVARCHAR(18)
 AS
 
-	IF ((@Cantidad+ (SELECT C.Cuenta_Suscripciones_Compradas FROM GEM4.Cuenta C WHERE C.Cuenta_Numero=@Cuenta))> 255)
+	IF ((@Cantidad+ (SELECT C.Cuenta_Suscripciones_Compradas FROM GEM4.Cuenta C WHERE C.Cuenta_Numero LIKE @Cuenta))> 255)
 		BEGIN
 			SELECT 1	
 			RETURN;

@@ -2821,7 +2821,44 @@ AS
 			SET Cuenta_Estado = 1
 			WHERE Cuenta_Cliente_ID = @Cliente AND Cuenta_Estado = 4
 	END	
-		
+GO
 
-	
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spOverflowSaldos')
+	DROP PROCEDURE GEM4.spOverflowSaldos;
+GO
+CREATE PROCEDURE GEM4.spOverflowSaldos
+	@Importe		INT,
+	@Cuenta			NUMERIC(18,0)
+AS
+
+	IF ((@Importe+ (SELECT C.Cuenta_Saldo FROM GEM4.Cuenta C WHERE C.Cuenta_Numero=@Cuenta))> 9999999999999999.99)
+		BEGIN
+			SELECT 1	
+			RETURN;
+		END
+	ELSE
+		BEGIN
+			SELECT 0
+			RETURN;
+		END		
+GO
+
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spOverflowSuscripciones')
+	DROP PROCEDURE GEM4.spOverflowSuscripciones;
+GO
+CREATE PROCEDURE GEM4.spOverflowSuscripciones
+	@Cantidad		INT,
+	@Cuenta			NUMERIC(18,0)
+AS
+
+	IF ((@Cantidad+ (SELECT C.Cuenta_Suscripciones_Compradas FROM GEM4.Cuenta C WHERE C.Cuenta_Numero=@Cuenta))> 255)
+		BEGIN
+			SELECT 1	
+			RETURN;
+		END
+	ELSE
+		BEGIN
+			SELECT 0
+			RETURN;
+		END		
 GO

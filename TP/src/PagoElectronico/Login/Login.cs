@@ -32,9 +32,10 @@ namespace PagoElectronico
             if (validacionesCorrectas == true)
             {
                 bool existeUsuario = Convert.ToBoolean(GestorDeSistema.loginUsuario(txtUsuario.Text, Cifrador.Cifrar(txtContrasena.Text)));
+                bool poseeRolesActivos = Convert.ToBoolean(GestorDeSistema.poseeRolesActivos(txtUsuario.Text));
                 int cantidadRoles = GestorDeSistema.cantidadRoles(txtUsuario.Text);
 
-                if (existeUsuario == true)
+                if (existeUsuario == true && poseeRolesActivos == true)
                 {
                     GestorDeSistema.logLogin(txtUsuario.Text, false, cantidadIntentos + 1);  /*Agrega el log de logueo correcto a la base*/
                     /*Login Correcto como ADMIN*/
@@ -69,7 +70,16 @@ namespace PagoElectronico
                     }
                     else
                     {
-                        System.Windows.Forms.MessageBox.Show("Datos no válidos o usuario bloqueado. \nIntentos " + this.cantidadIntentos.ToString() + " de 3");
+                        if (poseeRolesActivos == false)
+                        {
+                            System.Windows.Forms.MessageBox.Show("No posee roles habilitados para ingresar. \nIntentos " + this.cantidadIntentos.ToString() + " de 3");
+
+                        }
+                        else 
+                        {
+                            System.Windows.Forms.MessageBox.Show("Datos no válidos o usuario bloqueado. \nIntentos " + this.cantidadIntentos.ToString() + " de 3");
+
+                        }
                     }
 
                 }

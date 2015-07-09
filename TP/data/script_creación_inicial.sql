@@ -1347,6 +1347,22 @@ AS
 
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'poseeRolesActivos')
+	DROP PROCEDURE GEM4.poseeRolesActivos;
+GO
+CREATE PROCEDURE GEM4.poseeRolesActivos
+    @usuario nvarchar(30)
+AS 
+    IF ((SELECT COUNT(*) 
+				FROM GEM4.Usuario JOIN GEM4.Usuario_Por_Rol ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID) 
+									JOIN GEM4.Rol ON (Usuario_Por_Rol.Rol_Cod = Rol.Rol_Cod)
+				WHERE Usuario_Username = @usuario AND Usuario_Por_Rol.Habilitado = 1 AND Rol.Rol_Habilitado = 1) >= 1)
+	SELECT 1
+	ELSE
+	SELECT 0
+
+GO
+
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerRol')
 	DROP PROCEDURE GEM4.spObtenerRol;
 GO
@@ -1366,7 +1382,8 @@ CREATE PROCEDURE GEM4.spCantidadRoles
 AS
 	SELECT COUNT(Usuario_Por_Rol.Usuario_ID) CantidadRoles
 	FROM GEM4.Usuario_Por_Rol JOIN GEM4.Usuario ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID)
-	WHERE Usuario.Usuario_Username = @usuario AND Habilitado = 1
+								JOIN GEM4.Rol ON (Rol.Rol_Cod = Usuario_Por_Rol.Rol_Cod)
+	WHERE Usuario.Usuario_Username = @usuario AND Usuario_Por_Rol.Habilitado = 1 AND Rol.Rol_Habilitado = 1
 	GROUP BY Usuario_Por_Rol.Usuario_ID
 GO
 
@@ -1389,7 +1406,7 @@ AS
 	SELECT Rol.Rol_Nombre, Rol.Rol_Cod
 	FROM GEM4.Rol JOIN GEM4.Usuario_Por_Rol ON (Rol.Rol_Cod = Usuario_Por_Rol.Rol_Cod)
 					JOIN GEM4.Usuario ON (Usuario.Usuario_ID = Usuario_Por_Rol.Usuario_ID)
-	WHERE Usuario.Usuario_Username = @usuario AND Usuario_Por_Rol.Habilitado = 1
+	WHERE Usuario.Usuario_Username = @usuario AND Usuario_Por_Rol.Habilitado = 1 AND Rol.Rol_Habilitado = 1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerFuncionalidades')

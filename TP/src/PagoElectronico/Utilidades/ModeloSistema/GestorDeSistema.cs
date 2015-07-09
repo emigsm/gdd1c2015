@@ -21,6 +21,7 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         //Constantes de StoreProcedure
         private const string STORE_INSERTARFECHAFUNCIONAMIENTO = "GEM4.spInsertarFechaFuncionamiento";
         private const string STORE_LOGINUSUARIO = "GEM4.spLoginUsuario";
+        private const string STORE_POSEEROLESACTIVOS = "GEM4.poseeRolesActivos";
         private const string STORE_CANTIDADROLES = "GEM4.spCantidadRoles";
         private const string STORE_OBTENERROL = "GEM4.spObtenerRol";
         private const string STORE_OBTENERROLES = "GEM4.spObtenerRoles";
@@ -119,6 +120,16 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(user);
             parametros.Add(pass);
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_LOGINUSUARIO, SCALAR, parametros);
+            existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
+            return existe;
+        }
+      public static int poseeRolesActivos(string usuario)
+        {
+            int existe;
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            SqlParameter user = new SqlParameter("@usuario", usuario);
+            parametros.Add(user);
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_POSEEROLESACTIVOS, SCALAR, parametros);
             existe = ((resultadoStoreProcedure != null) ? Convert.ToInt32(resultadoStoreProcedure) : 0);
             return existe;
         }

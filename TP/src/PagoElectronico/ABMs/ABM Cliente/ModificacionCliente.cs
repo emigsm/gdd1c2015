@@ -18,7 +18,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
         private string nombreCliente { get; set; }
         
         public ModificacionCliente(Int32 id, string nombre, string apellido, int tipoDoc, Decimal nroDoc, string mail, int pais, string domCalle,
-                                        Decimal domNumero, Decimal domPiso, string domDepto,
+                                        String domNumero, String domPiso, string domDepto,
                                         string localidad, string nacionalidad, DateTime fechaNac, bool habilitado)
         {
             InitializeComponent();
@@ -114,7 +114,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             }
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
-                                         Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToDecimal(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
+                                         /*Convert.ToDecimal*/(DomNumerotextBox.Text), /*Convert.ToDecimal*/(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value, habilitadocheckBox.Checked);
 
             MessageBox.Show("El cliente ha sido modificado", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

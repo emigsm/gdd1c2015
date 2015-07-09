@@ -1902,17 +1902,27 @@ CREATE PROCEDURE GEM4.spModificarCliente
 	@pais	  NUMERIC(18,0),
 	@domicilio NVARCHAR(255),
 	@domicilioNumero NUMERIC(18,0),
-	@domicilioPiso	 NUMERIC(18,0),
+	@domicilioPiso	 NVARCHAR(18),  --NUMERIC(18,0),
 	@domicilioDepto	 NVARCHAR(10),
 	@localidad		 NVARCHAR(60),
 	@nacionalidad	 NVARCHAR(60),
 	@fechaNac		 DATETIME,
 	@habilitado		BIT
 AS
+	
+	DECLARE @pisoDepto NUMERIC(18,0);
+	IF (@domicilioPiso='')
+		BEGIN
+			SET @pisoDepto=NULL;
+		END
+	ELSE
+		BEGIN
+			SET @pisoDepto=@domicilioPiso;
+		END	;
 	UPDATE GEM4.Cliente
 	SET  Cliente_Nombre=@nombre,Cliente_Apellido=@apellido,Cliente_Tipo_Doc=@tipoDoc,
 		 Cliente_Numero_Documento=@nroDoc,Cliente_Mail=@mail,Cliente_Pais=@pais,
-		 Cliente_Dom_Calle=@domicilio,Cliente_Dom_Numero=@domicilioNumero,Cliente_Dom_Piso=@domicilioPiso,
+		 Cliente_Dom_Calle=@domicilio,Cliente_Dom_Numero=@domicilioNumero,Cliente_Dom_Piso=@pisoDepto,
 		 Cliente_Dom_Depto=@domicilioDepto,Cliente_Localidad=@localidad,Cliente_Nacionalidad=@nacionalidad,
 		 Cliente_Fecha_Nacimiento=@fechaNac,Cliente_Habilitado=@habilitado
 	WHERE Cliente_ID=@clienteID

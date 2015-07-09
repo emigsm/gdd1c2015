@@ -2909,3 +2909,23 @@ AS
 		END		
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spValidarClienteHabilitado')
+	DROP PROCEDURE GEM4.spValidarClienteHabilitado;
+GO
+
+CREATE PROCEDURE GEM4.spValidarClienteHabilitado
+@clienteID INT
+AS
+
+DECLARE @resultado INT;
+IF EXISTS (SELECT 1 FROM GEM4.Cliente WHERE (Cliente_ID=@clienteID and Cliente_Habilitado=0))
+	BEGIN
+		SET @resultado=0; 
+	END
+ELSE
+	BEGIN
+		SET @resultado=1;
+	END
+SELECT @resultado;
+
+GO

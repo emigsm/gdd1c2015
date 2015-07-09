@@ -15,6 +15,7 @@ namespace PagoElectronico.Operaciones.Retiros
         string usuario { get; set; }
         Decimal bancoCod { get; set; }
 
+
         public RetirosPrincipal(string username)
         {
 
@@ -92,7 +93,7 @@ namespace PagoElectronico.Operaciones.Retiros
 
                 return;
             }
-            
+  
             if(dgvBancos.SelectedRows.Count==1)
             {
             

@@ -1833,10 +1833,23 @@ GO
 CREATE PROCEDURE GEM4.spDarBajaCliente
 	@clienteID INT
 AS
+	DECLARE @usuarioID INT;
+	
+	SELECT @usuarioID=Usuario_ID
+	FROM GEM4.Usuario
+	WHERE Cliente_ID=@clienteID;
+	
 	UPDATE GEM4.Cliente
 	SET Cliente_Habilitado=0
 	WHERE Cliente_ID=@clienteID;
+	
+	UPDATE GEM4.Usuario_Por_Rol
+	SET Habilitado=0
+	WHERE Usuario_ID=@usuarioID AND Rol_Cod=2
+
 GO
+
+
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spCrearCliente')
 	DROP PROCEDURE GEM4.spCrearCliente;
@@ -1927,7 +1940,31 @@ AS
 		 Cliente_Fecha_Nacimiento=@fechaNac,Cliente_Habilitado=@habilitado
 	WHERE Cliente_ID=@clienteID
 	
-	
+	IF (@habilitado=0)
+	BEGIN
+			DECLARE @userID INT;
+		
+			SELECT  @userID=Usuario_ID
+			FROM GEM4.Usuario
+			WHERE Cliente_ID=@clienteID;
+		
+			UPDATE GEM4.Usuario_Por_Rol
+			SET Habilitado=@habilitado
+			WHERE Rol_Cod=2 AND Usuario_ID=@userID; 
+		END
+	ELSE
+		BEGIN
+			DECLARE @usID INT;
+		
+			SELECT  @usID=Usuario_ID
+			FROM GEM4.Usuario
+			WHERE Cliente_ID=@clienteID;
+		
+			UPDATE GEM4.Usuario_Por_Rol
+			SET Habilitado=@habilitado
+			WHERE Rol_Cod=2 AND Usuario_ID=@userID; 
+		END;
+		
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spModificarPaisCuenta')

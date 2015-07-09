@@ -132,7 +132,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 Int32 pais = Convert.ToInt32(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Pais"].Value.ToString());
                 String domCalle = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Calle"].Value.ToString();
                 Decimal domNumero =Convert.ToDecimal(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Numero"].Value.ToString());
-                Decimal domPiso =Convert.ToDecimal(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Piso"].Value.ToString());
+                Decimal domPiso = Convert.ToDecimal(dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Piso"].Value.ToString());
                 String domDepto = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Dom_Depto"].Value.ToString();
                 String localidad = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Localidad"].Value.ToString();
                 String nacionalidad = dgvClientes.Rows[e.RowIndex].Cells["Cliente_Nacionalidad"].Value.ToString();

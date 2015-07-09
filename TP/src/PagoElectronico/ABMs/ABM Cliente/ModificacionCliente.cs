@@ -107,7 +107,11 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
                 return;
             }
-
+            if ((DomicilioCalletextBox.Text == "") || (DomNumerotextBox.Text == ""))
+            {
+                MessageBox.Show("por favor ingrese su Domicilio", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          Convert.ToDecimal(DomNumerotextBox.Text), Convert.ToDecimal(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
@@ -159,7 +163,14 @@ namespace PagoElectronico.ABMs.ABM_Cliente
            
             }
         }
-
+        private void completaDomicilio()
+        {
+            if ((DomicilioCalletextBox.Text == "") || (DomNumerotextBox.Text == ""))
+            {
+                MessageBox.Show("por favor ingrese su Domicilio", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+        }
         private void ApellidoClitextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!(char.IsLetter(e.KeyChar)) && (e.KeyChar != (char)Keys.Back)&&!(char.IsSeparator(e.KeyChar)))

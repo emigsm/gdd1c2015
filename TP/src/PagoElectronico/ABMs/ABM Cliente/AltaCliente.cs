@@ -86,6 +86,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
     
                 return;
             }
+            if (GestorDeSistema.validarDisponibilidadNroTipoDoc(Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()), Convert.ToDecimal(NroDocClitextBox.Text),0) == "0")
+            {
+                MessageBox.Show("Su  Nro de Documento ya existe,verifique que  haya  ingresado los datos  correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                return;
+            }
             if (MailtextBox.Text == "")
             {
                 MessageBox.Show("Es obligatorio Insertar un mail", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

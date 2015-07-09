@@ -81,6 +81,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
                 return;
             }
+        
             
             if (NroDocClitextBox.Text == "")
             {
@@ -94,7 +95,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
 
                 return;
             }
+            if (GestorDeSistema.validarDisponibilidadNroTipoDoc(Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()), Convert.ToDecimal(NroDocClitextBox.Text), idCliente) == "0")
+            {
+                MessageBox.Show("Su  Nro de Documento ya existe,verifique que  haya  ingresado los datos  correctamente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                return;
+            }
             if (NombreClitextBox.Text == "")
             {
                 MessageBox.Show("Es obligatorio Insertar el Nombre de cliente", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -114,7 +120,7 @@ namespace PagoElectronico.ABMs.ABM_Cliente
             }
             GestorDeSistema.modificarCliente(Convert.ToInt32(IDLabelValor.Text), NombreClitextBox.Text, ApellidoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToInt32(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
-                                         /*Convert.ToDecimal*/(DomNumerotextBox.Text), /*Convert.ToDecimal*/(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
+                                         (DomNumerotextBox.Text),(DomicilioPisoTextBox.Text), DomicilioDeptotextBox.Text,
                                          LocalidadtextBox.Text, NacionalidadtextBox.Text, fechaNacimientodateTimePicker.Value, habilitadocheckBox.Checked);
 
             MessageBox.Show("El cliente ha sido modificado", "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);

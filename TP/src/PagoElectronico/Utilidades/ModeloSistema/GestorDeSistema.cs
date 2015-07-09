@@ -100,7 +100,8 @@ namespace PagoElectronico.Utilidades.ModeloSistema
         private const string STORE_CUENTAGRATUITAPENDIENTE = "GEM4.spCuentaGratuitaPendiente";
         private const string STORE_OVERFLOWSALDOS = "GEM4.spOverflowSaldos";
         private const string STORE_OVERFLOWSUSCRIPCIONES = "GEM4.spOverflowSuscripciones";
-        
+        private const string STORE_VALIDARDISPONIBILIDADNROTIPODOC = "GEM4.spValidarDisponibilidadNroTipoDoc";
+
       public static void insertarFechaFuncionamiento (string fecha)
         {
             List<SqlParameter> parametros = new List<SqlParameter>();
@@ -951,6 +952,19 @@ namespace PagoElectronico.Utilidades.ModeloSistema
             parametros.Add(new SqlParameter("@clienteID", clienteID));
            
             object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_VALIDARDISPONIBILIDADMAIL, SCALAR, parametros);
+            mensajeResultado = resultadoStoreProcedure.ToString();
+            return mensajeResultado;
+        }
+        public static string validarDisponibilidadNroTipoDoc(Int32 tipoDoc,Decimal nroDoc ,Int32 clienteID)
+        {
+            string mensajeResultado;
+
+            List<SqlParameter> parametros = new List<SqlParameter>();
+            parametros.Add(new SqlParameter("@tipoDoc", tipoDoc));
+            parametros.Add(new SqlParameter("@nroDoc", nroDoc));
+            parametros.Add(new SqlParameter("@clienteID", clienteID));
+
+            object resultadoStoreProcedure = ConexionDB.ConexionDB.InvocarStoreProcedure(STORE_VALIDARDISPONIBILIDADNROTIPODOC, SCALAR, parametros);
             mensajeResultado = resultadoStoreProcedure.ToString();
             return mensajeResultado;
         }

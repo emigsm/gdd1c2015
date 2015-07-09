@@ -2609,6 +2609,42 @@ AS
 		END;
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spValidarDisponibilidadNroTipoDoc')
+	DROP PROCEDURE GEM4.spValidarDisponibilidadNroTipoDoc;
+GO
+
+CREATE PROCEDURE GEM4.spValidarDisponibilidadNroTipoDoc
+	@tipoDoc			INT,
+	@nroDoc				NUMERIC(18,0),
+	@clienteID			INT
+AS
+DECLARE @resultado INT;
+
+		IF(@clienteID =0)
+		BEGIN
+			IF EXISTS (SELECT 1 FROM GEM4.Cliente WHERE (@tipoDoc=Cliente_Tipo_Doc AND @nroDoc=Cliente_Numero_Documento))
+				BEGIN
+					SELECT 0; 
+				END;
+			ELSE 
+				BEGIN
+					SELECT 1;
+				END
+		END
+	
+		ELSE
+			BEGIN 
+				IF EXISTS (SELECT 1 FROM GEM4.Cliente WHERE (@tipoDoc=Cliente_Tipo_Doc AND @nroDoc=Cliente_Numero_Documento AND Cliente_ID<>@clienteID))
+					BEGIN
+						SELECT 0; 
+					END;
+				ELSE 
+					BEGIN
+						SELECT 1;
+					END
+		END;
+
+GO
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTipoCuenta')
 	DROP PROCEDURE GEM4.spObtenerTipoCuenta;
 GO
@@ -2872,3 +2908,4 @@ AS
 			RETURN;
 		END		
 GO
+

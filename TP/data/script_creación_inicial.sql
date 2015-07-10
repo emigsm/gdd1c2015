@@ -1598,6 +1598,11 @@ AS
 		INSERT INTO GEM4.Usuario_Por_Rol(Usuario_ID, Rol_Cod, Habilitado) VALUES
 			(@usuarioID, @rolCod, 1)
 	END
+	
+	UPDATE	GEM4.Usuario
+	SET Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema()
+	WHERE Usuario_ID = @usuarioID
+	
 	IF ((EXISTS (SELECT 1 FROM GEM4.Usuario WHERE (@usuarioID=Usuario_ID AND Cliente_ID IS NOT NULL)))AND @rolCod=2)
 	BEGIN
 		DECLARE @cliID INT;
@@ -1639,7 +1644,9 @@ IF EXISTS(SELECT 1 FROM GEM4.Usuario_Por_Rol WHERE Usuario_ID = @usuarioID AND R
 		WHERE Usuario_ID = @usuarioID AND Rol_Cod = @viejoRolCod
 	END
 	
-	
+	UPDATE	GEM4.Usuario
+	SET Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema()
+	WHERE Usuario_ID = @usuarioID
 		
 	IF ((EXISTS (SELECT 1 FROM GEM4.Usuario WHERE (@usuarioID=Usuario_ID AND Cliente_ID IS NOT NULL)))AND @viejoRolCod=2)
 	BEGIN
@@ -1683,6 +1690,10 @@ AS
 	UPDATE GEM4.Usuario_Por_Rol
 	SET Habilitado = 0
 	WHERE Usuario_ID = @usuarioID AND Rol_Cod = @rolCod
+
+	UPDATE	GEM4.Usuario
+	SET Usuario_Fecha_Ultima_Modificacion = GEM4.fnDevolverFechaSistema()
+	WHERE Usuario_ID = @usuarioID
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spAltaUsuario')

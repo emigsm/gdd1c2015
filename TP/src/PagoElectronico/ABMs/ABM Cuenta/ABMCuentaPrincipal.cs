@@ -23,7 +23,7 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             rolCod = rolCodP;
             username = usernameP;
 
-            if (rolCod == 1)
+            if (rolCod != 2)
             {
                 lblClienteID.Enabled = true;
                 txtClienteID.Enabled = true;

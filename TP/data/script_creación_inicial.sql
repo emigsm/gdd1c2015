@@ -2026,7 +2026,7 @@ AS
 		
 			UPDATE GEM4.Usuario_Por_Rol
 			SET Habilitado=@habilitado
-			WHERE Rol_Cod=2 AND Usuario_ID=@userID; 
+			WHERE Rol_Cod=2 AND Usuario_ID=@usID; 
 		END;
 		
 GO

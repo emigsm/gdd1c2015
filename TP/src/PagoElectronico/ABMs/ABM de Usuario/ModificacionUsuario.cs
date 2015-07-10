@@ -215,7 +215,13 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
             }
             cmbRolActual.SelectedIndex = indexAnterior;
 
-            
+
+            bool restriccionCliente = false;
+            if (cmbRolActual.Items.Count == 1 && Convert.ToInt32(cmbRolActual.SelectedValue) != 2) //Para que a un usuario que no es cliente, NO PUEDA agregasele el rol de Cliente, debe registrarse antes.
+            {
+                restriccionCliente = true;
+            }
+                
             if (rbAgregarRol.Checked == true)
                             
             {
@@ -225,9 +231,26 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 }
                 else
                 {
-                    GestorDeSistema.agregarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue));
-                    System.Windows.Forms.MessageBox.Show("Rol agregado correctamente");
-                    cargarCmbsRol();                
+                    if (restriccionCliente == false)
+                    {
+                        GestorDeSistema.agregarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue));
+                        System.Windows.Forms.MessageBox.Show("Rol agregado correctamente");
+                        cargarCmbsRol();  
+                    }
+                    else 
+                    {
+                        if (Convert.ToInt32(cmbCambioRol.SelectedValue) == 2)
+                        {
+                            System.Windows.Forms.MessageBox.Show("Para poder ser Cliente, registrese desde ABM Clientes");
+                        }
+                        else
+                        {
+                            GestorDeSistema.agregarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue));
+                            System.Windows.Forms.MessageBox.Show("Rol agregado correctamente");
+                            cargarCmbsRol(); 
+                        }
+                    }
+              
                 }
 
 
@@ -241,9 +264,26 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
                 }
                 else
                 {
-                    GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
-                    System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
-                    cargarCmbsRol();
+                    if (restriccionCliente == false)
+                    {
+                        GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
+                        System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
+                        cargarCmbsRol();
+                    }
+                    else 
+                    {
+                        if (Convert.ToInt32(cmbCambioRol.SelectedValue) == 2)
+                        {
+                            System.Windows.Forms.MessageBox.Show("Para poder ser Cliente, registrese desde ABM Clientes");
+                        }
+                        else
+                        {
+                            GestorDeSistema.modificarRolAUsuario(usuarioID, Convert.ToInt32(cmbCambioRol.SelectedValue), Convert.ToInt32(cmbRolActual.SelectedValue));
+                            System.Windows.Forms.MessageBox.Show("Rol cambiado correctamente");
+                            cargarCmbsRol();
+                        }
+                    }
+
                 }
 
             }

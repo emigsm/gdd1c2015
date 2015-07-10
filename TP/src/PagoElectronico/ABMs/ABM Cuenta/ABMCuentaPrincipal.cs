@@ -103,40 +103,68 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             
             if (e.ColumnIndex == 11)
             {
-                string paisAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Pais"].Value.ToString();
-                string monedaAModificar =  dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Moneda"].Value.ToString();
-                string tipoCuentaAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Tipo"].Value.ToString();
-                ModificacionCuenta frmModificacionCuenta = new ModificacionCuenta(numeroCuentaAModificar, numeroClienteAModificar, paisAModificar, monedaAModificar, tipoCuentaAModificar);
-                this.Hide();
-                frmModificacionCuenta.ShowDialog(this);
-                btnBuscarCuenta.PerformClick();
-            }
-            if (e.ColumnIndex == 12)
-            {
-                if (rolCod == 1)
+                if (GestorDeSistema.estadoCuenta(numeroClienteAModificar, numeroCuentaAModificar) != 3)
                 {
-                    GestorDeSistema.inhabilitarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
-                    System.Windows.Forms.MessageBox.Show("La cuenta ha sido Inhabilitada correctamente");
+                    string paisAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Pais"].Value.ToString();
+                    string monedaAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Moneda"].Value.ToString();
+                    string tipoCuentaAModificar = dgvCuenta.Rows[e.RowIndex].Cells["Cuenta_Tipo"].Value.ToString();
+                    ModificacionCuenta frmModificacionCuenta = new ModificacionCuenta(numeroCuentaAModificar, numeroClienteAModificar, paisAModificar, monedaAModificar, tipoCuentaAModificar);
+                    this.Hide();
+                    frmModificacionCuenta.ShowDialog(this);
+                    btnBuscarCuenta.PerformClick();
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("Para inhabilitar su cuenta, consulte a un Administrador");
-                
+                    System.Windows.Forms.MessageBox.Show("No puede modificar una cuenta que ya esta cerrada.", "Error");
                 }
+
+            }
+            if (e.ColumnIndex == 12)
+            {
+
+                if (GestorDeSistema.estadoCuenta(numeroClienteAModificar, numeroCuentaAModificar) != 3)
+                {
+                    if (rolCod == 1)
+                    {
+                        GestorDeSistema.inhabilitarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
+                        System.Windows.Forms.MessageBox.Show("La cuenta ha sido Inhabilitada correctamente");
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("Para inhabilitar su cuenta, consulte a un Administrador");
+
+                    }
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No puede inhabilitar una cuenta que ya esta cerrada.", "Error");
+
+                }
+
                 
             }
             if (e.ColumnIndex == 13)
             {
-                int operacionesPendientesDePagar = GestorDeSistema.obtenerOperacionesSinFacturar(numeroClienteAModificar, numeroCuentaAModificar);
-                if (operacionesPendientesDePagar == 0)
+                if (GestorDeSistema.estadoCuenta(numeroClienteAModificar, numeroCuentaAModificar) != 3)
                 {
-                    GestorDeSistema.cerrarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
-                    System.Windows.Forms.MessageBox.Show("La cuenta ha sido Cerrada correctamente");
+                    int operacionesPendientesDePagar = GestorDeSistema.obtenerOperacionesSinFacturar(numeroClienteAModificar, numeroCuentaAModificar);
+                    if (operacionesPendientesDePagar == 0)
+                    {
+                        GestorDeSistema.cerrarCuenta(numeroClienteAModificar, numeroCuentaAModificar);
+                        System.Windows.Forms.MessageBox.Show("La cuenta ha sido Cerrada correctamente");
+                        btnBuscarCuenta.PerformClick();
+                    }
+                    else
+                    {
+                        System.Windows.Forms.MessageBox.Show("No se pudo cerrar la Cuenta. Posee operaciones sin pagar. Consulte sección Facturación.", "Error");
+                    }
                 }
                 else
                 {
-                    System.Windows.Forms.MessageBox.Show("No se pudo cerrar la Cuenta. Posee operaciones sin pagar. Consulte sección Facturación.", "Error");
+                    System.Windows.Forms.MessageBox.Show("No puede cerrar una cuenta que ya esta cerrada.", "Error");
+
                 }
+
             }
         }
         

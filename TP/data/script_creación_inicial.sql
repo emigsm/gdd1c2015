@@ -2111,6 +2111,20 @@ AS
 	WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
 GO
 
+IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spEstadoCuenta')
+	DROP PROCEDURE GEM4.spEstadoCuenta;
+GO
+CREATE PROCEDURE GEM4.spEstadoCuenta
+	@clienteID		INT,
+	@numeroCuenta	NUMERIC(18,0)
+AS
+
+SELECT Cuenta_Estado
+FROM GEM4.Cuenta
+WHERE Cuenta_Cliente_ID = @clienteID AND Cuenta_Numero = @numeroCuenta
+	
+GO
+
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerTarjetasUsuario')
 	DROP PROCEDURE GEM4.spObtenerTarjetasUsuario;
 GO

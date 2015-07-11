@@ -103,6 +103,12 @@ namespace PagoElectronico.ABMs.ABM_Cliente
                 MessageBox.Show("por favor ingrese su Domicilio", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
             }
+            if (Convert.ToDateTime(GestorDeSistema.solicitarFecha()) < Convert.ToDateTime(fechaNacimientodateTimePicker.Value))
+            {
+                MessageBox.Show("La fecha de nacimiento es mayor a la fecha actual de sistema, por favor verifique los datos ingresados", "Problema de ingreso de datos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
             GestorDeSistema.crearCliente(NombreClitextBox.Text, ApellidoNuevoClitextBox.Text, Convert.ToInt32(TipoDcomboBox.SelectedValue.ToString()),
                                          Convert.ToDecimal(NroDocClitextBox.Text), MailtextBox.Text, Convert.ToDecimal(PaiscomboBox.SelectedValue.ToString()), DomicilioCalletextBox.Text,
                                          DomNumerotextBox.Text, DomicilioPisoTextBox.Text, DomicilioDeptotextBox.Text,

@@ -42,6 +42,7 @@ namespace PagoElectronico.ABMs.ABM_de_Usuario
 
             btnAltaUsuario.Enabled = true;
             btnRegistrarCliente.Enabled = false;
+            btnVolver.Enabled = false;
 
             clienteID = clienteIDP;
 

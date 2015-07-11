@@ -79,7 +79,13 @@ namespace PagoElectronico.ABMs.ABM_Rol
                 case 4:
                     if (!rolHabilitado)
                     { MessageBox.Show("El Rol seleccionado ya se encontraba inhabilitado", "Baja lógica de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information); return; }
-
+                      if (rolCod == 1 & rolHabilitado == true)
+                    {
+                        MessageBox.Show("Lo sentimos, pero El Rol Seleccionado No puede ser dado de Baja del sistema", "Baja lógica de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                        return;
+                    }
+                    
+                  
                     GestorDeSistema.habilitarODeshabilitarRol(rolCod, 0);
                     MessageBox.Show("Se ha dado de baja el Rol seleccionado", "Baja lógica de Rol", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     BuscarRolesButton.PerformClick();
@@ -88,6 +94,7 @@ namespace PagoElectronico.ABMs.ABM_Rol
 
                 case 3:
                     {
+                       
                         ModificarRol formularioModificacion = new ModificarRol(rolCod, rolNombre, rolHabilitado);
                         formularioModificacion.ShowDialog(this);
                         BuscarRolesButton.PerformClick();

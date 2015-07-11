@@ -68,9 +68,10 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(636, 827);
+            this.btnVolver.Location = new System.Drawing.Point(424, 538);
+            this.btnVolver.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(160, 38);
+            this.btnVolver.Size = new System.Drawing.Size(107, 25);
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -80,27 +81,30 @@
             // 
             this.lblClienteNumero.AutoSize = true;
             this.lblClienteNumero.Enabled = false;
-            this.lblClienteNumero.Location = new System.Drawing.Point(3, 16);
+            this.lblClienteNumero.Location = new System.Drawing.Point(2, 10);
+            this.lblClienteNumero.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClienteNumero.Name = "lblClienteNumero";
-            this.lblClienteNumero.Size = new System.Drawing.Size(120, 20);
+            this.lblClienteNumero.Size = new System.Drawing.Size(80, 13);
             this.lblClienteNumero.TabIndex = 1;
             this.lblClienteNumero.Text = "Cliente numero:";
             // 
             // txtClienteNumero
             // 
             this.txtClienteNumero.Enabled = false;
-            this.txtClienteNumero.Location = new System.Drawing.Point(141, 13);
+            this.txtClienteNumero.Location = new System.Drawing.Point(94, 8);
+            this.txtClienteNumero.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtClienteNumero.Name = "txtClienteNumero";
-            this.txtClienteNumero.Size = new System.Drawing.Size(196, 26);
+            this.txtClienteNumero.Size = new System.Drawing.Size(132, 20);
             this.txtClienteNumero.TabIndex = 2;
             this.txtClienteNumero.TextChanged += new System.EventHandler(this.txtClienteNumero_TextChanged);
             // 
             // lblCuentaNumero
             // 
             this.lblCuentaNumero.AutoSize = true;
-            this.lblCuentaNumero.Location = new System.Drawing.Point(3, 61);
+            this.lblCuentaNumero.Location = new System.Drawing.Point(2, 40);
+            this.lblCuentaNumero.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCuentaNumero.Name = "lblCuentaNumero";
-            this.lblCuentaNumero.Size = new System.Drawing.Size(123, 20);
+            this.lblCuentaNumero.Size = new System.Drawing.Size(82, 13);
             this.lblCuentaNumero.TabIndex = 3;
             this.lblCuentaNumero.Text = "Cuenta numero:";
             // 
@@ -108,9 +112,10 @@
             // 
             this.cmbCuentas.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCuentas.FormattingEnabled = true;
-            this.cmbCuentas.Location = new System.Drawing.Point(141, 58);
+            this.cmbCuentas.Location = new System.Drawing.Point(94, 38);
+            this.cmbCuentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbCuentas.Name = "cmbCuentas";
-            this.cmbCuentas.Size = new System.Drawing.Size(196, 28);
+            this.cmbCuentas.Size = new System.Drawing.Size(132, 21);
             this.cmbCuentas.TabIndex = 4;
             this.cmbCuentas.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -120,16 +125,18 @@
             this.panel1.Controls.Add(this.cmbCuentas);
             this.panel1.Controls.Add(this.lblClienteNumero);
             this.panel1.Controls.Add(this.txtClienteNumero);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
+            this.panel1.Location = new System.Drawing.Point(8, 8);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(350, 97);
+            this.panel1.Size = new System.Drawing.Size(233, 63);
             this.panel1.TabIndex = 5;
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(384, 70);
+            this.btnConsultar.Location = new System.Drawing.Point(256, 45);
+            this.btnConsultar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnConsultar.Name = "btnConsultar";
-            this.btnConsultar.Size = new System.Drawing.Size(301, 39);
+            this.btnConsultar.Size = new System.Drawing.Size(201, 25);
             this.btnConsultar.TabIndex = 6;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
@@ -138,17 +145,21 @@
             // dgvDepositos
             // 
             this.dgvDepositos.AllowUserToAddRows = false;
+            this.dgvDepositos.AllowUserToDeleteRows = false;
+            this.dgvDepositos.AllowUserToResizeColumns = false;
+            this.dgvDepositos.AllowUserToResizeRows = false;
             this.dgvDepositos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDepositos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Deposito_Codigo,
             this.Deposito_Fecha,
             this.Deposito_Importe,
             this.Deposito_Tarjeta});
-            this.dgvDepositos.Location = new System.Drawing.Point(7, 37);
+            this.dgvDepositos.Location = new System.Drawing.Point(5, 24);
+            this.dgvDepositos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvDepositos.Name = "dgvDepositos";
             this.dgvDepositos.RowHeadersVisible = false;
             this.dgvDepositos.RowTemplate.Height = 28;
-            this.dgvDepositos.Size = new System.Drawing.Size(653, 150);
+            this.dgvDepositos.Size = new System.Drawing.Size(435, 97);
             this.dgvDepositos.TabIndex = 7;
             // 
             // Deposito_Codigo
@@ -178,27 +189,31 @@
             // lblSaldo
             // 
             this.lblSaldo.AutoSize = true;
-            this.lblSaldo.Location = new System.Drawing.Point(15, 123);
+            this.lblSaldo.Location = new System.Drawing.Point(10, 80);
+            this.lblSaldo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblSaldo.Name = "lblSaldo";
-            this.lblSaldo.Size = new System.Drawing.Size(54, 20);
+            this.lblSaldo.Size = new System.Drawing.Size(37, 13);
             this.lblSaldo.TabIndex = 5;
             this.lblSaldo.Text = "Saldo:";
             // 
             // lblVSaldo
             // 
             this.lblVSaldo.AutoSize = true;
-            this.lblVSaldo.Location = new System.Drawing.Point(149, 123);
+            this.lblVSaldo.Location = new System.Drawing.Point(99, 80);
+            this.lblVSaldo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVSaldo.Name = "lblVSaldo";
-            this.lblVSaldo.Size = new System.Drawing.Size(59, 20);
+            this.lblVSaldo.Size = new System.Drawing.Size(42, 13);
             this.lblVSaldo.TabIndex = 10;
             this.lblVSaldo.Text = "(Vacío)";
             // 
             // gbDepositos
             // 
             this.gbDepositos.Controls.Add(this.dgvDepositos);
-            this.gbDepositos.Location = new System.Drawing.Point(12, 159);
+            this.gbDepositos.Location = new System.Drawing.Point(8, 103);
+            this.gbDepositos.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbDepositos.Name = "gbDepositos";
-            this.gbDepositos.Size = new System.Drawing.Size(673, 200);
+            this.gbDepositos.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbDepositos.Size = new System.Drawing.Size(449, 130);
             this.gbDepositos.TabIndex = 11;
             this.gbDepositos.TabStop = false;
             this.gbDepositos.Text = "Últimos 5 depósitos";
@@ -207,9 +222,11 @@
             // gbRetiros
             // 
             this.gbRetiros.Controls.Add(this.dgvRetiros);
-            this.gbRetiros.Location = new System.Drawing.Point(12, 377);
+            this.gbRetiros.Location = new System.Drawing.Point(8, 245);
+            this.gbRetiros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbRetiros.Name = "gbRetiros";
-            this.gbRetiros.Size = new System.Drawing.Size(673, 200);
+            this.gbRetiros.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbRetiros.Size = new System.Drawing.Size(449, 130);
             this.gbRetiros.TabIndex = 12;
             this.gbRetiros.TabStop = false;
             this.gbRetiros.Text = "Últimos 5 retiros";
@@ -223,11 +240,12 @@
             this.Retiro_Fecha,
             this.Retiro_Importe,
             this.Retiro_Cheque});
-            this.dgvRetiros.Location = new System.Drawing.Point(7, 37);
+            this.dgvRetiros.Location = new System.Drawing.Point(5, 24);
+            this.dgvRetiros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvRetiros.Name = "dgvRetiros";
             this.dgvRetiros.RowHeadersVisible = false;
             this.dgvRetiros.RowTemplate.Height = 28;
-            this.dgvRetiros.Size = new System.Drawing.Size(653, 150);
+            this.dgvRetiros.Size = new System.Drawing.Size(435, 97);
             this.dgvRetiros.TabIndex = 7;
             // 
             // Retiro_Codigo
@@ -257,9 +275,11 @@
             // gbT
             // 
             this.gbT.Controls.Add(this.dgvTransferencias);
-            this.gbT.Location = new System.Drawing.Point(12, 602);
+            this.gbT.Location = new System.Drawing.Point(8, 391);
+            this.gbT.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.gbT.Name = "gbT";
-            this.gbT.Size = new System.Drawing.Size(774, 200);
+            this.gbT.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbT.Size = new System.Drawing.Size(516, 130);
             this.gbT.TabIndex = 12;
             this.gbT.TabStop = false;
             this.gbT.Text = "Últimas 10 transferencias";
@@ -274,11 +294,12 @@
             this.Transferencia_Importe,
             this.Transferencia_Costo,
             this.Transferencia_Cuenta_Destino});
-            this.dgvTransferencias.Location = new System.Drawing.Point(7, 37);
+            this.dgvTransferencias.Location = new System.Drawing.Point(5, 24);
+            this.dgvTransferencias.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvTransferencias.Name = "dgvTransferencias";
             this.dgvTransferencias.RowHeadersVisible = false;
             this.dgvTransferencias.RowTemplate.Height = 28;
-            this.dgvTransferencias.Size = new System.Drawing.Size(755, 150);
+            this.dgvTransferencias.Size = new System.Drawing.Size(503, 97);
             this.dgvTransferencias.TabIndex = 7;
             // 
             // Transferencia_Codigo
@@ -312,9 +333,10 @@
             // 
             // btnCargarCuentas
             // 
-            this.btnCargarCuentas.Location = new System.Drawing.Point(384, 12);
+            this.btnCargarCuentas.Location = new System.Drawing.Point(256, 8);
+            this.btnCargarCuentas.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCargarCuentas.Name = "btnCargarCuentas";
-            this.btnCargarCuentas.Size = new System.Drawing.Size(301, 39);
+            this.btnCargarCuentas.Size = new System.Drawing.Size(201, 25);
             this.btnCargarCuentas.TabIndex = 13;
             this.btnCargarCuentas.Text = "Cargar Cuentas";
             this.btnCargarCuentas.UseVisualStyleBackColor = true;
@@ -322,9 +344,9 @@
             // 
             // ConsultaSaldosPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(813, 883);
+            this.ClientSize = new System.Drawing.Size(542, 454);
             this.Controls.Add(this.btnCargarCuentas);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gbT);
@@ -334,6 +356,7 @@
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.gbDepositos);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ConsultaSaldosPrincipal";
             this.Text = "Consulta de Saldos";
             this.Load += new System.EventHandler(this.ConsultaSaldosPrincipal_Load);

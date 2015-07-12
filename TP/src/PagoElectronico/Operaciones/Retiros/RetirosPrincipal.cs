@@ -85,7 +85,13 @@ namespace PagoElectronico.Operaciones.Retiros
 
                 return;
             }
+            if (Convert.ToDecimal(ImportetextBox.Text) < 1)
+            {
+                MessageBox.Show("El importe debe ser mayor o igual a 1", "Resultado Operacion",
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
+                return;
+            }
             if (cuentacomboBox.Items.Count == 0)
             {
                 MessageBox.Show("No puede realizar retiros sin tener Cuentas.", "Resultado Operacion",

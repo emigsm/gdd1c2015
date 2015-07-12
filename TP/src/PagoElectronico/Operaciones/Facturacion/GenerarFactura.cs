@@ -33,7 +33,15 @@ namespace PagoElectronico.Operaciones.Facturacion
             }
             else
             {
-                cliente =Convert.ToInt32(GestorDeSistema.obtenerIDCliente(usuario));
+                if (Convert.ToInt32(GestorDeSistema.obtenerIDCliente(usuario)) != -1)
+                {
+                    cliente = Convert.ToInt32(GestorDeSistema.obtenerIDCliente(usuario));
+                }
+                else
+                {
+                    System.Windows.Forms.MessageBox.Show("No posee datos de Cliente asociados, por favor consulte a un administrador.");
+
+                }
                 
             }
 

@@ -158,11 +158,20 @@ namespace PagoElectronico.Operaciones.Asociacion_TC
           }
           private void NuevaTarjetabutton_Click(object sender, EventArgs e)
           {
-              AltaTarjeta altaTarjeta = new AltaTarjeta(idCliente);
-              this.Hide();
-              altaTarjeta.ShowDialog(this);
+              if (idCliente != 0)
+              {
+                  AltaTarjeta altaTarjeta = new AltaTarjeta(idCliente);
+                  this.Hide();
+                  altaTarjeta.ShowDialog(this);
+
+                  this.actualizarLista();
+              }
+              else 
+              {
+                  System.Windows.Forms.MessageBox.Show("No posee datos de Cliente asociados, por favor consulte a un administrador.");
+              }
               
-              this.actualizarLista();
+
 
           }
 

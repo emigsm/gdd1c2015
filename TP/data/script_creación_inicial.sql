@@ -2870,7 +2870,12 @@ CREATE PROCEDURE GEM4.spObtenerIDCliente
 @Usuario NVARCHAR(30)
 		
 AS
-	SELECT U.Cliente_ID FROM GEM4.Usuario U WHERE U.Usuario_Username LIKE @Usuario
+	DECLARE @clienteID INT = (SELECT U.Cliente_ID FROM GEM4.Usuario U 
+								WHERE U.Usuario_Username LIKE @Usuario)
+	IF (@clienteID IS NOT NULL)
+	SELECT @clienteID
+	ELSE
+	SELECT -1
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spFacturar')

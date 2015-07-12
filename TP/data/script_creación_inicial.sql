@@ -1758,9 +1758,12 @@ GO
 CREATE PROCEDURE GEM4.spObtenerNumeroCliente
 	@username			NVARCHAR(30)
 AS
-	SELECT Cliente_ID
-	FROM GEM4.Usuario
-	WHERE Usuario_Username = @username
+	DECLARE @clienteID INT = (SELECT Cliente_ID FROM GEM4.Usuario 
+								WHERE Usuario_Username = @username)
+	IF (@clienteID IS NOT NULL)
+	SELECT @clienteID
+	ELSE 
+	SELECT -1 --no posee clienteID, por ser, por ejemplo, un administrador al que se le agrego el rol
 GO
 
 IF EXISTS (SELECT 1 FROM sys.sysobjects WHERE name = 'spObtenerPaises')

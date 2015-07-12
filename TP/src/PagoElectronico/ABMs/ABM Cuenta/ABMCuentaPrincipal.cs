@@ -33,9 +33,17 @@ namespace PagoElectronico.ABMs.ABM_Cuenta
             else
             {
                 clienteID = GestorDeSistema.obtenerNumeroCliente(username).ToString();
-                txtClienteID.Text = clienteID;
+                if (clienteID == "-1")
+                {
+                    System.Windows.Forms.MessageBox.Show("No posee datos de Cliente asociados, por favor consulte a un administrador.");
+                    txtClienteID.Text = "NO POSEE";
+                    btnNuevaCuenta.Enabled = false;
+                }
+                else
+                {
+                    txtClienteID.Text = clienteID;
+                }
              
-               
             }
         }
 
